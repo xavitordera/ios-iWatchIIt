@@ -19,6 +19,17 @@
 		10860C162427C44400DA3A5F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C152427C44400DA3A5F /* Realm */; };
 		10860C182427C44400DA3A5F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C172427C44400DA3A5F /* RealmSwift */; };
 		10860C1B2427C4C300DA3A5F /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C1A2427C4C300DA3A5F /* SkeletonView */; };
+		10860C1E2427C87000DA3A5F /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C1D2427C87000DA3A5F /* APIService.swift */; };
+		10860C202427CE5100DA3A5F /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C1F2427CE5100DA3A5F /* BaseInteractor.swift */; };
+		10860C222427CE5D00DA3A5F /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C212427CE5D00DA3A5F /* BasePresenter.swift */; };
+		10860C242427CE6C00DA3A5F /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C232427CE6C00DA3A5F /* BaseRouter.swift */; };
+		10860C262427CE9D00DA3A5F /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C252427CE9D00DA3A5F /* BaseVC.swift */; };
+		10860C2B24280F3100DA3A5F /* FakeSplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C2A24280F3100DA3A5F /* FakeSplashVC.swift */; };
+		10860C302428114500DA3A5F /* FakeSplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C2F2428114500DA3A5F /* FakeSplashRouter.swift */; };
+		10860C342428171500DA3A5F /* FakeSplashProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C332428171500DA3A5F /* FakeSplashProtocol.swift */; };
+		10860C362428184300DA3A5F /* FakeSplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C352428184300DA3A5F /* FakeSplashPresenter.swift */; };
+		10860C382428191E00DA3A5F /* FakeSplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C372428191E00DA3A5F /* FakeSplashInteractor.swift */; };
+		10860C3A24281A9600DA3A5F /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C3924281A9600DA3A5F /* RealmManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +62,17 @@
 		10533D492427BEB600BF8FC4 /* iWatchItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iWatchItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10533D4D2427BEB600BF8FC4 /* iWatchItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iWatchItUITests.swift; sourceTree = "<group>"; };
 		10533D4F2427BEB600BF8FC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10860C1D2427C87000DA3A5F /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		10860C1F2427CE5100DA3A5F /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
+		10860C212427CE5D00DA3A5F /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
+		10860C232427CE6C00DA3A5F /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		10860C252427CE9D00DA3A5F /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		10860C2A24280F3100DA3A5F /* FakeSplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSplashVC.swift; sourceTree = "<group>"; };
+		10860C2F2428114500DA3A5F /* FakeSplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSplashRouter.swift; sourceTree = "<group>"; };
+		10860C332428171500DA3A5F /* FakeSplashProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSplashProtocol.swift; sourceTree = "<group>"; };
+		10860C352428184300DA3A5F /* FakeSplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSplashPresenter.swift; sourceTree = "<group>"; };
+		10860C372428191E00DA3A5F /* FakeSplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSplashInteractor.swift; sourceTree = "<group>"; };
+		10860C3924281A9600DA3A5F /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +109,8 @@
 		1039A5C62427BF36005531A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				10860C2924280EEF00DA3A5F /* Splash */,
+				10860C252427CE9D00DA3A5F /* BaseVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -94,6 +118,8 @@
 		1039A5C72427BF8D005531A5 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				10860C2C2428107B00DA3A5F /* Splash */,
+				10860C232427CE6C00DA3A5F /* BaseRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -121,13 +147,15 @@
 		10533D282427BEB200BF8FC4 /* iWatchIt */ = {
 			isa = PBXGroup;
 			children = (
+				10860C312428169400DA3A5F /* Protocol */,
+				10860C1C2427C86100DA3A5F /* Service */,
 				10860C0A2427C12F00DA3A5F /* Resource */,
 				10860C092427C05200DA3A5F /* Entity */,
 				10860C082427C04400DA3A5F /* Interactor */,
 				10860C072427C03100DA3A5F /* Presenter */,
 				1039A5C72427BF8D005531A5 /* Router */,
 				1039A5C62427BF36005531A5 /* View */,
-				10533D5B2427BEDF00BF8FC4 /* Storyboards */,
+				10533D5B2427BEDF00BF8FC4 /* Storyboard */,
 				10533D292427BEB200BF8FC4 /* AppDelegate.swift */,
 			);
 			path = iWatchIt;
@@ -151,26 +179,29 @@
 			path = iWatchItUITests;
 			sourceTree = "<group>";
 		};
-		10533D5B2427BEDF00BF8FC4 /* Storyboards */ = {
+		10533D5B2427BEDF00BF8FC4 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
 				10533D312427BEB200BF8FC4 /* Main.storyboard */,
 				10533D362427BEB600BF8FC4 /* LaunchScreen.storyboard */,
 			);
-			path = Storyboards;
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		10860C072427C03100DA3A5F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				10860C2D2428109D00DA3A5F /* Splash */,
+				10860C212427CE5D00DA3A5F /* BasePresenter.swift */,
 			);
-			name = Presenter;
-			path = Presenters;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		10860C082427C04400DA3A5F /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				10860C2E242810B300DA3A5F /* Splash */,
+				10860C1F2427CE5100DA3A5F /* BaseInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -178,6 +209,7 @@
 		10860C092427C05200DA3A5F /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				10860C3924281A9600DA3A5F /* RealmManager.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -189,6 +221,63 @@
 				10533D392427BEB600BF8FC4 /* Info.plist */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		10860C1C2427C86100DA3A5F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				10860C1D2427C87000DA3A5F /* APIService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		10860C2924280EEF00DA3A5F /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				10860C2A24280F3100DA3A5F /* FakeSplashVC.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		10860C2C2428107B00DA3A5F /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				10860C2F2428114500DA3A5F /* FakeSplashRouter.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		10860C2D2428109D00DA3A5F /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				10860C352428184300DA3A5F /* FakeSplashPresenter.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		10860C2E242810B300DA3A5F /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				10860C372428191E00DA3A5F /* FakeSplashInteractor.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		10860C312428169400DA3A5F /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				10860C32242816D600DA3A5F /* Splash */,
+			);
+			name = Protocol;
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		10860C32242816D600DA3A5F /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				10860C332428171500DA3A5F /* FakeSplashProtocol.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,7 +426,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10860C362428184300DA3A5F /* FakeSplashPresenter.swift in Sources */,
 				10533D2A2427BEB200BF8FC4 /* AppDelegate.swift in Sources */,
+				10860C262427CE9D00DA3A5F /* BaseVC.swift in Sources */,
+				10860C222427CE5D00DA3A5F /* BasePresenter.swift in Sources */,
+				10860C242427CE6C00DA3A5F /* BaseRouter.swift in Sources */,
+				10860C3A24281A9600DA3A5F /* RealmManager.swift in Sources */,
+				10860C302428114500DA3A5F /* FakeSplashRouter.swift in Sources */,
+				10860C1E2427C87000DA3A5F /* APIService.swift in Sources */,
+				10860C382428191E00DA3A5F /* FakeSplashInteractor.swift in Sources */,
+				10860C2B24280F3100DA3A5F /* FakeSplashVC.swift in Sources */,
+				10860C202427CE5100DA3A5F /* BaseInteractor.swift in Sources */,
+				10860C342428171500DA3A5F /* FakeSplashProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,7 +612,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4LKGLN6SG4;
-				INFOPLIST_FILE = iWatchIt/Info.plist;
+				INFOPLIST_FILE = iWatchIt/Resource/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -530,7 +630,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4LKGLN6SG4;
-				INFOPLIST_FILE = iWatchIt/Info.plist;
+				INFOPLIST_FILE = iWatchIt/Resource/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
