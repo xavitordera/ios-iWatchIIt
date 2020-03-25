@@ -32,6 +32,6 @@ protocol SplashPresenterToInteractorProtocol: class {
 }
 
 protocol SplashInteractorToPresenterProtocol: class {
-    func configurationFetchedSuccess()
-    func noticeFetchFailed()
+    func configurationFetchedSuccess(configuration: Configuration)
+    func configurationFetchedFailed()
 }

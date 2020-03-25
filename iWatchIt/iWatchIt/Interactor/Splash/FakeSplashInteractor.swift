@@ -10,9 +10,20 @@ import Foundation
 import Alamofire
 
 class FakeSplashInteractor: BaseInteractor, SplashPresenterToInteractorProtocol{
-    var presenter: SplashPresenterToInteractorProtocol?
+    var presenter: SplashInteractorToPresenterProtocol
     
-    func fetchNotice() {
-        APIService.shared.
+    init(presenter: SplashInteractorToPresenterProtocol) {
+        presenter = presenter
+    }
+    
+    func fetchConfiguration() {
+        APIService.shared.getConfiguration() {[weak self] (configuration, error) in
+            guard let configuration = configuration as? Configuration else {
+                self?.presenter.configurationFetchedFailed(error)
+                return
+            }
+            
+            self?.presenter.configurationFetchedSuccess(configuration)
+        }
     }
 }

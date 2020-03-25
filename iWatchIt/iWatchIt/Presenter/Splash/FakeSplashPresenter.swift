@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FakeSplashPresenter:BasePresenter,ViewToPresenterProtocol {
+class FakeSplashPresenter:BasePresenter, ViewToPresenterProtocol {
     
     var view: PresenterToViewProtocol?
     
@@ -26,10 +26,14 @@ class FakeSplashPresenter:BasePresenter,ViewToPresenterProtocol {
 
 }
 
-extension NoticePresenter: InteractorToPresenterProtocol{
+extension FakeSplashPresenter: SplashInteractorToPresenterProtocol{
     
-    func noticeFetchedSuccess(noticeModelArray: Array<NoticeModel>) {
-        view?.showNotice(noticeArray: noticeModelArray)
+    func configurationFetchedSuccess(configuration: Configuration) {
+        do {
+            try RealmManager.saveObject(object: configuration)
+        } catch (error) {
+            print("Error saving configuration!!!")
+        }
     }
     
     func noticeFetchFailed() {

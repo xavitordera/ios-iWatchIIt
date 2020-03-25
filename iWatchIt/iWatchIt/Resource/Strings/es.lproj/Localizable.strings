@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  iWatchIt
+
+  Created by Xavi Tordera on 25/03/2020.
+  Copyright © 2020 Xavi Tordera. All rights reserved.
+*/
+
+"app_error_generic" = "There has been an error, please try again later";

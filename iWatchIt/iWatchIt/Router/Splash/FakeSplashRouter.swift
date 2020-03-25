@@ -14,7 +14,7 @@ class FakeSplashRouter: BaseRouter {
         
         let view = FakeSplashRouter.mainstoryboard.instantiateViewController(withIdentifier: "MyViewController") as! FakeSplashVC
         
-        let presenter: ViewToPresenterProtocol & InteractorToPresenterProtocol = NoticePresenter()
+        let presenter: ViewToPresenterProtocol & InteractorToPresenterProtocol = FakeSplashPresenter()
         let interactor: PresenterToInteractorProtocol = NoticeInteractor()
         let router:PresenterToRouterProtocol = NoticeRouter()
         
