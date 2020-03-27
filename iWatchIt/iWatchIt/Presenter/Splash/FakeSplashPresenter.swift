@@ -8,37 +8,29 @@
 
 import UIKit
 
-class FakeSplashPresenter:BasePresenter, ViewToPresenterProtocol {
+class FakeSplashPresenter:BasePresenter, SplashViewToPresenterProtocol {
     
-    var view: PresenterToViewProtocol?
-    
-    var interactor: PresenterToInteractorProtocol?
-    
-    var router: PresenterToRouterProtocol?
-    
-    func startFetchingNotice() {
-        interactor?.fetchNotice()
+    func startFetchingConfiguration() {
+        guard let interactor = self.interactor as? SplashPresenterToInteractorProtocol else { return }
+        interactor.fetchConfiguration()
     }
     
-    func showMovieController(navigationController: UINavigationController) {
-        router?.pushToMovieScreen(navigationConroller:navigationController)
+    func showHomeController(navigationController: UINavigationController) {
+        guard let router = router as? SplashPresenterToRouterProtocol else { return }
+        router.pushToHomeScreen(navigationConroller: navigationController)
     }
-
 }
 
 extension FakeSplashPresenter: SplashInteractorToPresenterProtocol{
+    func configurationFetchedFailed(message: String?) {
+        debugPrint("Configuration fetch failed: error -> ")
+    }
     
     func configurationFetchedSuccess(configuration: Configuration) {
         do {
             try RealmManager.saveObject(object: configuration)
-        } catch (error) {
-            print("Error saving configuration!!!")
+        } catch let error {
+            debugPrint(error.localizedDescription)
         }
     }
-    
-    func noticeFetchFailed() {
-        view?.showError()
-    }
-    
-    
 }

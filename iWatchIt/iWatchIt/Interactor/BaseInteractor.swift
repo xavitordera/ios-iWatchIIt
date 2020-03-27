@@ -6,6 +6,6 @@
 //  Copyright © 2020 Xavi Tordera. All rights reserved.
 //
 
-class BaseInteractor {
-    
+class BaseInteractor: BasePresenterToInteractorProtocol {
+    var presenter: BaseInteractorToPresenterProtocol?
 }

@@ -15,20 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        loadFirstScreen()
         
-        /* Create ui-view-controller instance*/
-//        let notice = NoticeRouter.createModule()
-
-        /* Initiating instance of ui-navigation-controller with view-controller */
-        let navigationController = UINavigationController()
-//        navigationController.viewControllers = [notice]
-
-        /* Setting up the root view-controller as ui-navigation-controller */
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
-
         return true
+    }
+    
+    func loadFirstScreen() {
+        let splash = FakeSplashRouter.shared.createModule()
+        Navigation.shared.setNavigationController(firstVC: splash)
     }
 }
 

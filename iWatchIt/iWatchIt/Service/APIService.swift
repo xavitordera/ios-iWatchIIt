@@ -52,13 +52,13 @@ class APIService {
     // MARK: - The movie DB services
     
     /// Configuration
-    func getConfiguration(completion: @escaping (Configuration?, Error) -> Void) {
+    func getConfiguration(completion: @escaping (Configuration?, Error?) -> Void) {
         requestObject(from: APIRouter.configuration) { (result: Result<Configuration, Error>) in
             switch result {
             case .failure(let error):
-                completion(error)
+                completion(nil, error)
             case .success(let value):
-                completion(value)
+                completion(value, nil)
             }
         }
     }

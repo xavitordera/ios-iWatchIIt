@@ -7,35 +7,26 @@
 //
 import UIKit
 
-class FakeSplashRouter: BaseRouter {
-    static let shared: FakeSplashRouter = FakeSplashRouter()
-    
-    override func createModule() -> BaseVC {
+class FakeSplashRouter: BaseRouter, SplashPresenterToRouterProtocol {
+    func createModule() -> FakeSplashVC {
+        let view = kStoryboardMain.instantiateViewController(withIdentifier: kFakeSpashVC) as! FakeSplashVC
         
-        let view = FakeSplashRouter.mainstoryboard.instantiateViewController(withIdentifier: "MyViewController") as! FakeSplashVC
+        let presenter: SplashViewToPresenterProtocol & SplashInteractorToPresenterProtocol = FakeSplashPresenter()
+        let interactor: SplashPresenterToInteractorProtocol = FakeSplashInteractor(presenter: presenter)
+        let router:SplashPresenterToRouterProtocol = FakeSplashRouter()
         
-        let presenter: ViewToPresenterProtocol & InteractorToPresenterProtocol = FakeSplashPresenter()
-        let interactor: PresenterToInteractorProtocol = NoticeInteractor()
-        let router:PresenterToRouterProtocol = NoticeRouter()
-        
-        view.presentor = presenter
+        view.presenter = presenter
         presenter.view = view
         presenter.router = router
         presenter.interactor = interactor
-        interactor.presenter = presenter
         
         return view
-        
     }
     
-    static var mainstoryboard: UIStoryboard{
-        return UIStoryboard(name:"Main",bundle: Bundle.main)
-    }
-    
-    func pushToMovieScreen(navigationConroller navigationController:UINavigationController) {
-        
-        let movieModue = MovieRouter.createMovieModule()
-        navigationController.pushViewController(movieModue,animated: true)
-        
+    static let shared: FakeSplashRouter = FakeSplashRouter()
+
+    func pushToHomeScreen(navigationConroller navigationController:UINavigationController) {
+//        let movieModue = HomeRouter.createMovieModule()
+//        navigationController.pushViewController(movieModue,animated: true)
     }
 }

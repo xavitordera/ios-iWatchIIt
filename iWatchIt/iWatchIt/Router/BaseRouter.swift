@@ -6,10 +6,4 @@
 //  Copyright © 2020 Xavi Tordera. All rights reserved.
 //
 
-class BaseRouter {
-    
-    func createModule() -> BaseVC {
-        return BaseVC()
-    }
-    
-}
+class BaseRouter: BasePresenterToRouterProtocol {}

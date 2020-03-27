@@ -8,30 +8,22 @@
 
 import UIKit
 
-protocol ViewToPresenterProtocol: class{
-    var view: SplashPresenterToViewProtocol? {get set}
-    var interactor: SplashPresenterToInteractorProtocol? {get set}
-    var router: SplashPresenterToRouterProtocol? {get set}
+protocol SplashViewToPresenterProtocol: BaseViewToPresenterProtocol{
     func startFetchingConfiguration()
     func showHomeController(navigationController:UINavigationController)
 }
 
-protocol SplashPresenterToViewProtocol: class{
-    func onConfigurationFetched()
-    func showError()
-}
+protocol SplashPresenterToViewProtocol: BasePresenterToViewProtocol{}
 
-protocol SplashPresenterToRouterProtocol: class {
-    static func createModule() -> FakeSplashVC
+protocol SplashPresenterToRouterProtocol: BasePresenterToRouterProtocol {
     func pushToHomeScreen(navigationConroller:UINavigationController)
 }
 
-protocol SplashPresenterToInteractorProtocol: class {
-    var presenter:SplashInteractorToPresenterProtocol? {get set}
+protocol SplashPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {
     func fetchConfiguration()
 }
 
-protocol SplashInteractorToPresenterProtocol: class {
+protocol SplashInteractorToPresenterProtocol: BaseInteractorToPresenterProtocol {
     func configurationFetchedSuccess(configuration: Configuration)
-    func configurationFetchedFailed()
+    func configurationFetchedFailed(message: String?)
 }

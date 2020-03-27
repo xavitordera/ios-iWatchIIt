@@ -7,6 +7,8 @@
 //
 
 
-class BasePresenter {
-    
+class BasePresenter: BaseViewToPresenterProtocol {
+    var view: BasePresenterToViewProtocol?
+    var interactor: BasePresenterToInteractorProtocol?
+    var router: BasePresenterToRouterProtocol? 
 }

@@ -7,11 +7,15 @@
 //
 import UIKit
 
-class BaseVC: UIViewController {
+class BaseVC: UIViewController, BasePresenterToViewProtocol {
+    var presenter: BaseViewToPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    func showError(message: String?) {
+        let alert = AlertHelper.alertWith(title: "app_error_title".localized, message: message)
+        present(alert, animated: true, completion: nil)
     }
 }
