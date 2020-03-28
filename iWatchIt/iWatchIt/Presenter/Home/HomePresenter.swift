@@ -9,6 +9,8 @@ import UIKit
 
 class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewToPresenterProtocol {
     
+    var home: Home?
+    
     // MARK: Interactor protocol
     func trendingFetchSuccess(trending: Any) {
             

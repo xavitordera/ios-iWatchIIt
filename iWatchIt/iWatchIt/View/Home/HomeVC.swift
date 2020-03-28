@@ -44,6 +44,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
         mainTV?.register(UINib(nibName: kInfiniteCarouselTVC, bundle: .main), forCellReuseIdentifier: kInfiniteCarouselTVC)
         mainTV?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 40, right: 0)
         mainTV?.separatorStyle = .none
+        setupSections()
     }
     
     // MARK: - Table View Delegate
@@ -61,15 +62,47 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        switch sections[indexPath.section] {
+        case kHomeTrendingSection:
+            return cellForTrending()
+        case kHomeDiscoverSection:
+            return cellForDiscover()
+        case kHomeWatchlistSection:
+            return cellForWatchlist()
+        default:
+            return UITableViewCell()
+        }
     }
     
     func cellForTrending() -> UITableViewCell {
-        if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC {
-            cell.configureCell(homeContentResponse: home?.trending, title: "home_trending".localized, isHiddingSeeMore: true)
+        if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC, let presenter = getPresenter() {
+            cell.configureCell(homeContentResponse: presenter.home?.trending, isHiddingSeeMore: true)
             return cell
         }
         return UITableViewCell()
     }
     
+    func cellForDiscover() -> UITableViewCell {
+        if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC, let presenter = getPresenter() {
+            cell.configureCell(homeContentResponse: presenter.home?.discover, isHiddingSeeMore: true)
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func cellForWatchlist() -> UITableViewCell {
+        if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC, let presenter = getPresenter() {
+            cell.configureCell(homeContentResponse: presenter.home?.watchlist, isHiddingSeeMore: true)
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func getPresenter() -> HomeViewToPresenterProtocol? {
+        guard let presenter = self.presenter as? HomeViewToPresenterProtocol else {
+            showError(message: "app_error_generic".localized)
+            return nil
+        }
+        return presenter
+    }
 }

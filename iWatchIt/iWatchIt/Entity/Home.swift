@@ -14,3 +14,15 @@ struct HomeContent: Decodable {
         case image = "poster_path"
     }
 }
+
+
+struct HomeSection {
+    var title: String = ""
+    var content: [HomeContent]?
+}
+
+struct Home {
+    var trending: HomeSection?
+    var discover: HomeSection?
+    var watchlist: HomeSection?
+}

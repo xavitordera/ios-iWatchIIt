@@ -30,6 +30,7 @@ var kStoryboardMain: UIStoryboard{
 
 let kTabMoviesImg = UIImage(named:"ic_tab_movies")
 let kTabShowsImg = UIImage(named:"ic_tab_shows")
+let kEmptyStateMedia = UIImage(named: "emptyStateMedia")
 
 
 

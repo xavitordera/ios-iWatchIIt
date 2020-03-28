@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol InfiniteCarouselTVCDelegate {
+    func didTapSeeMore()
+}
+
 class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     // MARK: - Properties
@@ -16,7 +20,8 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     @IBOutlet weak var indicatorImageView: UIImageView!
     @IBOutlet weak var carousel: UICollectionView!
     
-    var homeContentResponse: [HomeContent]?
+    var homeContentResponse: HomeSection?
+    var delegate: InfiniteCarouselTVCDelegate?
     
     // MARK: - UIView
     
@@ -45,7 +50,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         titleLbl.text = ""
         homeContentResponse = nil
         moreLbl.isHidden = false
-        homeContentResponse = []
+        homeContentResponse = HomeSection()
         carousel.reloadData()
     }
     
@@ -67,12 +72,14 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     }
     
     @IBAction func pushMoreAction(_ sender: Any) {
-        postNotification(with: kNotificationSeeMore, value: [kNotiTitle: titleLbl.text ?? ""])
+        if let delegate = self.delegate {
+            delegate.didTapSeeMore()
+        }
     }
     
     // MARK: - Public Interface
     
-    func configureCell(homeContentResponse: [HomeContent]?, title: String?, isHiddingSeeMore: Bool = false) {
+    func configureCell(homeContentResponse: HomeSection?, isHiddingSeeMore: Bool = false) {
         self.homeContentResponse = homeContentResponse
         self.indicatorImageView.isHidden = isHiddingSeeMore
         // Update view
@@ -82,28 +89,19 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     // MARK: - UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (homeContentResponse?.count ?? 0)
+        return (homeContentResponse?.content?.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kInfiniteCarouselCVC, for: indexPath) as? InfiniteCarouselCVC {
-            if homeContentResponse != nil {
-                if indexPath.row < homeContentResponse!.count {
-                    cell.configureCell(contentResponse: homeContentResponse![indexPath.row])
+            if let _ = homeContentResponse {
+                if indexPath.row < homeContentResponse!.content!.count {
+                    cell.configureCell(contentResponse: homeContentResponse?.content![indexPath.row])
                 }
             }
             return cell
         }
         return UICollectionViewCell()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if homeContentResponse != nil {
-            if indexPath.row < homeContentResponse!.count {
-                let item = homeContentResponse![indexPath.row]
-                // delegate notifyyyy
-            }
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

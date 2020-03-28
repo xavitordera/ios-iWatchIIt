@@ -9,6 +9,7 @@
 import UIKit
 
 protocol HomeViewToPresenterProtocol: BaseViewToPresenterProtocol{
+    var home: Home? { get set }
     func startFetchingTrending(type: MediaType)
     func startFetchingDiscover(type: MediaType)
     func showDetailController(navigationController: UINavigationController)
