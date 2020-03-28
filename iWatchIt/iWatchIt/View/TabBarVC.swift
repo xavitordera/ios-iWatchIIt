@@ -15,19 +15,16 @@ class TabBarVC: UITabBarController {
         
         self.tabBar.isTranslucent = false
         
-        self.title = " "
-        self.moreNavigationController.navigationBar.isHidden = true
+        let moviesVC = HomeRouter.shared.createMoviesModule()
+        let navMovies = UINavigationController.init(rootViewController: moviesVC)
+        navMovies.tabBarItem.image = kTabMoviesImg
+        navMovies.tabBarItem.title = "tab_bar_movies".localized
         
-//        let movies = kStoryboardMain.instantiateViewController(withIdentifier: "MoviesVC") as? MoviesVC
-//        let navMovies = UINavigationController.init(rootViewController: movies!)
-//        navMovies.tabBarItem.image = kTabMoviesImg
-//        navMovies.tabBarItem.title = "tab_bar_movies".localized
-//        
-//        let shows = kStoryboardMain.instantiateViewController(withIdentifier: "ShowsVC") as? ShowsVC
-//        let navShows = UINavigationController.init(rootViewController: shows!)
-//        navShows.tabBarItem.image = kTabShowsImg
-//        navShows.tabBarItem.title = "tab_bar_shows".localized
-//        
-//        viewControllers = [navMovies, navShows]
+        let shows = HomeRouter.shared.createShowsModule()
+        let navShows = UINavigationController.init(rootViewController: shows)
+        navShows.tabBarItem.image = kTabShowsImg
+        navShows.tabBarItem.title = "tab_bar_shows".localized
+        
+        viewControllers = [navMovies, navShows]
     }
 }

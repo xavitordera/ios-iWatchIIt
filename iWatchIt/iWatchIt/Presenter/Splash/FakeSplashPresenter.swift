@@ -12,7 +12,15 @@ class FakeSplashPresenter:BasePresenter, SplashViewToPresenterProtocol {
     
     func startFetchingConfiguration() {
         guard let interactor = self.interactor as? SplashPresenterToInteractorProtocol else { return }
-        interactor.fetchConfiguration()
+        do {
+            let config = try RealmManager.getObjects(type: ConfigurationRLM.self)
+            if config.isEmpty {
+                interactor.fetchConfiguration()
+            }
+        } catch let error {
+            debugPrint(error)
+            interactor.fetchConfiguration()
+        }
     }
     
     func showHomeController(navigationController: UINavigationController) {
@@ -23,14 +31,15 @@ class FakeSplashPresenter:BasePresenter, SplashViewToPresenterProtocol {
 
 extension FakeSplashPresenter: SplashInteractorToPresenterProtocol{
     func configurationFetchedFailed(message: String?) {
-        debugPrint("Configuration fetch failed: error -> ")
+        view?.showError(message:("Configuration fetch failed: error -> \(String(describing: message))"))
     }
     
     func configurationFetchedSuccess(configuration: Configuration) {
         do {
-            try RealmManager.saveObject(object: configuration)
+            let configRLM = ConfigurationRLM.createFromAPI(config: configuration)
+            try RealmManager.saveObject(object: configRLM)
         } catch let error {
-            debugPrint(error.localizedDescription)
+            debugPrint(error)
         }
     }
 }

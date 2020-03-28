@@ -30,7 +30,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQb-T5-wpm">
-                                <rect key="frame" x="186" y="144" width="42" height="21"/>
+                                <rect key="frame" x="186" y="109" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -38,7 +38,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="hQb-T5-wpm" firstAttribute="top" secondItem="NHW-2s-xsh" secondAttribute="top" constant="100" id="ExO-JR-BLe"/>
+                            <constraint firstItem="hQb-T5-wpm" firstAttribute="top" secondItem="NHW-2s-xsh" secondAttribute="top" constant="65" id="ExO-JR-BLe"/>
                             <constraint firstItem="hQb-T5-wpm" firstAttribute="centerX" secondItem="dIm-hg-KmT" secondAttribute="centerX" id="q2o-Ls-bmv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NHW-2s-xsh"/>
@@ -50,6 +50,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXF-r1-GLw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-928" y="0.0"/>
+        </scene>
+        <!--MoviesVC-->
+        <scene sceneID="1gg-OX-Ac5">
+            <objects>
+                <viewController storyboardIdentifier="MoviesVC" id="0Pj-el-qxa" customClass="MoviesVC" customModule="iWatchIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kbe-aC-OR9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="EOI-rm-Ugy"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfH-Bd-Xv5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="842" y="-342"/>
+        </scene>
+        <!--ShowsVC-->
+        <scene sceneID="634-aS-kHr">
+            <objects>
+                <viewController storyboardIdentifier="ShowsVC" id="FCd-HL-2ar" customClass="ShowsVC" customModule="iWatchIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="afD-kU-aa3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="UWX-cl-JII"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q82-vY-jJh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="842" y="331"/>
         </scene>
     </scenes>
 </document>

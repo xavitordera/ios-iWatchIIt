@@ -8,3 +8,10 @@
 "app_error_title" = "Error";
 "app_error_generic" = "There has been an error, please try again later";
 "app_title" = "iWatchIt";
+"dismiss_pop_up" = "OK";
+"tab_bar_movies" = "Movies";
+"tab_bar_shows" = "Shows";
+
+"home_section_trending" = "Trending";
+"home_section_discover" = "You might like...";
+"home_section_watchlist" = "Your watchlist";

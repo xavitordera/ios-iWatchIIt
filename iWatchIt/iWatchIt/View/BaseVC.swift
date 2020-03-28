@@ -15,7 +15,11 @@ class BaseVC: UIViewController, BasePresenterToViewProtocol {
     }
     
     func showError(message: String?) {
-        let alert = AlertHelper.alertWith(title: "app_error_title".localized, message: message)
+        let alert = AlertHelper.simpleAlertWith(title: "app_error_title".localized, message: message, action: "dismiss_pop_up".localized)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func setNavigationBarHidden(isHidden: Bool) {
+        self.navigationController?.isNavigationBarHidden = isHidden
     }
 }

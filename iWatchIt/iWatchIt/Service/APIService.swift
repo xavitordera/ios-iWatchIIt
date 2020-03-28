@@ -23,8 +23,8 @@ class APIService {
     }()
     
     func requestObject<T: Decodable>(from route: APIRouter, decoder: JSONDecoder = JSONDecoder(), completion: (@escaping (_: Result<T, Error>) -> Void)) {
-           
-        sessionManager.request(route).responseDecodable(of: T.self, queue: .main, decoder: decoder){ (response: DataResponse<T, AFError>) in
+        
+        sessionManager.request(route).responseDecodable(of: T.self) { (response) in
             
             guard let resp = response.response,
                 (200...300).contains(resp.statusCode) else {
@@ -53,12 +53,12 @@ class APIService {
     
     /// Configuration
     func getConfiguration(completion: @escaping (Configuration?, Error?) -> Void) {
-        requestObject(from: APIRouter.configuration) { (result: Result<Configuration, Error>) in
+        requestObject(from: APIRouter.configuration) { (result: Result<RootConfiguration, Error>) in
             switch result {
             case .failure(let error):
                 completion(nil, error)
             case .success(let value):
-                completion(value, nil)
+                completion(value.images, nil)
             }
         }
     }

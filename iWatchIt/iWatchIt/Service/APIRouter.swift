@@ -16,11 +16,11 @@ enum APIRouter: URLRequestConvertible {
     
     /// Gets trending movies or tv shows
     
-    case trending(mediaType: String, timeWindow: String)
+    case trending(mediaType: MediaType, timeWindow: String)
     
     /// Discover trending movies
     
-    case discover(mediaType: String, language: String, withGenres: String)
+    case discover(mediaType: MediaType, language: String, withGenres: String)
     
 
     var method: HTTPMethod {
@@ -40,40 +40,48 @@ enum APIRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .configuration: return kGETConfiguration
-        case .trending(let mediaType, let timeWindow): return String(format: kGETTrending, mediaType, timeWindow)
-        case .discover(let mediaType, _, _): return String(format: kGETDiscover, mediaType)
+        case .trending(let mediaType, let timeWindow): return String(format: kGETTrending, mediaType.rawValue, timeWindow)
+        case .discover(let mediaType, _, _): return String(format: kGETDiscover, mediaType.rawValue)
         }
     }
     
     
-    var parameters: [String: Any]? {
+    var queryParams: [URLQueryItem]? {
         switch self {
         case .configuration:
-            return [kApiKey: kTMDBAPIKey]
+            return [URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey)]
         case .trending(_, _):
-            return [kApiKey: kTMDBAPIKey]
+            return [URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey)]
         case .discover(_, let language, let withGenres):
-            return [kApiKey: kTMDBAPIKey, kLanguage: language, kWithGenres: withGenres]
-        default:
-            return nil
+            return [
+                URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
+                URLQueryItem.init(name: kLanguage, value: language),
+                URLQueryItem.init(name: kWithGenres, value: withGenres)
+            ]
         }
     }
     
     func asURLRequest() throws -> URLRequest {
-        let url = try APIRouter.baseURLString.asURL()
+        let serviceUrl = try APIRouter.baseURLString.asURL().appendingPathComponent(path)
+        let urlComp = serviceUrl.absoluteString
         
-        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
-        urlRequest.httpMethod = method.rawValue
-        urlRequest.allHTTPHeaderFields = .none
+        guard var components = URLComponents.init(string: urlComp) else {
+            return URLRequest.init(url: serviceUrl)
+        }
         
         switch self {
             
         //case :
           //      urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters) // URL
-//        case .createNewTV, .positionHasBeenPlayed, .positionStartedToPlay:
-//                urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters) // Body
-            default: break
+        case .configuration, .discover, .trending:
+            components.queryItems = queryParams
         }
+        
+        let url = try components.asURL()
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method.rawValue
+        urlRequest.allHTTPHeaderFields = .none
         
         return urlRequest
     }

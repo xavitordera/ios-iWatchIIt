@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ic_show_bar.png",
+      "filename" : "icons8-tv-show-24.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icons8-tv-show-48.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icons8-tv-show-96.png",
       "scale" : "3x"
     }
   ],

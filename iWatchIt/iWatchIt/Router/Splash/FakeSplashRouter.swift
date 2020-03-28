@@ -26,7 +26,7 @@ class FakeSplashRouter: BaseRouter, SplashPresenterToRouterProtocol {
     static let shared: FakeSplashRouter = FakeSplashRouter()
 
     func pushToHomeScreen(navigationConroller navigationController:UINavigationController) {
-//        let movieModue = HomeRouter.createMovieModule()
-//        navigationController.pushViewController(movieModue,animated: true)
+        let tabBar = TabBarVC()
+        navigationController.pushViewController(tabBar, animated: true)
     }
 }

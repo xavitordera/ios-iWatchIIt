@@ -16,6 +16,7 @@ class FakeSplashVC: BaseVC, SplashPresenterToViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupNav()
         setupAnimation()
         loadData()
     }
@@ -23,17 +24,20 @@ class FakeSplashVC: BaseVC, SplashPresenterToViewProtocol {
     func setup() {
         appTitle.text = "app_title".localized
         appTitle.font = .boldSystemFont(ofSize: 40.0)
-        appTitle.textColor = .white
+        appTitle.textColor = .black
         view.backgroundColor = .darkGray
         let view = UIView(frame: self.view.frame)
         let gradient = CAGradientLayer()
 
         gradient.frame = view.bounds
-        gradient.colors = [UIColor.black.cgColor, UIColor.black.withAlphaComponent(0.0).cgColor]
+        gradient.colors = [UIColor.black.withAlphaComponent(0.0).cgColor, UIColor.black.cgColor]
         
         view.layer.insertSublayer(gradient, at: 0)
-        view.backgroundColor = .darkGray
-        self.view.addSubview(view)
+        self.view.insertSubview(view, at: 0)
+    }
+    
+    func setupNav() {
+        setNavigationBarHidden(isHidden: true)
     }
     
     func setupAnimation() {
@@ -41,6 +45,7 @@ class FakeSplashVC: BaseVC, SplashPresenterToViewProtocol {
         animation.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width)
         animation.center = self.view.center
         animation.contentMode = .scaleAspectFill
+        animation.loopMode = .repeat(2)
         view.addSubview(animation)
         animation.play { _ in
             guard let presenter = self.getPresenter() else {

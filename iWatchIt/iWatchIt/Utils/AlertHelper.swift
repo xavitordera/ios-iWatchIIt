@@ -9,8 +9,9 @@
 import UIKit
 
 class AlertHelper {
-    class func alertWith(title: String?, message: String?) -> UIAlertController {
+    class func simpleAlertWith(title: String?, message: String?, action: String?) -> UIAlertController {
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(.init(title: action, style: .cancel, handler: nil))
         return alert
     }
 }
