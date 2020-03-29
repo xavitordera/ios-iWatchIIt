@@ -12,8 +12,8 @@ class MoviesVC: HomeVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.setupNav(title: "Movies")
-        // Do any additional setup after loading the view.
+        setupNav(title: "Movies")
+        loadData(mediaType: .movie)
     }
 
 }

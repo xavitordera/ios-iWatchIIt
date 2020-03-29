@@ -11,12 +11,7 @@ import Kingfisher
 
 extension UIImageView {
     
-    func imageFrom(urlString: String, with emptyState: UIImage? = kEmptyStateMedia, options: [KingfisherOptionsInfoItem] = [.cacheOriginalImage], completion: ((_ size: CGSize?) -> Void)? = nil) {
-        
-        guard let url = URL(string: urlString) else {
-            image = emptyState
-            return
-        }
+    func imageFrom(url: URL, with emptyState: UIImage? = kEmptyStateMedia, options: [KingfisherOptionsInfoItem] = [.cacheOriginalImage], completion: ((_ size: CGSize?) -> Void)? = nil) {
         
         kf.setImage(with: ImageResource(downloadURL: url),
                     placeholder: emptyState,

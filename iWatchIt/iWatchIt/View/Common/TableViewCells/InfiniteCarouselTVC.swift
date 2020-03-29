@@ -8,7 +8,7 @@
 import UIKit
 
 protocol InfiniteCarouselTVCDelegate {
-    func didTapSeeMore()
+    func didTapSeeMore(section: HomeSectionType)
 }
 
 class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -16,7 +16,6 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     // MARK: - Properties
     
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var moreLbl: UILabel!
     @IBOutlet weak var indicatorImageView: UIImageView!
     @IBOutlet weak var carousel: UICollectionView!
     
@@ -40,7 +39,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         // Horizontal scrolling
         if let layout = carousel.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         }
     }
     
@@ -49,7 +48,6 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         
         titleLbl.text = ""
         homeContentResponse = nil
-        moreLbl.isHidden = false
         homeContentResponse = HomeSection()
         carousel.reloadData()
     }
@@ -68,12 +66,15 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         carousel.clipsToBounds = false
         carousel.showsHorizontalScrollIndicator = false
         
-        indicatorImageView.tintColor = .darkGray
+        titleLbl.textColor = .whiteOrBlack
+        titleLbl.font = .boldSystemFont(ofSize: 26.0)
+        
+        indicatorImageView.tintColor = .whiteOrBlack
     }
     
     @IBAction func pushMoreAction(_ sender: Any) {
         if let delegate = self.delegate {
-            delegate.didTapSeeMore()
+            delegate.didTapSeeMore(section: homeContentResponse!.type)
         }
     }
     
@@ -81,6 +82,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     
     func configureCell(homeContentResponse: HomeSection?, isHiddingSeeMore: Bool = false) {
         self.homeContentResponse = homeContentResponse
+        self.titleLbl.text = homeContentResponse?.title
         self.indicatorImageView.isHidden = isHiddingSeeMore
         // Update view
         carousel.reloadData()

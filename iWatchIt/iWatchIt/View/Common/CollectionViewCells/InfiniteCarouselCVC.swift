@@ -11,14 +11,14 @@ import UIKit
 import Kingfisher
 
 protocol InfiniteCarouselCVCDelegate {
-    func didTapCell()
+    func didTapCell(id: Int)
 }
 
 class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
 
     // MARK: - Properties
     var contentResponse: HomeContent?
-    var delegate: InfiniteCarouselTVCDelegate?
+    var delegate: InfiniteCarouselCVCDelegate?
     
     @IBOutlet weak var coverImgView: UIImageView!
     
@@ -50,7 +50,11 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
     }
     
     private func setupCell() {
-        coverImgView.imageFrom(urlString: contentResponse?.image ?? "")
+        guard let imgPath = contentResponse?.image,
+            let imgURL = ImageHelper.createImageURL(path: imgPath, size: kHomeSectionsInfiniteCarouselImageSize)
+        else { return }
+        coverImgView.contentMode = .scaleAspectFill
+        coverImgView.imageFrom(url: imgURL)
     }
     
     // MARK: - Auxiliar functions
@@ -63,7 +67,7 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
     
     @objc func tapCell() {
         if let delegate = self.delegate {
-            delegate.didTapSeeMore()
+            delegate.didTapCell(id: contentResponse!.id)
         }
     }
 }

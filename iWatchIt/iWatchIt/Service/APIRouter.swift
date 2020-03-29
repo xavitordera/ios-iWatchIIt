@@ -86,3 +86,8 @@ enum APIRouter: URLRequestConvertible {
         return urlRequest
     }
 }
+
+enum TimeWindow: String {
+    case day = "day"
+    case week = "week"
+}

@@ -34,7 +34,8 @@ let kEmptyStateMedia = UIImage(named: "emptyStateMedia")
 
 
 
-let kHeightHomeSectionsInfiniteCarousel: CGFloat = 355
+let kHeightHomeSectionsInfiniteCarousel: CGFloat = 250
+let kHomeSectionsInfiniteCarouselImageSize: ImageSize = .poster(size: PosterSize.medium)
 
 
 let kInfiniteCarouselTVC = "InfiniteCarouselTVC"

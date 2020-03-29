@@ -11,8 +11,6 @@ import Lottie
 
 class FakeSplashVC: BaseVC, SplashPresenterToViewProtocol {
     
-    @IBOutlet weak var appTitle: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -22,9 +20,6 @@ class FakeSplashVC: BaseVC, SplashPresenterToViewProtocol {
     }
     
     func setup() {
-        appTitle.text = "app_title".localized
-        appTitle.font = .boldSystemFont(ofSize: 40.0)
-        appTitle.textColor = .black
         view.backgroundColor = .darkGray
         let view = UIView(frame: self.view.frame)
         let gradient = CAGradientLayer()
@@ -45,7 +40,6 @@ class FakeSplashVC: BaseVC, SplashPresenterToViewProtocol {
         animation.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width)
         animation.center = self.view.center
         animation.contentMode = .scaleAspectFill
-        animation.loopMode = .repeat(2)
         view.addSubview(animation)
         animation.play { _ in
             guard let presenter = self.getPresenter() else {

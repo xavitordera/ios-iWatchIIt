@@ -10,25 +10,26 @@ import UIKit
 
 protocol HomeViewToPresenterProtocol: BaseViewToPresenterProtocol{
     var home: Home? { get set }
-    func startFetchingTrending(type: MediaType)
-    func startFetchingDiscover(type: MediaType)
+    func startFetchingData(type: MediaType)
     func showDetailController(navigationController: UINavigationController)
 }
 
-protocol HomePresenterToViewProtocol: BasePresenterToViewProtocol{}
+protocol HomePresenterToViewProtocol: BasePresenterToViewProtocol{
+    func onDataFetched()
+}
 
 protocol HomePresenterToRouterProtocol: BasePresenterToRouterProtocol {
     func pushToDetailScreen(navigationController: UINavigationController)
 }
 
 protocol HomePresenterToInteractorProtocol: BasePresenterToInteractorProtocol {
-    func fetchTrending(type: MediaType)
+    func fetchTrending(type: MediaType, timeWindow: TimeWindow)
     func fetchDiscover(type: MediaType)
 }
 
 protocol HomeInteractorToPresenterProtocol: BaseInteractorToPresenterProtocol {
-    func trendingFetchSuccess(trending: Any)
+    func trendingFetchSuccess(trending: Root?)
     func trendingFetchFailed(message: String?)
-    func discoverFetchSuccess(trending: Any)
+    func discoverFetchSuccess(discover: Root?)
     func discoverFetchFailed(message: String?)
 }

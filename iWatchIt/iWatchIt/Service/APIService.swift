@@ -62,10 +62,21 @@ class APIService {
             }
         }
     }
-    // GET -> /configuration
-    // Store in Realm
     
     // Home Services
+    
+    func getTrending(mediaType: MediaType, timeWindow: TimeWindow, completion: @escaping (Root?, Error?) -> Void) {
+        requestObject(from: APIRouter.trending(mediaType: mediaType, timeWindow: timeWindow.rawValue)) { (result: Result<Root, Error>)
+            in
+            switch result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value, nil)
+            }
+        }
+    }
+    
     // GET -> getTrendingMovies
     // GET -> getTrendingTVShows
     // GET -> discoverMovies

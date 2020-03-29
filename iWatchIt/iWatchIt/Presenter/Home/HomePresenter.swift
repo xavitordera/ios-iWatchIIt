@@ -12,15 +12,18 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
     var home: Home?
     
     // MARK: Interactor protocol
-    func trendingFetchSuccess(trending: Any) {
-            
+    func trendingFetchSuccess(trending: Root?) {
+        home = Home.createFromRoot(rootTrending: trending, rootDiscover: nil)
+        if let view = getView() {
+            view.onDataFetched()
+        }
     }
     
     func trendingFetchFailed(message: String?) {
-        
+        view?.showError(message: message)
     }
     
-    func discoverFetchSuccess(trending: Any) {
+    func discoverFetchSuccess(discover: Root?) {
         
     }
     
@@ -30,15 +33,24 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
     
     // MARK: View protocol
     
-    func startFetchingTrending(type: MediaType) {
-        
-    }
-    
-    func startFetchingDiscover(type: MediaType) {
-        
+    func startFetchingData(type: MediaType) {
+        guard let interactor = interactor as? HomePresenterToInteractorProtocol else {
+            discoverFetchFailed(message: "app_error_generic".localized)
+            trendingFetchFailed(message: "app_error_generic".localized)
+            return
+        }
+        interactor.fetchTrending(type: type, timeWindow: TimeWindow.week)
+        interactor.fetchDiscover(type: type)
     }
     
     func showDetailController(navigationController: UINavigationController) {
         
+    }
+    
+    func getView() -> HomePresenterToViewProtocol? {
+        guard let view = self.view as? HomePresenterToViewProtocol else {
+            return nil
+        }
+        return view
     }
 }
