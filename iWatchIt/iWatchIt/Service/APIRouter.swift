@@ -18,15 +18,19 @@ enum APIRouter: URLRequestConvertible {
     
     case trending(mediaType: MediaType, timeWindow: String)
     
-    /// Discover trending movies
+    /// Discover trending content
     
     case discover(mediaType: MediaType, language: String, withGenres: String)
+    
+    /// Search content
+    
+    case search(mediaType: MediaType, query: String, language: String, page: Int = 1)
     
 
     var method: HTTPMethod {
         switch self {
             
-        case .configuration, .trending, .discover: return .get
+        case .configuration, .trending, .discover, .search: return .get
         
         // case : return .head
         // case : return .delete
@@ -42,6 +46,7 @@ enum APIRouter: URLRequestConvertible {
         case .configuration: return kGETConfiguration
         case .trending(let mediaType, let timeWindow): return String(format: kGETTrending, mediaType.rawValue, timeWindow)
         case .discover(let mediaType, _, _): return String(format: kGETDiscover, mediaType.rawValue)
+        case .search(let mediaType, _, _, _): return String(format: kGETSearch, mediaType.rawValue)
         }
     }
     
@@ -58,6 +63,13 @@ enum APIRouter: URLRequestConvertible {
                 URLQueryItem.init(name: kLanguage, value: language),
                 URLQueryItem.init(name: kWithGenres, value: withGenres)
             ]
+        case .search(_ , let query, let language, let page):
+            return [
+                URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
+                URLQueryItem.init(name: kLanguage, value: language),
+                URLQueryItem.init(name: kQuery, value: query),
+                URLQueryItem.init(name: kPage, value: String(page))
+            ]
         }
     }
     
@@ -73,7 +85,7 @@ enum APIRouter: URLRequestConvertible {
             
         //case :
           //      urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters) // URL
-        case .configuration, .discover, .trending:
+        case .configuration, .discover, .trending, .search:
             components.queryItems = queryParams
         }
         

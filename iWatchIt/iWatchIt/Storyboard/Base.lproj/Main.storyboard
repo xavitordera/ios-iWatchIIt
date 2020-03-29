@@ -66,5 +66,20 @@
             </objects>
             <point key="canvasLocation" x="842" y="331"/>
         </scene>
+        <!--SearchVC-->
+        <scene sceneID="7z7-Ur-Qb3">
+            <objects>
+                <viewController storyboardIdentifier="SearchVC" id="wUQ-cr-bZd" customClass="SearchVC" customModule="iWatchIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0y9-LI-sk1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Df0-Yn-NVZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fTb-CX-rJr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1758" y="0.0"/>
+        </scene>
     </scenes>
 </document>

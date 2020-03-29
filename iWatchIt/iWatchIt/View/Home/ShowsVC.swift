@@ -12,7 +12,7 @@ class ShowsVC: HomeVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNav(title: "Shows")
+        setupNav(title: "home_title_shows".localized, type: .show)
         loadData(mediaType: .show)
     }
 }

@@ -12,7 +12,7 @@ class MoviesVC: HomeVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNav(title: "Movies")
+        setupNav(title: "home_title_movies".localized, type: .movie)
         loadData(mediaType: .movie)
     }
 

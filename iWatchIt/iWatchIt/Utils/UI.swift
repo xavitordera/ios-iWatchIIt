@@ -13,6 +13,7 @@ let kHomeVC = "HomeVC"
 let kMoviesVC = "MoviesVC"
 let kShowsVC = "ShowsVC"
 let kTabBarVC = "TabBarVC"
+let kSearchVC = "SearchVC"
 
 
 let kHomeTrendingSection = "Trending"
@@ -34,9 +35,10 @@ let kEmptyStateMedia = UIImage(named: "emptyStateMedia")
 
 
 
-let kHeightHomeSectionsInfiniteCarousel: CGFloat = 250
+let kHeightHomeSectionsInfiniteCarousel: CGFloat = 280
 let kHomeSectionsInfiniteCarouselImageSize: ImageSize = .poster(size: PosterSize.medium)
 
 
 let kInfiniteCarouselTVC = "InfiniteCarouselTVC"
 let kInfiniteCarouselCVC = "InfiniteCarouselCVC"
+let kSectionHeader = "SectionHeader"

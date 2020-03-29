@@ -17,7 +17,7 @@ protocol InfiniteCarouselCVCDelegate {
 class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
 
     // MARK: - Properties
-    var contentResponse: HomeContent?
+    var contentResponse: Content?
     var delegate: InfiniteCarouselCVCDelegate?
     
     @IBOutlet weak var coverImgView: UIImageView!
@@ -39,11 +39,12 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
         contentResponse = nil
         
         coverImgView.image = nil
+        delegate = nil
     }
     
     // MARK: - Public interface
     
-    func configureCell(contentResponse: HomeContent?) {
+    func configureCell(contentResponse: Content?) {
         self.contentResponse = contentResponse
         
         setupCell()
@@ -61,11 +62,11 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
     
     private func setupLayout() {
         // ImageView
-        let tapGesture = UITapGestureRecognizer.init(target: coverImgView, action: #selector(tapCell))
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(tapCell))
         coverImgView.addGestureRecognizer(tapGesture)
     }
     
-    @objc func tapCell() {
+   @objc func tapCell(sender: UITapGestureRecognizer) {
         if let delegate = self.delegate {
             delegate.didTapCell(id: contentResponse!.id)
         }

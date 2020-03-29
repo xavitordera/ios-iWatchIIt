@@ -77,6 +77,30 @@ class APIService {
         }
     }
     
+    func discover(mediaType: MediaType, language: String, withGenres: String, completion: @escaping (Root?, Error?) -> Void) {
+        requestObject(from: APIRouter.discover(mediaType: mediaType, language: language, withGenres: withGenres)) { (result: Result<Root, Error>)
+            in
+            switch result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value, nil)
+            }
+        }
+    }
+
+    func search(query: String, mediaType: MediaType, language: String, page: Int, completion: @escaping (Root?, Error?) -> Void) {
+        requestObject(from: APIRouter.search(mediaType: mediaType, query: query, language: language, page: page)) { (result: Result<Root, Error>)
+            in
+            switch result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value, nil)
+            }
+        }
+    }
+    
     // GET -> getTrendingMovies
     // GET -> getTrendingTVShows
     // GET -> discoverMovies

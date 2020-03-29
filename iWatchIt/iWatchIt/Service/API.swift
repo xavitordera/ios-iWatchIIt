@@ -17,11 +17,14 @@ let kTMDBAPIKey = "dc178d675fbe6650c6ddb7f638f3bb99"
 let kGETConfiguration = "/configuration"
 let kGETTrending = "/trending/%@/%@"
 let kGETDiscover = "/discover/%@"
+let kGETSearch = "/search/%@"
 
 /// Param keys
 let kApiKey = "api_key"
 let kLanguage = "language"
 let kWithGenres = "with_genres"
+let kPage = "page"
+let kQuery = "query"
 
 
 

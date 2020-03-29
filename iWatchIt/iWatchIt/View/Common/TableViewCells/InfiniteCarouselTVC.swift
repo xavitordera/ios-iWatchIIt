@@ -9,9 +9,10 @@ import UIKit
 
 protocol InfiniteCarouselTVCDelegate {
     func didTapSeeMore(section: HomeSectionType)
+    func didTapMovie(id: Int)
 }
 
-class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, InfiniteCarouselCVCDelegate {
 
     // MARK: - Properties
     
@@ -50,6 +51,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         homeContentResponse = nil
         homeContentResponse = HomeSection()
         carousel.reloadData()
+        delegate = nil
     }
     
     // MARK: - Auxiliar functions
@@ -65,6 +67,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         carousel.dataSource = self
         carousel.clipsToBounds = false
         carousel.showsHorizontalScrollIndicator = false
+        carousel.decelerationRate = .normal
         
         titleLbl.textColor = .whiteOrBlack
         titleLbl.font = .boldSystemFont(ofSize: 26.0)
@@ -73,7 +76,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     }
     
     @IBAction func pushMoreAction(_ sender: Any) {
-        if let delegate = self.delegate {
+        if let delegate = self.delegate, !indicatorImageView.isHidden {
             delegate.didTapSeeMore(section: homeContentResponse!.type)
         }
     }
@@ -99,6 +102,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
             if let _ = homeContentResponse {
                 if indexPath.row < homeContentResponse!.content!.count {
                     cell.configureCell(contentResponse: homeContentResponse?.content![indexPath.row])
+                    cell.delegate = self
                 }
             }
             return cell
@@ -108,10 +112,15 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 136,
-                      height: 180)
+                      height: 204)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+    
+    func didTapCell(id: Int) {
+        // TODO: go detail!!
+        debugPrint("Tap on cell with movie: \(id)")
     }
 }

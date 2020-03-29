@@ -13,7 +13,7 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
     
     // MARK: Interactor protocol
     func trendingFetchSuccess(trending: Root?) {
-        home = Home.createFromRoot(rootTrending: trending, rootDiscover: nil)
+        home = Home.updateFromRoot(rootTrending: trending, rootDiscover: nil)
         if let view = getView() {
             view.onDataFetched()
         }
@@ -24,7 +24,10 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
     }
     
     func discoverFetchSuccess(discover: Root?) {
-        
+        home = Home.updateFromRoot(rootTrending: nil, rootDiscover: discover)
+        if let view = getView() {
+            view.onDataFetched()
+        }
     }
     
     func discoverFetchFailed(message: String?) {

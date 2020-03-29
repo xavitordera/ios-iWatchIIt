@@ -17,23 +17,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0A-1J-ZZk">
-                        <rect key="frame" x="15" y="44.5" width="42" height="21"/>
+                        <rect key="frame" x="15" y="20.5" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="UFk-wD-jLB">
-                        <rect key="frame" x="436" y="47.5" width="15" height="15"/>
+                        <rect key="frame" x="436" y="23.5" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="3co-K2-U72"/>
                             <constraint firstAttribute="width" secondItem="UFk-wD-jLB" secondAttribute="height" multiplier="1:1" id="z3y-MQ-5n5"/>
                         </constraints>
                     </imageView>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6kt-BL-6h6">
-                        <rect key="frame" x="0.0" y="82.5" width="466" height="180"/>
+                        <rect key="frame" x="0.0" y="58.5" width="466" height="204"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="180" id="xiX-DG-muR"/>
+                            <constraint firstAttribute="height" constant="204" id="xiX-DG-muR"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zgA-Ze-K97">
                             <size key="itemSize" width="50" height="50"/>
@@ -43,7 +43,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wx0-Tg-k4I">
-                        <rect key="frame" x="436" y="0.0" width="30" height="82.5"/>
+                        <rect key="frame" x="436" y="0.0" width="30" height="58.5"/>
                         <connections>
                             <action selector="pushMoreAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kGC-Uw-LTz"/>
                         </connections>

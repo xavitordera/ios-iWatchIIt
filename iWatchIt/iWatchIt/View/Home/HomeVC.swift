@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource, InfiniteCarouselCVCDelegate, InfiniteCarouselTVCDelegate {
+class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource, InfiniteCarouselTVCDelegate {
     
     var mainTV: UITableView?
     var sections: [String] = []
@@ -19,12 +19,17 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
         setupTV()
     }
     
-    func setupNav(title: String) {
+    func setupNav(title: String, type: MediaType) {
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        let search = UISearchController(searchResultsController: nil)
-        search.searchResultsUpdater = self
-        self.navigationItem.searchController = search
         self.navigationItem.title = title
+        
+        let searchVC = SearchRouter.shared.createModule()
+        searchVC.type = type
+        
+        let search = UISearchController(searchResultsController: searchVC)
+        search.searchResultsUpdater = self
+        search.searchBar.delegate = searchVC
+        self.navigationItem.searchController = search
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -44,7 +49,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
         mainTV?.tableFooterView = UIView()
         mainTV?.allowsSelection = false
         mainTV?.register(UINib(nibName: kInfiniteCarouselTVC, bundle: .main), forCellReuseIdentifier: kInfiniteCarouselTVC)
-        mainTV?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: (navigationController?.navigationBar.frame.height ?? 0) + 40, right: 0)
+        mainTV?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         mainTV?.separatorStyle = .none
         setupSections()
         view = (mainTV!)
@@ -66,7 +71,12 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return kHeightHomeSectionsInfiniteCarousel
+        switch sections[indexPath.row] {
+        case kHomeTrendingSection:
+            return kHeightHomeSectionsInfiniteCarousel - 20
+        default:
+            return kHeightHomeSectionsInfiniteCarousel
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,6 +95,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
     func cellForTrending() -> UITableViewCell {
         if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC, let presenter = getPresenter() {
             cell.configureCell(homeContentResponse: presenter.home?.trending, isHiddingSeeMore: true)
+            cell.delegate = self
             return cell
         }
         return UITableViewCell()
@@ -93,6 +104,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
     func cellForDiscover() -> UITableViewCell {
         if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC, let presenter = getPresenter() {
             cell.configureCell(homeContentResponse: presenter.home?.discover, isHiddingSeeMore: true)
+            cell.delegate = self
             return cell
         }
         return UITableViewCell()
@@ -101,6 +113,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
     func cellForWatchlist() -> UITableViewCell {
         if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC, let presenter = getPresenter() {
             cell.configureCell(homeContentResponse: presenter.home?.watchlist, isHiddingSeeMore: false)
+            cell.delegate = self
             return cell
         }
         return UITableViewCell()
@@ -108,13 +121,14 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
     
     // MARK: - Cell delegates
     
-    func didTapCell(id: Int) {
+    func didTapMovie(id: Int) {
         // TODO: go detail!!
+        debugPrint("Movie tapped: \(id)")
     }
     
     func didTapSeeMore(section: HomeSectionType) {
         // TODO: go see more!!
-    
+        debugPrint("see more tapped on section: \(section)")
     }
     
     // MARK: - Presenter delegate

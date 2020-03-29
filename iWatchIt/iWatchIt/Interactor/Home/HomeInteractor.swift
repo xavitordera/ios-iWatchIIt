@@ -30,6 +30,18 @@ class HomeInteractor: BaseInteractor, HomePresenterToInteractorProtocol {
     
     func fetchDiscover(type: MediaType) {
         // fetch discover
+        // FIXME: language and genres
+        APIService.shared.discover(mediaType: type, language: "en", withGenres: "") {
+            (discover, error) in
+            guard let presenter = self.getPresenter() else {
+                return
+            }
+            guard let discover = discover, error == nil else {
+                presenter.discoverFetchFailed(message: error?.localizedDescription)
+                return
+            }
+            presenter.discoverFetchSuccess(discover: discover)
+        }
     }
     
     func getPresenter() -> HomeInteractorToPresenterProtocol? {
