@@ -20,13 +20,11 @@ final class RealmManager {
         let realm = try Realm()
         let realmResults = realm.objects(type)
         return Array(realmResults)
-
     }
     static func getObjects<T:Object>(type: T.Type, filter:String) throws ->[T]  {
         let realm = try Realm()
         let realmResults = realm.objects(type).filter(filter)
         return Array(realmResults)
-
     }
     static func removeObjects<T:Object>(type: T.Type) throws {
         let realm = try Realm()

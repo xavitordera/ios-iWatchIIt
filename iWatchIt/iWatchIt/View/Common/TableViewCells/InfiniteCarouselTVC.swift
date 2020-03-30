@@ -9,7 +9,7 @@ import UIKit
 
 protocol InfiniteCarouselTVCDelegate {
     func didTapSeeMore(section: HomeSectionType)
-    func didTapMovie(id: Int)
+    func didTapContentCell(id: Int)
 }
 
 class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, InfiniteCarouselCVCDelegate {
@@ -122,5 +122,6 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     func didTapCell(id: Int) {
         // TODO: go detail!!
         debugPrint("Tap on cell with movie: \(id)")
+        delegate?.didTapContentCell(id: id)
     }
 }

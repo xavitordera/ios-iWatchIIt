@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource, InfiniteCarouselTVCDelegate {
+class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISearchControllerDelegate, UITableViewDelegate, UITableViewDataSource, InfiniteCarouselTVCDelegate {
     
     var mainTV: UITableView?
     var sections: [String] = []
@@ -28,12 +28,14 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
         
         let search = UISearchController(searchResultsController: searchVC)
         search.searchResultsUpdater = self
+        search.delegate = self
         search.searchBar.delegate = searchVC
+        definesPresentationContext = true
         self.navigationItem.searchController = search
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        
+        searchController.searchResultsController?.view.isHidden = false
     }
     
     func setupSections() {
@@ -121,9 +123,10 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UITa
     
     // MARK: - Cell delegates
     
-    func didTapMovie(id: Int) {
+    func didTapContentCell(id: Int) {
         // TODO: go detail!!
-        debugPrint("Movie tapped: \(id)")
+        debugPrint("Content tapped: \(id)")
+        RecentlySeenHelper.saveRecentlySeen(id: id, title: "stfu bitch you issa crazy hoe", mediaType: .movie)
     }
     
     func didTapSeeMore(section: HomeSectionType) {

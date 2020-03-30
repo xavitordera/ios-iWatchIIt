@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchRouter: BaseRouter, SearchPresenterToRouterProtocol {
-    func pushToDetailScreen(navigationController: UINavigationController) {
+    func pushToDetailScreen(navigationController: UINavigationController, for contentWithId: Int) {
         
     }
     

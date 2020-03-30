@@ -42,3 +42,4 @@ let kHomeSectionsInfiniteCarouselImageSize: ImageSize = .poster(size: PosterSize
 let kInfiniteCarouselTVC = "InfiniteCarouselTVC"
 let kInfiniteCarouselCVC = "InfiniteCarouselCVC"
 let kSectionHeader = "SectionHeader"
+let kDefaultCell = "defaultCell"

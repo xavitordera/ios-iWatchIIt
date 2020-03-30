@@ -9,8 +9,9 @@ import UIKit
 
 protocol SearchViewToPresenterProtocol: BaseViewToPresenterProtocol{
     var search: Search? { get set }
+    var recentlySeen: [RecentlySeen]? { get set }
     func startFetchingData(query: String, type: MediaType)
-    func showDetailController(navigationController: UINavigationController)
+    func showDetailController(navigationController: UINavigationController, for contentWithId: Int)
 }
 
 protocol SearchPresenterToViewProtocol: BasePresenterToViewProtocol{
@@ -18,14 +19,16 @@ protocol SearchPresenterToViewProtocol: BasePresenterToViewProtocol{
 }
 
 protocol SearchPresenterToRouterProtocol: BasePresenterToRouterProtocol {
-    func pushToDetailScreen(navigationController: UINavigationController)
+    func pushToDetailScreen(navigationController: UINavigationController, for contentWithId: Int)
 }
 
 protocol SearchPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {
     func fetchSearch(query: String, mediaType: MediaType)
+    func fetchRecentlySeen(mediaType: MediaType)
 }
 
 protocol SearchInteractorToPresenterProtocol: BaseInteractorToPresenterProtocol {
     func searchFetchSuccess(results: Root?)
     func searchFetchFailed(message: String?)
+    func recentlySeenFetchSuccess(results: [RecentlySeen]?)
 }

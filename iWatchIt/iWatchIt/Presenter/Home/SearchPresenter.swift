@@ -10,6 +10,7 @@ import UIKit
 class SearchPresenter: BasePresenter, SearchInteractorToPresenterProtocol, SearchViewToPresenterProtocol {
     
     var search: Search?
+    var recentlySeen: [RecentlySeen]?
     
     // MARK: Interactor protocol
     func searchFetchSuccess(results: Root?) {
@@ -23,6 +24,17 @@ class SearchPresenter: BasePresenter, SearchInteractorToPresenterProtocol, Searc
         view?.showError(message: message)
     }
     
+    
+    func recentlySeenFetchSuccess(results: [RecentlySeen]?) {
+        guard let results = results else {
+            return
+        }
+        recentlySeen = results
+        if let view = getView() {
+            view.onDataFetched()
+        }
+    }
+    
     // MARK: View protocol
     
     func startFetchingData(query: String, type: MediaType) {
@@ -33,7 +45,7 @@ class SearchPresenter: BasePresenter, SearchInteractorToPresenterProtocol, Searc
         interactor.fetchSearch(query: query, mediaType: type)
     }
     
-    func showDetailController(navigationController: UINavigationController) {
+    func showDetailController(navigationController: UINavigationController, for contentWithId: Int) {
         
     }
     
