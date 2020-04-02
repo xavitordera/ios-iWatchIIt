@@ -31,10 +31,8 @@ class SearchInteractor: BaseInteractor, SearchPresenterToInteractorProtocol {
     
     
     func fetchRecentlySeen(mediaType: MediaType) {
-        
-            let results = RecentlySeenHelper.getRecentlySeen()
-            self.getPresenter()?.recentlySeenFetchSuccess(results: results)
-        
+        let results = RecentlySeenHelper.getRecentlySeen()
+        self.getPresenter()?.recentlySeenFetchSuccess(results: results)
     }
     
     func getPresenter() -> SearchInteractorToPresenterProtocol? {

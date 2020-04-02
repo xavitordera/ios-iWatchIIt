@@ -101,12 +101,21 @@ class APIService {
         }
     }
     
-    // GET -> getTrendingMovies
-    // GET -> getTrendingTVShows
-    // GET -> discoverMovies
-    // GET -> discoverTVShows
-    
     /// Detail services
+    
+    func detail(mediaType: MediaType, id: Int, language: String, appendToResponse: String, completion: @escaping (ContentExtended?, Error?) -> Void) {
+        requestObject(from: APIRouter.detail(mediaType: mediaType, id: id, language: language, appendToResponse: appendToResponse)) { (result: Result<ContentExtended, Error>)
+            in
+            switch result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value, nil)
+            }
+        }
+    }
+    
+    
     // GET -> getDetails
     // GET -> getVideos
     // GET -> getReviews

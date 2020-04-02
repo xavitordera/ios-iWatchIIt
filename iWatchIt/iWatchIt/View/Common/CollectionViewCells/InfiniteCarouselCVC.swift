@@ -43,6 +43,9 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
         
         coverImgView.image = nil
         delegate = nil
+        layer.borderWidth = 0
+        scoreBtn.isHidden = true
+        lblTitle.isHidden = true
     }
     
     // MARK: - Public interface
@@ -54,25 +57,38 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
     }
     
     private func setupCell() {
+        
+        if let voteAverage = contentResponse?.voteAverage, voteAverage > 0.0 {
+            let x = String(format: "%.1f", voteAverage)
+            scoreBtn.setTitle(x, for: .normal)
+            scoreBtn.isHidden = false
+        } else {
+            scoreBtn.isHidden = true
+        }
+        
         guard let imgPath = contentResponse?.image,
             let imgURL = ImageHelper.createImageURL(path: imgPath, size: kHomeSectionsInfiniteCarouselImageSize)
         else {
             coverImgView.image = kEmptyStateMedia
-            lblTitle.text = contentResponse?.title
+            lblTitle.text = contentResponse?.title ?? contentResponse?.name
             lblTitle.isHidden = false
+            layer.borderWidth = 1
+            layer.borderColor = UIColor.black.cgColor
             return
         }
         lblTitle.isHidden = true
         coverImgView.contentMode = .scaleAspectFill
         coverImgView.imageFrom(url: imgURL)
-        if let voteAverage = contentResponse?.voteAverage, voteAverage > 0.0 {
-            let x = String(format: "%.1f", voteAverage)
-            scoreBtn.titleLabel?.text = x
-        } else {
-            scoreBtn.isHidden = true
-        }
     }
     
+    
+    func setupCastCell() {
+        
+    }
+    
+    func setupPlatformCell() {
+        
+    }
     // MARK: - Auxiliar functions
     
     private func setupLayout() {

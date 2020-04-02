@@ -14,6 +14,7 @@ let kMoviesVC = "MoviesVC"
 let kShowsVC = "ShowsVC"
 let kTabBarVC = "TabBarVC"
 let kSearchVC = "SearchVC"
+let kDetailVC = "DetailVC"
 
 
 let kHomeTrendingSection = "Trending"
@@ -44,4 +45,4 @@ let kInfiniteCarouselCVC = "InfiniteCarouselCVC"
 let kSectionHeader = "SectionHeader"
 let kDefaultCell = "defaultCell"
 
-let kColorEmptyStateLabel = UIColor.whiteOrBlack.withAlphaComponent(0.6)
+let kColorEmptyStateLabel = UIColor.whiteOrBlack

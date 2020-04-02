@@ -9,7 +9,12 @@
 
 final class RecentlySeenHelper {
     
-    static func saveRecentlySeen(id: Int, title: String, mediaType: MediaType) {
+    static func saveRecentlySeen(id: Int?, title: String?, mediaType: MediaType?) {
+        
+        guard let id = id, let title = title, let mediaType = mediaType else {
+            return
+        }
+        
         let entry = RecentlySeen()
         entry.id = id
         entry.title = title
@@ -25,7 +30,7 @@ final class RecentlySeenHelper {
     static func getRecentlySeen() -> [RecentlySeen]? {
         do {
             let wholeResults = try RealmManager.getObjects(type: RecentlySeen.self)
-            let results = Array(wholeResults.suffix(7))
+            let results = Array(wholeResults.suffix(6))
             return results
         } catch let error {
             debugPrint("Could not save entry \(error)")

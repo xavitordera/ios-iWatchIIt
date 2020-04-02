@@ -37,12 +37,14 @@ struct Content: Decodable {
     var id: Int?
     var voteAverage: Double?
     var title: String?
+    var name: String?
     
     enum CodingKeys: String, CodingKey {
         case image = "poster_path"
         case id
         case voteAverage = "vote_average"
         case title
+        case name
     }
 }
 
@@ -51,13 +53,21 @@ struct ContentExtended: Decodable {
     var id: Int?
     var voteAverage: Double?
     var title: String?
+    var name: String?
     var overview: String?
+    var genres: [Int]?
+    var movieReleaseDate: String?
+    var firstAirDate: String?
     
     enum CodingKeys: String, CodingKey {
         case image = "poster_path"
         case id
         case voteAverage = "vote_average"
         case title
+        case name
         case overview
+        case genres = "genre_ids"
+        case movieReleaseDate = "release_date"
+        case firstAirDate = "first_air_date"
     }
 }

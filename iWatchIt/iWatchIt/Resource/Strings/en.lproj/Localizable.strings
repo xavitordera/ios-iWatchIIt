@@ -19,4 +19,5 @@
 "home_section_watchlist" = "Your watchlist";
 
 "search_header_recently_seen" = "Recently seen";
-"search_header_recently_seen" = "No results found for '%@'";
+"search_empty_results" = "No results found for\n'%@'";
+"search_empty_history" = "Seems you haven't explored anything yet...";

@@ -31,7 +31,7 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
     }
     
     func discoverFetchFailed(message: String?) {
-        
+        view?.showError(message: message)
     }
     
     // MARK: View protocol
@@ -46,8 +46,8 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
         interactor.fetchDiscover(type: type)
     }
     
-    func showDetailController(navigationController: UINavigationController) {
-        
+    func contentSelected(for movieId: Int, navigationController: UINavigationController) {
+
     }
     
     func getView() -> HomePresenterToViewProtocol? {

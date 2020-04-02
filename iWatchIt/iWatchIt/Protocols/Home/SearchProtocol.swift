@@ -13,11 +13,12 @@ protocol SearchViewToPresenterProtocol: BaseViewToPresenterProtocol{
     var lastQuery: String? { get set }
     func startFetchingHistory(type: MediaType)
     func startFetchingData(query: String, type: MediaType)
-    func showDetailController(navigationController: UINavigationController, for contentWithId: Int)
+    func contentSelected(navigationController: UINavigationController, for contentWithId: Int)
 }
 
 protocol SearchPresenterToViewProtocol: BasePresenterToViewProtocol{
     func onDataFetched(isEmpty: Bool)
+    func onRecentlySeenFetched(isEmpty: Bool)
 }
 
 protocol SearchPresenterToRouterProtocol: BasePresenterToRouterProtocol {

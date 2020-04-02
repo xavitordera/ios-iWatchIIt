@@ -32,7 +32,7 @@ class SearchPresenter: BasePresenter, SearchInteractorToPresenterProtocol, Searc
         }
         recentlySeen = results
         if let view = getView() {
-            view.onDataFetched(isEmpty: recentlySeen?.isEmpty ?? true)
+            view.onRecentlySeenFetched(isEmpty: results.isEmpty)
         }
     }
     
@@ -54,7 +54,7 @@ class SearchPresenter: BasePresenter, SearchInteractorToPresenterProtocol, Searc
         interactor.fetchRecentlySeen(mediaType: type)
     }
     
-    func showDetailController(navigationController: UINavigationController, for contentWithId: Int) {
+    func contentSelected(navigationController: UINavigationController, for contentWithId: Int) {
         
     }
     

@@ -11,7 +11,7 @@ import UIKit
 protocol HomeViewToPresenterProtocol: BaseViewToPresenterProtocol{
     var home: Home? { get set }
     func startFetchingData(type: MediaType)
-    func showDetailController(navigationController: UINavigationController)
+    func contentSelected(for movieId: Int, navigationController: UINavigationController)
 }
 
 protocol HomePresenterToViewProtocol: BasePresenterToViewProtocol{
@@ -19,7 +19,7 @@ protocol HomePresenterToViewProtocol: BasePresenterToViewProtocol{
 }
 
 protocol HomePresenterToRouterProtocol: BasePresenterToRouterProtocol {
-    func pushToDetailScreen(navigationController: UINavigationController)
+    func pushToDetailScreen(for movieId: Int, navigationController: UINavigationController)
 }
 
 protocol HomePresenterToInteractorProtocol: BasePresenterToInteractorProtocol {

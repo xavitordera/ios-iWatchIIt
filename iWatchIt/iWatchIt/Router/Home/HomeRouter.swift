@@ -9,7 +9,7 @@
 import UIKit
 
 class HomeRouter: BaseRouter, HomePresenterToRouterProtocol {
-    func pushToDetailScreen(navigationController: UINavigationController) {
+    func pushToDetailScreen(for movieId: Int, navigationController: UINavigationController) {
         
     }
     

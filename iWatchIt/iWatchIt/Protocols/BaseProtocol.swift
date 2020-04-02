@@ -26,3 +26,5 @@ protocol BasePresenterToInteractorProtocol: class {
 }
 
 protocol BaseInteractorToPresenterProtocol: class {}
+
+

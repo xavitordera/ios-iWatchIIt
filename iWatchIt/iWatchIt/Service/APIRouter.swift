@@ -26,16 +26,20 @@ enum APIRouter: URLRequestConvertible {
     
     case search(mediaType: MediaType, query: String, language: String, page: Int = 1)
     
-
+    /// Get detailed information
+    
+    case detail(mediaType: MediaType, id: Int, language: String, appendToResponse: String)
+    
+    
     var method: HTTPMethod {
         switch self {
             
-        case .configuration, .trending, .discover, .search: return .get
-        
-        // case : return .head
-        // case : return .delete
-        // case : return .patch
-        // case : return .put
+        case .configuration, .trending, .discover, .search, .detail: return .get
+            
+            // case : return .head
+            // case : return .delete
+            // case : return .patch
+            // case : return .put
         }
     }
     
@@ -47,6 +51,7 @@ enum APIRouter: URLRequestConvertible {
         case .trending(let mediaType, let timeWindow): return String(format: kGETTrending, mediaType.rawValue, timeWindow)
         case .discover(let mediaType, _, _): return String(format: kGETDiscover, mediaType.rawValue)
         case .search(let mediaType, _, _, _): return String(format: kGETSearch, mediaType.rawValue)
+        case .detail(let mediaType, let id, _, _): return String(format: kGETDetail, mediaType.rawValue, id)
         }
     }
     
@@ -70,6 +75,12 @@ enum APIRouter: URLRequestConvertible {
                 URLQueryItem.init(name: kQuery, value: query),
                 URLQueryItem.init(name: kPage, value: String(page))
             ]
+        case .detail(_, _, let language, let appendToResponse):
+            return [
+                URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
+                URLQueryItem.init(name: kLanguage, value: language),
+                URLQueryItem.init(name: kAppendToResponse, value: appendToResponse)
+            ]
         }
     }
     
@@ -83,9 +94,9 @@ enum APIRouter: URLRequestConvertible {
         
         switch self {
             
-        //case :
-          //      urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters) // URL
-        case .configuration, .discover, .trending, .search:
+            //case :
+        //      urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters) // URL
+        case .configuration, .discover, .trending, .search, .detail:
             components.queryItems = queryParams
         }
         
@@ -94,8 +105,6 @@ enum APIRouter: URLRequestConvertible {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = .none
-        
-        debugPrint(urlRequest)
         
         return urlRequest
     }

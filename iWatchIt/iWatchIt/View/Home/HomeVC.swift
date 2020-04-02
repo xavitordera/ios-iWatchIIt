@@ -126,7 +126,9 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
     func didTapContentCell(id: Int) {
         // TODO: go detail!!
         debugPrint("Content tapped: \(id)")
-        RecentlySeenHelper.saveRecentlySeen(id: id, title: "stfu bitch you issa crazy hoe fuctudtuxtxyzxrtzyxzryxuxtuxtuxtyxyrt", mediaType: .movie)
+        if let presenter = getPresenter() {
+            presenter.contentSelected(for: id, navigationController: self.navigationController!)
+        }
     }
     
     func didTapSeeMore(section: HomeSectionType) {

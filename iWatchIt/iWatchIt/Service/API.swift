@@ -18,6 +18,9 @@ let kGETConfiguration = "/configuration"
 let kGETTrending = "/trending/%@/%@"
 let kGETDiscover = "/discover/%@"
 let kGETSearch = "/search/%@"
+let kGETDetail = "/%@/%@"
+let kGETDetailVideos = "videos"
+let kGETDetailImages = "images"
 
 /// Param keys
 let kApiKey = "api_key"
@@ -25,6 +28,7 @@ let kLanguage = "language"
 let kWithGenres = "with_genres"
 let kPage = "page"
 let kQuery = "query"
+let kAppendToResponse = "append_to_response"
 
 
 
