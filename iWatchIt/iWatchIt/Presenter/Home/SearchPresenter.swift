@@ -11,12 +11,13 @@ class SearchPresenter: BasePresenter, SearchInteractorToPresenterProtocol, Searc
     
     var search: Search?
     var recentlySeen: [RecentlySeen]?
+    var lastQuery: String?
     
     // MARK: Interactor protocol
     func searchFetchSuccess(results: Root?) {
         search = Search.createFromRoot(root: results)
-        if let view = getView() {
-            view.onDataFetched()
+        if let view = getView(), let results = search?.results {
+            view.onDataFetched(isEmpty: results.isEmpty)
         }
     }
     
@@ -31,7 +32,7 @@ class SearchPresenter: BasePresenter, SearchInteractorToPresenterProtocol, Searc
         }
         recentlySeen = results
         if let view = getView() {
-            view.onDataFetched()
+            view.onDataFetched(isEmpty: recentlySeen?.isEmpty ?? true)
         }
     }
     
@@ -42,7 +43,15 @@ class SearchPresenter: BasePresenter, SearchInteractorToPresenterProtocol, Searc
             searchFetchFailed(message: "app_error_generic".localized)
             return
         }
+        lastQuery = query
         interactor.fetchSearch(query: query, mediaType: type)
+    }
+    
+    func startFetchingHistory(type: MediaType) {
+        guard let interactor = interactor as? SearchPresenterToInteractorProtocol else {
+            return
+        }
+        interactor.fetchRecentlySeen(mediaType: type)
     }
     
     func showDetailController(navigationController: UINavigationController, for contentWithId: Int) {

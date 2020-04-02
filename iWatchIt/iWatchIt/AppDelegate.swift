@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         loadFirstScreen()
+        initRealm()
         
         return true
     }
@@ -24,5 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let splash = FakeSplashRouter.shared.createModule()
         Navigation.shared.setNavigationController(firstVC: splash)
     }
+    
+    func initRealm() {
+        RealmManager.initRealm()
+    }
+    
 }
 

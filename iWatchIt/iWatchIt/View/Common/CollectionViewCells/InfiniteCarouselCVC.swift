@@ -22,6 +22,9 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
     
     @IBOutlet weak var coverImgView: UIImageView!
     
+    @IBOutlet weak var lblTitle: UILabel!
+    
+    @IBOutlet weak var scoreBtn: UIButton!
     // MARK: - UIView
     
     override func awakeFromNib() {
@@ -53,9 +56,21 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
     private func setupCell() {
         guard let imgPath = contentResponse?.image,
             let imgURL = ImageHelper.createImageURL(path: imgPath, size: kHomeSectionsInfiniteCarouselImageSize)
-        else { return }
+        else {
+            coverImgView.image = kEmptyStateMedia
+            lblTitle.text = contentResponse?.title
+            lblTitle.isHidden = false
+            return
+        }
+        lblTitle.isHidden = true
         coverImgView.contentMode = .scaleAspectFill
         coverImgView.imageFrom(url: imgURL)
+        if let voteAverage = contentResponse?.voteAverage, voteAverage > 0.0 {
+            let x = String(format: "%.1f", voteAverage)
+            scoreBtn.titleLabel?.text = x
+        } else {
+            scoreBtn.isHidden = true
+        }
     }
     
     // MARK: - Auxiliar functions
@@ -64,11 +79,15 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
         // ImageView
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(tapCell))
         coverImgView.addGestureRecognizer(tapGesture)
+        lblTitle.font = .systemFont(ofSize: 14.0, weight: .light)
+        lblTitle.textColor = .black
+        lblTitle.numberOfLines = 0
+        scoreBtn.layer.cornerRadius = scoreBtn.frame.size.width / 3.5
     }
     
    @objc func tapCell(sender: UITapGestureRecognizer) {
-        if let delegate = self.delegate {
-            delegate.didTapCell(id: contentResponse!.id)
+    if let delegate = self.delegate, let id = contentResponse?.id {
+            delegate.didTapCell(id: id)
         }
     }
 }

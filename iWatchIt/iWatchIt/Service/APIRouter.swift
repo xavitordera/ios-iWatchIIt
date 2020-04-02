@@ -95,6 +95,8 @@ enum APIRouter: URLRequestConvertible {
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = .none
         
+        debugPrint(urlRequest)
+        
         return urlRequest
     }
 }

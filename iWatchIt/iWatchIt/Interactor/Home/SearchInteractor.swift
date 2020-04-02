@@ -31,13 +31,10 @@ class SearchInteractor: BaseInteractor, SearchPresenterToInteractorProtocol {
     
     
     func fetchRecentlySeen(mediaType: MediaType) {
-        do {
-            let results = try RealmManager.getObjects(type: RecentlySeen.self)
+        
+            let results = RecentlySeenHelper.getRecentlySeen()
             self.getPresenter()?.recentlySeenFetchSuccess(results: results)
-        } catch let error {
-            debugPrint(error)
-            self.getPresenter()?.recentlySeenFetchSuccess(results: nil)
-        }
+        
     }
     
     func getPresenter() -> SearchInteractorToPresenterProtocol? {

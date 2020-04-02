@@ -9,55 +9,55 @@
 
 
 struct Root: Decodable {
-    var page: Int = 1
-    var totalPages: Int = 1
-    var totalResults: Int = 1
+    var page: Int?
     var results: [Content]?
     
     enum CodingKeys: String, CodingKey {
-        case page = "page"
-        case results = "results"
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
+        case page
+        case results
     }
 }
 
 struct RootExtended: Decodable {
-    var page: Int = 1
-    var totalPages: Int = 1
-    var totalResults: Int = 1
+    var page: Int?
+    var totalPages: Int?
+    var totalResults: Int?
     var results: [ContentExtended]?
     
     enum CodingKeys: String, CodingKey {
-        case page = "page"
-        case results = "results"
+        case page
+        case results
         case totalPages = "total_pages"
         case totalResults = "total_results"
     }
 }
 
 struct Content: Decodable {
-    var image: String = ""
-    var id: Int = 0
-    var voteAverage: Double = 0.0
+    var image: String?
+    var id: Int?
+    var voteAverage: Double?
+    var title: String?
     
     enum CodingKeys: String, CodingKey {
         case image = "poster_path"
-        case id = "id"
+        case id
         case voteAverage = "vote_average"
+        case title
     }
 }
 
 struct ContentExtended: Decodable {
-    var image: String = ""
-    var id: Int = 0
-    var voteAverage: Double = 0.0
-    var title: String = ""
-    var overview: String = ""
+    var image: String?
+    var id: Int?
+    var voteAverage: Double?
+    var title: String?
+    var overview: String?
     
     enum CodingKeys: String, CodingKey {
         case image = "poster_path"
-        case id = "id"
+        case id
         case voteAverage = "vote_average"
+        case title
+        case overview
     }
 }

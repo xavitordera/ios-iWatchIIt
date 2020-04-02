@@ -63,6 +63,7 @@
 		10E5BA27242CF6F1005227C8 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E5BA26242CF6F1005227C8 /* UI.swift */; };
 		10E5BA29242CF92A005227C8 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E5BA28242CF92A005227C8 /* Navigation.swift */; };
 		10E5BA2B242D05DC005227C8 /* BaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E5BA2A242D05DC005227C8 /* BaseProtocol.swift */; };
+		10EAF1C8243530BF006A491D /* ScoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EAF1C7243530BF006A491D /* ScoreButton.swift */; };
 		10EBB4AA2431513800C40732 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10EBB4A92431513800C40732 /* SectionHeader.xib */; };
 		10EBB4AC2431515E00C40732 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EBB4AB2431515E00C40732 /* SectionHeader.swift */; };
 		10F64082242BB5D00096C229 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F64081242BB5D00096C229 /* Configuration.swift */; };
@@ -149,6 +150,7 @@
 		10E5BA26242CF6F1005227C8 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		10E5BA28242CF92A005227C8 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		10E5BA2A242D05DC005227C8 /* BaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocol.swift; sourceTree = "<group>"; };
+		10EAF1C7243530BF006A491D /* ScoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreButton.swift; sourceTree = "<group>"; };
 		10EBB4A92431513800C40732 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
 		10EBB4AB2431515E00C40732 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		10F64081242BB5D00096C229 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 		1048278C242EE7C600ED7683 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				10EAF1C624352FE3006A491D /* Buttons */,
 				10482790242EE89A00ED7683 /* CollectionViewCells */,
 				1048278D242EE7CC00ED7683 /* TableViewCells */,
 			);
@@ -489,6 +492,14 @@
 			path = iWatchIt/Utils/Helpers/Controller;
 			sourceTree = SOURCE_ROOT;
 		};
+		10EAF1C624352FE3006A491D /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				10EAF1C7243530BF006A491D /* ScoreButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		10F64089242C13270096C229 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,6 +714,7 @@
 				10860C3A24281A9600DA3A5F /* RealmManager.swift in Sources */,
 				10230299242E43190088859B /* TabBarVC.swift in Sources */,
 				10D91AB32432846600623B51 /* WatchlistManager.swift in Sources */,
+				10EAF1C8243530BF006A491D /* ScoreButton.swift in Sources */,
 				10482786242ED65B00ED7683 /* HomeInteractor.swift in Sources */,
 				1048277C242ED12A00ED7683 /* HomeVC.swift in Sources */,
 				10D28884242F736900A2DA0D /* Reusable.swift in Sources */,

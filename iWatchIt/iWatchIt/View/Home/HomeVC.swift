@@ -126,7 +126,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
     func didTapContentCell(id: Int) {
         // TODO: go detail!!
         debugPrint("Content tapped: \(id)")
-        RecentlySeenHelper.saveRecentlySeen(id: id, title: "stfu bitch you issa crazy hoe", mediaType: .movie)
+        RecentlySeenHelper.saveRecentlySeen(id: id, title: "stfu bitch you issa crazy hoe fuctudtuxtxyzxrtzyxzryxuxtuxtuxtyxyrt", mediaType: .movie)
     }
     
     func didTapSeeMore(section: HomeSectionType) {

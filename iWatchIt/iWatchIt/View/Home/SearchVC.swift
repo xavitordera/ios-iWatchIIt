@@ -16,11 +16,14 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
     var sections: [String] = []
     var isEmpty = true
     var searchBar: UISearchBar?
+    var labelEmpty = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupEmptyState()
         setupCV()
         setupTV()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,8 +39,20 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
     
     // MARK: - Presenter
     
-    func onDataFetched() {
+    func onDataFetched(isEmpty: Bool) {
+        reloadData(isEmpty: isEmpty)
+        if !isEmpty {
+            mainCV?.scrollToItem(at: .init(row: 0, section: 0), at: .top, animated: true)
+        }
+    }
+    
+    func reloadData(isEmpty: Bool) {
         mainCV?.reloadData()
+        if isEmpty {
+            loadSearchEmptyState()
+        } else {
+            labelEmpty.isHidden = true
+        }
         emptySearchTV?.reloadData()
     }
     
@@ -65,6 +80,7 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
     }
     
     func showEmptyTV() {
+        loadEmptyState()
         view = emptySearchTV
     }
     
@@ -72,19 +88,48 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         view = mainCV
     }
     
+    func loadEmptyState() {
+        guard let presenter = getPresenter() else {
+            return
+        }
+        presenter.startFetchingHistory(type: type)
+    }
+    
+    func loadSearchEmptyState() {
+        if view.subviews.contains(labelEmpty) {
+            labelEmpty.removeFromSuperview()
+        }
+        labelEmpty.text = String(format: "search_header_recently_seen".localized, getPresenter()?.lastQuery ?? "")
+        labelEmpty.sizeToFit()
+        labelEmpty.center = view.center
+        labelEmpty.isHidden = false
+        view.addSubview(labelEmpty)
+    }
+
+    func setupEmptyState() {
+        labelEmpty.font = .systemFont(ofSize: 20.0, weight: .light)
+        labelEmpty.textColor = kColorEmptyStateLabel
+        labelEmpty.isHidden = true
+        view.addSubview(labelEmpty)
+    }
     // MARK: - UICollectionView
     
     func setupCV() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = .init(width: 100, height: 150)
+        let width = (view.frame.size.width / 3) - 15
+        layout.itemSize = .init(width: width, height: width * 1.5)
         layout.scrollDirection = .vertical
         mainCV = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         mainCV?.delegate = self
         mainCV?.dataSource = self
         mainCV?.allowsSelection = false
         mainCV?.register(UINib(nibName: kInfiniteCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kInfiniteCarouselCVC)
-        mainCV?.register(UINib(nibName: kSectionHeader, bundle: .main), forSupplementaryViewOfKind: kSectionHeader, withReuseIdentifier: kSectionHeader)
-        mainCV?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        mainCV?.backgroundView?.alpha = 0.4
+        if let bottomInset = UserDefaults.standard.object(forKey: "keyboardHeight") as? CGFloat {
+                mainCV?.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: bottomInset, right: 10)
+        } else {
+            mainCV?.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -95,28 +140,19 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-
-        if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kSectionHeader, for: indexPath) as? SectionHeader {
-            sectionHeader.configureHeader(title: "Results")
-            return sectionHeader
-        }
-        return UICollectionReusableView()
-    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kInfiniteCarouselCVC, for: indexPath) as? InfiniteCarouselCVC else {
             return UICollectionViewCell()
         }
-        
+        cell.configureCell(contentResponse: getPresenter()?.search?.results?[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let presenter = getPresenter(), let contentSelected = presenter.search?.results?[indexPath.row] else {
+        guard let presenter = getPresenter(), let contentSelectedId = presenter.search?.results?[indexPath.row].id else {
             return
         }
-        presenter.showDetailController(navigationController: self.navigationController!, for: contentSelected.id)
+        presenter.showDetailController(navigationController: self.navigationController!, for: contentSelectedId)
     }
     
     // MARK: - UITableView
@@ -129,11 +165,14 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         emptySearchTV?.tableFooterView = UIView()
         emptySearchTV?.allowsSelection = true
         emptySearchTV?.register(UITableViewCell.self, forCellReuseIdentifier: kDefaultCell)
-        emptySearchTV?.contentInset = UIEdgeInsets(top: 15, left: 10, bottom: 0, right: 0)
+        emptySearchTV?.contentInset = UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
+        emptySearchTV?.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+        emptySearchTV?.clipsToBounds = true
+        emptySearchTV?.alwaysBounceVertical = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return getPresenter()?.recentlySeen?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -146,11 +185,10 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // go detail
-//        guard let presenter = getPresenter(), let contentSelected = presenter.recentlySearched?[indexPath.row] else {
-//            return
-//        }
-//        debugPrint("tap on cell with content id -> \(contentSelected.id)")
+       guard let presenter = getPresenter(), let contentSelectedId = presenter.recentlySeen?[indexPath.row].id else {
+            return
+        }
+        presenter.showDetailController(navigationController: self.navigationController!, for: contentSelectedId)
     }
     
     func cellForItem(at index: IndexPath) -> UITableViewCell {
@@ -158,8 +196,10 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
             return UITableViewCell()
         }
         cell.textLabel?.text = results[index.row].title
-        cell.textLabel?.font = .systemFont(ofSize: 21.0, weight: .medium)
+        cell.textLabel?.font = .systemFont(ofSize: 20.0, weight: .medium)
         cell.textLabel?.textColor = .systemBlue
+        cell.textLabel?.sizeToFit()
+        cell.selectionStyle = .none
         return cell
     }
  
@@ -168,7 +208,7 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
             return UITableViewCell()
         }
         cell.textLabel?.text = "Recently seen"
-        cell.textLabel?.font = .boldSystemFont(ofSize: 27.0)
+        cell.textLabel?.font = .boldSystemFont(ofSize: 24.0)
         cell.textLabel?.textColor = .whiteOrBlack
         return cell
     }

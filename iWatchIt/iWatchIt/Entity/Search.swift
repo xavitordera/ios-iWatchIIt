@@ -20,9 +20,9 @@ struct Search {
 
 
 class RecentlySeen: Object {
-    dynamic var id: Int = 0
-    dynamic var title: String = ""
-    private dynamic var privateType: String = MediaType.movie.rawValue
+    @objc dynamic var id: Int = 0
+    @objc dynamic var title: String = ""
+    @objc private dynamic var privateType: String = MediaType.movie.rawValue
     var type: MediaType {
         get { return MediaType(rawValue: privateType)! }
         set { privateType = newValue.rawValue }

@@ -32,7 +32,7 @@ var kStoryboardMain: UIStoryboard{
 let kTabMoviesImg = UIImage(named:"ic_tab_movies")
 let kTabShowsImg = UIImage(named:"ic_tab_shows")
 let kEmptyStateMedia = UIImage(named: "emptyStateMedia")
-
+let kMovieStar = UIImage(named: "ic_movie_star")
 
 
 let kHeightHomeSectionsInfiniteCarousel: CGFloat = 280
@@ -43,3 +43,5 @@ let kInfiniteCarouselTVC = "InfiniteCarouselTVC"
 let kInfiniteCarouselCVC = "InfiniteCarouselCVC"
 let kSectionHeader = "SectionHeader"
 let kDefaultCell = "defaultCell"
+
+let kColorEmptyStateLabel = UIColor.whiteOrBlack.withAlphaComponent(0.6)

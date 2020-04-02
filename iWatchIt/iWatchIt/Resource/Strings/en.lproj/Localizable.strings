@@ -17,3 +17,6 @@
 "home_section_trending" = "Trending";
 "home_section_discover" = "You might like...";
 "home_section_watchlist" = "Your watchlist";
+
+"search_header_recently_seen" = "Recently seen";
+"search_header_recently_seen" = "No results found for '%@'";

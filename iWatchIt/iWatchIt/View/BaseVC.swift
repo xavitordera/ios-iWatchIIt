@@ -12,6 +12,16 @@ class BaseVC: UIViewController, BasePresenterToViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addNotifications()
+    }
+    
+    func addNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
     }
     
     func showError(message: String?) {
@@ -21,5 +31,12 @@ class BaseVC: UIViewController, BasePresenterToViewProtocol {
     
     func setNavigationBarHidden(isHidden: Bool) {
         self.navigationController?.isNavigationBarHidden = isHidden
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            UserDefaults.standard.set(keyboardRectangle.height, forKey: "keyboardHeight")
+        }
     }
 }

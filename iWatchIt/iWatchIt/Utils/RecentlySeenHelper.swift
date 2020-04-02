@@ -24,7 +24,8 @@ final class RecentlySeenHelper {
     
     static func getRecentlySeen() -> [RecentlySeen]? {
         do {
-            let results = try RealmManager.getObjects(type: RecentlySeen.self)
+            let wholeResults = try RealmManager.getObjects(type: RecentlySeen.self)
+            let results = Array(wholeResults.suffix(7))
             return results
         } catch let error {
             debugPrint("Could not save entry \(error)")
