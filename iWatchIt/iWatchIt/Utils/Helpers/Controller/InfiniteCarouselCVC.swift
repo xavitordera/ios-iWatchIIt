@@ -8,7 +8,7 @@
 //
 
 import UIKit
-import Kingfisher
+
 
 protocol InfiniteCarouselCVCDelegate {
     func didTapCell(id: Int)

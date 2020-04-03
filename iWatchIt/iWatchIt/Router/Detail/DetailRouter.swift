@@ -15,7 +15,7 @@ class DetailRouter: BaseRouter, DetailPresenterToRouterProtocol {
     }
     
     func createModule() -> DetailVC {
-        let view = kStoryboardMain.instantiateViewController(identifier: kDetailVC) as! DetailVC
+        let view = kStoryboardHome.instantiateViewController(identifier: kDetailVC) as! DetailVC
         
         let presenter: DetailViewToPresenterProtocol & DetailInteractorToPresenterProtocol = DetailPresenter()
         let interactor: DetailPresenterToInteractorProtocol = DetailInteractor(presenter: presenter)

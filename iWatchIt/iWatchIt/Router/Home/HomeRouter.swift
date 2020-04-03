@@ -25,7 +25,7 @@ class HomeRouter: BaseRouter, HomePresenterToRouterProtocol {
     }
     
     func createMoviesModule() -> MoviesVC {
-        let view = kStoryboardMain.instantiateViewController(withIdentifier: kMoviesVC) as! MoviesVC
+        let view = kStoryboardHome.instantiateViewController(withIdentifier: kMoviesVC) as! MoviesVC
         
         setupModule(view: view)
         
@@ -33,7 +33,7 @@ class HomeRouter: BaseRouter, HomePresenterToRouterProtocol {
     }
     
     func createShowsModule() -> ShowsVC {
-        let view = kStoryboardMain.instantiateViewController(withIdentifier: kShowsVC) as! ShowsVC
+        let view = kStoryboardHome.instantiateViewController(withIdentifier: kShowsVC) as! ShowsVC
         
         setupModule(view: view)
         

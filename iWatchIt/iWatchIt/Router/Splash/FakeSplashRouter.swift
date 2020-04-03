@@ -9,7 +9,7 @@ import UIKit
 
 class FakeSplashRouter: BaseRouter, SplashPresenterToRouterProtocol {
     func createModule() -> FakeSplashVC {
-        let view = kStoryboardMain.instantiateViewController(withIdentifier: kFakeSpashVC) as! FakeSplashVC
+        let view = kStoryboardHome.instantiateViewController(withIdentifier: kFakeSpashVC) as! FakeSplashVC
         
         let presenter: SplashViewToPresenterProtocol & SplashInteractorToPresenterProtocol = FakeSplashPresenter()
         let interactor: SplashPresenterToInteractorProtocol = FakeSplashInteractor(presenter: presenter)

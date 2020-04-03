@@ -24,8 +24,8 @@ let kHomeWatchlistSection = "Your watchlist"
 let kLogoAnimation = "ic_loading_splash"
 
 
-var kStoryboardMain: UIStoryboard{
-    return UIStoryboard(name:"Main",bundle: Bundle.main)
+var kStoryboardHome: UIStoryboard{
+    return UIStoryboard(name:"Home", bundle: Bundle.main)
 }
 
 
@@ -33,7 +33,14 @@ var kStoryboardMain: UIStoryboard{
 let kTabMoviesImg = UIImage(named:"ic_tab_movies")
 let kTabShowsImg = UIImage(named:"ic_tab_shows")
 let kEmptyStateMedia = UIImage(named: "emptyStateMedia")
+let kEmptyStateUserMale = UIImage(named: "ic_empty_user_male")
+let kEmptyStateUserFemale = UIImage(named: "ic_empty_user_female")
 let kMovieStar = UIImage(named: "ic_movie_star")
+let kEmptyStar = UIImage(named: "ic_star_empty")
+let kShare = UIImage(named: "ic_share")
+let kWatchlistAdd = UIImage(named: "ic_watchlist_add")
+let kWatchlistAdded = UIImage(named: "ic_watchlist_added")
+let kPlay = UIImage(named: "ic_play")
 
 
 let kHeightHomeSectionsInfiniteCarousel: CGFloat = 280
@@ -42,7 +49,17 @@ let kHomeSectionsInfiniteCarouselImageSize: ImageSize = .poster(size: PosterSize
 
 let kInfiniteCarouselTVC = "InfiniteCarouselTVC"
 let kInfiniteCarouselCVC = "InfiniteCarouselCVC"
-let kSectionHeader = "SectionHeader"
+let kDetailCarouselCVC = "DetailCarouselCVC"
+let kHorizontalCarouselCVC = "HorizontalCarouselCVC"
+
+
+let kSectionDetailHeader = "SectionDetailHeader"
+let kSectionDetailOverview = "SectionDetailOverview"
+let kSectionDetailPlatforms = "SectionDetailPlatforms"
+let kSectionDetailCast = "SectionDetailCast"
+let kSectionDetailTrailers = "SectionDetailTrailers"
+
+
 let kDefaultCell = "defaultCell"
 
 let kColorEmptyStateLabel = UIColor.whiteOrBlack

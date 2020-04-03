@@ -14,7 +14,7 @@ class SearchRouter: BaseRouter, SearchPresenterToRouterProtocol {
     }
     
     func createModule() -> SearchVC {
-        let view = kStoryboardMain.instantiateViewController(identifier: kSearchVC) as! SearchVC
+        let view = kStoryboardHome.instantiateViewController(identifier: kSearchVC) as! SearchVC
         
         let presenter: SearchViewToPresenterProtocol & SearchInteractorToPresenterProtocol = SearchPresenter()
         let interactor: SearchPresenterToInteractorProtocol = SearchInteractor(presenter: presenter)

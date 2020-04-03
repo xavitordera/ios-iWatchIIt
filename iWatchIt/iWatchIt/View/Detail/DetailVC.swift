@@ -14,20 +14,32 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     var contentId: Int?
     var type: MediaType?
 
+    @IBOutlet weak var mainCV: UICollectionView! {
+        didSet {
+            mainCV.backgroundColor = .clear
+            mainCV.delegate = self
+            mainCV.dataSource = self
+            mainCV.allowsSelection = false
+            
+            mainCV.register(UINib(nibName: kInfiniteCarouselTVC, bundle: .main), forCellWithReuseIdentifier: kInfiniteCarouselTVC)
+            
+            mainCV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+            
+            mainCV.bounces = true
+            mainCV.alwaysBounceVertical = true
+        }
+    }
+    
+
     // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTV()
         loadDetail()
         // Do any additional setup after loading the view.
     }
     
     // MARK: - Auxiliar functions
-    
-    func setupTV() {
-        
-    }
-    
+
     func loadDetail() {
         guard let presenter = getPresenter() else {
             return
@@ -36,6 +48,10 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     }
     
     func reloadData() {
+        
+    }
+    
+    func setupSections() {
         
     }
     
@@ -55,18 +71,26 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
 
 }
 
-// MARK: - UITableView
+// MARK: - UICollectionView
 
-extension DetailVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return  1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
     }
+    
+    
 }
 
-extension DetailVC: InfiniteCarouselCVCDelegate {
+extension DetailVC: InfiniteCarouselTVCDelegate {
+    func didTapSeeMore(section: HomeSectionType) {
+        
+    }
     
+    func didTapContentCell(id: Int) {
+        
+    }
 }
