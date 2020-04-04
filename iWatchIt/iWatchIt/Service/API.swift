@@ -21,6 +21,7 @@ let kGETSearch = "/search/%@"
 let kGETDetail = "/%@/%d"
 let kGETDetailVideos = "videos"
 let kGETDetailImages = "images"
+let kGETDetailCredits = "credits"
 
 /// Param keys
 let kApiKey = "api_key"

@@ -83,7 +83,7 @@ class DetailCarouselCVC: UICollectionViewCell, NibReusable {
             coverImgView.imageFrom(url: imageURL)
         } else {
             // No image for this person :(
-            if let gender = cast.gender, gender == .female {
+            if let gender = cast.gender, gender == Gender.female.rawValue {
                 coverImgView.image = kEmptyStateUserFemale
             } else {
                 coverImgView.image = kEmptyStateUserMale

@@ -14,7 +14,7 @@ class VideoHelper {
     class func getURLForPreview(for video: Video?) -> URL? {
         var url: URL?
         switch video?.site {
-        case .Youtube:
+        case VideoSite.Youtube.rawValue:
             url = URL(string: String(format: kYoutubeImageURL, video?.key ?? ""))
         default:
             url = nil
@@ -25,7 +25,7 @@ class VideoHelper {
     class func getVideoURLForEmbed(for video: Video?) -> String?{
         var url: String?
            switch video?.site {
-           case .Youtube:
+           case VideoSite.Youtube.rawValue:
                url = String(format: kYoutubeEmbedVideoURL, video?.key ?? "")
            default:
                url = nil

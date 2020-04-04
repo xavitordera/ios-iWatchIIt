@@ -16,7 +16,7 @@ class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
     }
     
     func fetchDetail(type: MediaType, id: Int, language: String) {
-        APIService.shared.detail(mediaType: type, id: id, language: "en", appendToResponse: kGETDetailVideos) { (result, error) in
+        APIService.shared.detail(mediaType: type, id: id, language: "en", appendToResponse: String(format: "%@,%@", kGETDetailVideos, kGETDetailCredits)) { (result, error) in
             guard let presenter = self.getPresenter() else {
                 return
             }
@@ -25,7 +25,6 @@ class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
                 presenter.detailFetchFailed(message: error?.localizedDescription)
                 return
             }
-            
             presenter.detailFetchSuccess(detail: result)
         }
     }

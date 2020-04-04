@@ -132,8 +132,6 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
     // MARK: - Cell delegates
     
     func didTapContentCell(id: Int) {
-        // TODO: go detail!!
-        debugPrint("Content tapped: \(id)")
         if let presenter = getPresenter() {
             presenter.contentSelected(navigationController: self.navigationController!, for: id, and: self.type!)
         }

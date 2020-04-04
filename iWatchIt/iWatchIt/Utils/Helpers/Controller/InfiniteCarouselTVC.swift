@@ -120,8 +120,6 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     }
     
     func didTapCell(id: Int) {
-        // TODO: go detail!!
-        debugPrint("Tap on cell with movie: \(id)")
         delegate?.didTapContentCell(id: id)
     }
 }

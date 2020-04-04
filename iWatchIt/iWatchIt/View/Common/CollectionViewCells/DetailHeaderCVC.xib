@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gTV-IL-0wX" customClass="DetailHeaderCVC" customModule="iWatchIt" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="424" height="254"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="424" height="254"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="75F-eU-nAe">
+                        <rect key="frame" x="148" y="22" width="128" height="192"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="128" id="kPb-DM-Vgz"/>
+                            <constraint firstAttribute="height" constant="192" id="m37-fp-zGs"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h30min · Documentary · 2012" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWZ-s2-9FZ">
+                        <rect key="frame" x="0.0" y="224" width="424" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="75F-eU-nAe" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="22" id="36i-U7-Skq"/>
+                <constraint firstAttribute="trailing" secondItem="vWZ-s2-9FZ" secondAttribute="trailing" id="MLb-ZP-elW"/>
+                <constraint firstItem="vWZ-s2-9FZ" firstAttribute="top" secondItem="75F-eU-nAe" secondAttribute="bottom" constant="10" id="eEs-rc-ndC"/>
+                <constraint firstAttribute="bottom" secondItem="vWZ-s2-9FZ" secondAttribute="bottom" constant="12" id="luL-6f-mst"/>
+                <constraint firstItem="vWZ-s2-9FZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oou-nt-Oly"/>
+                <constraint firstItem="75F-eU-nAe" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="wzc-bG-7de"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="424" height="254"/>
+            <connections>
+                <outlet property="infoLbl" destination="vWZ-s2-9FZ" id="FJR-1c-ABU"/>
+                <outlet property="posterImg" destination="75F-eU-nAe" id="HKv-re-u5G"/>
+            </connections>
+            <point key="canvasLocation" x="149.27536231884059" y="99.107142857142847"/>
+        </collectionViewCell>
+    </objects>
+</document>

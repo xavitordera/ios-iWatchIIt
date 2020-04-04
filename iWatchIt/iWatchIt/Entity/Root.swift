@@ -55,9 +55,12 @@ struct ContentExtended: Decodable {
     var title: String?
     var name: String?
     var overview: String?
-    var genres: [Int]?
+    var genres: [Genre]?
+    var runtime: Int?
     var movieReleaseDate: String?
     var firstAirDate: String?
+    var videos: RootVideo?
+    var credits: RootCast?
     
     enum CodingKeys: String, CodingKey {
         case image = "poster_path"
@@ -66,8 +69,19 @@ struct ContentExtended: Decodable {
         case title
         case name
         case overview
-        case genres = "genre_ids"
+        case genres
+        case runtime
         case movieReleaseDate = "release_date"
         case firstAirDate = "first_air_date"
+        case videos
+        case credits
     }
+}
+
+struct RootVideo: Decodable {
+    var results: [Video]?
+}
+
+struct RootCast: Decodable {
+    var cast: [Cast]?
 }

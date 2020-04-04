@@ -53,13 +53,14 @@ let kInfiniteCarouselTVC = "InfiniteCarouselTVC"
 let kInfiniteCarouselCVC = "InfiniteCarouselCVC"
 let kDetailCarouselCVC = "DetailCarouselCVC"
 let kHorizontalCarouselCVC = "HorizontalCarouselCVC"
+let kDetailHeaderCVC = "DetailHeaderCVC"
 
 
 let kSectionDetailHeader = "SectionDetailHeader"
 let kSectionDetailOverview = "SectionDetailOverview"
 let kSectionDetailPlatforms = "SectionDetailPlatforms"
 let kSectionDetailCast = "SectionDetailCast"
-let kSectionDetailTrailers = "SectionDetailTrailers"
+let kSectionDetailVideos = "SectionDetailVideos"
 
 
 let kDefaultCell = "defaultCell"

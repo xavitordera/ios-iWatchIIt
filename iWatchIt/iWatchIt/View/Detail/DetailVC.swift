@@ -21,12 +21,14 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             mainCV.dataSource = self
             mainCV.allowsSelection = false
             
+            mainCV.register(UINib(nibName: kDetailHeaderCVC, bundle: .main), forCellWithReuseIdentifier: kDetailHeaderCVC)
             mainCV.register(UINib(nibName: kHorizontalCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kHorizontalCarouselCVC)
             
             mainCV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
             
             mainCV.bounces = true
             mainCV.alwaysBounceVertical = true
+            mainCV.backgroundColor = .clear
         }
     }
     
@@ -46,6 +48,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     // MARK: - Auxiliar functions
     
     func setupNav() {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         if let presenter = getPresenter(), let id = presenter.detail?.id {
             
             let isInWatchlist = WatchlistManager.shared.isInWatchlist(id: id)
@@ -53,11 +56,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             let rightBtn = isInWatchlist ? UIBarButtonItem.init(type: .watchlistAdded, target: self, action: #selector(share)) : UIBarButtonItem.init(type: .watchlistAdd, target: self, action: #selector(share))
             
             navigationItem.rightBarButtonItems = [.init(type: .share, target: self, action: #selector(share)), rightBtn]
-            self.navigationController?.navigationBar.prefersLargeTitles = false
             navigationItem.title = presenter.detail?.title ?? presenter.detail?.name
         }
-        
-        
     }
     
     func loadDetail() {
@@ -68,11 +68,40 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     }
     
     func reloadData() {
-        
+        mainCV.reloadData()
     }
     
     func setupSections() {
+        guard let presenter = getPresenter(), let detail = presenter.detail else {
+            return
+        }
         
+        sections.append(kSectionDetailHeader)
+        
+        if let _ = detail.overview {
+            sections.append(kSectionDetailOverview)
+        }
+        
+        sections.append(kSectionDetailPlatforms)
+        
+        if let _ = detail.credits?.cast {
+            sections.append(kSectionDetailCast)
+        }
+        
+        if let _ = detail.videos {
+            sections.append(kSectionDetailVideos)
+        }
+    }
+    
+    func loadBackground() {
+        let imageView = UIImageView(frame: view.frame)
+        if let imagePth = getPresenter()?.detail?.image, let imgURL = ImageHelper.createImageURL(path: imagePth, size: .poster(size: .xbig)) {
+            imageView.imageFrom(url: imgURL)
+        } else {
+            imageView.image = kEmptyStateMedia
+        }
+        imageView.contentMode = .center
+        view.insertSubview(imageView, at: 0)
     }
     
     func getPresenter() -> DetailViewToPresenterProtocol? {
@@ -89,44 +118,109 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         setupSections() 
         reloadData()
         setupNav()
+        loadBackground()
     }
     
     // MARK: - Actions
     
     @objc func share() {
         // set up activity view controller
-        let text = "See this film!!"
+        let text = "See this film!!" // FIXME: DYNAMIC LINKSSS
         let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }
-}
-
-// MARK: - UICollectionView
-
-extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  1
+    
+    func cellForHeader(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kDetailHeaderCVC, for: indexPath) as? DetailHeaderCVC else {
+            return UICollectionViewCell()
+        }
+        
+        cell.configureCell(with: getPresenter()?.detail?.image,
+                           and: getPresenter()?.detail?.createDescriptionForHeader())
+        
+        return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
+    func cellForOverview(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
             return UICollectionViewCell()
         }
         return cell
     }
     
+    func cellForPlatform(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
+            return UICollectionViewCell()
+        }
+        return cell
+    }
     
+    func cellForCast(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
+            return UICollectionViewCell()
+        }
+        return cell
+    }
+    
+    func cellForVideos(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
+            return UICollectionViewCell()
+        }
+        return cell
+    }
 }
 
-extension DetailVC: InfiniteCarouselTVCDelegate {
-    func didTapSeeMore(section: HomeSectionType) {
+// MARK: - UICollectionView
+
+extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return  1
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return sections.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch sections[indexPath.section] {
+        case kSectionDetailHeader:
+            return cellForHeader(indexPath: indexPath)
+        case kSectionDetailOverview:
+            return cellForOverview(indexPath: indexPath)
+        case kSectionDetailPlatforms:
+            return cellForPlatform(indexPath: indexPath)
+        case kSectionDetailCast:
+            return cellForCast(indexPath: indexPath)
+        case kSectionDetailVideos:
+            return cellForVideos(indexPath: indexPath)
+        default:
+            return UICollectionViewCell()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch sections[indexPath.section] {
+        case kSectionDetailHeader:
+            return .init(width: UIScreen.main.bounds.width, height: 260)
+        default:
+            return .zero
+        }
+    }
+}
+
+extension DetailVC: HorizontalCarouselCVCDelegate {
+    func navigateTo(platform: Platform) {
         
     }
     
-    func didTapContentCell(id: Int) {
+    func navigateTo(cast: Cast) {
+        
+    }
+    
+    func navigateTo(video: Video) {
         
     }
 }

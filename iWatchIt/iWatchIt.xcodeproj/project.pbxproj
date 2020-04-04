@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		10230299242E43190088859B /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10230298242E43190088859B /* TabBarVC.swift */; };
 		1023029B242E55350088859B /* UIColor+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023029A242E55350088859B /* UIColor+color.swift */; };
+		102BD0B62438EF74003215AF /* DetailHeaderCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102BD0B42438EF74003215AF /* DetailHeaderCVC.swift */; };
+		102BD0B72438EF74003215AF /* DetailHeaderCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 102BD0B52438EF74003215AF /* DetailHeaderCVC.xib */; };
+		102BD0B92438F549003215AF /* UIView+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102BD0B82438F549003215AF /* UIView+View.swift */; };
+		102BD0BC243918BE003215AF /* DetailOverviewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102BD0BA243918BE003215AF /* DetailOverviewCVC.swift */; };
+		102BD0BD243918BE003215AF /* DetailOverviewCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */; };
 		103540B9242D6ED6006309FE /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103540B8242D6ED6006309FE /* AlertHelper.swift */; };
 		1048277C242ED12A00ED7683 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048277B242ED12A00ED7683 /* HomeVC.swift */; };
 		1048277E242ED33900ED7683 /* MoviesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048277D242ED33900ED7683 /* MoviesVC.swift */; };
@@ -110,6 +115,11 @@
 /* Begin PBXFileReference section */
 		10230298242E43190088859B /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		1023029A242E55350088859B /* UIColor+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+color.swift"; sourceTree = "<group>"; };
+		102BD0B42438EF74003215AF /* DetailHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderCVC.swift; sourceTree = "<group>"; };
+		102BD0B52438EF74003215AF /* DetailHeaderCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailHeaderCVC.xib; sourceTree = "<group>"; };
+		102BD0B82438F549003215AF /* UIView+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+View.swift"; sourceTree = "<group>"; };
+		102BD0BA243918BE003215AF /* DetailOverviewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOverviewCVC.swift; sourceTree = "<group>"; };
+		102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailOverviewCVC.xib; sourceTree = "<group>"; };
 		103540B8242D6ED6006309FE /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		1048277B242ED12A00ED7683 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		1048277D242ED33900ED7683 /* MoviesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesVC.swift; sourceTree = "<group>"; };
@@ -315,6 +325,10 @@
 		10482790242EE89A00ED7683 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				102BD0B42438EF74003215AF /* DetailHeaderCVC.swift */,
+				102BD0B52438EF74003215AF /* DetailHeaderCVC.xib */,
+				102BD0BA243918BE003215AF /* DetailOverviewCVC.swift */,
+				102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -598,6 +612,7 @@
 				10D28889242F741700A2DA0D /* UIImageView+Utils.swift */,
 				1050D9F8243645AE0086990A /* UIViewController+Controller.swift */,
 				10E4A5382437470D00CD80C2 /* UIBarButtonItem+Item.swift */,
+				102BD0B82438F549003215AF /* UIView+View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -747,12 +762,14 @@
 			files = (
 				10E4A54724376CE900CD80C2 /* DetailCarouselCVC.xib in Resources */,
 				10EBB4AA2431513800C40732 /* SectionHeader.xib in Resources */,
+				102BD0BD243918BE003215AF /* DetailOverviewCVC.xib in Resources */,
 				10533D382427BEB600BF8FC4 /* LaunchScreen.storyboard in Resources */,
 				10E4A53B2437547400CD80C2 /* Detail.storyboard in Resources */,
 				10F6408C242C13420096C229 /* Localizable.strings in Resources */,
 				10533D352427BEB500BF8FC4 /* Assets.xcassets in Resources */,
 				10533D332427BEB200BF8FC4 /* Home.storyboard in Resources */,
 				10E5BA25242CF3A2005227C8 /* ic_loading_splash.json in Resources */,
+				102BD0B72438EF74003215AF /* DetailHeaderCVC.xib in Resources */,
 				10F6BFC3242FDE2400AE693A /* InfiniteCarouselTVC.xib in Resources */,
 				10E4A53F2437604500CD80C2 /* HorizontalCarouselCVC.xib in Resources */,
 				10F6BFC1242FDE0E00AE693A /* InfiniteCarouselCVC.xib in Resources */,
@@ -786,6 +803,7 @@
 				109E457624312F370027012B /* SearchProtocol.swift in Sources */,
 				108564702436905A00082755 /* DetailInteractor.swift in Sources */,
 				109E457224312F010027012B /* SearchPresenter.swift in Sources */,
+				102BD0BC243918BE003215AF /* DetailOverviewCVC.swift in Sources */,
 				10E4A5392437470D00CD80C2 /* UIBarButtonItem+Item.swift in Sources */,
 				10D2888C242FAB3300A2DA0D /* ImageHelper.swift in Sources */,
 				10533D2A2427BEB200BF8FC4 /* AppDelegate.swift in Sources */,
@@ -802,6 +820,7 @@
 				10482784242ED64A00ED7683 /* HomePresenter.swift in Sources */,
 				10860C3A24281A9600DA3A5F /* RealmManager.swift in Sources */,
 				10230299242E43190088859B /* TabBarVC.swift in Sources */,
+				102BD0B62438EF74003215AF /* DetailHeaderCVC.swift in Sources */,
 				10D91AB32432846600623B51 /* WatchlistManager.swift in Sources */,
 				10EAF1C8243530BF006A491D /* ScoreButton.swift in Sources */,
 				10482786242ED65B00ED7683 /* HomeInteractor.swift in Sources */,
@@ -822,6 +841,7 @@
 				10E4A5412437607000CD80C2 /* HorizontalCarouselCVC.swift in Sources */,
 				10860C302428114500DA3A5F /* FakeSplashRouter.swift in Sources */,
 				1048277E242ED33900ED7683 /* MoviesVC.swift in Sources */,
+				102BD0B92438F549003215AF /* UIView+View.swift in Sources */,
 				10D28880242F736900A2DA0D /* NibLoadable.swift in Sources */,
 				1085646E2436890600082755 /* DetailProtocol.swift in Sources */,
 				109E456C243106AB0027012B /* Search.swift in Sources */,
