@@ -12,9 +12,28 @@ protocol WatchlistManagerDelegate {
 }
 
 class WatchlistManager {
-    var delegates: [WatchlistManagerDelegate] = []
+    private var delegates: [WatchlistManagerDelegate] = []
     
-    func addToWatchlist(content: Content) {
-        
+    static let shared = WatchlistManager()
+    
+    func addToWatchlist(content: Content?) {
+        guard let content = content else { return }
+        for delegate in delegates {
+            delegate.didAddToWatchlist(id: content.id!)
+        }
+    }
+    
+    func removeFromWatchlist(id: Int) {
+        for delegate in delegates {
+            delegate.didRemoveFromWatchlist(id: id)
+        }
+    }
+    
+    func isInWatchlist(id: Int) -> Bool {
+        return false
+    }
+
+    func addDelegate(delegate: WatchlistManagerDelegate) {
+        delegates.append(delegate)
     }
 }

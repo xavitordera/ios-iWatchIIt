@@ -39,6 +39,7 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
             detailFetchFailed(message: "app_error_generic".localized)
             return
         }
+        self.type = type
         interactor.fetchDetail(type: type, id: id, language: "en")
     }
     

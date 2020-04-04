@@ -18,7 +18,7 @@ let kGETConfiguration = "/configuration"
 let kGETTrending = "/trending/%@/%@"
 let kGETDiscover = "/discover/%@"
 let kGETSearch = "/search/%@"
-let kGETDetail = "/%@/%@"
+let kGETDetail = "/%@/%d"
 let kGETDetailVideos = "videos"
 let kGETDetailImages = "images"
 

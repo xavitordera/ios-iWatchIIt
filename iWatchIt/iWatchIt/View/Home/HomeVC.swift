@@ -12,6 +12,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
     
     var mainTV: UITableView?
     var sections: [String] = []
+    var type: MediaType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,12 +20,19 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
         setupTV()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     func setupNav(title: String, type: MediaType) {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = title
+        self.type = type
         
         let searchVC = SearchRouter.shared.createModule()
         searchVC.type = type
+        searchVC.nav = navigationController
         
         let search = UISearchController(searchResultsController: searchVC)
         search.searchResultsUpdater = self
@@ -127,7 +135,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
         // TODO: go detail!!
         debugPrint("Content tapped: \(id)")
         if let presenter = getPresenter() {
-            presenter.contentSelected(for: id, navigationController: self.navigationController!)
+            presenter.contentSelected(navigationController: self.navigationController!, for: id, and: self.type!)
         }
     }
     

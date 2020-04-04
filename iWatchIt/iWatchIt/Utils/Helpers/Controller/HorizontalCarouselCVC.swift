@@ -26,7 +26,6 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     var videoResponse: [Video]?
     
     // Variables
-    var indexPath: IndexPath?
     weak var delegate: HorizontalCarouselCVCDelegate?
     
     // MARK: - UIView
@@ -36,7 +35,6 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         
         titleLbl.text = nil
         delegate = nil
-        indexPath = nil
         carouselCV.contentOffset.x = 0
     }
     
@@ -74,21 +72,19 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     
     // MARK: - Public Interface
     
-    func configureCell(platformResponse: [Platform]?, title: String?, showSeeAll: Bool = false, indexPath: IndexPath? = nil) {
+    func configureCell(platformResponse: [Platform]?, title: String?) {
         self.platformResponse = platformResponse
         self.titleLbl.text = title
     }
     
-    func configureCell(castResponse: [Cast]?, title: String?, showSeeAll: Bool = false, indexPath: IndexPath? = nil) {
+    func configureCell(castResponse: [Cast]?, title: String?) {
         self.castResponse = castResponse
         self.titleLbl.text = title
-        self.indexPath = indexPath
     }
     
-    func configureCell(videoResponse: [Video]?, title: String?, showSeeAll: Bool = false, indexPath: IndexPath? = nil) {
+    func configureCell(videoResponse: [Video]?, title: String?) {
         self.videoResponse = videoResponse
         self.titleLbl.text = title
-        self.indexPath = indexPath
     }
     
     // MARK: - UICollectionView

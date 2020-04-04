@@ -54,8 +54,9 @@ class SearchPresenter: BasePresenter, SearchInteractorToPresenterProtocol, Searc
         interactor.fetchRecentlySeen(mediaType: type)
     }
     
-    func contentSelected(navigationController: UINavigationController, for contentWithId: Int) {
-        
+    func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType) {
+        guard let router = self.router as? SearchPresenterToRouterProtocol else { return }
+        router.pushToDetailScreen(navigationController: navigationController, for: contentWithId, and: mediaType)
     }
     
     func getView() -> SearchPresenterToViewProtocol? {

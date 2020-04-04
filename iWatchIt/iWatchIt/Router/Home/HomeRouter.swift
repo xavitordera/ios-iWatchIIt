@@ -9,8 +9,10 @@
 import UIKit
 
 class HomeRouter: BaseRouter, HomePresenterToRouterProtocol {
-    func pushToDetailScreen(for movieId: Int, navigationController: UINavigationController) {
-        
+    
+    func pushToDetailScreen(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType) {
+        let detail = DetailRouter.shared.createModule(with: contentWithId, and: mediaType)
+        navigationController.pushViewController(detail, animated: true)
     }
     
     func setupModule(view: HomeVC) {

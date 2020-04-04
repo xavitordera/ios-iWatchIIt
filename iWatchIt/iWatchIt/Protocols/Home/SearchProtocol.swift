@@ -13,7 +13,7 @@ protocol SearchViewToPresenterProtocol: BaseViewToPresenterProtocol{
     var lastQuery: String? { get set }
     func startFetchingHistory(type: MediaType)
     func startFetchingData(query: String, type: MediaType)
-    func contentSelected(navigationController: UINavigationController, for contentWithId: Int)
+    func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType)
 }
 
 protocol SearchPresenterToViewProtocol: BasePresenterToViewProtocol{
@@ -22,7 +22,7 @@ protocol SearchPresenterToViewProtocol: BasePresenterToViewProtocol{
 }
 
 protocol SearchPresenterToRouterProtocol: BasePresenterToRouterProtocol {
-    func pushToDetailScreen(navigationController: UINavigationController, for contentWithId: Int)
+    func pushToDetailScreen(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType)
 }
 
 protocol SearchPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {

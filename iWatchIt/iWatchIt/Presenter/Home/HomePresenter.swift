@@ -46,8 +46,9 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
         interactor.fetchDiscover(type: type)
     }
     
-    func contentSelected(for movieId: Int, navigationController: UINavigationController) {
-
+    func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType) {
+        guard let router = self.router as? HomePresenterToRouterProtocol else { return }
+        router.pushToDetailScreen(navigationController: navigationController, for: contentWithId, and: mediaType)
     }
     
     func getView() -> HomePresenterToViewProtocol? {

@@ -81,14 +81,6 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
         coverImgView.imageFrom(url: imgURL)
     }
     
-    
-    func setupCastCell() {
-        
-    }
-    
-    func setupPlatformCell() {
-        
-    }
     // MARK: - Auxiliar functions
     
     private func setupLayout() {

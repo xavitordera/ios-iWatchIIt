@@ -17,6 +17,7 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
     var isEmpty = true
     var searchBar: UISearchBar?
     var labelEmptySearch = UILabel()
+    var nav: UINavigationController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,7 +137,7 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         mainCV = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         mainCV?.delegate = self
         mainCV?.dataSource = self
-        mainCV?.allowsSelection = false
+        mainCV?.allowsSelection = true
         mainCV?.register(UINib(nibName: kInfiniteCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kInfiniteCarouselCVC)
         mainCV?.backgroundColor = .blackOrWhite
         if let bottomInset = UserDefaults.standard.object(forKey: "keyboardHeight") as? CGFloat {
@@ -159,14 +160,8 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
             return UICollectionViewCell()
         }
         cell.configureCell(contentResponse: getPresenter()?.search?.results?[indexPath.row])
+        cell.delegate = self
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let presenter = getPresenter(), let contentSelectedId = presenter.search?.results?[indexPath.row].id else {
-            return
-        }
-        presenter.contentSelected(navigationController: self.navigationController!, for: contentSelectedId)
     }
     
     // MARK: - UITableView
@@ -204,7 +199,7 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         guard let presenter = getPresenter(), let contentSelectedId = presenter.recentlySeen?[indexPath.row].id else {
             return
         }
-        presenter.contentSelected(navigationController: self.navigationController!, for: contentSelectedId)
+        presenter.contentSelected(navigationController: nav!, for: contentSelectedId, and: type)
     }
     
     func cellForItem(at index: IndexPath) -> UITableViewCell {
@@ -233,7 +228,7 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
 extension SearchVC: InfiniteCarouselCVCDelegate {
     func didTapCell(id: Int) {
         if let presenter = getPresenter() {
-            presenter.contentSelected(navigationController: self.navigationController!, for: id)
+            presenter.contentSelected(navigationController: self.nav!, for: id, and: self.type)
         }
     }
 }

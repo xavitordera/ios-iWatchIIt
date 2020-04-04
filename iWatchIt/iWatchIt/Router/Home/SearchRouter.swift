@@ -9,8 +9,9 @@
 import UIKit
 
 class SearchRouter: BaseRouter, SearchPresenterToRouterProtocol {
-    func pushToDetailScreen(navigationController: UINavigationController, for contentWithId: Int) {
-        
+    func pushToDetailScreen(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType) {
+        let detail = DetailRouter.shared.createModule(with: contentWithId, and: mediaType)
+        navigationController.pushViewController(detail, animated: true)
     }
     
     func createModule() -> SearchVC {

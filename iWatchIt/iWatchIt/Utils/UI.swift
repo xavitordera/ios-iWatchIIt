@@ -21,15 +21,17 @@ let kHomeTrendingSection = "Trending"
 let kHomeDiscoverSection = "You might like..."
 let kHomeWatchlistSection = "Your watchlist"
 
-let kLogoAnimation = "ic_loading_splash"
-
 
 var kStoryboardHome: UIStoryboard{
     return UIStoryboard(name:"Home", bundle: Bundle.main)
 }
 
+var kStoryboardDetail: UIStoryboard{
+    return UIStoryboard(name:"Detail", bundle: Bundle.main)
+}
 
 
+let kLogoAnimation = "ic_loading_splash"
 let kTabMoviesImg = UIImage(named:"ic_tab_movies")
 let kTabShowsImg = UIImage(named:"ic_tab_shows")
 let kEmptyStateMedia = UIImage(named: "emptyStateMedia")

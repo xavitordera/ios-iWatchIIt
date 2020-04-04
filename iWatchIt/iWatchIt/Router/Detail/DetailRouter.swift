@@ -14,8 +14,8 @@ class DetailRouter: BaseRouter, DetailPresenterToRouterProtocol {
         
     }
     
-    func createModule() -> DetailVC {
-        let view = kStoryboardHome.instantiateViewController(identifier: kDetailVC) as! DetailVC
+    func createModule(with id: Int, and type: MediaType) -> DetailVC {
+        let view = kStoryboardDetail.instantiateViewController(identifier: kDetailVC) as! DetailVC
         
         let presenter: DetailViewToPresenterProtocol & DetailInteractorToPresenterProtocol = DetailPresenter()
         let interactor: DetailPresenterToInteractorProtocol = DetailInteractor(presenter: presenter)
@@ -25,6 +25,9 @@ class DetailRouter: BaseRouter, DetailPresenterToRouterProtocol {
         presenter.view = view
         presenter.router = router
         presenter.interactor = interactor
+        
+        view.contentId = id
+        view.type = type
         
         return view
     }
