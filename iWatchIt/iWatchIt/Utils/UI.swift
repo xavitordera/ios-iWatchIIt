@@ -43,17 +43,27 @@ let kShare = UIImage(named: "ic_share")
 let kWatchlistAdd = UIImage(named: "ic_watchlist_add")
 let kWatchlistAdded = UIImage(named: "ic_watchlist_added")
 let kPlay = UIImage(named: "ic_play")
+let kStarEmpty = UIImage(systemName: "star")
+let kStarHalf = UIImage(systemName: "star.lefthalf.fill")
+let kStarFilled = UIImage(systemName: "star.fill")
 
 
 let kHeightHomeSectionsInfiniteCarousel: CGFloat = 280
 let kHomeSectionsInfiniteCarouselImageSize: ImageSize = .poster(size: PosterSize.medium)
 
+let kHeightDetailSectionsHeader: CGFloat = 260
+let kHeightDetailSectionsOverview: CGFloat = 160
+let kHeightDetailSectionsPlatforms: CGFloat = 200
+let kHeightDetailSectionsCast: CGFloat = 140
+let kHeightDetailSectionsVideo: CGFloat = 250
 
+let kDefaultCell = "defaultCell"
 let kInfiniteCarouselTVC = "InfiniteCarouselTVC"
 let kInfiniteCarouselCVC = "InfiniteCarouselCVC"
 let kDetailCarouselCVC = "DetailCarouselCVC"
 let kHorizontalCarouselCVC = "HorizontalCarouselCVC"
 let kDetailHeaderCVC = "DetailHeaderCVC"
+let kDetailOverviewCVC = "DetailOverviewCVC"
 
 
 let kSectionDetailHeader = "SectionDetailHeader"
@@ -62,7 +72,5 @@ let kSectionDetailPlatforms = "SectionDetailPlatforms"
 let kSectionDetailCast = "SectionDetailCast"
 let kSectionDetailVideos = "SectionDetailVideos"
 
-
-let kDefaultCell = "defaultCell"
 
 let kColorEmptyStateLabel = UIColor.whiteOrBlack

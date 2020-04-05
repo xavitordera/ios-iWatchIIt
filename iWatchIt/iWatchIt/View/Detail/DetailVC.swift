@@ -14,6 +14,10 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     var contentId: Int?
     var type: MediaType?
     
+    override var isTransparentBar: Bool {
+        return true
+    }
+    
     @IBOutlet weak var mainCV: UICollectionView! {
         didSet {
             mainCV.backgroundColor = .clear
@@ -22,6 +26,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             mainCV.allowsSelection = false
             
             mainCV.register(UINib(nibName: kDetailHeaderCVC, bundle: .main), forCellWithReuseIdentifier: kDetailHeaderCVC)
+            mainCV.register(UINib(nibName: kDetailOverviewCVC, bundle: .main), forCellWithReuseIdentifier: kDetailOverviewCVC)
             mainCV.register(UINib(nibName: kHorizontalCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kHorizontalCarouselCVC)
             
             mainCV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
@@ -96,11 +101,11 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     func loadBackground() {
         let imageView = UIImageView(frame: view.frame)
         if let imagePth = getPresenter()?.detail?.image, let imgURL = ImageHelper.createImageURL(path: imagePth, size: .poster(size: .xbig)) {
-            imageView.imageFrom(url: imgURL)
+            imageView.imageFrom(url: imgURL, with: nil)
         } else {
             imageView.image = kEmptyStateMedia
         }
-        imageView.contentMode = .center
+        imageView.contentMode = .scaleToFill
         view.insertSubview(imageView, at: 0)
     }
     
@@ -145,9 +150,10 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     }
     
     func cellForOverview(indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
+        guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kDetailOverviewCVC, for: indexPath) as? DetailOverviewCVC else {
             return UICollectionViewCell()
         }
+        cell.configureCell(with: getPresenter()?.detail?.voteAverage, and: "detail_overview_section".localized, and: getPresenter()?.detail?.overview)
         return cell
     }
     
@@ -170,6 +176,15 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             return UICollectionViewCell()
         }
         return cell
+    }
+    
+    func heightForOverview() -> CGFloat {
+        if let overview = getPresenter()?.detail?.overview {
+            let overviewExpectedHeight = overview.height(withConstrainedWidth: view.frame.width - 20, font: .systemFont(ofSize: 14.0, weight: .light))
+            let totalHeight = overviewExpectedHeight + 60.0 // items offset
+            return totalHeight
+        }
+        return 0.0
     }
 }
 
@@ -204,10 +219,24 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch sections[indexPath.section] {
         case kSectionDetailHeader:
-            return .init(width: UIScreen.main.bounds.width, height: 260)
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsHeader)
+        case kSectionDetailOverview:
+            return CGSize(width: UIScreen.main.bounds.width, height: heightForOverview())
         default:
             return .zero
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .init(top: 0, left: 0, bottom: 0, right: 0)
     }
 }
 

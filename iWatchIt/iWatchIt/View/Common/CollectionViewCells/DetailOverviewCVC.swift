@@ -26,13 +26,16 @@ class DetailOverviewCVC: UICollectionViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        contentView.backgroundColor = .black
     }
     
-    func configureCell(with score: Double?, and description: String?) {
+    func configureCell(with score: Double?, and title: String, and description: String?) {
+        lblTitle.text = title
         lblDescription.text = description
         if let score = score, score > 0.0 {
             btnScore.setTitle(String(format: "%.1f", score), for: .normal)
             btnScore.isHidden = false
+            setupStars(for: score)
         } else {
             btnScore.isHidden = true
             hideStars()
@@ -41,6 +44,41 @@ class DetailOverviewCVC: UICollectionViewCell, NibReusable {
 
     private func setupStars(for score: Double) {
         
+        imgStar1.isHidden = false
+        imgStar2.isHidden = false
+        imgStar3.isHidden = false
+        imgStar4.isHidden = false
+        imgStar5.isHidden = false
+        
+        if score > 0.0 && score < 2.0 {
+            imgStar1.image = kStarHalf
+        } else if score >= 2.0 {
+            imgStar1.image = kStarFilled
+        }
+        
+        if score > 2.0 && score < 4.0 {
+            imgStar2.image = kStarHalf
+        } else if score >= 4.0 {
+            imgStar2.image = kStarFilled
+        }
+        
+        if score > 4.0 && score < 6.0 {
+            imgStar3.image = kStarHalf
+        } else if score >= 6.0 {
+            imgStar3.image = kStarFilled
+        }
+        
+        if score > 6.0 && score < 8.0 {
+            imgStar4.image = kStarHalf
+        } else if score >= 8.0 {
+            imgStar4.image = kStarFilled
+        }
+        
+        if score > 8.0 && score < 10.0 {
+            imgStar5.image = kStarHalf
+        } else if score >= 10.0 {
+            imgStar5.image = kStarFilled
+        }
     }
 
     private func hideStars() {

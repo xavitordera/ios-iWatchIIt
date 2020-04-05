@@ -21,3 +21,8 @@
 "search_header_recently_seen" = "Recently seen";
 "search_empty_results" = "No results found for\n'%@'";
 "search_empty_history" = "Seems you haven't explored anything yet...";
+
+"detail_overview_section" = "Overview";
+"detail_platforms_section" = "Watch it on...";
+"detail_cast_section" = "Cast";
+"detail_videos_section" = "Trailers & more";

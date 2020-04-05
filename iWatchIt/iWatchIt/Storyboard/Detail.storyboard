@@ -16,9 +16,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0as-d5-yfa">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="f19-X3-7nx">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="f19-X3-7nx">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -29,7 +29,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="2Pv-ea-3Fi" firstAttribute="bottom" secondItem="0as-d5-yfa" secondAttribute="bottom" id="919-mp-dHb"/>
+                            <constraint firstAttribute="bottom" secondItem="0as-d5-yfa" secondAttribute="bottom" id="919-mp-dHb"/>
                             <constraint firstItem="0as-d5-yfa" firstAttribute="top" secondItem="jqH-ER-FW1" secondAttribute="top" id="DLw-b4-bvr"/>
                             <constraint firstItem="2Pv-ea-3Fi" firstAttribute="trailing" secondItem="0as-d5-yfa" secondAttribute="trailing" id="EvB-6s-KLd"/>
                             <constraint firstItem="0as-d5-yfa" firstAttribute="leading" secondItem="2Pv-ea-3Fi" secondAttribute="leading" id="ikc-Eg-uKP"/>
