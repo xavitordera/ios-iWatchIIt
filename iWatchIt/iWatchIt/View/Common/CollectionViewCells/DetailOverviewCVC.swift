@@ -26,7 +26,7 @@ class DetailOverviewCVC: UICollectionViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = UIColor.black.withAlphaComponent(0.85)
     }
     
     func configureCell(with score: Double?, and title: String, and description: String?) {

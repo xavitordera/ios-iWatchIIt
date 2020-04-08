@@ -29,6 +29,21 @@ class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
         }
     }
     
+    func fetchPlatforms(term: String) {
+        APIService.shared.getPlatforms(country: "us", term: term) {
+            (result, error) in
+            guard let presenter = self.getPresenter() else {
+                return
+            }
+            
+            guard let result = result else {
+                presenter.platformsFetchFailed(message: error?.localizedDescription)
+                return
+            }
+            presenter.platformsFetchSuccess(platforms: result)
+        }
+    }
+    
     func saveRecentlySeen(id: Int?, title: String?, type: MediaType?) {
         RecentlySeenHelper.saveRecentlySeen(id: id, title: title, mediaType: type)
     }

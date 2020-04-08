@@ -27,7 +27,7 @@ class DetailHeaderCVC: UICollectionViewCell, NibReusable {
     private func setupLayout() {
         infoLbl.font = .systemFont(ofSize: 14.0, weight: .thin)
         infoLbl.textColor = .white
-        contentView.addGradient(startColor: UIColor.black.withAlphaComponent(0.35), endColor: .black)
+        contentView.addGradient(startColor: UIColor.black.withAlphaComponent(0.35), endColor: UIColor.black.withAlphaComponent(0.85))
     }
     
     func configureCell(with imgPath: String?, and description: String?) {

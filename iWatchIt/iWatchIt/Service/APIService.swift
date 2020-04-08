@@ -115,6 +115,19 @@ class APIService {
         }
     }
     
+    func getPlatforms(country: String, term: String, completion: @escaping (RootPlatform?, Error?) -> Void) {
+        requestObject(from: APIRouter.platforms(term: term, country: country)) { (result: Result<RootPlatform, Error>)
+            in
+            switch result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value, nil)
+            }
+        }
+        
+    }
+    
     
     // GET -> getDetails
     // GET -> getVideos

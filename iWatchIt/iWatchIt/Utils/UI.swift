@@ -52,15 +52,17 @@ let kHeightHomeSectionsInfiniteCarousel: CGFloat = 280
 let kHomeSectionsInfiniteCarouselImageSize: ImageSize = .poster(size: PosterSize.medium)
 
 let kHeightDetailSectionsHeader: CGFloat = 260
-let kHeightDetailSectionsOverview: CGFloat = 160
-let kHeightDetailSectionsPlatforms: CGFloat = 200
-let kHeightDetailSectionsCast: CGFloat = 140
-let kHeightDetailSectionsVideo: CGFloat = 250
+let kHeightDetailSectionsPlatforms: CGFloat = 160
+let kHeightDetailSectionsCast: CGFloat = 215
+let kHeightDetailSectionsVideo: CGFloat = 290
 
 let kDefaultCell = "defaultCell"
 let kInfiniteCarouselTVC = "InfiniteCarouselTVC"
 let kInfiniteCarouselCVC = "InfiniteCarouselCVC"
 let kDetailCarouselCVC = "DetailCarouselCVC"
+let kDetailCarouselTrailerCVC = "DetailCarouselTrailerCVC"
+let kDetailCarouselPlatformCVC = "DetailCarouselPlatformCVC"
+let kDetailCarouselCastCVC = "DetailCarouselCastCVC"
 let kHorizontalCarouselCVC = "HorizontalCarouselCVC"
 let kDetailHeaderCVC = "DetailHeaderCVC"
 let kDetailOverviewCVC = "DetailOverviewCVC"
@@ -74,3 +76,4 @@ let kSectionDetailVideos = "SectionDetailVideos"
 
 
 let kColorEmptyStateLabel = UIColor.whiteOrBlack
+let kColorEmptyStatePlatforms = UIColor.white.withAlphaComponent(0.6)

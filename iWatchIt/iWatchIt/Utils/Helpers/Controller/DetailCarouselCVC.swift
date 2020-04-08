@@ -23,6 +23,8 @@ class DetailCarouselCVC: UICollectionViewCell, NibReusable {
     
     @IBOutlet weak var playImg: UIImageView!
     
+    @IBOutlet weak var artistImage: UIImageView!
+    
     // MARK: - UIView
     
     override func awakeFromNib() {
@@ -42,8 +44,10 @@ class DetailCarouselCVC: UICollectionViewCell, NibReusable {
         video = nil
         
         coverImgView.image = nil
+        artistImage.image = nil
         delegate = nil
         lblTitle.isHidden = true
+        lblTitle.text = nil
         playImg.isHidden = true
     }
     
@@ -71,30 +75,39 @@ class DetailCarouselCVC: UICollectionViewCell, NibReusable {
         guard let platform = platform else {
             return
         }
+        lblTitle.text = platform.displayName
+        playImg.isHidden = true
+        
+        if let site = platform.displayName, let image = PlatformHelper.getImageForSite(site: site)  {
+            coverImgView.image = image
+            coverImgView.contentMode = .scaleAspectFill
+        } else {
+            coverImgView.image = kEmptyStateMedia
+        }
     }
     
     func setupCastCell() {
         guard let cast = cast else {
             return
         }
-        
         // setup image
         if let imgPath = cast.image, let imageURL = ImageHelper.createImageURL(path: imgPath, size: .profile(size: .medium)) {
-            coverImgView.imageFrom(url: imageURL)
+            artistImage.imageFrom(url: imageURL)
         } else {
             // No image for this person :(
             if let gender = cast.gender, gender == Gender.female.rawValue {
-                coverImgView.image = kEmptyStateUserFemale
+                artistImage.image = kEmptyStateUserFemale
             } else {
-                coverImgView.image = kEmptyStateUserMale
+                artistImage.image = kEmptyStateUserMale
             }
         }
         // round
-        coverImgView.roundCornersForAspectFit(radius: coverImgView.frame.height / 2)
+        artistImage.roundCornersForAspectFit(radius: artistImage.frame.height / 2)
         
         // setup name
         lblTitle.isHidden = false
         lblTitle.text = cast.name
+        playImg.isHidden = true
     }
     
     func setupVideoCell() {
@@ -106,14 +119,19 @@ class DetailCarouselCVC: UICollectionViewCell, NibReusable {
             coverImgView.imageFrom(url: videoImgUrl)
         }
         
+        playImg.isHidden = false
+        
         lblTitle.isHidden = false
         lblTitle.text = video.name
     }
     // MARK: - Auxiliar functions
     
     private func setupLayout() {
-        lblTitle.font = .systemFont(ofSize: 14.0, weight: .light)
+        lblTitle.font = .systemFont(ofSize: 12.0, weight: .light)
         lblTitle.textColor = .white
         lblTitle.numberOfLines = 0
+        
+        coverImgView.contentMode = .center
+        artistImage.contentMode = .scaleAspectFill
     }
 }

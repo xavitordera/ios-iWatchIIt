@@ -14,12 +14,13 @@ protocol HorizontalCarouselCVCDelegate: class {
     func navigateTo(video: Video)
 }
 
-class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionViewDelegate, UICollectionViewDataSource {
+class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     // MARK: - Properties
 
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var carouselCV: UICollectionView!
+    @IBOutlet weak var emptyLbl: UILabel!
     
     var platformResponse: [Platform]?
     var castResponse: [Cast]?
@@ -33,8 +34,13 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        platformResponse = nil
+        videoResponse = nil
+        castResponse = nil
+        
         titleLbl.text = nil
         delegate = nil
+        emptyLbl.text = nil
         carouselCV.contentOffset.x = 0
     }
     
@@ -52,7 +58,9 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         titleLbl.textAlignment = .left
         
         // Carousel
-        carouselCV.register(UINib(nibName: kDetailCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kDetailCarouselCVC)
+        carouselCV.register(UINib(nibName: kDetailCarouselCastCVC, bundle: .main), forCellWithReuseIdentifier: kDetailCarouselCastCVC)
+        carouselCV.register(UINib(nibName: kDetailCarouselPlatformCVC, bundle: .main), forCellWithReuseIdentifier: kDetailCarouselPlatformCVC)
+        carouselCV.register(UINib(nibName: kDetailCarouselTrailerCVC, bundle: .main), forCellWithReuseIdentifier: kDetailCarouselTrailerCVC)
         carouselCV.backgroundColor = UIColor.clear
         carouselCV.isPagingEnabled = false
         carouselCV.delegate = self
@@ -68,6 +76,17 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         
         // Update view
         carouselCV.reloadData()
+        
+        // Background
+        contentView.backgroundColor = UIColor.black.withAlphaComponent(0.85)
+        
+        emptyLbl.font = .systemFont(ofSize: 18.0, weight: .light)
+        emptyLbl.textColor = kColorEmptyStatePlatforms
+        emptyLbl.textAlignment = .center
+    }
+    
+    func loadEmptyState(with text: String) {
+        emptyLbl.text = text
     }
     
     // MARK: - Public Interface
@@ -75,16 +94,23 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     func configureCell(platformResponse: [Platform]?, title: String?) {
         self.platformResponse = platformResponse
         self.titleLbl.text = title
+        if let platformResponse = platformResponse, !platformResponse.isEmpty {
+            setupLayout()
+        } else {
+            loadEmptyState(with: "No platforms")
+        }
     }
     
     func configureCell(castResponse: [Cast]?, title: String?) {
         self.castResponse = castResponse
         self.titleLbl.text = title
+        setupLayout()
     }
     
     func configureCell(videoResponse: [Video]?, title: String?) {
         self.videoResponse = videoResponse
         self.titleLbl.text = title
+        setupLayout()
     }
     
     // MARK: - UICollectionView
@@ -105,30 +131,46 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kDetailCarouselCVC, for: indexPath) as? DetailCarouselCVC {
-            if platformResponse != nil {
-                if platformResponse!.count >= indexPath.row {
+        
+        if platformResponse != nil {
+            if platformResponse!.count >= indexPath.row {
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kDetailCarouselPlatformCVC, for: indexPath) as? DetailCarouselPlatformCVC {
                     cell.configureCell(platform: self.platformResponse?[indexPath.row])
+                    return cell
                 }
             }
-            else if castResponse != nil {
-                if castResponse!.count >= indexPath.row {
-                    cell.configureCell(cast: self.castResponse?[indexPath.row])
-                }
-            }
-            else if videoResponse != nil {
-                if videoResponse!.count >= indexPath.row {
-                    cell.configureCell(video: self.videoResponse?[indexPath.row])
-                }
-            }
+        }
             
-            return cell
+        else if castResponse != nil {
+            if castResponse!.count >= indexPath.row {
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kDetailCarouselCastCVC, for: indexPath) as? DetailCarouselCastCVC {
+                    cell.configureCell(cast: self.castResponse?[indexPath.row])
+                    return cell
+                }
+            }
+        }
+        
+        else if videoResponse != nil {
+            if videoResponse!.count >= indexPath.row {
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kDetailCarouselTrailerCVC, for: indexPath) as? DetailCarouselTrailerCVC {
+                cell.configureCell(video: self.videoResponse?[indexPath.row])
+                return cell
+                }
+            }
         }
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return UICollectionViewFlowLayout.automaticSize
+        if let _ = castResponse {
+            return .init(width: 85, height: 164)
+        } else if let _ = platformResponse {
+            return .init(width: 100, height: 100)
+        } else if let _ = videoResponse {
+            return .init(width: 200, height: 250)
+        } else {
+            return UICollectionViewFlowLayout.automaticSize
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

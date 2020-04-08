@@ -13,7 +13,7 @@ class HomeInteractor: BaseInteractor, HomePresenterToInteractorProtocol {
         self.presenter = presenter
     }
     
-    func fetchTrending(type: MediaType, timeWindow: TimeWindow = .week) {
+    func fetchTrending(type: MediaType, timeWindow: TimeWindow = .day) {
         APIService.shared.getTrending(mediaType: type, timeWindow: timeWindow) { (trending, error) in
             guard let presenter = self.getPresenter() else {
                 return

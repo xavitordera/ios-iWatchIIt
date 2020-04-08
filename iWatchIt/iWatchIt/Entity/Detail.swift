@@ -14,11 +14,17 @@ enum Gender: Int, Decodable  {
 }
 
 enum VideoSite: String, Decodable  {
-    case Youtube = "Youtube"
+    case YouTube = "YouTube"
 }
 
 struct Platform: Decodable {
+    var url: String?
+    var displayName: String?
     
+    enum CodingKeys: String, CodingKey {
+        case url
+        case displayName = "display_name"
+    }
 }
 
 struct Cast: Decodable {
@@ -42,6 +48,14 @@ struct Video: Decodable {
 struct Genre: Decodable {
     var id: Int?
     var name: String?
+}
+
+struct PlatformExternalIdResults: Decodable {
+    var tmdb: PlatformExternalId?
+}
+
+struct PlatformExternalId: Decodable {
+    var id: String?
 }
 
 extension ContentExtended {
@@ -77,6 +91,11 @@ extension ContentExtended {
             if let dateAsDate = formatter.date(from: date) {
                 description.append(String(Calendar.current.component(.year, from: dateAsDate)))
             }
+        }
+        
+        if let nseason = numberOfSeasons, nseason > 0 {
+            description.append(" · ")
+            description.append(String(format: "detail_header_seasons".localized, nseason))
         }
         
         return description

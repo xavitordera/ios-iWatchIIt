@@ -42,7 +42,7 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
             trendingFetchFailed(message: "app_error_generic".localized)
             return
         }
-        interactor.fetchTrending(type: type, timeWindow: TimeWindow.week)
+        interactor.fetchTrending(type: type, timeWindow: TimeWindow.day)
         interactor.fetchDiscover(type: type)
     }
     

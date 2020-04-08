@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DetailCarouselCastCVC" id="gTV-IL-0wX" customClass="DetailCarouselCastCVC" customModule="iWatchIt" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="98" height="164"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="98" height="164"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Krw-7x-FQu">
+                        <rect key="frame" x="14" y="0.0" width="70" height="105"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="Ez2-bv-PNN"/>
+                            <constraint firstAttribute="height" constant="105" id="aAt-4o-hGt"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jaume Alguersuari" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USB-eb-jIg">
+                        <rect key="frame" x="0.0" y="115" width="98" height="41"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="USB-eb-jIg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="6XU-mX-bFX"/>
+                <constraint firstItem="USB-eb-jIg" firstAttribute="top" secondItem="Krw-7x-FQu" secondAttribute="bottom" constant="10" id="8Ek-7G-H1Q"/>
+                <constraint firstItem="Krw-7x-FQu" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="fkv-PF-hRM"/>
+                <constraint firstItem="Krw-7x-FQu" firstAttribute="centerX" secondItem="USB-eb-jIg" secondAttribute="centerX" id="r2L-kA-bLp"/>
+                <constraint firstAttribute="trailing" secondItem="USB-eb-jIg" secondAttribute="trailing" id="rVE-vS-4YT"/>
+                <constraint firstItem="Krw-7x-FQu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="x0Z-nl-igw"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="383" height="364"/>
+            <connections>
+                <outlet property="artistImage" destination="Krw-7x-FQu" id="7NB-TY-mRx"/>
+                <outlet property="lblTitle" destination="USB-eb-jIg" id="jbT-Nz-1hp"/>
+            </connections>
+            <point key="canvasLocation" x="65.217391304347828" y="184.82142857142856"/>
+        </collectionViewCell>
+    </objects>
+</document>

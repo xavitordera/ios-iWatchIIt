@@ -9,7 +9,6 @@ import Alamofire
 import Foundation
 
 enum APIRouter: URLRequestConvertible {
-    
     /// Gets API configuration.
     
     case configuration
@@ -31,10 +30,15 @@ enum APIRouter: URLRequestConvertible {
     case detail(mediaType: MediaType, id: Int, language: String, appendToResponse: String)
     
     
+    /// UTELLY: - Get platform links
+    
+    case platforms(term: String, country: String)
+    
+    
     var method: HTTPMethod {
         switch self {
             
-        case .configuration, .trending, .discover, .search, .detail: return .get
+        case .configuration, .trending, .discover, .search, .detail, .platforms: return .get
             
             // case : return .head
             // case : return .delete
@@ -43,7 +47,14 @@ enum APIRouter: URLRequestConvertible {
         }
     }
     
-    static let baseURLString = kTMDBBaseURL + kTMDBAPIVersion
+    var baseURLString: String {
+        switch self {
+        case .configuration, .discover, .trending, .search, .detail:
+            return kTMDBBaseURL + kTMDBAPIVersion
+        case .platforms:
+            return kUtellyBaseURL
+        }
+    }
     
     var path: String {
         switch self {
@@ -52,6 +63,7 @@ enum APIRouter: URLRequestConvertible {
         case .discover(let mediaType, _, _): return String(format: kGETDiscover, mediaType.rawValue)
         case .search(let mediaType, _, _, _): return String(format: kGETSearch, mediaType.rawValue)
         case .detail(let mediaType, let id, _, _): return String(format: kGETDetail, mediaType.rawValue, id)
+        case .platforms(_, _): return kGETLookup
         }
     }
     
@@ -81,11 +93,29 @@ enum APIRouter: URLRequestConvertible {
                 URLQueryItem.init(name: kLanguage, value: language),
                 URLQueryItem.init(name: kAppendToResponse, value: appendToResponse)
             ]
+        case .platforms(let term, let country):
+            return [
+                URLQueryItem.init(name: kCountry, value: country),
+                URLQueryItem.init(name: kTerm, value: term)
+            ]
+        }
+    }
+    
+    var headers: HTTPHeaders? {
+        switch self {
+        case .platforms:
+            return
+                HTTPHeaders.init([
+                HTTPHeader.init(name: kHeaderRapidAPIHost, value: kUtellyHost),
+                HTTPHeader.init(name: kHeaderRapidAPIKey, value: kUtellyAPIKey)
+            ])
+        default:
+            return nil
         }
     }
     
     func asURLRequest() throws -> URLRequest {
-        let serviceUrl = try APIRouter.baseURLString.asURL().appendingPathComponent(path)
+        let serviceUrl = try self.baseURLString.asURL().appendingPathComponent(path)
         let urlComp = serviceUrl.absoluteString
         
         guard var components = URLComponents.init(string: urlComp) else {
@@ -96,7 +126,7 @@ enum APIRouter: URLRequestConvertible {
             
             //case :
         //      urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters) // URL
-        case .configuration, .discover, .trending, .search, .detail:
+        case .configuration, .discover, .trending, .search, .detail, .platforms:
             components.queryItems = queryParams
         }
         
@@ -104,8 +134,10 @@ enum APIRouter: URLRequestConvertible {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
-        urlRequest.allHTTPHeaderFields = .none
-        
+        if let headers = headers {
+            urlRequest.headers = headers
+        }
+    
         return urlRequest
     }
 }

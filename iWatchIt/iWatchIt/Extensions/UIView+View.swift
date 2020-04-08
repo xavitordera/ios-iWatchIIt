@@ -18,4 +18,18 @@ extension UIView {
 
         self.layer.insertSublayer(gradient, at: 0)
     }
+    
+    func addGradient(startColor: UIColor, endColor: UIColor, startingY: CGFloat, endY: CGFloat) {
+        
+        let gradient = CAGradientLayer()
+        
+        let newFrame = CGRect(x: 0, y: startingY, width: self.frame.width, height: endY)
+        
+        gradient.frame = newFrame
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        
+//        self.layer.insertSublayer(gradient, below: self.layer)
+
+        self.layer.insertSublayer(gradient, at: 0)
+    }
 }

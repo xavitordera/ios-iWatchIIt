@@ -14,10 +14,6 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     var contentId: Int?
     var type: MediaType?
     
-    override var isTransparentBar: Bool {
-        return true
-    }
-    
     @IBOutlet weak var mainCV: UICollectionView! {
         didSet {
             mainCV.backgroundColor = .clear
@@ -29,14 +25,13 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             mainCV.register(UINib(nibName: kDetailOverviewCVC, bundle: .main), forCellWithReuseIdentifier: kDetailOverviewCVC)
             mainCV.register(UINib(nibName: kHorizontalCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kHorizontalCarouselCVC)
             
-            mainCV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+            mainCV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             
-            mainCV.bounces = true
+            mainCV.bounces = false
             mainCV.alwaysBounceVertical = true
             mainCV.backgroundColor = .clear
         }
     }
-    
     
     // MARK: - UIViewController
     override func viewDidLoad() {
@@ -48,6 +43,10 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     // MARK: - Auxiliar functions
@@ -76,6 +75,12 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         mainCV.reloadData()
     }
     
+    func reloadSection(section: String) {
+        if let index = sections.firstIndex(of: section) {
+            mainCV.reloadItems(at: [.init(item: 0, section: index)])
+        }
+    }
+    
     func setupSections() {
         guard let presenter = getPresenter(), let detail = presenter.detail else {
             return
@@ -83,17 +88,17 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         
         sections.append(kSectionDetailHeader)
         
-        if let _ = detail.overview {
+        if let overview = detail.overview, !overview.isEmpty {
             sections.append(kSectionDetailOverview)
         }
         
         sections.append(kSectionDetailPlatforms)
         
-        if let _ = detail.credits?.cast {
+        if let cast = detail.credits?.cast, !cast.isEmpty {
             sections.append(kSectionDetailCast)
         }
         
-        if let _ = detail.videos {
+        if let videos = detail.videos?.results, !videos.isEmpty {
             sections.append(kSectionDetailVideos)
         }
     }
@@ -126,6 +131,10 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         loadBackground()
     }
     
+    func onPlatformsFetched() {
+        reloadSection(section: kSectionDetailPlatforms)
+    }
+    
     // MARK: - Actions
     
     @objc func share() {
@@ -154,6 +163,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             return UICollectionViewCell()
         }
         cell.configureCell(with: getPresenter()?.detail?.voteAverage, and: "detail_overview_section".localized, and: getPresenter()?.detail?.overview)
+//        cell.addGradient(startColor: .black, endColor: UIColor.black.withAlphaComponent(0.8))
         return cell
     }
     
@@ -161,6 +171,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
             return UICollectionViewCell()
         }
+        cell.configureCell(platformResponse: getPresenter()?.platforms, title: "detail_platforms_section".localized)
+        cell.delegate = self
         return cell
     }
     
@@ -168,6 +180,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
             return UICollectionViewCell()
         }
+        cell.configureCell(castResponse: getPresenter()?.detail?.credits?.cast, title: "detail_cast_section".localized)
+        cell.delegate = self
         return cell
     }
     
@@ -175,6 +189,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
             return UICollectionViewCell()
         }
+        cell.configureCell(videoResponse: getPresenter()?.detail?.videos?.results, title: "detail_videos_section".localized)
+        cell.delegate = self
         return cell
     }
     
@@ -222,6 +238,12 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsHeader)
         case kSectionDetailOverview:
             return CGSize(width: UIScreen.main.bounds.width, height: heightForOverview())
+        case kSectionDetailPlatforms:
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsPlatforms)
+        case kSectionDetailCast:
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsCast)
+        case kSectionDetailVideos:
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsVideo)
         default:
             return .zero
         }
@@ -242,7 +264,7 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 
 extension DetailVC: HorizontalCarouselCVCDelegate {
     func navigateTo(platform: Platform) {
-        
+        PlatformHelper.goToPlatform(platform: platform)
     }
     
     func navigateTo(cast: Cast) {
