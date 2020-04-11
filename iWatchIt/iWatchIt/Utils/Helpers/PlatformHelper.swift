@@ -44,43 +44,80 @@ class PlatformHelper {
     
     static let excludedPlatformWords = ["Google"]
     
-    class func getImageForSite(site: String) -> UIImage? {
-        return UIImage(named: site)
+    class func getImageForSite(platform: Platform?) -> UIImage? {
+        guard let platform = platform, let site = getSiteForPlatform(platform: platform) else { return nil }
+        
+        switch site {
+        case .Netflix:
+            return kNetflix
+        case .AmazonPrimeVideo:
+            return kAmazonPrimeVideo
+        case .AmazonInstantVideo:
+            return kAmazonInstantVideo
+        case .AppleTV:
+            return kAppleTV
+        case .iTunes:
+            return kiTunes
+        case .YouTubePremium:
+            return kYouTubePremium
+        case .DisneyPlus:
+            return kDisneyPlus
+        case .Hulu:
+            return kHulu
+        case .AtomTickets:
+            return kAtomTickets
+        case .CBS:
+            return kCBS
+        case .DCUniverse:
+            return kDCUniverse
+        case .HBO:
+            return kHBO
+        case .DiscoveryChannel:
+            return kDiscoveryChannel
+        case .FandangoMovies:
+            return kFandangoMovies
+        case .Fox:
+            return kFox
+        case .NBC:
+            return kNBC
+        case .Nickelodeon:
+            return kNickelodeon
+        }
     }
     
     /// Helper function used beacause the shitty Utelly API does not take into account that TMDB uses /movies or /shows to fucking differenciate between them
     
-    class func checkIfContentExistsInTMDB(for platform: RootCollection?, and contentId: Int?) -> Bool {
-        guard let tdmbId = platform?.externalIds?.tmdb?.id, let id = contentId else {
-            return false
-        }
-        
-        if tdmbId == String(id) {
-            return true
-        } else {
-            return false
-        }
-    }
+//    class func checkIfContentExistsInTMDB(for platform: RootCollection?, and contentId: Int?) -> Bool {
+//        guard let tdmbId = platform?.externalIds?.tmdb?.id, let id = contentId else {
+//            return false
+//        }
+//
+//        if tdmbId == String(id) {
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
     
     /// Helper function used beacause the shitty Utelly API does not take into account that TMDB uses /movies or /shows to fucking differenciate between them
     /// it basically iterates over the model and compares ids, if match lets go!
-    private class func getLocations(of platform: RootPlatform?, and contentId: Int?) -> [Platform]? {
-        guard let platform = platform, let results = platform.results, let id = contentId else {
-            return nil
-        }
-
-        for result in results {
-            if let ids = result.externalIds, let extId = ids.tmdb?.id, extId == String(id) {
-                return result.locations
-            }
-        }
-        
-        return nil
-    }
+//    private class func getLocations(of platform: RootPlatform?, and contentId: Int?) -> [Platform]? {
+//        guard let platform = platform, let results = platform.results, let id = contentId else {
+//            return nil
+//        }
+//
+//        for result in results {
+//            if let ids = result.externalIds, let extId = ids.tmdb?.id, extId == String(id) {
+//                return result.locations
+//            }
+//        }
+//
+//        return nil
+//    }
     
     /// Nope, we filter some locations because we don't want to...you know...display anything wierd or offensive to our beloved users
-    class func filteredLocations(of platform: RootPlatform?, and contentId: Int?) -> [Platform]? {
-        guard var locations = getLocations(of: platform, and: contentId) else {
+    class func filteredLocations(of platform: RootPlatform?) -> [Platform]? {
+        guard var locations = platform?.collection?.locations else {
             return nil
         }
         var i = 0
@@ -165,7 +202,7 @@ class PlatformHelper {
             return .Netflix
         }
         
-        if platformURL.contains("amazon") {
+        if platformURL.contains("amazon") || platformURL.contains("primevideo") {
             return .AmazonPrimeVideo
         }
         

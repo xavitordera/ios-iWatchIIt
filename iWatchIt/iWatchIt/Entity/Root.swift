@@ -63,6 +63,9 @@ struct ContentExtended: Decodable {
     var credits: RootCast?
     var numberOfSeasons: Int?
     var numberOfEpisodes: Int?
+    var originalName: String?
+    var originalTitle: String?
+    var externalIDs: ContentExternalId?
     
     enum CodingKeys: String, CodingKey {
         case image = "poster_path"
@@ -79,6 +82,9 @@ struct ContentExtended: Decodable {
         case credits
         case numberOfSeasons = "number_of_seasons"
         case numberOfEpisodes = "number_of_episodes"
+        case originalName = "original_name"
+        case originalTitle = "original_title"
+        case externalIDs = "external_ids"
     }
 }
 
@@ -91,15 +97,13 @@ struct RootCast: Decodable {
 }
 
 struct RootPlatform: Decodable {
-    var results: [RootCollection]?
+    var collection: RootCollection?
 }
 
 struct RootCollection: Decodable  {
     var locations: [Platform]?
-    var externalIds: PlatformExternalIdResults?
     
     enum CodingKeys: String, CodingKey {
         case locations
-        case externalIds = "external_ids"
     }
 }

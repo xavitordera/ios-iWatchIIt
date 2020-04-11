@@ -78,7 +78,7 @@ class DetailCarouselCVC: UICollectionViewCell, NibReusable {
         lblTitle.text = platform.displayName
         playImg.isHidden = true
         
-        if let site = platform.displayName, let image = PlatformHelper.getImageForSite(site: site)  {
+        if let image = PlatformHelper.getImageForSite(platform: platform)  {
             coverImgView.image = image
             coverImgView.contentMode = .scaleAspectFill
         } else {

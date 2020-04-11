@@ -12,6 +12,8 @@
 "tab_bar_movies" = "Movies";
 "tab_bar_shows" = "Shows";
 
+"home_search_movies" = "Search movies...";
+"home_search_shows" = "Search shows...";
 "home_title_movies" = "Movies";
 "home_title_shows" = "Shows";
 "home_section_trending" = "Trending";

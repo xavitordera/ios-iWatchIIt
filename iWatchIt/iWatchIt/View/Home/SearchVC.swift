@@ -219,7 +219,7 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         guard let cell = firstStateTV?.dequeueReusableCell(withIdentifier: kDefaultCell) else {
             return UITableViewCell()
         }
-        cell.textLabel?.text = "Recently seen"
+        cell.textLabel?.text = "search_header_recently_seen".localized
         cell.textLabel?.font = .boldSystemFont(ofSize: 24.0)
         cell.textLabel?.textColor = .whiteOrBlack
         return cell

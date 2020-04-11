@@ -14,7 +14,7 @@ class HomeInteractor: BaseInteractor, HomePresenterToInteractorProtocol {
     }
     
     func fetchTrending(type: MediaType, timeWindow: TimeWindow = .day) {
-        APIService.shared.getTrending(mediaType: type, timeWindow: timeWindow) { (trending, error) in
+        APIService.shared.getTrending(mediaType: type, timeWindow: timeWindow, language: Preference.getLocaleLanguage()) { (trending, error) in
             guard let presenter = self.getPresenter() else {
                 return
             }
@@ -31,7 +31,7 @@ class HomeInteractor: BaseInteractor, HomePresenterToInteractorProtocol {
     func fetchDiscover(type: MediaType) {
         // fetch discover
         // FIXME: language and genres
-        APIService.shared.discover(mediaType: type, language: "en", withGenres: "") {
+        APIService.shared.discover(mediaType: type, language: Preference.getLocaleLanguage(), withGenres: "") {
             (discover, error) in
             guard let presenter = self.getPresenter() else {
                 return

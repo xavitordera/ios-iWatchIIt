@@ -65,8 +65,8 @@ class APIService {
     
     // Home Services
     
-    func getTrending(mediaType: MediaType, timeWindow: TimeWindow, completion: @escaping (Root?, Error?) -> Void) {
-        requestObject(from: APIRouter.trending(mediaType: mediaType, timeWindow: timeWindow.rawValue)) { (result: Result<Root, Error>)
+    func getTrending(mediaType: MediaType, timeWindow: TimeWindow, language: String, completion: @escaping (Root?, Error?) -> Void) {
+        requestObject(from: APIRouter.trending(mediaType: mediaType, timeWindow: timeWindow.rawValue, language: language)) { (result: Result<Root, Error>)
             in
             switch result {
             case .failure(let error):
@@ -115,8 +115,8 @@ class APIService {
         }
     }
     
-    func getPlatforms(country: String, term: String, completion: @escaping (RootPlatform?, Error?) -> Void) {
-        requestObject(from: APIRouter.platforms(term: term, country: country)) { (result: Result<RootPlatform, Error>)
+    func getPlatforms(id: String, country: String, source: String, completion: @escaping (RootPlatform?, Error?) -> Void) {
+        requestObject(from: APIRouter.platforms(id: id, source: source, country: country)) { (result: Result<RootPlatform, Error>)
             in
             switch result {
             case .failure(let error):
@@ -125,12 +125,7 @@ class APIService {
                 completion(value, nil)
             }
         }
-        
     }
-    
-    
-    // GET -> getDetails
-    // GET -> getVideos
     // GET -> getReviews
     // GET -> getSimilarMovies
     // GET -> getSimilarTVShows

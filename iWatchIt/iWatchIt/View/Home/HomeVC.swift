@@ -38,6 +38,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
         search.searchResultsUpdater = self
         search.delegate = self
         search.searchBar.delegate = searchVC
+        search.searchBar.placeholder = (type == .movie) ? "home_search_movies".localized : "home_search_shows".localized
         definesPresentationContext = true
         self.navigationItem.searchController = search
     }

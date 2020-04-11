@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Amazon-icon-2.png",
+      "filename" : "1f0feac18fbdaf45b63aaabae4ff3362_icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Amazon-icon.png",
+      "filename" : "1f0feac18fbdaf45b63aaabae4ff3362_icon-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Amazon-icon-1.png",
+      "filename" : "1f0feac18fbdaf45b63aaabae4ff3362_icon-2.png",
       "scale" : "3x"
     }
   ],

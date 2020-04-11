@@ -77,3 +77,23 @@ let kSectionDetailVideos = "SectionDetailVideos"
 
 let kColorEmptyStateLabel = UIColor.whiteOrBlack
 let kColorEmptyStatePlatforms = UIColor.white.withAlphaComponent(0.6)
+
+
+// Platfroms
+let kNetflix = UIImage(named: "Netflix")
+let kAmazonPrimeVideo = UIImage(named: "Amazon Prime Video")
+let kAmazonInstantVideo = UIImage(named: "Amazon Instant Video")
+let kAppleTV = UIImage(named: "Apple Tv+")
+let kiTunes = UIImage(named: "iTunes")
+let kYouTubePremium = UIImage(named: "YouTube Premium")
+let kDisneyPlus = UIImage(named: "Disney Plus")
+let kHulu = UIImage(named: "Hulu")
+let kAtomTickets = UIImage(named: "Atom Tickets")
+let kCBS = UIImage(named: "CBS")
+let kDCUniverse = UIImage(named: "DC Universe")
+let kHBO = UIImage(named: "HBO")
+let kDiscoveryChannel = UIImage(named: "Discovery Channel")
+let kFandangoMovies = UIImage(named: "Fandango Movies")
+let kFox = UIImage(named: "Fox")
+let kNBC = UIImage(named: "NBC")
+let kNickelodeon = UIImage(named: "Nickelodeon")

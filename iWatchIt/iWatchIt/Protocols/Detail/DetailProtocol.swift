@@ -32,7 +32,7 @@ protocol DetailPresenterToRouterProtocol: BasePresenterToRouterProtocol {
 
 protocol DetailPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {
     func fetchDetail(type: MediaType, id: Int, language: String)
-    func fetchPlatforms(term: String)
+    func fetchPlatforms(id: String)
     func saveRecentlySeen(id: Int?, title: String?, type: MediaType?)
 }
 

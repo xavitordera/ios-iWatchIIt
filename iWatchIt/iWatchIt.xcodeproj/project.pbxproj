@@ -95,6 +95,7 @@
 		10EAF1C8243530BF006A491D /* ScoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EAF1C7243530BF006A491D /* ScoreButton.swift */; };
 		10EBB4AA2431513800C40732 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10EBB4A92431513800C40732 /* SectionHeader.xib */; };
 		10EBB4AC2431515E00C40732 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EBB4AB2431515E00C40732 /* SectionHeader.swift */; };
+		10F2B5132442027A00952A58 /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F2B5122442027A00952A58 /* PreferenceManager.swift */; };
 		10F64082242BB5D00096C229 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F64081242BB5D00096C229 /* Configuration.swift */; };
 		10F64084242BB6640096C229 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F64083242BB6640096C229 /* API.swift */; };
 		10F64086242BCE890096C229 /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F64085242BCE890096C229 /* APIRouter.swift */; };
@@ -211,6 +212,8 @@
 		10EAF1C7243530BF006A491D /* ScoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreButton.swift; sourceTree = "<group>"; };
 		10EBB4A92431513800C40732 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
 		10EBB4AB2431515E00C40732 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		10F2B5122442027A00952A58 /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
+		10F2B514244206C100952A58 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10F64081242BB5D00096C229 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		10F64083242BB6640096C229 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		10F64085242BCE890096C229 /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
@@ -588,6 +591,7 @@
 				10860C3924281A9600DA3A5F /* RealmManager.swift */,
 				10529A9E24378BEC000F12FA /* VideoHelper.swift */,
 				10973B372439EEAD005C467D /* PlatformHelper.swift */,
+				10F2B5122442027A00952A58 /* PreferenceManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -772,6 +776,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 10533D1D2427BEB200BF8FC4;
 			packageReferences = (
@@ -898,6 +903,7 @@
 				10F64082242BB5D00096C229 /* Configuration.swift in Sources */,
 				10860C1E2427C87000DA3A5F /* APIService.swift in Sources */,
 				10482780242ED36500ED7683 /* ShowsVC.swift in Sources */,
+				10F2B5132442027A00952A58 /* PreferenceManager.swift in Sources */,
 				10860C382428191E00DA3A5F /* FakeSplashInteractor.swift in Sources */,
 				10860C2B24280F3100DA3A5F /* FakeSplashVC.swift in Sources */,
 				10860C202427CE5100DA3A5F /* BaseInteractor.swift in Sources */,
@@ -964,6 +970,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				10F6408D242C13420096C229 /* en */,
+				10F2B514244206C100952A58 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

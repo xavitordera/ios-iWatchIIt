@@ -48,7 +48,7 @@ class DetailCarouselPlatformCVC: UICollectionViewCell, NibReusable {
         guard let platform = platform else {
             return
         }
-        if let site = platform.displayName, let image = PlatformHelper.getImageForSite(site: site)  {
+        if let image = PlatformHelper.getImageForSite(platform: platform)  {
             coverImgView.image = image
         } else {
             coverImgView.image = kEmptyStateMedia

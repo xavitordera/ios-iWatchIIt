@@ -25,7 +25,8 @@ let kGETDetail = "/%@/%d"
 let kGETDetailVideos = "videos"
 let kGETDetailImages = "images"
 let kGETDetailCredits = "credits"
-let kGETLookup = "lookup"
+let kGETDetailExternalIDs = "external_ids"
+let kGETLookup = "idlookup"
 
 /// Param keys
 let kApiKey = "api_key"
@@ -36,10 +37,13 @@ let kQuery = "query"
 let kAppendToResponse = "append_to_response"
 let kCountry = "country"
 let kSourceId = "source_id"
+let kSource = "source"
 let kTerm = "term"
 let kHeaderRapidAPIHost = "x-rapidapi-host"
 let kHeaderRapidAPIKey = "x-rapidapi-key"
 
+/// Config
+let kIMDB = "imdb"
 
 
 

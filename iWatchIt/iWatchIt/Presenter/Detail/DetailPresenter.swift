@@ -25,10 +25,8 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
         }
         interactor.saveRecentlySeen(id: detail?.id, title: detail?.title ?? detail?.name, type: type)
         
-        if let title = self.detail?.title {
-            interactor.fetchPlatforms(term: title)
-        } else if let name = self.detail?.name {
-            interactor.fetchPlatforms(term: name)
+        if let externalID = self.detail?.externalIDs?.imdbID {
+            interactor.fetchPlatforms(id: externalID)
         }
     }
     
@@ -37,8 +35,7 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
     }
     
     func platformsFetchSuccess(platforms: RootPlatform?) {
-        debugPrint("Querying for id")
-        if let locations = PlatformHelper.filteredLocations(of: platforms, and: detail?.id) {
+        if let locations = PlatformHelper.filteredLocations(of: platforms) {
             self.platforms = locations
         }
 
@@ -62,14 +59,14 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
             return
         }
         self.type = type
-        interactor.fetchDetail(type: type, id: id, language: "en")
+        interactor.fetchDetail(type: type, id: id, language: Preference.getLocaleLanguage())
     }
     
     func startFetchingPlatform(term: String) {
         guard let interactor = interactor as? DetailPresenterToInteractorProtocol else {
             return
         }
-        interactor.fetchPlatforms(term: term)
+        interactor.fetchPlatforms(id: term)
     }
     
     func didTapOnPlatform(platform: Platform?) {

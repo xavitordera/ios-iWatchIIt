@@ -58,6 +58,14 @@ struct PlatformExternalId: Decodable {
     var id: String?
 }
 
+struct ContentExternalId: Decodable {
+    var imdbID: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case imdbID = "imdb_id"
+    }
+}
+
 extension ContentExtended {
     func createDescriptionForHeader() -> String {
         var description = ""

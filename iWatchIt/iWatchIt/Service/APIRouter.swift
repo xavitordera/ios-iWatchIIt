@@ -15,7 +15,7 @@ enum APIRouter: URLRequestConvertible {
     
     /// Gets trending movies or tv shows
     
-    case trending(mediaType: MediaType, timeWindow: String)
+    case trending(mediaType: MediaType, timeWindow: String, language: String)
     
     /// Discover trending content
     
@@ -32,7 +32,7 @@ enum APIRouter: URLRequestConvertible {
     
     /// UTELLY: - Get platform links
     
-    case platforms(term: String, country: String)
+    case platforms(id: String, source: String, country: String)
     
     
     var method: HTTPMethod {
@@ -59,11 +59,11 @@ enum APIRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .configuration: return kGETConfiguration
-        case .trending(let mediaType, let timeWindow): return String(format: kGETTrending, mediaType.rawValue, timeWindow)
+        case .trending(let mediaType, let timeWindow, _): return String(format: kGETTrending, mediaType.rawValue, timeWindow)
         case .discover(let mediaType, _, _): return String(format: kGETDiscover, mediaType.rawValue)
         case .search(let mediaType, _, _, _): return String(format: kGETSearch, mediaType.rawValue)
         case .detail(let mediaType, let id, _, _): return String(format: kGETDetail, mediaType.rawValue, id)
-        case .platforms(_, _): return kGETLookup
+        case .platforms(_, _, _): return kGETLookup
         }
     }
     
@@ -72,8 +72,11 @@ enum APIRouter: URLRequestConvertible {
         switch self {
         case .configuration:
             return [URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey)]
-        case .trending(_, _):
-            return [URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey)]
+        case .trending(_, _, let language):
+            return [
+                URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
+                URLQueryItem.init(name: kLanguage, value: language)
+            ]
         case .discover(_, let language, let withGenres):
             return [
                 URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
@@ -93,10 +96,11 @@ enum APIRouter: URLRequestConvertible {
                 URLQueryItem.init(name: kLanguage, value: language),
                 URLQueryItem.init(name: kAppendToResponse, value: appendToResponse)
             ]
-        case .platforms(let term, let country):
+        case .platforms(let id, let source, let country):
             return [
                 URLQueryItem.init(name: kCountry, value: country),
-                URLQueryItem.init(name: kTerm, value: term)
+                URLQueryItem.init(name: kSourceId, value: id),
+                URLQueryItem.init(name: kSource, value: source)
             ]
         }
     }

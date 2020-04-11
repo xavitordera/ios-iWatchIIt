@@ -110,10 +110,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
             default:
                 break
             }
-            
         }
-        
-        
     }
     
     // MARK: - UICollectionView

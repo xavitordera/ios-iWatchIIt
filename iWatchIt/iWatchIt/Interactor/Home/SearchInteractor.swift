@@ -15,7 +15,7 @@ class SearchInteractor: BaseInteractor, SearchPresenterToInteractorProtocol {
     
     func fetchSearch(query: String, mediaType: MediaType) {
         // FIXME: language
-        APIService.shared.search(query: query, mediaType: mediaType, language: "en", page: 1) { (results, error) in
+        APIService.shared.search(query: query, mediaType: mediaType, language: Preference.getLocaleLanguage(), page: 1) { (results, error) in
             guard let presenter = self.getPresenter() else {
                 return
             }
