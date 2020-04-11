@@ -10,10 +10,11 @@ import UIKit
 class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewToPresenterProtocol {
     
     var home: Home?
+    var type: MediaType = .movie
     
     // MARK: Interactor protocol
     func trendingFetchSuccess(trending: Root?) {
-        home = Home.updateFromRoot(rootTrending: trending, rootDiscover: nil)
+        home = Home.updateFromRoot(rootTrending: trending, rootDiscover: nil, watchlist: nil, type: type)
         if let view = getView() {
             view.onDataFetched()
         }
@@ -24,7 +25,7 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
     }
     
     func discoverFetchSuccess(discover: Root?) {
-        home = Home.updateFromRoot(rootTrending: nil, rootDiscover: discover)
+        home = Home.updateFromRoot(rootTrending: nil, rootDiscover: discover, watchlist: nil, type: type)
         if let view = getView() {
             view.onDataFetched()
         }
@@ -32,6 +33,14 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
     
     func discoverFetchFailed(message: String?) {
         view?.showError(message: message)
+    }
+    
+    func watchlistFetched(watchlist: [WatchlistContent]?) {
+        home = Home.updateFromRoot(rootTrending: nil, rootDiscover: nil, watchlist: watchlist, type: type)
+        if let view = getView() {
+            view.onDataFetched()
+        }
+        WatchlistManager.shared.addDelegate(delegate: self)
     }
     
     // MARK: View protocol
@@ -42,8 +51,10 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
             trendingFetchFailed(message: "app_error_generic".localized)
             return
         }
+        self.type = type
         interactor.fetchTrending(type: type, timeWindow: TimeWindow.day)
         interactor.fetchDiscover(type: type)
+        interactor.fetchWatchlist(type: type)
     }
     
     func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType) {
@@ -56,5 +67,13 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
             return nil
         }
         return view
+    }
+}
+
+extension HomePresenter: WatchlistManagerDelegate {
+    func didChangeWatchlist(type: MediaType) {
+        if let interactor = interactor as? HomePresenterToInteractorProtocol, type == self.type {
+            interactor.fetchWatchlist(type: type)
+        }
     }
 }

@@ -17,6 +17,7 @@
 "home_section_trending" = "Trending";
 "home_section_discover" = "You might like...";
 "home_section_watchlist" = "Your watchlist";
+"home_empty_watchlist" = "Here you will see your watchlist content. Start exploring!";
 
 "search_header_recently_seen" = "Recently seen";
 "search_empty_results" = "No results found for\n'%@'";
@@ -27,3 +28,6 @@
 "detail_cast_section" = "Cast";
 "detail_videos_section" = "Trailers & more";
 "detail_header_seasons" = "%d seasons";
+"detail_empty_platforms" = "We couldn't find any platform streaming this content in your country.";
+"detail_added_to_watchlist" = "Added to watchlist";
+"detail_removed_from_watchlist" = "Removed from watchlist";

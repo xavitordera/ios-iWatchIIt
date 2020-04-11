@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let kDeepURLAmazon = "piv://apv/play?asin=%@"
+let kDeepURLAmazon = "aiv://aiv/play?asin=%@"
 
 enum PlatformSite: String, CaseIterable {
     case Netflix = "Netflix"
@@ -33,7 +33,7 @@ enum PlatformSite: String, CaseIterable {
 
 enum PlatformScheme: String, CaseIterable {
     case Netflix = "nflx"
-    case AmazonPrimeVideo = "apv"
+    case AmazonPrimeVideo = "aiv"
     case AppleTV = "videos"
     case iTunes = "itms"
     case HBO = "hbogo"
@@ -119,6 +119,10 @@ class PlatformHelper {
                 let customURL = URL(string: schemeurl) {
                     let urlToOpen = UIApplication.shared.canOpenURL(customURL) ? customURL : originalURL
                     UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
+            } else {
+                if let url = URL(string: platformUrl) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
             }
         } else {
             if let url = URL(string: platformUrl) {

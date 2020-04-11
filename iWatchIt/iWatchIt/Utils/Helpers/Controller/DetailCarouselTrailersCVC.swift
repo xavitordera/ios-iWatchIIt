@@ -21,6 +21,7 @@ class DetailCarouselTrailerCVC: UICollectionViewCell, NibReusable {
     
     @IBOutlet weak var playImg: UIImageView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     // MARK: - UIView
     
     override func awakeFromNib() {
@@ -39,6 +40,7 @@ class DetailCarouselTrailerCVC: UICollectionViewCell, NibReusable {
         coverImgView.image = nil
         delegate = nil
         lblTitle.text = nil
+        activityIndicator.isHidden = true
     }
     
     // MARK: - Public interface
@@ -48,8 +50,21 @@ class DetailCarouselTrailerCVC: UICollectionViewCell, NibReusable {
         
         setupVideoCell()
     }
-   
-    func setupVideoCell() {
+    
+    func startLoading() {
+        playImg.isHidden = true
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    func hideLoading() {
+        playImg.isHidden = false
+        activityIndicator.isHidden = true
+        activityIndicator.startAnimating()
+    }
+    
+   // MARK: - Auxiliar functions
+    private func setupVideoCell() {
         guard let video = video else {
             return
         }
@@ -59,7 +74,7 @@ class DetailCarouselTrailerCVC: UICollectionViewCell, NibReusable {
         }
         lblTitle.text = video.name
     }
-    // MARK: - Auxiliar functions
+    
     
     private func setupLayout() {
         lblTitle.font = .systemFont(ofSize: 12.0, weight: .light)

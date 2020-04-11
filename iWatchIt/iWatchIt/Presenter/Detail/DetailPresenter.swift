@@ -23,7 +23,7 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
         guard let interactor = interactor as? DetailPresenterToInteractorProtocol else {
             return
         }
-        interactor.saveRecentlySeen(id: detail?.id, title: detail?.title, type: type)
+        interactor.saveRecentlySeen(id: detail?.id, title: detail?.title ?? detail?.name, type: type)
         
         if let title = self.detail?.title {
             interactor.fetchPlatforms(term: title)
@@ -74,6 +74,29 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
     
     func didTapOnPlatform(platform: Platform?) {
         PlatformHelper.goToPlatform(platform: platform)
+    }
+    
+    func didTapOnCast(cast: Cast?) {
+        
+    }
+    
+    func didTapOnVideo(video: Video?, nav: UINavigationController) {
+//        VideoHelper.goToVideo(video: video, withNav: nav)
+    }
+    
+    func didTapShare() {
+        
+    }
+    
+    func didTapWatchlist() -> Bool {
+        guard let detail = detail, let id = detail.id, let type = type else {return false}
+        if WatchlistManager.shared.isInWatchlist(id: id, type: type) {
+            WatchlistManager.shared.removeFromWatchlist(id: id, type: type)
+            return false
+        } else {
+            WatchlistManager.shared.addToWatchlist(content: detail, type: type)
+            return true
+        }
     }
     
     func getView() -> DetailPresenterToViewProtocol? {

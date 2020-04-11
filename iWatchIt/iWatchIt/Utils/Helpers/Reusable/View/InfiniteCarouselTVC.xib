@@ -48,16 +48,26 @@
                             <action selector="pushMoreAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kGC-Uw-LTz"/>
                         </connections>
                     </button>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZv-pv-g9i">
+                        <rect key="frame" x="60" y="150.5" width="346" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="RZv-pv-g9i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="40" id="4ex-UO-iTA"/>
+                    <constraint firstItem="RZv-pv-g9i" firstAttribute="centerY" secondItem="6kt-BL-6h6" secondAttribute="centerY" id="7yE-iv-8RT"/>
                     <constraint firstAttribute="trailing" secondItem="UFk-wD-jLB" secondAttribute="trailing" constant="15" id="9W6-Ku-SU2"/>
                     <constraint firstItem="Wx0-Tg-k4I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ame-g1-aJI"/>
                     <constraint firstItem="Wx0-Tg-k4I" firstAttribute="bottom" secondItem="6kt-BL-6h6" secondAttribute="top" id="Cm7-7D-0GJ"/>
                     <constraint firstItem="UFk-wD-jLB" firstAttribute="centerY" secondItem="L0A-1J-ZZk" secondAttribute="centerY" id="DS1-Ts-igg"/>
                     <constraint firstAttribute="trailing" secondItem="Wx0-Tg-k4I" secondAttribute="trailing" id="Gfp-xj-Hew"/>
                     <constraint firstItem="6kt-BL-6h6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="N1g-13-eEA"/>
+                    <constraint firstItem="RZv-pv-g9i" firstAttribute="centerX" secondItem="6kt-BL-6h6" secondAttribute="centerX" id="Q2h-cB-5kE"/>
                     <constraint firstAttribute="bottom" secondItem="6kt-BL-6h6" secondAttribute="bottom" constant="-0.5" id="m0O-2h-uFw"/>
                     <constraint firstItem="UFk-wD-jLB" firstAttribute="width" secondItem="UFk-wD-jLB" secondAttribute="height" multiplier="1:1" id="oCR-Na-NNv"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="RZv-pv-g9i" secondAttribute="trailing" constant="40" id="ow8-cj-fM1"/>
                     <constraint firstAttribute="trailing" secondItem="6kt-BL-6h6" secondAttribute="trailing" id="oxr-oq-Dym"/>
                     <constraint firstItem="6kt-BL-6h6" firstAttribute="top" secondItem="L0A-1J-ZZk" secondAttribute="bottom" constant="17" id="tS9-60-P2t"/>
                     <constraint firstItem="L0A-1J-ZZk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="xhO-nh-G7J"/>
@@ -66,6 +76,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="carousel" destination="6kt-BL-6h6" id="Slh-eN-oId"/>
+                <outlet property="emptyLbl" destination="RZv-pv-g9i" id="9nh-jm-wBQ"/>
                 <outlet property="indicatorImageView" destination="UFk-wD-jLB" id="b3W-oy-vSk"/>
                 <outlet property="titleLbl" destination="L0A-1J-ZZk" id="hSb-hj-cw0"/>
             </connections>

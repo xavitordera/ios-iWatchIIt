@@ -11,7 +11,7 @@ import UIKit
 protocol HorizontalCarouselCVCDelegate: class {
     func navigateTo(platform: Platform)
     func navigateTo(cast: Cast)
-    func navigateTo(video: Video)
+    func navigateTo(video: Video, indexPath: IndexPath)
 }
 
 class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -80,7 +80,7 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         // Background
         contentView.backgroundColor = UIColor.black.withAlphaComponent(0.85)
         
-        emptyLbl.font = .systemFont(ofSize: 18.0, weight: .light)
+        emptyLbl.font = .systemFont(ofSize: 14.0, weight: .light)
         emptyLbl.textColor = kColorEmptyStatePlatforms
         emptyLbl.textAlignment = .center
     }
@@ -97,7 +97,7 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         if let platformResponse = platformResponse, !platformResponse.isEmpty {
             setupLayout()
         } else {
-            loadEmptyState(with: "No platforms")
+            loadEmptyState(with: "detail_empty_platforms".localized)
         }
     }
     
@@ -183,7 +183,7 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         } else if let cast = castResponse {
             delegate?.navigateTo(cast: cast[indexPath.row])
         } else if let videos = videoResponse {
-            delegate?.navigateTo(video: videos[indexPath.row])
+            delegate?.navigateTo(video: videos[indexPath.row], indexPath: indexPath)
         }
     }
 }

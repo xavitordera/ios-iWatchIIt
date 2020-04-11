@@ -6,6 +6,8 @@
 //  Copyright © 2020 Xavi Tordera. All rights reserved.
 //
 import Foundation
+import UIKit
+import WebKit
 
 let kYoutubeImageURL = "https://img.youtube.com/vi/%@/hqdefault.jpg"
 let kYoutubeEmbedVideoURL = "https://www.youtube.com/embed/%@"

@@ -25,6 +25,7 @@ protocol HomePresenterToRouterProtocol: BasePresenterToRouterProtocol {
 protocol HomePresenterToInteractorProtocol: BasePresenterToInteractorProtocol {
     func fetchTrending(type: MediaType, timeWindow: TimeWindow)
     func fetchDiscover(type: MediaType)
+    func fetchWatchlist(type: MediaType)
 }
 
 protocol HomeInteractorToPresenterProtocol: BaseInteractorToPresenterProtocol {
@@ -32,4 +33,5 @@ protocol HomeInteractorToPresenterProtocol: BaseInteractorToPresenterProtocol {
     func trendingFetchFailed(message: String?)
     func discoverFetchSuccess(discover: Root?)
     func discoverFetchFailed(message: String?)
+    func watchlistFetched(watchlist: [WatchlistContent]?)
 }

@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import WebKit
 
 class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     // MARK: - Properties
     var sections: [String] = []
     var contentId: Int?
     var type: MediaType?
+    var videoPlayer: WKWebView?
+    var videoIndexPath: IndexPath?
     
     @IBOutlet weak var mainCV: UICollectionView! {
         didSet {
@@ -25,10 +28,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             mainCV.register(UINib(nibName: kDetailOverviewCVC, bundle: .main), forCellWithReuseIdentifier: kDetailOverviewCVC)
             mainCV.register(UINib(nibName: kHorizontalCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kHorizontalCarouselCVC)
             
-            mainCV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            
+            mainCV.contentInset = .zero
             mainCV.bounces = false
-            mainCV.alwaysBounceVertical = true
             mainCV.backgroundColor = .clear
         }
     }
@@ -38,6 +39,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         super.viewDidLoad()
         setupNav()
         loadDetail()
+        prepareVideoPlayer()
+        addOservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,19 +48,23 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Auxiliar functions
+    
+    func addOservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(hideLoadingVideoCell), name: UIWindow.didBecomeHiddenNotification, object: nil)
+    }
     
     func setupNav() {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         if let presenter = getPresenter(), let id = presenter.detail?.id {
             
-            let isInWatchlist = WatchlistManager.shared.isInWatchlist(id: id)
+            let isInWatchlist = WatchlistManager.shared.isInWatchlist(id: id, type: type!)
             
-            let rightBtn = isInWatchlist ? UIBarButtonItem.init(type: .watchlistAdded, target: self, action: #selector(share)) : UIBarButtonItem.init(type: .watchlistAdd, target: self, action: #selector(share))
+            let rightBtn = isInWatchlist ? UIBarButtonItem.init(type: .watchlistAdded, target: self, action: #selector(watchlist)) : UIBarButtonItem.init(type: .watchlistAdd, target: self, action: #selector(watchlist))
             
             navigationItem.rightBarButtonItems = [.init(type: .share, target: self, action: #selector(share)), rightBtn]
             navigationItem.title = presenter.detail?.title ?? presenter.detail?.name
@@ -147,6 +154,15 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
+    @objc func watchlist() {
+        guard let presenter = getPresenter() else {
+            return
+        }
+        presenter.didTapWatchlist() ? showAlert(message: "detail_added_to_watchlist".localized) : showAlert(message: "detail_removed_from_watchlist".localized)
+        setupNav()
+    }
+    
+    // MARK: - Collection View Cells
     func cellForHeader(indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kDetailHeaderCVC, for: indexPath) as? DetailHeaderCVC else {
             return UICollectionViewCell()
@@ -163,7 +179,6 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             return UICollectionViewCell()
         }
         cell.configureCell(with: getPresenter()?.detail?.voteAverage, and: "detail_overview_section".localized, and: getPresenter()?.detail?.overview)
-//        cell.addGradient(startColor: .black, endColor: UIColor.black.withAlphaComponent(0.8))
         return cell
     }
     
@@ -248,30 +263,104 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return .zero
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 0, left: 0, bottom: 0, right: 0)
-    }
 }
 
 extension DetailVC: HorizontalCarouselCVCDelegate {
     func navigateTo(platform: Platform) {
-        PlatformHelper.goToPlatform(platform: platform)
+        if let presenter = getPresenter() {
+            presenter.didTapOnPlatform(platform: platform)
+        }
     }
     
     func navigateTo(cast: Cast) {
-        
+        if let presenter = getPresenter() {
+            presenter.didTapOnCast(cast: cast)
+        }
     }
     
-    func navigateTo(video: Video) {
+    func navigateTo(video: Video, indexPath: IndexPath) {
+        if let presenter = getPresenter(), let nav = navigationController {
+            presenter.didTapOnVideo(video: video, nav: nav)
+        }
         
+        guard let urlStr = VideoHelper.getVideoURLForEmbed(for: video), let url = URL(string: urlStr), let videoPlayer = videoPlayer else  {
+            return
+        }
+        
+        videoIndexPath = indexPath
+        
+        var embedVideoHtml:String {
+            return """
+            <!DOCTYPE html>
+            <html>
+            <body>
+            <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+            <div id="player"></div>
+
+            <script>
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            var player;
+            function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+            height: '\(videoPlayer.frame.height)',
+            width: '\(videoPlayer.frame.width)',
+            videoId: '\(url.lastPathComponent)',
+            events: {
+            'onReady': onPlayerReady
+            }
+            });
+            }
+
+            function onPlayerReady(event) {
+            event.target.playVideo();
+            }
+            </script>
+            </body>
+            </html>
+            """
+        }
+        videoPlayer.loadHTMLString(embedVideoHtml, baseURL: nil)
+        startLoadingVideoCell(at: indexPath)
     }
+    
+    func prepareVideoPlayer() {
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = false
+        configuration.mediaTypesRequiringUserActionForPlayback = []
+        videoPlayer = WKWebView(frame: .zero, configuration: configuration)
+        videoPlayer!.navigationDelegate = self
+        videoPlayer?.uiDelegate = self
+        view.addSubview(videoPlayer!)
+    }
+    
+    func startLoadingVideoCell(at indexPath: IndexPath) {
+        if let index = sections.firstIndex(of: kSectionDetailVideos), let cell = mainCV.cellForItem(at: .init(row: 0, section: index)) as? HorizontalCarouselCVC {
+            if let videoCell = cell.carouselCV.cellForItem(at: indexPath) as? DetailCarouselTrailerCVC {
+                videoCell.startLoading()
+            }
+        }
+    }
+    
+    @objc func hideLoadingVideoCell(_ notification: Notification) {
+        guard let indexPath = videoIndexPath else {return}
+        videoIndexPath = nil
+        if let index = sections.firstIndex(of: kSectionDetailVideos), let cell = mainCV.cellForItem(at: .init(row: 0, section: index)) as? HorizontalCarouselCVC {
+            if let videoCell = cell.carouselCV.cellForItem(at: indexPath) as? DetailCarouselTrailerCVC {
+                videoCell.hideLoading()
+            }
+        }
+    }
+}
+
+extension DetailVC: WKNavigationDelegate, WKUIDelegate {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+//        hideLoadingVideoCell()
+        print("failed")
+    }
+    
 }

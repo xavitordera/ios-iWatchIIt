@@ -17,6 +17,7 @@ extension UIView {
         gradient.colors = [startColor.cgColor, endColor.cgColor]
 
         self.layer.insertSublayer(gradient, at: 0)
+        
     }
     
     func addGradient(startColor: UIColor, endColor: UIColor, startingY: CGFloat, endY: CGFloat) {
@@ -31,5 +32,15 @@ extension UIView {
 //        self.layer.insertSublayer(gradient, below: self.layer)
 
         self.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    func hasGradient() -> Bool {
+        guard let layers = layer.sublayers else { return false }
+        for layer in layers {
+            if layer.isKind(of: CAGradientLayer.self) {
+                return true
+            }
+        }
+        return false
     }
 }

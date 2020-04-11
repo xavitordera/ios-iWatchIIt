@@ -196,9 +196,10 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let presenter = getPresenter(), let contentSelectedId = presenter.recentlySeen?[indexPath.row].id else {
+        guard let presenter = getPresenter(), let recSee = presenter.recentlySeen, indexPath.row > 0 && indexPath.row - 1 < recSee.count else {
             return
         }
+        let contentSelectedId = recSee[indexPath.row - 1].id
         presenter.contentSelected(navigationController: nav!, for: contentSelectedId, and: type)
     }
     

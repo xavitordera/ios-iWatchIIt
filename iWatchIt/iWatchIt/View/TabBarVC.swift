@@ -25,6 +25,6 @@ class TabBarVC: UITabBarController {
         navShows.tabBarItem.image = kTabShowsImg
         navShows.tabBarItem.title = "tab_bar_shows".localized
         
-        viewControllers = [navMovies, navShows]
+        viewControllers = [navShows, navMovies]
     }
 }

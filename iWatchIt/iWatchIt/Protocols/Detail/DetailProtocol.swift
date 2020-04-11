@@ -15,6 +15,10 @@ protocol DetailViewToPresenterProtocol: BaseViewToPresenterProtocol{
     func startFetchingDetail(type: MediaType?, id: Int?)
     func startFetchingPlatform(term: String)
     func didTapOnPlatform(platform: Platform?)
+    func didTapOnVideo(video: Video?, nav: UINavigationController)
+    func didTapOnCast(cast: Cast?)
+    func didTapWatchlist() -> Bool
+    func didTapShare()
 }
 
 protocol DetailPresenterToViewProtocol: BasePresenterToViewProtocol{

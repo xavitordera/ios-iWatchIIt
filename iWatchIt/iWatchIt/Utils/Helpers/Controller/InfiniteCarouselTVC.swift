@@ -20,6 +20,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     @IBOutlet weak var indicatorImageView: UIImageView!
     @IBOutlet weak var carousel: UICollectionView!
     
+    @IBOutlet weak var emptyLbl: UILabel!
     var homeContentResponse: HomeSection?
     var delegate: InfiniteCarouselTVCDelegate?
     
@@ -52,6 +53,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         homeContentResponse = HomeSection()
         carousel.reloadData()
         delegate = nil
+        emptyLbl.text = nil
     }
     
     // MARK: - Auxiliar functions
@@ -72,7 +74,16 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         titleLbl.textColor = .whiteOrBlack
         titleLbl.font = .boldSystemFont(ofSize: 26.0)
         
+        emptyLbl.font = .systemFont(ofSize: 14.0, weight: .light)
+        emptyLbl.textColor = kColorEmptyStatePlatforms
+        emptyLbl.textAlignment = .center
+        
         indicatorImageView.tintColor = .whiteOrBlack
+    }
+    
+    func loadEmptyState(with text: String) {
+        emptyLbl.isHidden = false
+        emptyLbl.text = text
     }
     
     @IBAction func pushMoreAction(_ sender: Any) {
@@ -88,7 +99,21 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         self.titleLbl.text = homeContentResponse?.title
         self.indicatorImageView.isHidden = isHiddingSeeMore
         // Update view
-        carousel.reloadData()
+    
+        if let resp = homeContentResponse, let content = resp.content, !content.isEmpty {
+            carousel.reloadData()
+        } else {
+            guard let type = homeContentResponse?.type else {return}
+            switch type {
+            case .Watchlist:
+                loadEmptyState(with: "home_empty_watchlist".localized)
+            default:
+                break
+            }
+            
+        }
+        
+        
     }
     
     // MARK: - UICollectionView

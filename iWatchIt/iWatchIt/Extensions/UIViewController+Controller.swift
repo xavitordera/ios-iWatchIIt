@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SPAlert
 
 extension UIViewController {
 
@@ -18,5 +19,12 @@ extension UIViewController {
     var topbarHeight: CGFloat {
         return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
             (self.navigationController?.navigationBar.frame.height ?? 0.0)
+    }
+    
+    func showAlert(message: String, image: UIImage? = nil) {
+        let alertView = SPAlertView(title: message, message: nil, preset: SPAlertPreset.done)
+        alertView.haptic = .success
+        alertView.duration = 2
+        alertView.present()
     }
 }

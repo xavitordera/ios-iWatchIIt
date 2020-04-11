@@ -22,16 +22,19 @@ final class RecentlySeenHelper {
         
         do {
             try RealmManager.saveObject(object: entry)
+        
         } catch let error {
             debugPrint("Could not save entry \(error)")
         }
     }
     
-    static func getRecentlySeen() -> [RecentlySeen]? {
+    static func getRecentlySeen(type: MediaType) -> [RecentlySeen]? {
         do {
-            let wholeResults = try RealmManager.getObjects(type: RecentlySeen.self)
+//            let wholeResults = try RealmManager.getObjects(type: RecentlySeen.self)
+            let wholeResults = try RealmManager.getObjects(type: RecentlySeen.self, filter: String(format: "privateType == '%@'", type.rawValue))
+//            let resultsFiltered = wholeResults.filter { $0.type == type }
             let results = Array(wholeResults.suffix(6))
-            return results
+            return results.reversed()
         } catch let error {
             debugPrint("Could not save entry \(error)")
             return nil

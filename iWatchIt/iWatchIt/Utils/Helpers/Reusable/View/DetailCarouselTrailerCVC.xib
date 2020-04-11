@@ -36,22 +36,31 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="GGu-iq-Iab">
+                        <rect key="frame" x="115" y="70" width="20" height="20"/>
+                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </activityIndicatorView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="USB-eb-jIg" firstAttribute="top" secondItem="lWq-2V-sTo" secondAttribute="bottom" constant="5" id="6PV-y0-5Qs"/>
                 <constraint firstItem="USB-eb-jIg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="8WQ-Qf-KCG"/>
+                <constraint firstItem="GGu-iq-Iab" firstAttribute="height" secondItem="O0x-My-ccD" secondAttribute="height" multiplier="0.5" id="A20-do-x4K"/>
                 <constraint firstAttribute="trailing" secondItem="lWq-2V-sTo" secondAttribute="trailing" id="Ark-3k-DBh"/>
                 <constraint firstItem="lWq-2V-sTo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Dqd-aD-1DO"/>
                 <constraint firstAttribute="trailing" secondItem="USB-eb-jIg" secondAttribute="trailing" constant="15" id="EQO-pY-N0X"/>
                 <constraint firstItem="lWq-2V-sTo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="YOJ-VP-txh"/>
                 <constraint firstItem="O0x-My-ccD" firstAttribute="centerY" secondItem="lWq-2V-sTo" secondAttribute="centerY" id="eld-pb-9fX"/>
                 <constraint firstItem="O0x-My-ccD" firstAttribute="centerX" secondItem="lWq-2V-sTo" secondAttribute="centerX" id="gba-DN-QhX"/>
+                <constraint firstItem="GGu-iq-Iab" firstAttribute="centerY" secondItem="O0x-My-ccD" secondAttribute="centerY" id="ic8-kH-YM8"/>
+                <constraint firstItem="GGu-iq-Iab" firstAttribute="width" secondItem="O0x-My-ccD" secondAttribute="width" multiplier="0.5" id="mdA-nB-saI"/>
+                <constraint firstItem="GGu-iq-Iab" firstAttribute="centerX" secondItem="O0x-My-ccD" secondAttribute="centerX" id="qen-1y-zhj"/>
                 <constraint firstItem="lWq-2V-sTo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="rf2-jA-3AV"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="535" height="426"/>
             <connections>
+                <outlet property="activityIndicator" destination="GGu-iq-Iab" id="9pc-is-wdo"/>
                 <outlet property="coverImgView" destination="lWq-2V-sTo" id="HuE-20-OH8"/>
                 <outlet property="lblTitle" destination="USB-eb-jIg" id="Af0-se-ojN"/>
                 <outlet property="playImg" destination="O0x-My-ccD" id="ILd-6x-g1e"/>

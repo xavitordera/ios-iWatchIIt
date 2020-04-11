@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>857785370601-kj170h9qhul6tqlos0ckbcedrjk9boel.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.857785370601-kj170h9qhul6tqlos0ckbcedrjk9boel</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAFqSlsqh0bdVi7sDnnpXl64q6-A1PZAS8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>857785370601</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.xtordera.iWatchIt</string>
+	<key>PROJECT_ID</key>
+	<string>iwatchit-a653f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>iwatchit-a653f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:857785370601:ios:9e1e7f1c2b254c0ed32d78</string>
+	<key>DATABASE_URL</key>
+	<string>https://iwatchit-a653f.firebaseio.com</string>
+</dict>
+</plist>

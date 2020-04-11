@@ -26,16 +26,19 @@ public class RealmManager {
             realm.add(object)
         }
     }
+    
     static func getObjects<T:Object>(type: T.Type) throws ->[T] {
         guard let realm = self.realm else {return []}
         let realmResults = realm.objects(type)
         return Array(realmResults)
     }
+    
     static func getObjects<T:Object>(type: T.Type, filter:String) throws ->[T]  {
         guard let realm = self.realm else {return []}
         let realmResults = realm.objects(type).filter(filter)
         return Array(realmResults)
     }
+    
     static func removeObjects<T:Object>(type: T.Type) throws {
         guard let realm = self.realm else {return}
         let objects = realm.objects(type)
@@ -44,13 +47,21 @@ public class RealmManager {
             realm.delete(objects)
         }
     }
+    static func removeObject<T:Object>(type: T.Type, filter: String) throws {
+        guard let realm = self.realm else {return}
+        let realmResults = realm.objects(type).filter(filter)
+
+        try realm.write {
+            realm.delete(realmResults)
+        }
+    }
     
     static func initRealm() {
         
         let config = Realm.Configuration(
           // Set the new schema version. This must be greater than the previously used
           // version (if you've never set a schema version before, the version is 0).
-          schemaVersion: 2,
+          schemaVersion: 4,
 
           // Set the block which will be called automatically when opening a Realm with
           // a schema version lower than the one set above

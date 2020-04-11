@@ -44,6 +44,12 @@ class HomeInteractor: BaseInteractor, HomePresenterToInteractorProtocol {
         }
     }
     
+    func fetchWatchlist(type: MediaType) {
+        let ws = WatchlistManager.shared.getWatchlist(type: type)
+        guard let presenter = getPresenter() else { return }
+        presenter.watchlistFetched(watchlist: ws)
+    }
+    
     func getPresenter() -> HomeInteractorToPresenterProtocol? {
         guard let presenter = presenter as? HomeInteractorToPresenterProtocol else {
             return nil

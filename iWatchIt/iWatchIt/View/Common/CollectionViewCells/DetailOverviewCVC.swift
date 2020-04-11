@@ -26,6 +26,11 @@ class DetailOverviewCVC: UICollectionViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         contentView.backgroundColor = UIColor.black.withAlphaComponent(0.85)
     }
     

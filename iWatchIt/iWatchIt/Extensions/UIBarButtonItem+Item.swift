@@ -30,15 +30,16 @@ extension UIBarButtonItem
         }
         
         let menuBtn = UIButton(type: .custom)
-        menuBtn.frame = CGRect(x: 0.0, y: 0.0, width: 21, height: 21)
-        menuBtn.setImage(image, for: .normal)
+        menuBtn.frame = CGRect(x: 0.0, y: 0.0, width: 25, height: 25)
+        let tintedImage = image?.withTintColor(.whiteOrBlack)
+        menuBtn.setImage(tintedImage, for: .normal)
         menuBtn.addTarget(target, action: action, for: .touchUpInside)
     
         self.init(customView:menuBtn)
         
-        let currWidth = customView?.widthAnchor.constraint(equalToConstant: 23)
+        let currWidth = customView?.widthAnchor.constraint(equalToConstant: 28)
         currWidth?.isActive = true
-        let currHeight = customView?.heightAnchor.constraint(equalToConstant: 23)
+        let currHeight = customView?.heightAnchor.constraint(equalToConstant: 28)
         currHeight?.isActive = true
     }
 }

@@ -17,17 +17,19 @@ class DetailHeaderCVC: UICollectionViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupLayout()
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        setupLayout()
     }
     
     private func setupLayout() {
         infoLbl.font = .systemFont(ofSize: 14.0, weight: .thin)
         infoLbl.textColor = .white
-        contentView.addGradient(startColor: UIColor.black.withAlphaComponent(0.35), endColor: UIColor.black.withAlphaComponent(0.85))
+        if !contentView.hasGradient() {
+            contentView.addGradient(startColor: UIColor.black.withAlphaComponent(0.35), endColor: UIColor.black.withAlphaComponent(0.85))
+        }
     }
     
     func configureCell(with imgPath: String?, and description: String?) {

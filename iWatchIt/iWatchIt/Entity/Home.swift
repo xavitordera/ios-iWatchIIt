@@ -27,25 +27,57 @@ struct Home {
     var trending: HomeSection?
     var discover: HomeSection?
     var watchlist: HomeSection?
-    static var home = Home()
+    static var homeShows = Home()
+    static var homeMovies = Home()
     
-    static func updateFromRoot(rootTrending: Root?, rootDiscover: Root?) -> Home? {
+    static func updateFromRoot(rootTrending: Root?, rootDiscover: Root?, watchlist: [WatchlistContent]?, type: MediaType) -> Home? {
         if let rootTren = rootTrending {
             var trending = HomeSection()
             trending.content = rootTren.results
             trending.title = "home_section_trending".localized
             trending.type = .Trending
-            home.trending = trending
-            trending.title = "home_section_watchlist".localized
-            home.watchlist = trending
-            home.watchlist?.type = .Watchlist
+            switch type {
+            case .movie:
+                homeMovies.trending = trending
+            case .show:
+                homeShows.trending = trending
+            }
         }
         if let rootDisc = rootDiscover {
             var discover = HomeSection()
             discover.content = rootDisc.results
             discover.title = "home_section_discover".localized
-            home.discover = discover
+            switch type {
+            case .movie:
+                homeMovies.discover = discover
+            case .show:
+                homeShows.discover = discover
+            }
         }
-        return home
+        if let watchlist = watchlist {
+            var wsHome = HomeSection()
+            wsHome.title = "home_section_watchlist".localized
+            wsHome.content = []
+            for watchli in watchlist {
+                var content = Content()
+                content.id = watchli.id
+                content.image = watchli.image
+                content.voteAverage = watchli.voteAverage
+                wsHome.content?.append(content)
+            }
+            wsHome.type = .Watchlist
+            switch type {
+            case .movie:
+                homeMovies.watchlist = wsHome
+            case .show:
+                homeShows.watchlist = wsHome
+            }
+        }
+        switch type {
+        case .movie:
+            return homeMovies
+        case .show:
+            return homeShows
+        }
     }
 }
