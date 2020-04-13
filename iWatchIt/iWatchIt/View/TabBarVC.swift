@@ -25,6 +25,11 @@ class TabBarVC: UITabBarController {
         navShows.tabBarItem.image = kTabShowsImg
         navShows.tabBarItem.title = "tab_bar_shows".localized
         
-        viewControllers = [navShows, navMovies]
+        let discover = DiscoverRouter.shared.createModule()
+        let navDiscover = UINavigationController.init(rootViewController: discover)
+        navDiscover.tabBarItem.image = kTabDiscoverImg
+        navDiscover.tabBarItem.title = "tab_bar_discover".localized
+        
+        viewControllers = [navShows, navMovies, navDiscover]
     }
 }

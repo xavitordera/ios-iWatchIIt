@@ -46,7 +46,7 @@ struct Video: Decodable {
 }
 
 struct Genre: Decodable {
-    var id: Int?
+    var id: Int64?
     var name: String?
 }
 

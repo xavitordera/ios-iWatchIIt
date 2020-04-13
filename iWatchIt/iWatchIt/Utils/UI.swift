@@ -15,6 +15,7 @@ let kShowsVC = "ShowsVC"
 let kTabBarVC = "TabBarVC"
 let kSearchVC = "SearchVC"
 let kDetailVC = "DetailVC"
+let kDiscoverVC = "DiscoverVC"
 
 
 let kHomeTrendingSection = "Trending"
@@ -34,6 +35,7 @@ var kStoryboardDetail: UIStoryboard{
 let kLogoAnimation = "ic_loading_splash"
 let kTabMoviesImg = UIImage(named:"ic_tab_movies")
 let kTabShowsImg = UIImage(named:"ic_tab_shows")
+let kTabDiscoverImg = UIImage(systemName: "magnifyingglass")
 let kEmptyStateMedia = UIImage(named: "emptyStateMedia")
 let kEmptyStateUserMale = UIImage(named: "ic_empty_user_male")
 let kEmptyStateUserFemale = UIImage(named: "ic_empty_user_female")
@@ -75,7 +77,7 @@ let kSectionDetailCast = "SectionDetailCast"
 let kSectionDetailVideos = "SectionDetailVideos"
 
 
-let kColorEmptyStateLabel = UIColor.whiteOrBlack
+let kColorEmptyStateLabel = UIColor.whiteOrBlack.withAlphaComponent(0.6)
 let kColorEmptyStatePlatforms = UIColor.white.withAlphaComponent(0.6)
 
 

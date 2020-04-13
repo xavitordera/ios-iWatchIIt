@@ -10,7 +10,7 @@
         <!--DetailVC-->
         <scene sceneID="LSg-TZ-1fK">
             <objects>
-                <viewController storyboardIdentifier="DetailVC" hidesBottomBarWhenPushed="YES" id="L2n-p6-H5p" customClass="DetailVC" customModule="iWatchIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailVC" id="L2n-p6-H5p" customClass="DetailVC" customModule="iWatchIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jqH-ER-FW1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

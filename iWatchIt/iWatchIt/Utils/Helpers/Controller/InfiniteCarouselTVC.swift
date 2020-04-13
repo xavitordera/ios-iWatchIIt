@@ -17,7 +17,6 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
     // MARK: - Properties
     
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var indicatorImageView: UIImageView!
     @IBOutlet weak var carousel: UICollectionView!
     
     @IBOutlet weak var emptyLbl: UILabel!
@@ -75,10 +74,8 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         titleLbl.font = .boldSystemFont(ofSize: 26.0)
         
         emptyLbl.font = .systemFont(ofSize: 14.0, weight: .light)
-        emptyLbl.textColor = kColorEmptyStatePlatforms
+        emptyLbl.textColor = kColorEmptyStateLabel
         emptyLbl.textAlignment = .center
-        
-        indicatorImageView.tintColor = .whiteOrBlack
     }
     
     func loadEmptyState(with text: String) {
@@ -86,18 +83,11 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         emptyLbl.text = text
     }
     
-    @IBAction func pushMoreAction(_ sender: Any) {
-        if let delegate = self.delegate, !indicatorImageView.isHidden {
-            delegate.didTapSeeMore(section: homeContentResponse!.type)
-        }
-    }
-    
     // MARK: - Public Interface
     
     func configureCell(homeContentResponse: HomeSection?, isHiddingSeeMore: Bool = false) {
         self.homeContentResponse = homeContentResponse
         self.titleLbl.text = homeContentResponse?.title
-        self.indicatorImageView.isHidden = isHiddingSeeMore
         // Update view
     
         if let resp = homeContentResponse, let content = resp.content, !content.isEmpty {

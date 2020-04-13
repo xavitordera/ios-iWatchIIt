@@ -23,6 +23,23 @@ class FakeSplashPresenter:BasePresenter, SplashViewToPresenterProtocol {
         }
     }
     
+    func startFetchingGenres() {
+        guard let interactor = interactor as? SplashPresenterToInteractorProtocol else { return }
+        do {
+            let storedGenres = try RealmManager.getObjects(type: GenresRLM.self)
+            if storedGenres.isEmpty {
+                interactor.fetchGenres(type: .movie)
+                interactor.fetchGenres(type: .show)
+            }
+        } catch let error {
+            debugPrint(error)
+            interactor.fetchGenres(type: .movie)
+            interactor.fetchGenres(type: .show)
+        }
+        
+        
+    }
+    
     func showHomeController(navigationController: UINavigationController) {
         guard let router = router as? SplashPresenterToRouterProtocol else { return }
         router.pushToHomeScreen(navigationConroller: navigationController)
@@ -30,6 +47,15 @@ class FakeSplashPresenter:BasePresenter, SplashViewToPresenterProtocol {
 }
 
 extension FakeSplashPresenter: SplashInteractorToPresenterProtocol{
+    func genresFetchedSuccess(genres: RootGenres) {
+        do {
+            let genresRLM = GenresRLM.createFromRoot(root: genres)
+            try RealmManager.saveObject(object: genresRLM)
+        } catch let error {
+            debugPrint(error)
+        }
+    }
+    
     func configurationFetchedFailed(message: String?) {
         view?.showError(message:("Configuration fetch failed: error -> \(String(describing: message))"))
     }

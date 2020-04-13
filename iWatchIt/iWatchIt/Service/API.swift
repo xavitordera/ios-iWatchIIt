@@ -27,6 +27,10 @@ let kGETDetailImages = "images"
 let kGETDetailCredits = "credits"
 let kGETDetailExternalIDs = "external_ids"
 let kGETLookup = "idlookup"
+let kGETGenres = "/genre/%@/list"
+let kGETSearchKeywords = "/search/keyword"
+let kGETSearchPeople = "/search/person"
+
 
 /// Param keys
 let kApiKey = "api_key"

@@ -11,6 +11,7 @@
 "dismiss_pop_up" = "OK";
 "tab_bar_movies" = "Movies";
 "tab_bar_shows" = "Shows";
+"tab_bar_discover" = "Discover";
 
 "home_search_movies" = "Search movies...";
 "home_search_shows" = "Search shows...";
@@ -33,3 +34,8 @@
 "detail_empty_platforms" = "We couldn't find any platform streaming this content in your country.";
 "detail_added_to_watchlist" = "Added to watchlist";
 "detail_removed_from_watchlist" = "Removed from watchlist";
+
+"discover_title" = "Discover";
+"discover_tv_shows_tab" = "TV Shows";
+"discover_movies_tab" = "Movies";
+"discover_search" = "Search";

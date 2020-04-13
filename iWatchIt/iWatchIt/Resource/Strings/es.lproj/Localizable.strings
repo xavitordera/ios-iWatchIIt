@@ -11,6 +11,7 @@
 "dismiss_pop_up" = "OK";
 "tab_bar_movies" = "Películas";
 "tab_bar_shows" = "Series";
+"tab_bar_discover" = "Explorar";
 
 "home_search_movies" = "Busca películas...";
 "home_search_shows" = "Busca series...";
@@ -33,3 +34,8 @@
 "detail_empty_platforms" = "No hemos podido encontrar ninguna plataforma de streaming en tu país para este contenido.";
 "detail_added_to_watchlist" = "Añadido a tu lista";
 "detail_removed_from_watchlist" = "Eliminado de tu lista";
+
+"discover_title" = "Explorar";
+"discover_tv_shows_tab" = "Series";
+"discover_movies_tab" = "Películas";
+"discover_search" = "Buscar";

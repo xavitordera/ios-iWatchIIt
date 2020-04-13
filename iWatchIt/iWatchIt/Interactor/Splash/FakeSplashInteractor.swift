@@ -29,4 +29,18 @@ class FakeSplashInteractor: BaseInteractor, SplashPresenterToInteractorProtocol 
             presenter.configurationFetchedSuccess(configuration: configuration)
         }
     }
+    
+    func fetchGenres(type: MediaType) {
+        APIService.shared.getGenres(mediaType: type, language: Preference.getLocaleLanguage()) {[weak self] (genres, error) in
+            
+            guard let presenter = self?.presenter as? SplashInteractorToPresenterProtocol else {return}
+            
+            guard let genres = genres else {
+                presenter.configurationFetchedFailed(message: error?.localizedDescription)
+                return
+            }
+            
+            presenter.genresFetchedSuccess(genres:genres)
+        }
+    }
 }

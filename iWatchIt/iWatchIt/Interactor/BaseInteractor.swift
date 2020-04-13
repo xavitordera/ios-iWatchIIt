@@ -8,4 +8,9 @@
 
 class BaseInteractor: BasePresenterToInteractorProtocol {
     var presenter: BaseInteractorToPresenterProtocol?
+    
+    func getPresenter<T> (type: T.Type) -> T? {
+        guard let presenter = presenter as? T else { return nil }
+        return presenter
+    }
 }

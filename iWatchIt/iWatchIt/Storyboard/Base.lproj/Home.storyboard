@@ -49,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfH-Bd-Xv5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="842" y="-342"/>
+            <point key="canvasLocation" x="841" y="-678"/>
         </scene>
         <!--ShowsVC-->
         <scene sceneID="634-aS-kHr">
@@ -64,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q82-vY-jJh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="842" y="331"/>
+            <point key="canvasLocation" x="841" y="0.0"/>
         </scene>
         <!--SearchVC-->
         <scene sceneID="7z7-Ur-Qb3">
@@ -79,7 +79,50 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTb-CX-rJr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1758" y="0.0"/>
+            <point key="canvasLocation" x="1658" y="0.0"/>
+        </scene>
+        <!--DiscoverVC-->
+        <scene sceneID="i4f-mZ-sY8">
+            <objects>
+                <viewController storyboardIdentifier="DiscoverVC" id="ccg-eC-bdQ" customClass="DiscoverVC" customModule="iWatchIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WUL-Ga-Nr9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="76g-F8-6nW">
+                                <rect key="frame" x="0.0" y="154" width="414" height="722"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="O5i-sm-oi6">
+                                <rect key="frame" x="126.5" y="74" width="161" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="esC-Y0-maY"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="TV Shows"/>
+                                    <segment title="Movies"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="O5i-sm-oi6" firstAttribute="top" secondItem="Ixh-ZY-rm1" secondAttribute="top" constant="30" id="1Wx-BE-7J1"/>
+                            <constraint firstItem="76g-F8-6nW" firstAttribute="leading" secondItem="Ixh-ZY-rm1" secondAttribute="leading" id="5jg-xG-Ugp"/>
+                            <constraint firstItem="76g-F8-6nW" firstAttribute="trailing" secondItem="Ixh-ZY-rm1" secondAttribute="trailing" id="NK5-61-0aM"/>
+                            <constraint firstItem="O5i-sm-oi6" firstAttribute="centerX" secondItem="WUL-Ga-Nr9" secondAttribute="centerX" id="g4p-60-9PM"/>
+                            <constraint firstAttribute="bottom" secondItem="76g-F8-6nW" secondAttribute="bottom" constant="20" symbolic="YES" id="gSV-FR-dma"/>
+                            <constraint firstItem="76g-F8-6nW" firstAttribute="top" secondItem="O5i-sm-oi6" secondAttribute="bottom" constant="35" id="xmE-XG-mlK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ixh-ZY-rm1"/>
+                    </view>
+                    <connections>
+                        <outlet property="mainTV" destination="76g-F8-6nW" id="2DV-jn-MAs"/>
+                        <outlet property="segMediaType" destination="O5i-sm-oi6" id="gz9-as-exm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FyG-Z7-IBH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="840.57971014492762" y="704.46428571428567"/>
         </scene>
     </scenes>
 </document>

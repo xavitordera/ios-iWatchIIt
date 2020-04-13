@@ -102,8 +102,16 @@ struct RootPlatform: Decodable {
 
 struct RootCollection: Decodable  {
     var locations: [Platform]?
-    
-    enum CodingKeys: String, CodingKey {
-        case locations
-    }
+}
+
+struct RootPeople: Decodable {
+    var results: [People]?
+}
+
+struct RootKeyword: Decodable {
+    var results: [Keyword]?
+}
+
+struct RootGenres: Decodable {
+    var genres: [Genre]?
 }

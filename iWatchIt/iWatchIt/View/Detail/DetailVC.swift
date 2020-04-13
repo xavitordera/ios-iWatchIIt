@@ -29,7 +29,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             mainCV.register(UINib(nibName: kHorizontalCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kHorizontalCarouselCVC)
             
             mainCV.contentInset = .zero
-            mainCV.bounces = false
+            mainCV.bounces = true
+            mainCV.alwaysBounceVertical = true
             mainCV.backgroundColor = .clear
         }
     }
@@ -61,7 +62,6 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     func setupNav() {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         if let presenter = getPresenter(), let id = presenter.detail?.id {
-            
             let isInWatchlist = WatchlistManager.shared.isInWatchlist(id: id, type: type!)
             
             let rightBtn = isInWatchlist ? UIBarButtonItem.init(type: .watchlistAdded, target: self, action: #selector(watchlist)) : UIBarButtonItem.init(type: .watchlistAdd, target: self, action: #selector(watchlist))
@@ -121,13 +121,15 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         view.insertSubview(imageView, at: 0)
     }
     
-    func getPresenter() -> DetailViewToPresenterProtocol? {
-        guard let presenter = self.presenter as? DetailViewToPresenterProtocol else {
-            showError(message: "app_error_generic".localized)
-            return nil
-        }
-        return presenter
-    }
+    func prepareVideoPlayer() {
+           let configuration = WKWebViewConfiguration()
+           configuration.allowsInlineMediaPlayback = false
+           configuration.mediaTypesRequiringUserActionForPlayback = []
+           videoPlayer = WKWebView(frame: .zero, configuration: configuration)
+           videoPlayer?.navigationDelegate = self
+           videoPlayer?.uiDelegate = self
+           view.addSubview(videoPlayer!)
+       }
     
     // MARK: - Presenter
     
@@ -140,6 +142,14 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     
     func onPlatformsFetched() {
         reloadSection(section: kSectionDetailPlatforms)
+    }
+    
+    func getPresenter() -> DetailViewToPresenterProtocol? {
+        guard let presenter = self.presenter as? DetailViewToPresenterProtocol else {
+            showError(message: "app_error_generic".localized)
+            return nil
+        }
+        return presenter
     }
     
     // MARK: - Actions
@@ -326,16 +336,6 @@ extension DetailVC: HorizontalCarouselCVCDelegate {
         }
         videoPlayer.loadHTMLString(embedVideoHtml, baseURL: nil)
         startLoadingVideoCell(at: indexPath)
-    }
-    
-    func prepareVideoPlayer() {
-        let configuration = WKWebViewConfiguration()
-        configuration.allowsInlineMediaPlayback = false
-        configuration.mediaTypesRequiringUserActionForPlayback = []
-        videoPlayer = WKWebView(frame: .zero, configuration: configuration)
-        videoPlayer!.navigationDelegate = self
-        videoPlayer?.uiDelegate = self
-        view.addSubview(videoPlayer!)
     }
     
     func startLoadingVideoCell(at indexPath: IndexPath) {

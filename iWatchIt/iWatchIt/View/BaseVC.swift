@@ -39,4 +39,9 @@ class BaseVC: UIViewController, BasePresenterToViewProtocol {
             UserDefaults.standard.set(keyboardRectangle.height, forKey: "keyboardHeight")
         }
     }
+    
+    func getPresenter<T>(type: T.Type) -> T? {
+        guard let presenter = self.presenter as? T else { return nil }
+        return presenter
+    }
 }

@@ -31,6 +31,15 @@
 		1048278F242EE7FB00ED7683 /* InfiniteCarouselTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048278E242EE7FB00ED7683 /* InfiniteCarouselTVC.swift */; };
 		10482792242EE8B400ED7683 /* InfiniteCarouselCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10482791242EE8B400ED7683 /* InfiniteCarouselCVC.swift */; };
 		10482794242EEF7700ED7683 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10482793242EEF7700ED7683 /* Home.swift */; };
+		104D59AD244334230085F073 /* DiscoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D59AC244334230085F073 /* DiscoverVC.swift */; };
+		104D59B2244334E00085F073 /* DiscoverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D59B1244334E00085F073 /* DiscoverInteractor.swift */; };
+		104D59B52443350B0085F073 /* DiscoverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D59B42443350B0085F073 /* DiscoverProtocol.swift */; };
+		104D59B724433AF10085F073 /* Discover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D59B624433AF10085F073 /* Discover.swift */; };
+		104D59B924433EF70085F073 /* RealmObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D59B824433EF70085F073 /* RealmObjects.swift */; };
+		104D59BB24436B360085F073 /* DiscoverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D59BA24436B360085F073 /* DiscoverPresenter.swift */; };
+		104D59BD24436B4A0085F073 /* DiscoverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D59BC24436B4A0085F073 /* DiscoverRouter.swift */; };
+		104D59C02443E1870085F073 /* DiscoverHeaderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D59BE2443E1870085F073 /* DiscoverHeaderTVC.swift */; };
+		104D59C12443E1870085F073 /* DiscoverHeaderTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 104D59BF2443E1870085F073 /* DiscoverHeaderTVC.xib */; };
 		1050D9F9243645AE0086990A /* UIViewController+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050D9F8243645AE0086990A /* UIViewController+Controller.swift */; };
 		10529A9F24378BEC000F12FA /* VideoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10529A9E24378BEC000F12FA /* VideoHelper.swift */; };
 		10533D2A2427BEB200BF8FC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10533D292427BEB200BF8FC4 /* AppDelegate.swift */; };
@@ -104,6 +113,9 @@
 		10F6409A242C14EF0096C229 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F64099242C14EF0096C229 /* AppError.swift */; };
 		10F6BFC1242FDE0E00AE693A /* InfiniteCarouselCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F6BFC0242FDE0E00AE693A /* InfiniteCarouselCVC.xib */; };
 		10F6BFC3242FDE2400AE693A /* InfiniteCarouselTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F6BFC2242FDE2400AE693A /* InfiniteCarouselTVC.xib */; };
+		18B36CE590F275DE49DB1F4F /* Pods_iWatchIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84984065FC5CD77B63660568 /* Pods_iWatchIt.framework */; };
+		313B99FB224A367CF63C82E2 /* Pods_iWatchItTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFACB54DE5920C223F305F6 /* Pods_iWatchItTests.framework */; };
+		E584EF0F89A60120FB6B830C /* Pods_iWatchIt_iWatchItUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36674763B9D3CB89BEE6B18 /* Pods_iWatchIt_iWatchItUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +136,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AB85E401AC13DD8EF6D4765 /* Pods-iWatchIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.debug.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.debug.xcconfig"; sourceTree = "<group>"; };
+		0B1B88E9B1C888D384CD9F0C /* Pods-iWatchItTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchItTests.release.xcconfig"; path = "Target Support Files/Pods-iWatchItTests/Pods-iWatchItTests.release.xcconfig"; sourceTree = "<group>"; };
 		1005B754243B9125004B78F3 /* DetailCarouselPlatformCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailCarouselPlatformCVC.xib; sourceTree = "<group>"; };
 		1005B755243B9126004B78F3 /* DetailCarouselTrailerCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailCarouselTrailerCVC.xib; sourceTree = "<group>"; };
 		1005B756243B9126004B78F3 /* DetailCarouselCastCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailCarouselCastCVC.xib; sourceTree = "<group>"; };
@@ -148,6 +162,15 @@
 		1048278E242EE7FB00ED7683 /* InfiniteCarouselTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteCarouselTVC.swift; sourceTree = "<group>"; };
 		10482791242EE8B400ED7683 /* InfiniteCarouselCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteCarouselCVC.swift; sourceTree = "<group>"; };
 		10482793242EEF7700ED7683 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		104D59AC244334230085F073 /* DiscoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverVC.swift; sourceTree = "<group>"; };
+		104D59B1244334E00085F073 /* DiscoverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverInteractor.swift; sourceTree = "<group>"; };
+		104D59B42443350B0085F073 /* DiscoverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverProtocol.swift; sourceTree = "<group>"; };
+		104D59B624433AF10085F073 /* Discover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discover.swift; sourceTree = "<group>"; };
+		104D59B824433EF70085F073 /* RealmObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObjects.swift; sourceTree = "<group>"; };
+		104D59BA24436B360085F073 /* DiscoverPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPresenter.swift; sourceTree = "<group>"; };
+		104D59BC24436B4A0085F073 /* DiscoverRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverRouter.swift; sourceTree = "<group>"; };
+		104D59BE2443E1870085F073 /* DiscoverHeaderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverHeaderTVC.swift; sourceTree = "<group>"; };
+		104D59BF2443E1870085F073 /* DiscoverHeaderTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverHeaderTVC.xib; sourceTree = "<group>"; };
 		1050D9F8243645AE0086990A /* UIViewController+Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Controller.swift"; sourceTree = "<group>"; };
 		10529A9E24378BEC000F12FA /* VideoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHelper.swift; sourceTree = "<group>"; };
 		10533D262427BEB200BF8FC4 /* iWatchIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWatchIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +245,13 @@
 		10F64099242C14EF0096C229 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		10F6BFC0242FDE0E00AE693A /* InfiniteCarouselCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfiniteCarouselCVC.xib; sourceTree = "<group>"; };
 		10F6BFC2242FDE2400AE693A /* InfiniteCarouselTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfiniteCarouselTVC.xib; sourceTree = "<group>"; };
+		693CBD7B6ACE9997D26EB7F4 /* Pods-iWatchIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.release.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.release.xcconfig"; sourceTree = "<group>"; };
+		746B495B1F65E583E9D5F8E8 /* Pods-iWatchItTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchItTests.debug.xcconfig"; path = "Target Support Files/Pods-iWatchItTests/Pods-iWatchItTests.debug.xcconfig"; sourceTree = "<group>"; };
+		84984065FC5CD77B63660568 /* Pods_iWatchIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWatchIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B36674763B9D3CB89BEE6B18 /* Pods_iWatchIt_iWatchItUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWatchIt_iWatchItUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7875806BC859AF47BB38ADB /* Pods-iWatchIt-iWatchItUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt-iWatchItUITests.debug.xcconfig"; path = "Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C30EBE692397EBBB73C7DA18 /* Pods-iWatchIt-iWatchItUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt-iWatchItUITests.release.xcconfig"; path = "Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests.release.xcconfig"; sourceTree = "<group>"; };
+		DAFACB54DE5920C223F305F6 /* Pods_iWatchItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWatchItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +266,7 @@
 				10860C182427C44400DA3A5F /* RealmSwift in Frameworks */,
 				10860C1B2427C4C300DA3A5F /* SkeletonView in Frameworks */,
 				10860C102427C36800DA3A5F /* Alamofire in Frameworks */,
+				18B36CE590F275DE49DB1F4F /* Pods_iWatchIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +274,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				313B99FB224A367CF63C82E2 /* Pods_iWatchItTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +282,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E584EF0F89A60120FB6B830C /* Pods_iWatchIt_iWatchItUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +292,7 @@
 		1039A5C62427BF36005531A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				104D59AB244334050085F073 /* Discover */,
 				1085646C2436810600082755 /* Detail */,
 				1048278C242EE7C600ED7683 /* Common */,
 				10482777242ED0CA00ED7683 /* Home */,
@@ -272,6 +306,7 @@
 		1039A5C72427BF8D005531A5 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				104D59AE244334790085F073 /* Discover */,
 				1085646B243680FA00082755 /* Detail */,
 				10482778242ED0D800ED7683 /* Home */,
 				10860C2C2428107B00DA3A5F /* Splash */,
@@ -340,6 +375,8 @@
 		1048278D242EE7CC00ED7683 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				104D59BE2443E1870085F073 /* DiscoverHeaderTVC.swift */,
+				104D59BF2443E1870085F073 /* DiscoverHeaderTVC.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -353,6 +390,46 @@
 				102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */,
 			);
 			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		104D59AB244334050085F073 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				104D59AC244334230085F073 /* DiscoverVC.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		104D59AE244334790085F073 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				104D59BC24436B4A0085F073 /* DiscoverRouter.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		104D59AF244334B10085F073 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				104D59BA24436B360085F073 /* DiscoverPresenter.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		104D59B0244334D00085F073 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				104D59B1244334E00085F073 /* DiscoverInteractor.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		104D59B3244334F60085F073 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				104D59B42443350B0085F073 /* DiscoverProtocol.swift */,
+			);
+			path = Discover;
 			sourceTree = "<group>";
 		};
 		1050D9FA243680840086990A /* Detail */ = {
@@ -371,6 +448,7 @@
 				10533D4C2427BEB600BF8FC4 /* iWatchItUITests */,
 				10533D272427BEB200BF8FC4 /* Products */,
 				10A63878244108A9002B4B83 /* Frameworks */,
+				EAC5A6745B6E0E5B36C47AE8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -467,6 +545,7 @@
 		10860C072427C03100DA3A5F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				104D59AF244334B10085F073 /* Discover */,
 				1085646A243680F100082755 /* Detail */,
 				10482779242ED0DF00ED7683 /* Home */,
 				10860C2D2428109D00DA3A5F /* Splash */,
@@ -478,6 +557,7 @@
 		10860C082427C04400DA3A5F /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				104D59B0244334D00085F073 /* Discover */,
 				10856469243680E600082755 /* Detail */,
 				1048277A242ED0E500ED7683 /* Home */,
 				10860C2E242810B300DA3A5F /* Splash */,
@@ -495,6 +575,8 @@
 				109E456B243106AB0027012B /* Search.swift */,
 				10E4A542243762C800CD80C2 /* Detail.swift */,
 				10A638742440D5B9002B4B83 /* Watchlist.swift */,
+				104D59B624433AF10085F073 /* Discover.swift */,
+				104D59B824433EF70085F073 /* RealmObjects.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -556,6 +638,7 @@
 		10860C312428169400DA3A5F /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				104D59B3244334F60085F073 /* Discover */,
 				1050D9FA243680840086990A /* Detail */,
 				10482787242ED68300ED7683 /* Home */,
 				10860C32242816D600DA3A5F /* Splash */,
@@ -576,6 +659,9 @@
 		10A63878244108A9002B4B83 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84984065FC5CD77B63660568 /* Pods_iWatchIt.framework */,
+				B36674763B9D3CB89BEE6B18 /* Pods_iWatchIt_iWatchItUITests.framework */,
+				DAFACB54DE5920C223F305F6 /* Pods_iWatchItTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -681,6 +767,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EAC5A6745B6E0E5B36C47AE8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0AB85E401AC13DD8EF6D4765 /* Pods-iWatchIt.debug.xcconfig */,
+				693CBD7B6ACE9997D26EB7F4 /* Pods-iWatchIt.release.xcconfig */,
+				B7875806BC859AF47BB38ADB /* Pods-iWatchIt-iWatchItUITests.debug.xcconfig */,
+				C30EBE692397EBBB73C7DA18 /* Pods-iWatchIt-iWatchItUITests.release.xcconfig */,
+				746B495B1F65E583E9D5F8E8 /* Pods-iWatchItTests.debug.xcconfig */,
+				0B1B88E9B1C888D384CD9F0C /* Pods-iWatchItTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -688,9 +787,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10533D522427BEB600BF8FC4 /* Build configuration list for PBXNativeTarget "iWatchIt" */;
 			buildPhases = (
+				A0CEE4091CE38B8BF9C2B98D /* [CP] Check Pods Manifest.lock */,
 				10533D222427BEB200BF8FC4 /* Sources */,
 				10533D232427BEB200BF8FC4 /* Frameworks */,
 				10533D242427BEB200BF8FC4 /* Resources */,
+				92C191984B273AF8678F411A /* [CP] Embed Pods Frameworks */,
+				10F2B51524427C4800952A58 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -714,6 +816,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10533D552427BEB600BF8FC4 /* Build configuration list for PBXNativeTarget "iWatchItTests" */;
 			buildPhases = (
+				D068A864D5B1CD86FD6A901C /* [CP] Check Pods Manifest.lock */,
 				10533D3A2427BEB600BF8FC4 /* Sources */,
 				10533D3B2427BEB600BF8FC4 /* Frameworks */,
 				10533D3C2427BEB600BF8FC4 /* Resources */,
@@ -732,9 +835,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10533D582427BEB600BF8FC4 /* Build configuration list for PBXNativeTarget "iWatchItUITests" */;
 			buildPhases = (
+				4765D59AFBA02337DA0A6AF6 /* [CP] Check Pods Manifest.lock */,
 				10533D452427BEB600BF8FC4 /* Sources */,
 				10533D462427BEB600BF8FC4 /* Frameworks */,
 				10533D472427BEB600BF8FC4 /* Resources */,
+				3E9DD8CA4B27E9E1B5F86E99 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -818,6 +923,7 @@
 				10A638732440D3D2002B4B83 /* GoogleService-Info.plist in Resources */,
 				10F6BFC3242FDE2400AE693A /* InfiniteCarouselTVC.xib in Resources */,
 				10E4A53F2437604500CD80C2 /* HorizontalCarouselCVC.xib in Resources */,
+				104D59C12443E1870085F073 /* DiscoverHeaderTVC.xib in Resources */,
 				10F6BFC1242FDE0E00AE693A /* InfiniteCarouselCVC.xib in Resources */,
 				1005B758243B9126004B78F3 /* DetailCarouselTrailerCVC.xib in Resources */,
 			);
@@ -839,12 +945,133 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		10F2B51524427C4800952A58 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		3E9DD8CA4B27E9E1B5F86E99 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4765D59AFBA02337DA0A6AF6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iWatchIt-iWatchItUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92C191984B273AF8678F411A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0CEE4091CE38B8BF9C2B98D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iWatchIt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D068A864D5B1CD86FD6A901C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iWatchItTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		10533D222427BEB200BF8FC4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				10E4A54524376C6000CD80C2 /* DetailCarouselCVC.swift in Sources */,
+				104D59C02443E1870085F073 /* DiscoverHeaderTVC.swift in Sources */,
 				10860C362428184300DA3A5F /* FakeSplashPresenter.swift in Sources */,
 				1005B75F243B913C004B78F3 /* DetailCarouselTrailersCVC.swift in Sources */,
 				10F64086242BCE890096C229 /* APIRouter.swift in Sources */,
@@ -852,6 +1079,7 @@
 				108564702436905A00082755 /* DetailInteractor.swift in Sources */,
 				1005B75D243B913C004B78F3 /* DetailCarouselCastCVC.swift in Sources */,
 				109E457224312F010027012B /* SearchPresenter.swift in Sources */,
+				104D59B924433EF70085F073 /* RealmObjects.swift in Sources */,
 				102BD0BC243918BE003215AF /* DetailOverviewCVC.swift in Sources */,
 				10E4A5392437470D00CD80C2 /* UIBarButtonItem+Item.swift in Sources */,
 				10D2888C242FAB3300A2DA0D /* ImageHelper.swift in Sources */,
@@ -862,6 +1090,7 @@
 				10D28886242F736900A2DA0D /* UICollectionView+Reusable.swift in Sources */,
 				109E456A243106540027012B /* Root.swift in Sources */,
 				10860C262427CE9D00DA3A5F /* BaseVC.swift in Sources */,
+				104D59B52443350B0085F073 /* DiscoverProtocol.swift in Sources */,
 				10482789242ED69000ED7683 /* HomeProtocol.swift in Sources */,
 				109E456E24312DB00027012B /* SearchVC.swift in Sources */,
 				10F6409A242C14EF0096C229 /* AppError.swift in Sources */,
@@ -878,7 +1107,10 @@
 				1048277C242ED12A00ED7683 /* HomeVC.swift in Sources */,
 				10D28884242F736900A2DA0D /* Reusable.swift in Sources */,
 				10F64097242C14260096C229 /* String+string.swift in Sources */,
+				104D59BB24436B360085F073 /* DiscoverPresenter.swift in Sources */,
 				10E4A543243762C800CD80C2 /* Detail.swift in Sources */,
+				104D59AD244334230085F073 /* DiscoverVC.swift in Sources */,
+				104D59B2244334E00085F073 /* DiscoverInteractor.swift in Sources */,
 				10D2888A242F741700A2DA0D /* UIImageView+Utils.swift in Sources */,
 				109E457424312F1D0027012B /* SearchInteractor.swift in Sources */,
 				10E5BA29242CF92A005227C8 /* Navigation.swift in Sources */,
@@ -896,6 +1128,7 @@
 				102BD0B92438F549003215AF /* UIView+View.swift in Sources */,
 				10D28880242F736900A2DA0D /* NibLoadable.swift in Sources */,
 				1085646E2436890600082755 /* DetailProtocol.swift in Sources */,
+				104D59BD24436B4A0085F073 /* DiscoverRouter.swift in Sources */,
 				109E456C243106AB0027012B /* Search.swift in Sources */,
 				10E5BA27242CF6F1005227C8 /* UI.swift in Sources */,
 				108564762436A74300082755 /* DetailVC.swift in Sources */,
@@ -912,6 +1145,7 @@
 				10E5BA2B242D05DC005227C8 /* BaseProtocol.swift in Sources */,
 				10D28882242F736900A2DA0D /* NibOwnerLoadable.swift in Sources */,
 				10EBB4AC2431515E00C40732 /* SectionHeader.swift in Sources */,
+				104D59B724433AF10085F073 /* Discover.swift in Sources */,
 				10482792242EE8B400ED7683 /* InfiniteCarouselCVC.swift in Sources */,
 				10482782242ED4C800ED7683 /* HomeRouter.swift in Sources */,
 				10860C342428171500DA3A5F /* FakeSplashProtocol.swift in Sources */,
@@ -1096,6 +1330,7 @@
 		};
 		10533D532427BEB600BF8FC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AB85E401AC13DD8EF6D4765 /* Pods-iWatchIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iWatchIt/iWatchIt.entitlements;
@@ -1118,6 +1353,7 @@
 		};
 		10533D542427BEB600BF8FC4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 693CBD7B6ACE9997D26EB7F4 /* Pods-iWatchIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iWatchIt/iWatchIt.entitlements;
@@ -1140,6 +1376,7 @@
 		};
 		10533D562427BEB600BF8FC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 746B495B1F65E583E9D5F8E8 /* Pods-iWatchItTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1162,6 +1399,7 @@
 		};
 		10533D572427BEB600BF8FC4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B1B88E9B1C888D384CD9F0C /* Pods-iWatchItTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1184,6 +1422,7 @@
 		};
 		10533D592427BEB600BF8FC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7875806BC859AF47BB38ADB /* Pods-iWatchIt-iWatchItUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1204,6 +1443,7 @@
 		};
 		10533D5A2427BEB600BF8FC4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C30EBE692397EBBB73C7DA18 /* Pods-iWatchIt-iWatchItUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

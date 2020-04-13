@@ -10,6 +10,7 @@ import UIKit
 
 protocol SplashViewToPresenterProtocol: BaseViewToPresenterProtocol{
     func startFetchingConfiguration()
+    func startFetchingGenres()
     func showHomeController(navigationController:UINavigationController)
 }
 
@@ -21,9 +22,11 @@ protocol SplashPresenterToRouterProtocol: BasePresenterToRouterProtocol {
 
 protocol SplashPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {
     func fetchConfiguration()
+    func fetchGenres(type: MediaType)
 }
 
 protocol SplashInteractorToPresenterProtocol: BaseInteractorToPresenterProtocol {
     func configurationFetchedSuccess(configuration: Configuration)
     func configurationFetchedFailed(message: String?)
+    func genresFetchedSuccess(genres: RootGenres)
 }

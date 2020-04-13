@@ -1,0 +1,22 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'iWatchIt' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for iWatchIt
+  pod 'Firebase/Core'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/DynamicLinks'
+  target 'iWatchItTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'iWatchItUITests' do
+    # Pods for testing
+  end
+
+end

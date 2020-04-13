@@ -13,6 +13,9 @@ enum APIRouter: URLRequestConvertible {
     
     case configuration
     
+    /// Gets current movie or tv genres
+    case genres(mediaType: MediaType, language: String)
+    
     /// Gets trending movies or tv shows
     
     case trending(mediaType: MediaType, timeWindow: String, language: String)
@@ -29,6 +32,14 @@ enum APIRouter: URLRequestConvertible {
     
     case detail(mediaType: MediaType, id: Int, language: String, appendToResponse: String)
     
+    /// Keywords
+    
+    case searchKeyword(query: String)
+    
+    /// People
+    
+    case searchPeople(query: String, language: String)
+    
     
     /// UTELLY: - Get platform links
     
@@ -38,7 +49,7 @@ enum APIRouter: URLRequestConvertible {
     var method: HTTPMethod {
         switch self {
             
-        case .configuration, .trending, .discover, .search, .detail, .platforms: return .get
+        case .configuration, .genres, .trending, .discover, .search, .detail, .searchKeyword, .searchPeople, .platforms: return .get
             
             // case : return .head
             // case : return .delete
@@ -49,7 +60,7 @@ enum APIRouter: URLRequestConvertible {
     
     var baseURLString: String {
         switch self {
-        case .configuration, .discover, .trending, .search, .detail:
+        case .configuration, .genres, .discover, .trending, .search, .detail, .searchKeyword, .searchPeople:
             return kTMDBBaseURL + kTMDBAPIVersion
         case .platforms:
             return kUtellyBaseURL
@@ -59,10 +70,13 @@ enum APIRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .configuration: return kGETConfiguration
+        case .genres(let mediaType, _): return String(format: kGETGenres, mediaType.rawValue)
         case .trending(let mediaType, let timeWindow, _): return String(format: kGETTrending, mediaType.rawValue, timeWindow)
         case .discover(let mediaType, _, _): return String(format: kGETDiscover, mediaType.rawValue)
         case .search(let mediaType, _, _, _): return String(format: kGETSearch, mediaType.rawValue)
         case .detail(let mediaType, let id, _, _): return String(format: kGETDetail, mediaType.rawValue, id)
+        case .searchKeyword(_): return kGETSearchKeywords
+        case .searchPeople(_,_): return kGETSearchPeople
         case .platforms(_, _, _): return kGETLookup
         }
     }
@@ -72,6 +86,11 @@ enum APIRouter: URLRequestConvertible {
         switch self {
         case .configuration:
             return [URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey)]
+        case .genres(_, let language):
+            return [
+                URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
+                URLQueryItem.init(name: kLanguage, value: language)
+            ]
         case .trending(_, _, let language):
             return [
                 URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
@@ -96,6 +115,17 @@ enum APIRouter: URLRequestConvertible {
                 URLQueryItem.init(name: kLanguage, value: language),
                 URLQueryItem.init(name: kAppendToResponse, value: appendToResponse)
             ]
+        case .searchKeyword(let query):
+            return [
+                URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
+                URLQueryItem.init(name: kQuery, value: query)
+            ]
+        case .searchPeople(let query, let language):
+            return [
+                URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
+                URLQueryItem.init(name: kLanguage, value: language),
+                URLQueryItem.init(name: kQuery, value: query)
+            ]
         case .platforms(let id, let source, let country):
             return [
                 URLQueryItem.init(name: kCountry, value: country),
@@ -110,9 +140,9 @@ enum APIRouter: URLRequestConvertible {
         case .platforms:
             return
                 HTTPHeaders.init([
-                HTTPHeader.init(name: kHeaderRapidAPIHost, value: kUtellyHost),
-                HTTPHeader.init(name: kHeaderRapidAPIKey, value: kUtellyAPIKey)
-            ])
+                    HTTPHeader.init(name: kHeaderRapidAPIHost, value: kUtellyHost),
+                    HTTPHeader.init(name: kHeaderRapidAPIKey, value: kUtellyAPIKey)
+                ])
         default:
             return nil
         }
@@ -130,7 +160,7 @@ enum APIRouter: URLRequestConvertible {
             
             //case :
         //      urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters) // URL
-        case .configuration, .discover, .trending, .search, .detail, .platforms:
+        case .configuration, .genres, .discover, .trending, .search, .detail, .searchKeyword, .searchPeople, .platforms:
             components.queryItems = queryParams
         }
         
@@ -141,7 +171,7 @@ enum APIRouter: URLRequestConvertible {
         if let headers = headers {
             urlRequest.headers = headers
         }
-    
+        
         return urlRequest
     }
 }

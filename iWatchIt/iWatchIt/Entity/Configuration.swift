@@ -6,8 +6,6 @@
 //  Copyright © 2020 Xavi Tordera. All rights reserved.
 //
 import Foundation
-import RealmSwift
-
 
 class Configuration: Decodable {
     var imageBaseURL: String = ""
@@ -27,23 +25,4 @@ class Configuration: Decodable {
 
 class RootConfiguration: Decodable {
     var images: Configuration
-}
-
-class ConfigurationRLM: Object {
-    @objc dynamic var imageBaseURL: String = ""
-    @objc dynamic var imageSecureBaseURL: String = ""
-    let logoSizes = List<String>()
-    let posterSizes = List<String>()
-    let profileSizes = List<String>()
-    
-    static func createFromAPI(config: Configuration) -> ConfigurationRLM {
-        let configRlm = ConfigurationRLM()
-        configRlm.imageBaseURL = config.imageBaseURL
-        configRlm.imageSecureBaseURL = config.imageSecureBaseURL
-        configRlm.logoSizes.append(objectsIn: config.logoSizes)
-        configRlm.posterSizes.append(objectsIn: config.posterSizes)
-        configRlm.profileSizes.append(objectsIn: config.profileSizes)
-        
-        return configRlm
-    }
 }

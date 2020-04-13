@@ -63,6 +63,18 @@ class APIService {
         }
     }
     
+    func getGenres(mediaType: MediaType, language: String, completion: @escaping (RootGenres?, Error?) -> Void) {
+        requestObject(from: APIRouter.genres(mediaType: mediaType, language: language)) { (result: Result<RootGenres, Error>)
+            in
+            switch result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value, nil)
+            }
+        }
+    }
+    
     // Home Services
     
     func getTrending(mediaType: MediaType, timeWindow: TimeWindow, language: String, completion: @escaping (Root?, Error?) -> Void) {
@@ -91,6 +103,30 @@ class APIService {
 
     func search(query: String, mediaType: MediaType, language: String, page: Int, completion: @escaping (Root?, Error?) -> Void) {
         requestObject(from: APIRouter.search(mediaType: mediaType, query: query, language: language, page: page)) { (result: Result<Root, Error>)
+            in
+            switch result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value, nil)
+            }
+        }
+    }
+    
+    func searchKeyword(query: String, completion: @escaping (RootKeyword?, Error?) -> Void) {
+        requestObject(from: APIRouter.searchKeyword(query: query)) { (result: Result<RootKeyword, Error>)
+            in
+            switch result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value, nil)
+            }
+        }
+    }
+    
+    func searchPeople(query: String, language: String, completion: @escaping (RootPeople?, Error?) -> Void) {
+        requestObject(from: APIRouter.searchPeople(query: query, language: language)) { (result: Result<RootPeople, Error>)
             in
             switch result {
             case .failure(let error):
