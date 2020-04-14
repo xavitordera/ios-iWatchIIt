@@ -14,6 +14,7 @@ protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
     var genres: [GenreRLM]? {get set}
     var people: [People]? {get set}
     func startFetchingKeywords(term: String)
+    func startFetchingGenres(mediaType: MediaType)
     func startFilteringGenres(term: String, mediaType: MediaType)
     func startFetchingPeople(term: String)
     func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType)
@@ -21,7 +22,7 @@ protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
 
 protocol DiscoverPresenterToViewProtocol: BasePresenterToViewProtocol{
     func onKeywordsFetched()
-    func onGenresFiltered()
+    func onGenresFiltered(mediaType: MediaType)
     func onPeopleFetched()
 }
 

@@ -74,10 +74,22 @@ class DiscoverVC: BaseVC {
         setupNav()
         setupSearchButton()
         setupSections()
+        loadData()
     }
     
     func setupSections() {
-        sections = [kSectionDiscoverKeywords, kSectionDiscoverGenre, kSectionDiscoverPeople]
+        sections = [
+            kSectionDiscoverKeywords,
+            kSectionDiscoverGenre,
+            kSectionDiscoverPeople
+                    ]
+    }
+    
+    func loadData() {
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
+            presenter.startFetchingGenres(mediaType: .movie)
+            presenter.startFetchingGenres(mediaType: .show)
+        }
     }
     
     // MARK: - Actions
@@ -116,18 +128,21 @@ class DiscoverVC: BaseVC {
 }
 
 extension DiscoverVC: DiscoverPresenterToViewProtocol {
+    
     func onKeywordsFetched() {
         if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let index = sections.firstIndex(of: kSectionDiscoverKeywords) {
             if let cell = mainTV.cellForRow(at: .init(row: 0, section: index)) as? DiscoverSearchTVC {
                 cell.updateKeywordsCell(results: presenter.keywords)
+                mainTV.reloadData()
             }
         }
     }
     
-    func onGenresFiltered() {
+    func onGenresFiltered(mediaType: MediaType) {
         if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let index = sections.firstIndex(of: kSectionDiscoverGenre) {
             if let cell = mainTV.cellForRow(at: .init(row: 0, section: index)) as? DiscoverSearchTVC {
                 cell.updateGenresCell(results: presenter.genres)
+                mainTV.reloadData()
             }
         }
     }
@@ -136,6 +151,7 @@ extension DiscoverVC: DiscoverPresenterToViewProtocol {
         if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let index = sections.firstIndex(of: kSectionDiscoverPeople) {
             if let cell = mainTV.cellForRow(at: .init(row: 0, section: index)) as? DiscoverSearchTVC {
                 cell.updatePeopleCell(results: presenter.people)
+                mainTV.reloadData()
             }
         }
     }
@@ -236,7 +252,11 @@ extension DiscoverVC: DiscoverSearchDelegate {
     
     func didSearchGenre(genre: String) {
         if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
-            presenter.startFilteringGenres(term: genre, mediaType: .movie) // TODOOOO
+            if segMediaType.selectedSegmentIndex == SegmentIndexes.movies.rawValue {
+                presenter.startFilteringGenres(term: genre, mediaType: .movie)
+            } else {
+                presenter.startFilteringGenres(term: genre, mediaType: .show)
+            }
         }
     }
     

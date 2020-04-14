@@ -31,7 +31,7 @@ extension DiscoverInteractor: DiscoverPresenterToInteractorProtocol {
     func fetchGenres(mediaType: MediaType) {
         guard let presenter = self.getPresenter(type: DiscoverInteractorToPresenterProtocol.self) else {return}
         do {
-            let genres = try RealmManager.getObjects(type: GenresRLM.self).first
+            let genres = try RealmManager.getObjects(type: GenresRLM.self, filter: String(format: "privateType == '%@'", mediaType.rawValue)).first
             presenter.genresFetchSuccess(results: genres)
         } catch let error {
             presenter.genresFetchFailed(message: "\(error)")
