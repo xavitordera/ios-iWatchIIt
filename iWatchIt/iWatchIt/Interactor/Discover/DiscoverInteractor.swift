@@ -16,15 +16,36 @@ class DiscoverInteractor: BaseInteractor {
 }
 
 extension DiscoverInteractor: DiscoverPresenterToInteractorProtocol {
+    
     func fetchKeywords(term: String) {
-        
+        APIService.shared.searchKeyword(query: term) { (result, error) in
+            guard let presenter = self.getPresenter(type: DiscoverInteractorToPresenterProtocol.self) else {return}
+            guard let result = result else {
+                presenter.keywordsFetchFailed(message: "\(error ?? AppError.generic)")
+                return
+            }
+            presenter.keywordsFetchSuccess(results: result)
+        }
     }
     
-    func fetchGenres(mediaType: String) {
-        
+    func fetchGenres(mediaType: MediaType) {
+        guard let presenter = self.getPresenter(type: DiscoverInteractorToPresenterProtocol.self) else {return}
+        do {
+            let genres = try RealmManager.getObjects(type: GenresRLM.self).first
+            presenter.genresFetchSuccess(results: genres)
+        } catch let error {
+            presenter.genresFetchFailed(message: "\(error)")
+        }
     }
     
     func fetchPeople(term: String) {
-        
+        APIService.shared.searchPeople(query: term, language: Preference.getLocaleLanguage()) { (result, error) in
+            guard let presenter = self.getPresenter(type: DiscoverInteractorToPresenterProtocol.self) else {return}
+            guard let result = result else {
+                presenter.peopleFetchFailed(message: "\(error ?? AppError.generic)")
+                return
+            }
+            presenter.peopleFetchSuccess(results: result)
+        }
     }
 }

@@ -48,6 +48,8 @@ let kPlay = UIImage(named: "ic_play")
 let kStarEmpty = UIImage(systemName: "star")
 let kStarHalf = UIImage(systemName: "star.lefthalf.fill")
 let kStarFilled = UIImage(systemName: "star.fill")
+let kPlusCircle = UIImage(systemName: "plus.circle")
+let kMinusCircle = UIImage(systemName: "minus.circle")
 
 
 let kHeightHomeSectionsInfiniteCarousel: CGFloat = 280
@@ -57,6 +59,8 @@ let kHeightDetailSectionsHeader: CGFloat = 260
 let kHeightDetailSectionsPlatforms: CGFloat = 160
 let kHeightDetailSectionsCast: CGFloat = 215
 let kHeightDetailSectionsVideo: CGFloat = 290
+
+let kHeightDiscoverSections: CGFloat = 45
 
 let kDefaultCell = "defaultCell"
 let kInfiniteCarouselTVC = "InfiniteCarouselTVC"
@@ -69,12 +73,19 @@ let kHorizontalCarouselCVC = "HorizontalCarouselCVC"
 let kDetailHeaderCVC = "DetailHeaderCVC"
 let kDetailOverviewCVC = "DetailOverviewCVC"
 
+let kDiscoverHeaderTHV = "DiscoverHeaderTVC"
+let kDiscoverSearchTVC = "DiscoverSearchTVC"
+
 
 let kSectionDetailHeader = "SectionDetailHeader"
 let kSectionDetailOverview = "SectionDetailOverview"
 let kSectionDetailPlatforms = "SectionDetailPlatforms"
 let kSectionDetailCast = "SectionDetailCast"
 let kSectionDetailVideos = "SectionDetailVideos"
+
+let kSectionDiscoverKeywords = "SectionDiscoverKeywords"
+let kSectionDiscoverGenre = "SectionDiscoverGenre"
+let kSectionDiscoverPeople = "SectionDiscoverPeople"
 
 
 let kColorEmptyStateLabel = UIColor.whiteOrBlack.withAlphaComponent(0.6)

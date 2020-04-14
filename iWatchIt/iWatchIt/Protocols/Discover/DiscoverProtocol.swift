@@ -10,6 +10,9 @@ import UIKit
 
 protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
     var query: DiscoverQuery? {get set}
+    var keywords: [Keyword]? {get set}
+    var genres: [GenreRLM]? {get set}
+    var people: [People]? {get set}
     func startFetchingKeywords(term: String)
     func startFilteringGenres(term: String, mediaType: MediaType)
     func startFetchingPeople(term: String)
@@ -17,9 +20,9 @@ protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
 }
 
 protocol DiscoverPresenterToViewProtocol: BasePresenterToViewProtocol{
-    func onKeywordsFetched(isEmpty: Bool)
-    func onGenresFiltered(isEmpty: Bool)
-    func onPeopleFetched(isEmpty: Bool)
+    func onKeywordsFetched()
+    func onGenresFiltered()
+    func onPeopleFetched()
 }
 
 protocol DiscoverPresenterToRouterProtocol: BasePresenterToRouterProtocol {
@@ -28,7 +31,7 @@ protocol DiscoverPresenterToRouterProtocol: BasePresenterToRouterProtocol {
 
 protocol DiscoverPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {
     func fetchKeywords(term: String)
-    func fetchGenres(mediaType: String)
+    func fetchGenres(mediaType: MediaType)
     func fetchPeople(term: String)
 }
 

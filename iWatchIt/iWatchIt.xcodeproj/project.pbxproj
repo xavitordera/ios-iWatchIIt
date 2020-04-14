@@ -21,6 +21,8 @@
 		102BD0BC243918BE003215AF /* DetailOverviewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102BD0BA243918BE003215AF /* DetailOverviewCVC.swift */; };
 		102BD0BD243918BE003215AF /* DetailOverviewCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */; };
 		103540B9242D6ED6006309FE /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103540B8242D6ED6006309FE /* AlertHelper.swift */; };
+		10354E082444BB97008DF790 /* DiscoverSearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10354E062444BB97008DF790 /* DiscoverSearchTVC.swift */; };
+		10354E092444BB97008DF790 /* DiscoverSearchTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10354E072444BB97008DF790 /* DiscoverSearchTVC.xib */; };
 		1048277C242ED12A00ED7683 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048277B242ED12A00ED7683 /* HomeVC.swift */; };
 		1048277E242ED33900ED7683 /* MoviesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048277D242ED33900ED7683 /* MoviesVC.swift */; };
 		10482780242ED36500ED7683 /* ShowsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048277F242ED36500ED7683 /* ShowsVC.swift */; };
@@ -113,9 +115,9 @@
 		10F6409A242C14EF0096C229 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F64099242C14EF0096C229 /* AppError.swift */; };
 		10F6BFC1242FDE0E00AE693A /* InfiniteCarouselCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F6BFC0242FDE0E00AE693A /* InfiniteCarouselCVC.xib */; };
 		10F6BFC3242FDE2400AE693A /* InfiniteCarouselTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F6BFC2242FDE2400AE693A /* InfiniteCarouselTVC.xib */; };
-		18B36CE590F275DE49DB1F4F /* Pods_iWatchIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84984065FC5CD77B63660568 /* Pods_iWatchIt.framework */; };
-		313B99FB224A367CF63C82E2 /* Pods_iWatchItTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFACB54DE5920C223F305F6 /* Pods_iWatchItTests.framework */; };
-		E584EF0F89A60120FB6B830C /* Pods_iWatchIt_iWatchItUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36674763B9D3CB89BEE6B18 /* Pods_iWatchIt_iWatchItUITests.framework */; };
+		5AF49F3F8A4F61538E11F13E /* libPods-iWatchIt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52FF939CB65594BD3C726254 /* libPods-iWatchIt.a */; };
+		67351AC911C270D497ED0142 /* libPods-iWatchItTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A73BCE92BBE25B296F35A895 /* libPods-iWatchItTests.a */; };
+		D09CD62E542BAC6C3E0FEFB4 /* libPods-iWatchIt-iWatchItUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8166960CFDDB78DCF3CBF794 /* libPods-iWatchIt-iWatchItUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +154,8 @@
 		102BD0BA243918BE003215AF /* DetailOverviewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOverviewCVC.swift; sourceTree = "<group>"; };
 		102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailOverviewCVC.xib; sourceTree = "<group>"; };
 		103540B8242D6ED6006309FE /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
+		10354E062444BB97008DF790 /* DiscoverSearchTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverSearchTVC.swift; sourceTree = "<group>"; };
+		10354E072444BB97008DF790 /* DiscoverSearchTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverSearchTVC.xib; sourceTree = "<group>"; };
 		1048277B242ED12A00ED7683 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		1048277D242ED33900ED7683 /* MoviesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesVC.swift; sourceTree = "<group>"; };
 		1048277F242ED36500ED7683 /* ShowsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsVC.swift; sourceTree = "<group>"; };
@@ -245,13 +249,13 @@
 		10F64099242C14EF0096C229 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		10F6BFC0242FDE0E00AE693A /* InfiniteCarouselCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfiniteCarouselCVC.xib; sourceTree = "<group>"; };
 		10F6BFC2242FDE2400AE693A /* InfiniteCarouselTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfiniteCarouselTVC.xib; sourceTree = "<group>"; };
+		52FF939CB65594BD3C726254 /* libPods-iWatchIt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchIt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		693CBD7B6ACE9997D26EB7F4 /* Pods-iWatchIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.release.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.release.xcconfig"; sourceTree = "<group>"; };
 		746B495B1F65E583E9D5F8E8 /* Pods-iWatchItTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchItTests.debug.xcconfig"; path = "Target Support Files/Pods-iWatchItTests/Pods-iWatchItTests.debug.xcconfig"; sourceTree = "<group>"; };
-		84984065FC5CD77B63660568 /* Pods_iWatchIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWatchIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B36674763B9D3CB89BEE6B18 /* Pods_iWatchIt_iWatchItUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWatchIt_iWatchItUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8166960CFDDB78DCF3CBF794 /* libPods-iWatchIt-iWatchItUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchIt-iWatchItUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A73BCE92BBE25B296F35A895 /* libPods-iWatchItTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchItTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7875806BC859AF47BB38ADB /* Pods-iWatchIt-iWatchItUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt-iWatchItUITests.debug.xcconfig"; path = "Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C30EBE692397EBBB73C7DA18 /* Pods-iWatchIt-iWatchItUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt-iWatchItUITests.release.xcconfig"; path = "Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests.release.xcconfig"; sourceTree = "<group>"; };
-		DAFACB54DE5920C223F305F6 /* Pods_iWatchItTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWatchItTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,7 +270,7 @@
 				10860C182427C44400DA3A5F /* RealmSwift in Frameworks */,
 				10860C1B2427C4C300DA3A5F /* SkeletonView in Frameworks */,
 				10860C102427C36800DA3A5F /* Alamofire in Frameworks */,
-				18B36CE590F275DE49DB1F4F /* Pods_iWatchIt.framework in Frameworks */,
+				5AF49F3F8A4F61538E11F13E /* libPods-iWatchIt.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				313B99FB224A367CF63C82E2 /* Pods_iWatchItTests.framework in Frameworks */,
+				67351AC911C270D497ED0142 /* libPods-iWatchItTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,7 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E584EF0F89A60120FB6B830C /* Pods_iWatchIt_iWatchItUITests.framework in Frameworks */,
+				D09CD62E542BAC6C3E0FEFB4 /* libPods-iWatchIt-iWatchItUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +381,8 @@
 			children = (
 				104D59BE2443E1870085F073 /* DiscoverHeaderTVC.swift */,
 				104D59BF2443E1870085F073 /* DiscoverHeaderTVC.xib */,
+				10354E062444BB97008DF790 /* DiscoverSearchTVC.swift */,
+				10354E072444BB97008DF790 /* DiscoverSearchTVC.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -659,9 +665,9 @@
 		10A63878244108A9002B4B83 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				84984065FC5CD77B63660568 /* Pods_iWatchIt.framework */,
-				B36674763B9D3CB89BEE6B18 /* Pods_iWatchIt_iWatchItUITests.framework */,
-				DAFACB54DE5920C223F305F6 /* Pods_iWatchItTests.framework */,
+				52FF939CB65594BD3C726254 /* libPods-iWatchIt.a */,
+				8166960CFDDB78DCF3CBF794 /* libPods-iWatchIt-iWatchItUITests.a */,
+				A73BCE92BBE25B296F35A895 /* libPods-iWatchItTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -791,7 +797,6 @@
 				10533D222427BEB200BF8FC4 /* Sources */,
 				10533D232427BEB200BF8FC4 /* Frameworks */,
 				10533D242427BEB200BF8FC4 /* Resources */,
-				92C191984B273AF8678F411A /* [CP] Embed Pods Frameworks */,
 				10F2B51524427C4800952A58 /* ShellScript */,
 			);
 			buildRules = (
@@ -839,7 +844,6 @@
 				10533D452427BEB600BF8FC4 /* Sources */,
 				10533D462427BEB600BF8FC4 /* Frameworks */,
 				10533D472427BEB600BF8FC4 /* Resources */,
-				3E9DD8CA4B27E9E1B5F86E99 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -915,6 +919,7 @@
 				10533D382427BEB600BF8FC4 /* LaunchScreen.storyboard in Resources */,
 				10E4A53B2437547400CD80C2 /* Detail.storyboard in Resources */,
 				10F6408C242C13420096C229 /* Localizable.strings in Resources */,
+				10354E092444BB97008DF790 /* DiscoverSearchTVC.xib in Resources */,
 				10533D352427BEB500BF8FC4 /* Assets.xcassets in Resources */,
 				10533D332427BEB200BF8FC4 /* Home.storyboard in Resources */,
 				1005B757243B9126004B78F3 /* DetailCarouselPlatformCVC.xib in Resources */,
@@ -963,23 +968,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
-		3E9DD8CA4B27E9E1B5F86E99 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4765D59AFBA02337DA0A6AF6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1000,23 +988,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		92C191984B273AF8678F411A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A0CEE4091CE38B8BF9C2B98D /* [CP] Check Pods Manifest.lock */ = {
@@ -1122,6 +1093,7 @@
 				108564742436A65600082755 /* DetailRouter.swift in Sources */,
 				1050D9F9243645AE0086990A /* UIViewController+Controller.swift in Sources */,
 				10E4A5412437607000CD80C2 /* HorizontalCarouselCVC.swift in Sources */,
+				10354E082444BB97008DF790 /* DiscoverSearchTVC.swift in Sources */,
 				1005B75E243B913C004B78F3 /* DetailCarouselPlatformCVC.swift in Sources */,
 				10860C302428114500DA3A5F /* FakeSplashRouter.swift in Sources */,
 				1048277E242ED33900ED7683 /* MoviesVC.swift in Sources */,

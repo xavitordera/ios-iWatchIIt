@@ -90,13 +90,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="76g-F8-6nW">
-                                <rect key="frame" x="0.0" y="154" width="414" height="722"/>
+                                <rect key="frame" x="0.0" y="129" width="414" height="747"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="O5i-sm-oi6">
-                                <rect key="frame" x="126.5" y="74" width="161" height="46"/>
+                                <rect key="frame" x="126.5" y="69" width="161" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="esC-Y0-maY"/>
+                                    <constraint firstAttribute="height" constant="35" id="esC-Y0-maY"/>
                                 </constraints>
                                 <segments>
                                     <segment title="TV Shows"/>
@@ -106,12 +106,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="O5i-sm-oi6" firstAttribute="top" secondItem="Ixh-ZY-rm1" secondAttribute="top" constant="30" id="1Wx-BE-7J1"/>
+                            <constraint firstItem="O5i-sm-oi6" firstAttribute="top" secondItem="Ixh-ZY-rm1" secondAttribute="top" constant="25" id="1Wx-BE-7J1"/>
                             <constraint firstItem="76g-F8-6nW" firstAttribute="leading" secondItem="Ixh-ZY-rm1" secondAttribute="leading" id="5jg-xG-Ugp"/>
                             <constraint firstItem="76g-F8-6nW" firstAttribute="trailing" secondItem="Ixh-ZY-rm1" secondAttribute="trailing" id="NK5-61-0aM"/>
                             <constraint firstItem="O5i-sm-oi6" firstAttribute="centerX" secondItem="WUL-Ga-Nr9" secondAttribute="centerX" id="g4p-60-9PM"/>
                             <constraint firstAttribute="bottom" secondItem="76g-F8-6nW" secondAttribute="bottom" constant="20" symbolic="YES" id="gSV-FR-dma"/>
-                            <constraint firstItem="76g-F8-6nW" firstAttribute="top" secondItem="O5i-sm-oi6" secondAttribute="bottom" constant="35" id="xmE-XG-mlK"/>
+                            <constraint firstItem="76g-F8-6nW" firstAttribute="top" secondItem="O5i-sm-oi6" secondAttribute="bottom" constant="25" id="xmE-XG-mlK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ixh-ZY-rm1"/>
                     </view>
