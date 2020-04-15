@@ -60,5 +60,6 @@ class FakeSplashVC: BaseVC, SplashPresenterToViewProtocol {
     func loadData() {
         guard let presenter = getPresenter() else {return}
         presenter.startFetchingConfiguration()
+        presenter.startFetchingGenres()
     }
 }

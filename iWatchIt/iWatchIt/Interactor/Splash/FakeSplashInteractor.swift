@@ -40,7 +40,7 @@ class FakeSplashInteractor: BaseInteractor, SplashPresenterToInteractorProtocol 
                 return
             }
             
-            presenter.genresFetchedSuccess(genres:genres)
+            presenter.genresFetchedSuccess(genres:genres, mediaType: type)
         }
     }
 }

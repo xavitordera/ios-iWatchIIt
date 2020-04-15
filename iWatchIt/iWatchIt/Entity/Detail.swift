@@ -45,7 +45,7 @@ struct Video: Decodable {
     var site: String?
 }
 
-struct Genre: Decodable {
+struct Genre: Decodable, Equatable {
     var id: Int64?
     var name: String?
 }

@@ -28,5 +28,5 @@ protocol SplashPresenterToInteractorProtocol: BasePresenterToInteractorProtocol 
 protocol SplashInteractorToPresenterProtocol: BaseInteractorToPresenterProtocol {
     func configurationFetchedSuccess(configuration: Configuration)
     func configurationFetchedFailed(message: String?)
-    func genresFetchedSuccess(genres: RootGenres)
+    func genresFetchedSuccess(genres: RootGenres, mediaType: MediaType)
 }

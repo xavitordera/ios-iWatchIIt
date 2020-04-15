@@ -25,19 +25,15 @@ class FakeSplashPresenter:BasePresenter, SplashViewToPresenterProtocol {
     
     func startFetchingGenres() {
         guard let interactor = interactor as? SplashPresenterToInteractorProtocol else { return }
+        
         do {
-            let storedGenres = try RealmManager.getObjects(type: GenresRLM.self)
-            if storedGenres.isEmpty {
-                interactor.fetchGenres(type: .movie)
-                interactor.fetchGenres(type: .show)
-            }
+            try RealmManager.removeObjects(type: GenresRLM.self)
         } catch let error {
             debugPrint(error)
-            interactor.fetchGenres(type: .movie)
-            interactor.fetchGenres(type: .show)
         }
         
-        
+        interactor.fetchGenres(type: .movie)
+        interactor.fetchGenres(type: .show)
     }
     
     func showHomeController(navigationController: UINavigationController) {
@@ -47,9 +43,9 @@ class FakeSplashPresenter:BasePresenter, SplashViewToPresenterProtocol {
 }
 
 extension FakeSplashPresenter: SplashInteractorToPresenterProtocol{
-    func genresFetchedSuccess(genres: RootGenres) {
+    func genresFetchedSuccess(genres: RootGenres, mediaType: MediaType) {
         do {
-            let genresRLM = GenresRLM.createFromRoot(root: genres)
+            let genresRLM = GenresRLM.createFromRoot(root: genres, type: mediaType)
             try RealmManager.saveObject(object: genresRLM)
         } catch let error {
             debugPrint(error)

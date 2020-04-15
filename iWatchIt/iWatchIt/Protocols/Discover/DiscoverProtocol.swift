@@ -9,7 +9,6 @@
 import UIKit
 
 protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
-    var query: DiscoverQuery? {get set}
     var keywords: [Keyword]? {get set}
     var genres: [GenreRLM]? {get set}
     var people: [People]? {get set}
@@ -18,6 +17,9 @@ protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
     func startFilteringGenres(term: String, mediaType: MediaType)
     func startFetchingPeople(term: String)
     func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType)
+    func didSelectKeyword(keyword: Keyword)
+    func didSelectGenre(genre: GenreRLM)
+    func didSelectPeople(people: People)
 }
 
 protocol DiscoverPresenterToViewProtocol: BasePresenterToViewProtocol{

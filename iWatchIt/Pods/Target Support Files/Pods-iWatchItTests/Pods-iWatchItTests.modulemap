@@ -1,6 +1,0 @@
-framework module Pods_iWatchItTests {
-  umbrella header "Pods-iWatchItTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

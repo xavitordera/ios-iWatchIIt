@@ -36,15 +36,17 @@ class GenresRLM: Object {
     }
     let genres = List<GenreRLM>()
     
-    static func createFromRoot(root: RootGenres) -> GenresRLM {
+    static func createFromRoot(root: RootGenres, type: MediaType) -> GenresRLM {
         let genres = GenresRLM()
         guard let results = root.genres else { return genres }
-        let genreItem = GenreRLM()
+        
         for result in results {
+            let genreItem = GenreRLM()
             genreItem.id = result.id ?? 0
             genreItem.name = result.name ?? ""
             genres.genres.append(genreItem)
         }
+        genres.type = type
         return genres
     }
 }

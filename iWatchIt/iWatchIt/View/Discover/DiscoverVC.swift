@@ -231,15 +231,21 @@ extension DiscoverVC: DiscoverHeaderDelegate {
 
 extension DiscoverVC: DiscoverQueryDelegate {
     func didTapOnKeyword(keyword: Keyword) {
-         
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
+            presenter.didSelectKeyword(keyword: keyword)
+        }
     }
     
     func didTapOnGenre(genre: GenreRLM) {
-        
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
+            presenter.didSelectGenre(genre: genre)
+        }
     }
     
     func didTapOnPeople(people: People) {
-        
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
+            presenter.didSelectPeople(people: people)
+        }
     }
 }
 

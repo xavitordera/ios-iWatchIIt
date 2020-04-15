@@ -9,7 +9,7 @@
 import UIKit
 
 class DiscoverPresenter: BasePresenter {
-    var query: DiscoverQuery?
+    var query: DiscoverQuery = DiscoverQuery()
     var keywords: [Keyword]?
     var genres: [GenreRLM]?
     var people: [People]?
@@ -17,11 +17,12 @@ class DiscoverPresenter: BasePresenter {
     var moviesGenres: GenresRLM?
     
     private func filterGenre(term: String, type: MediaType) -> [GenreRLM] {
+        
         let mainGenre = type == .movie ? moviesGenres : showsGenres
         guard let unwrappedMainGenre = mainGenre else { return [] }
-        // INSANE:- whate we doing here is to compare case insensitive and without diacritics! if term is 'accion', it will match with 'Acción' ;)
-        let filtered = unwrappedMainGenre.genres.filter { $0.name.folding(options: .diacriticInsensitive, locale: .current).caseInsensitiveCompare(term) == .orderedSame
-        }
+        
+        let filtered = unwrappedMainGenre.genres.filter { $0.name.lowercased().contains(term.lowercased()) }
+        
         return Array(filtered)
     }
 }
@@ -53,6 +54,18 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
     
     func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType) {
         
+    }
+    
+    func didSelectKeyword(keyword: Keyword) {
+        query.addOrRemoveKeyword(keyword: keyword)
+    }
+    
+    func didSelectGenre(genre: GenreRLM) {
+        query.addOrRemoveGenre(genre: genre)
+    }
+    
+    func didSelectPeople(people: People) {
+        query.addOrRemovePeople(people: people)
     }
 }
 
@@ -94,3 +107,4 @@ extension DiscoverPresenter: DiscoverInteractorToPresenterProtocol {
         view?.showError(message: message)
     }
 }
+
