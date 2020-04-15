@@ -56,6 +56,12 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
         
     }
     
+    func didBeginSearch(discoverType: DiscoverType, mediaType: MediaType, navigationController: UINavigationController, queryDelegate: DiscoverQueryDelegate) {
+        if let router = router as? DiscoverPresenterToRouterProtocol{
+            router.presentSearchInfoVC(discoverType: discoverType, and: mediaType, queryDelegate: queryDelegate, nav: navigationController)
+        }
+    }
+    
     func didSelectKeyword(keyword: Keyword) {
         query.addOrRemoveKeyword(keyword: keyword)
     }

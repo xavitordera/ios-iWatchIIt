@@ -20,6 +20,7 @@ protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
     func didSelectKeyword(keyword: Keyword)
     func didSelectGenre(genre: GenreRLM)
     func didSelectPeople(people: People)
+    func didBeginSearch(discoverType: DiscoverType, mediaType: MediaType, navigationController: UINavigationController, queryDelegate: DiscoverQueryDelegate)
 }
 
 protocol DiscoverPresenterToViewProtocol: BasePresenterToViewProtocol{
@@ -29,7 +30,13 @@ protocol DiscoverPresenterToViewProtocol: BasePresenterToViewProtocol{
 }
 
 protocol DiscoverPresenterToRouterProtocol: BasePresenterToRouterProtocol {
-    func pushToResultsScreen(navigationController: UINavigationController, for searchQuery: DiscoverQuery)
+    func pushToResultsScreen(navigationController: UINavigationController,
+                             for searchQuery: DiscoverQuery)
+    
+    func presentSearchInfoVC(discoverType: DiscoverType,
+                             and mediaType: MediaType,
+                             queryDelegate: DiscoverQueryDelegate,
+                             nav: UINavigationController)
 }
 
 protocol DiscoverPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {

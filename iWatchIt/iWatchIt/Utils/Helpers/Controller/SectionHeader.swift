@@ -17,7 +17,7 @@ class SectionHeader: UICollectionReusableView, NibReusable {
     }
     
     func setupLayout() {
-                self.title.font = .boldSystemFont(ofSize: 22.0)
+        self.title.font = .boldSystemFont(ofSize: 22.0)
         self.title.textColor = .whiteOrBlack
     }
     

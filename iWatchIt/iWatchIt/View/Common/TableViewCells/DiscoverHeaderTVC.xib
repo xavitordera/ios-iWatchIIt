@@ -22,36 +22,18 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5b-iT-Pkm">
-                        <rect key="frame" x="290" y="12" width="20" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="20" id="JVH-57-hJd"/>
-                            <constraint firstAttribute="height" constant="20" id="lN5-Nm-yDO"/>
-                        </constraints>
-                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <state key="normal" image="plus.circle" catalog="system"/>
-                        <connections>
-                            <action selector="setCollapsed:" destination="-2" eventType="touchUpInside" id="08o-rl-6XK"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="s5b-iT-Pkm" secondAttribute="trailing" constant="10" id="AMP-gv-xMb"/>
                     <constraint firstItem="vcQ-EC-WfS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Dup-WL-ZC1"/>
                     <constraint firstItem="vcQ-EC-WfS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="JhG-DX-4K9"/>
                     <constraint firstAttribute="bottom" secondItem="vcQ-EC-WfS" secondAttribute="bottom" constant="5" id="R6o-MT-CLP"/>
-                    <constraint firstItem="s5b-iT-Pkm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="sDM-dA-7Xi"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="btnCollapse" destination="s5b-iT-Pkm" id="Afd-KL-Wwe"/>
                 <outlet property="titleLbl" destination="vcQ-EC-WfS" id="H0h-rA-kiA"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="104.46428571428571"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="plus.circle" catalog="system" width="64" height="60"/>
-    </resources>
 </document>

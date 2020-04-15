@@ -22,10 +22,6 @@ protocol DiscoverHeaderDelegate {
 class DiscoverHeaderTVC: UITableViewHeaderFooterView, Reusable {
 
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var btnCollapse: UIButton!
-    var isCollapsed = true
-    var delegate: DiscoverHeaderDelegate?
-    var type: DiscoverType?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,40 +36,15 @@ class DiscoverHeaderTVC: UITableViewHeaderFooterView, Reusable {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-        delegate = nil
-        type = nil
-    }
-    
-    @IBAction func setCollapsed(_ sender: UIButton) {
-        if isCollapsed {
-            UIView.transition(with: sender, duration: 0.65, options: .transitionCrossDissolve, animations: {
-                sender.setImage(kMinusCircle, for: .normal)
-            }) { (success) in
-                // TODO: Notifify delegate
-                self.delegate?.didExpand(type: self.type!)
-                self.isCollapsed = false
-            }
-        } else {
-            UIView.transition(with: sender, duration: 0.65, options: .transitionCrossDissolve, animations: {
-                sender.setImage(kPlusCircle, for: .normal)
-            }) { (success) in
-                // TODO: Notifify delegate
-                self.delegate?.didCollapse(type: self.type!)
-                self.isCollapsed = true
-            }
-        }
+        titleLbl.text = ""
     }
     
     private func setupLayout() {
         titleLbl.font = .systemFont(ofSize: 21.0, weight: .bold)
         titleLbl.textColor = .whiteOrBlack
-        btnCollapse.tintColor = .whiteOrBlack
     }
     
-    func configureCell(title: String, delegate: DiscoverHeaderDelegate, type: DiscoverType) {
+    func configureCell(title: String) {
         titleLbl.text = title
-        self.delegate = delegate
-        self.type = type
     }
 }

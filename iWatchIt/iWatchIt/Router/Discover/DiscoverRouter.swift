@@ -25,9 +25,34 @@ class DiscoverRouter: BaseRouter, DiscoverPresenterToRouterProtocol {
         presenter.router = router
         presenter.interactor = interactor
         
-        // presenter.query = query
+        return view
+    }
+    
+    func createSearchInfoModule() -> SearchInfoVC {
+        let view = SearchInfoVC(nibName: kSearchInfoVC, bundle: nil)
+        
+        let presenter: DiscoverViewToPresenterProtocol & DiscoverInteractorToPresenterProtocol = DiscoverPresenter()
+        let interactor: DiscoverPresenterToInteractorProtocol = DiscoverInteractor(presenter: presenter)
+        let router: DiscoverPresenterToRouterProtocol = DiscoverRouter()
+        
+        view.presenter = presenter
+        presenter.view = view
+        presenter.router = router
+        presenter.interactor = interactor
         
         return view
+    }
+    
+    func presentSearchInfoVC(discoverType: DiscoverType,
+                             and mediaType: MediaType,
+                             queryDelegate: DiscoverQueryDelegate,
+                             nav: UINavigationController) {
+        
+        let searchVC = DiscoverRouter.shared.createSearchInfoModule()
+        searchVC.type = discoverType
+        searchVC.mediaType = mediaType
+        searchVC.queryDelegate = queryDelegate
+        nav.present(searchVC, animated: true, completion: nil)
     }
     
     static let shared = DiscoverRouter()
