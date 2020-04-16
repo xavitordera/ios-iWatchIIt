@@ -9,6 +9,7 @@
 import UIKit
 
 protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
+    var query: DiscoverQuery? {get set}
     var keywords: [Keyword]? {get set}
     var genres: [GenreRLM]? {get set}
     var people: [People]? {get set}

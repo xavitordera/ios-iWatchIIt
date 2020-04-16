@@ -13,6 +13,7 @@ struct DiscoverQuery {
     var keywords: [Keyword] = []
     var genres: [GenreRLM] = []
     var people: [People] = []
+    static var shared = DiscoverQuery()
     
     mutating func addOrRemoveKeyword(keyword: Keyword) {
         if self.keywords.contains(keyword), let index = self.keywords.firstIndex(of: keyword) {
@@ -36,6 +37,18 @@ struct DiscoverQuery {
         } else {
             self.people.append(people)
         }
+    }
+    
+    func keywordIsInQuery(keyword: Keyword) -> Bool {
+        return keywords.contains(keyword)
+    }
+    
+    func genreIsInQuery(genre: GenreRLM) -> Bool {
+        return genres.contains(genre)
+    }
+    
+    func peopleIsInQuery(people: People) -> Bool {
+        return self.people.contains(people)
     }
     
     func getIdsForType(type: DiscoverType) -> [Int64]? {

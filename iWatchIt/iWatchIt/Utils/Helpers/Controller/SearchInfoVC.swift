@@ -84,6 +84,51 @@ class SearchInfoVC: BaseVC {
         }
     }
     
+    func cellForKeyword(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDefaultCell) else {
+            return UITableViewCell()
+        }
+        if let keywords = keywordResults, !keywords.isEmpty {
+            cell.textLabel?.text = keywords[indexPath.row].name
+            if DiscoverQuery.shared.keywordIsInQuery(keyword: keywords[indexPath.row]) {
+                cell.imageView?.image = kCheckmark
+            } else {
+                cell.imageView?.image = nil
+            }
+        }
+        return cell
+    }
+    
+    func cellForGenre(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDefaultCell) else {
+            return UITableViewCell()
+        }
+        if let genres = genreResults, !genres.isEmpty {
+            cell.textLabel?.text = genres[indexPath.row].name
+            if DiscoverQuery.shared.genreIsInQuery(genre: genres[indexPath.row]) {
+                cell.imageView?.image = kCheckmark
+            } else {
+                cell.imageView?.image = nil
+            }
+        }
+        return cell
+    }
+    
+    func cellForPeople(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDefaultCell) else {
+            return UITableViewCell()
+        }
+        
+        if let people = peopleResults, !people.isEmpty {
+            cell.textLabel?.text = people[indexPath.row].name
+            if DiscoverQuery.shared.peopleIsInQuery(people: people[indexPath.row]) {
+                cell.imageView?.image = kCheckmark
+            } else {
+                cell.imageView?.image = nil
+            }
+        }
+        return cell
+    }
 }
 
 extension SearchInfoVC: DiscoverPresenterToViewProtocol {
@@ -104,8 +149,6 @@ extension SearchInfoVC: DiscoverPresenterToViewProtocol {
             updateWithPeople(results: presenter.people)
         }
     }
-    
-    
 }
 
 extension SearchInfoVC: UISearchBarDelegate {
@@ -146,15 +189,14 @@ extension SearchInfoVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.textLabel?.font = .systemFont(ofSize: 17.0, weight: .light)
         
-        if let genres = genreResults, !genres.isEmpty {
-            cell.textLabel?.text = genres[indexPath.row].name
-        } else if let keywords = keywordResults, !keywords.isEmpty {
-            cell.textLabel?.text = keywords[indexPath.row].name
-        } else if let people = peopleResults, !people.isEmpty {
-            cell.textLabel?.text = people[indexPath.row].name
+        switch type {
+        case .Keywords:
+            return cellForKeyword(indexPath: indexPath)
+        case .Genres:
+            return cellForGenre(indexPath: indexPath)
+        case .People:
+            return cellForPeople(indexPath: indexPath)
         }
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -167,5 +209,7 @@ extension SearchInfoVC: UITableViewDelegate, UITableViewDataSource {
         } else if let people = peopleResults, !people.isEmpty {
             delegate.didTapOnPeople(people: people[indexPath.row])
         }
+        
+        mainTV.reloadData()
     }
 }

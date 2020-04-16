@@ -9,7 +9,7 @@
 import UIKit
 
 class DiscoverPresenter: BasePresenter {
-    var query: DiscoverQuery = DiscoverQuery()
+    var query: DiscoverQuery?
     var keywords: [Keyword]?
     var genres: [GenreRLM]?
     var people: [People]?
@@ -21,7 +21,9 @@ class DiscoverPresenter: BasePresenter {
         let mainGenre = type == .movie ? moviesGenres : showsGenres
         guard let unwrappedMainGenre = mainGenre else { return [] }
         
-        let filtered = unwrappedMainGenre.genres.filter { $0.name.lowercased().contains(term.lowercased()) }
+        let filtered = unwrappedMainGenre.genres.filter {
+            $0.name.lowercased().contains(term.lowercased())
+        }
         
         return Array(filtered)
     }
@@ -48,7 +50,7 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
     }
     
     func startFetchingPeople(term: String) {
-            guard let interactor = self.interactor as? DiscoverPresenterToInteractorProtocol else { return  }
+        guard let interactor = self.interactor as? DiscoverPresenterToInteractorProtocol else { return }
         interactor.fetchPeople(term: term)
     }
     
@@ -63,15 +65,15 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
     }
     
     func didSelectKeyword(keyword: Keyword) {
-        query.addOrRemoveKeyword(keyword: keyword)
+        DiscoverQuery.shared.addOrRemoveKeyword(keyword: keyword)
     }
     
     func didSelectGenre(genre: GenreRLM) {
-        query.addOrRemoveGenre(genre: genre)
+        DiscoverQuery.shared.addOrRemoveGenre(genre: genre)
     }
     
     func didSelectPeople(people: People) {
-        query.addOrRemovePeople(people: people)
+        DiscoverQuery.shared.addOrRemovePeople(people: people)
     }
 }
 

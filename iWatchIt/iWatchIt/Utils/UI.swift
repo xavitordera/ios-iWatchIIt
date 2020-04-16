@@ -51,6 +51,7 @@ let kStarHalf = UIImage(systemName: "star.lefthalf.fill")
 let kStarFilled = UIImage(systemName: "star.fill")
 let kPlusCircle = UIImage(systemName: "plus.circle")
 let kMinusCircle = UIImage(systemName: "minus.circle")
+let kCheckmark = UIImage(systemName: "checkmark")
 
 
 let kHeightHomeSectionsInfiniteCarousel: CGFloat = 280

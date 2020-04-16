@@ -24,6 +24,7 @@ class DiscoverRouter: BaseRouter, DiscoverPresenterToRouterProtocol {
         presenter.view = view
         presenter.router = router
         presenter.interactor = interactor
+        presenter.query = DiscoverQuery.shared
         
         return view
     }
@@ -39,6 +40,7 @@ class DiscoverRouter: BaseRouter, DiscoverPresenterToRouterProtocol {
         presenter.view = view
         presenter.router = router
         presenter.interactor = interactor
+        presenter.query = DiscoverQuery.shared
         
         return view
     }

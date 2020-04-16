@@ -136,7 +136,12 @@ class DiscoverVC: BaseVC {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+        switch indexPath.row {
+        case 0:
+            return 55
+        default:
+            return 28
+        }
     }
 }
 //
