@@ -42,7 +42,6 @@ class SearchInfoVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setupSearchEmptyStates()
         DiscoverQuery.shared.addDelegate(delegate: self)
     }
     
@@ -67,8 +66,6 @@ class SearchInfoVC: BaseVC {
         mainTV.reloadData()
         if let genres = genreResults, !genres.isEmpty {
             labelEmptySearch.isHidden = true
-        } else {
-            loadSearchEmptyState(type: .Genres)
         }
     }
     
@@ -78,8 +75,6 @@ class SearchInfoVC: BaseVC {
         mainTV.reloadData()
         if let keywords = keywordResults, !keywords.isEmpty {
             labelEmptySearch.isHidden = true
-        } else {
-            loadSearchEmptyState(type: .Keywords)
         }
     }
     
@@ -89,8 +84,6 @@ class SearchInfoVC: BaseVC {
         mainTV.reloadData()
         if let people = peopleResults, !people.isEmpty {
             labelEmptySearch.isHidden = true
-        } else {
-            loadSearchEmptyState(type: .People)
         }
     }
     
@@ -98,8 +91,8 @@ class SearchInfoVC: BaseVC {
         guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDiscoverSearchTVC) as? DiscoverSearchTVC else {
             return UITableViewCell()
         }
-        if let keywords = keywordResults, !keywords.isEmpty {
-            cell.configureCell(keyword: keywords[indexPath.row], genre: nil)
+        if let keywords = keywordResults {
+            !keywords.isEmpty ? cell.configureCell(keyword: keywords[indexPath.row], genre: nil) : cell.configureEmpty(text: "No keywords found")
         }
         return cell
     }
@@ -108,8 +101,12 @@ class SearchInfoVC: BaseVC {
         guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDiscoverSearchTVC) as? DiscoverSearchTVC else {
             return UITableViewCell()
         }
-        if let genres = genreResults, !genres.isEmpty {
-            cell.configureCell(keyword: nil, genre: genres[indexPath.row])
+        if let genres = genreResults {
+            if !genres.isEmpty {
+                cell.configureCell(keyword: nil, genre: genres[indexPath.row])
+            } else {
+                cell.configureEmpty(text: "No genres found")
+            }
         }
         return cell
     }
@@ -118,39 +115,10 @@ class SearchInfoVC: BaseVC {
         guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDiscoverPeopleTVC) as? DiscoverPeopleTVC else {
             return UITableViewCell()
         }
-        if let people = peopleResults, !people.isEmpty {
-            cell.configureCell(people: people[indexPath.row])
+        if let people = peopleResults {
+            !people.isEmpty ? cell.configureCell(people: people[indexPath.row]) : cell.configureEmpty(text: "No people found")
         }
         return cell
-    }
-    
-    func loadSearchEmptyState(type: DiscoverType) {
-        if view.subviews.contains(labelEmptySearch) {
-            labelEmptySearch.removeFromSuperview()
-        }
-        labelEmptySearch.sizeToFit()
-        labelEmptySearch.center = .init(x: UIScreen.main.bounds.width/2 - 10, y: UIScreen.main.bounds.height/2 - topbarHeight - 75)
-        labelEmptySearch.isHidden = false
-        view.addSubview(labelEmptySearch)
-        
-        switch type {
-        case .Keywords:
-            labelEmptySearch.text = "No keywords found"
-        case .Genres:
-            labelEmptySearch.text = "No genres found"
-        case .People:
-            labelEmptySearch.text = "No people found"
-        }
-    }
-    
-    func setupSearchEmptyStates() {
-        labelEmptySearch.font = .systemFont(ofSize: 20.0, weight: .light)
-        labelEmptySearch.textColor = kColorEmptyStateLabel
-        labelEmptySearch.isHidden = true
-        labelEmptySearch.preferredMaxLayoutWidth = UIScreen.main.bounds.width - 10
-        labelEmptySearch.numberOfLines = 0
-        labelEmptySearch.textAlignment = .center
-        view.addSubview(labelEmptySearch)
     }
     
     func headerForKeywords() -> UITableViewHeaderFooterView  {
@@ -199,14 +167,22 @@ extension SearchInfoVC: UITableViewDelegate, UITableViewDataSource {
         
         switch sections[section] {
         case kSectionDiscoverGenre:
-            return genreResults?.count ?? 0
+            if let genres = genreResults {
+                return genres.count > 0 ? genres.count : 1
+            }
         case kSectionDiscoverPeople:
-            return peopleResults?.count ?? 0
+            if let people = peopleResults {
+                return people.count > 0 ? people.count : 1
+            }
         case kSectionDiscoverKeywords:
-            return genreResults?.count ?? 0
+            if let keywords = keywordResults {
+                return keywords.count > 0 ? keywords.count : 1
+            }
         default:
             fatalError("Index out of bounds")
         }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -252,6 +228,6 @@ extension SearchInfoVC: UITableViewDelegate, UITableViewDataSource {
 
 extension SearchInfoVC: DiscoverQueryDelegate {
     func didUpdateQuery() {
-        mainTV.reloadData()
+//        mainTV.reloadData()
     }
 }

@@ -15,6 +15,7 @@ class DiscoverSearchTVC: UITableViewCell, Reusable {
 //    @IBOutlet weak var removeBtn: UIButton!
     var keyword: Keyword?
     var genre: GenreRLM?
+    var btnAdd: UIButton?
     
     // MARK: - UITVC
     override func awakeFromNib() {
@@ -22,37 +23,36 @@ class DiscoverSearchTVC: UITableViewCell, Reusable {
         // Initialization code
         self.textLabel?.textColor = .whiteOrBlack
         self.tintColor = .whiteOrBlack
+        btnAdd = accessoryButton()
+        accessoryView = btnAdd
     }
     
     override func prepareForReuse() {
-//        lblTitle.text = ""
-//        removeBtn.isHidden = true
         keyword = nil
         genre = nil
         imageView?.image = nil
-//        removeBtn.setImage(nil, for: .normal)
         accessoryView = UIView()
+        textLabel?.text = nil
+        imageView?.image = nil
     }
     
     // MARK: - Public interface
     func configureCell(keyword: Keyword?, genre: GenreRLM?) {
         self.keyword = keyword
         self.genre = genre
-//        lblTitle.text = keyword?.name ?? genre?.name
+        textLabel?.font = .systemFont(ofSize: 15.0, weight: .regular)
+        textLabel?.textColor = .whiteOrBlack
         self.textLabel?.text = keyword?.name ?? genre?.name
         self.accessoryType = .detailButton
         
-        
+        btnAdd = accessoryButton()
+        accessoryView = btnAdd
         if let keyword = keyword {
-            let image = DiscoverQuery.shared.keywordIsInQuery(keyword: keyword) ? UIImage(systemName: "xmark") : UIImage(systemName: "plus")
-//            removeBtn.setImage(image, for: .normal)
+            DiscoverQuery.shared.keywordIsInQuery(keyword: keyword) ? showRemove() : showAdd()
             self.imageView?.image = UIImage(systemName: "tag")
-            accessoryView = UIImageView.init(image: image)
         } else if let genre = genre {
-//            removeBtn.isHidden = DiscoverQuery.shared.genreIsInQuery(genre: genre)
-            let image = DiscoverQuery.shared.genreIsInQuery(genre: genre) ? UIImage(systemName: "xmark") : UIImage(systemName: "plus")
+            DiscoverQuery.shared.genreIsInQuery(genre: genre) ? showRemove() : showAdd()
             self.imageView?.image = UIImage(systemName: "tv.circle")
-            accessoryView = UIImageView.init(image: image)
         }
     }
     
@@ -62,4 +62,43 @@ class DiscoverSearchTVC: UITableViewCell, Reusable {
         textLabel?.font = .systemFont(ofSize: 15.0, weight: .light)
     }
     
+    func configureEmpty(text: String) {
+        textLabel?.textColor = kColorEmptyStateLabel
+        textLabel?.text = text
+        textLabel?.font = .systemFont(ofSize: 15.0, weight: .light)
+        accessoryView = UIView()
+    }
+    
+    private func accessoryButton() -> UIButton {
+        let cellAudioButton = UIButton(type: .custom)
+        cellAudioButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        cellAudioButton.addTarget(self, action: #selector(accessoryButtonTapped(sender:)), for: .touchUpInside)
+        cellAudioButton.contentMode = .scaleAspectFit
+        cellAudioButton.tintColor = .whiteOrBlack
+        return cellAudioButton
+    }
+    
+    private func showAdd() {
+        UIView.transition(with: btnAdd!, duration: 0.5, options: .transitionFlipFromBottom, animations: {
+            self.btnAdd?.setImage(UIImage(systemName: "plus"), for: .normal)
+        }, completion: nil)
+    }
+    
+    private func showRemove() {
+        UIView.transition(with: btnAdd!, duration: 0.5, options: .transitionFlipFromTop, animations: {
+            self.btnAdd?.setImage(UIImage(systemName: "xmark"), for: .normal)
+        }, completion: nil)
+    }
+    
+    @objc func accessoryButtonTapped(sender : AnyObject){
+        if let keyword = keyword {
+            DiscoverQuery.shared.addOrRemoveKeyword(keyword: keyword)
+             DiscoverQuery.shared.keywordIsInQuery(keyword: keyword) ? showRemove() : showAdd()
+        }
+        
+        if let genre = genre {
+            DiscoverQuery.shared.addOrRemoveGenre(genre: genre)
+            DiscoverQuery.shared.genreIsInQuery(genre: genre) ? showRemove() : showAdd()
+        }
+    }
 }

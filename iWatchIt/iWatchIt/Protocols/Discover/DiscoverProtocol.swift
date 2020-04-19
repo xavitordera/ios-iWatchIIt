@@ -17,10 +17,7 @@ protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
     func startFetchingGenres(mediaType: MediaType)
     func startFilteringGenres(term: String, mediaType: MediaType)
     func startFetchingPeople(term: String)
-    func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType)
-//    func didSelectKeyword(keyword: Keyword)
-//    func didSelectGenre(genre: GenreRLM)
-//    func didSelectPeople(people: People)
+    func startDiscovering(navigationController: UINavigationController, query: DiscoverQuery, mediaType: MediaType)
 }
 
 protocol DiscoverPresenterToViewProtocol: BasePresenterToViewProtocol{
@@ -31,7 +28,7 @@ protocol DiscoverPresenterToViewProtocol: BasePresenterToViewProtocol{
 
 protocol DiscoverPresenterToRouterProtocol: BasePresenterToRouterProtocol {
     func pushToResultsScreen(navigationController: UINavigationController,
-                             for searchQuery: DiscoverQuery)
+                             for searchQuery: DiscoverQuery, mediaType: MediaType)
 }
 
 protocol DiscoverPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {

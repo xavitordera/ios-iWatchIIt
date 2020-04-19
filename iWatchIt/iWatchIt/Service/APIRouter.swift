@@ -41,6 +41,10 @@ enum APIRouter: URLRequestConvertible {
     case searchPeople(query: String, language: String)
     
     
+    /// Discover Extended
+    case discoverExtended(mediaType: MediaType, language: String, page: Int, withGenres: String, withPeople: String, withKeywords: String)
+    
+    
     /// UTELLY: - Get platform links
     
     case platforms(id: String, source: String, country: String)
@@ -49,7 +53,7 @@ enum APIRouter: URLRequestConvertible {
     var method: HTTPMethod {
         switch self {
             
-        case .configuration, .genres, .trending, .discover, .search, .detail, .searchKeyword, .searchPeople, .platforms: return .get
+        case .configuration, .genres, .trending, .discover, .search, .detail, .searchKeyword, .searchPeople, .discoverExtended, .platforms: return .get
             
             // case : return .head
             // case : return .delete
@@ -60,7 +64,7 @@ enum APIRouter: URLRequestConvertible {
     
     var baseURLString: String {
         switch self {
-        case .configuration, .genres, .discover, .trending, .search, .detail, .searchKeyword, .searchPeople:
+        case .configuration, .genres, .discover, .trending, .search, .detail, .searchKeyword, .searchPeople, .discoverExtended:
             return kTMDBBaseURL + kTMDBAPIVersion
         case .platforms:
             return kUtellyBaseURL
@@ -77,6 +81,7 @@ enum APIRouter: URLRequestConvertible {
         case .detail(let mediaType, let id, _, _): return String(format: kGETDetail, mediaType.rawValue, id)
         case .searchKeyword(_): return kGETSearchKeywords
         case .searchPeople(_,_): return kGETSearchPeople
+        case .discoverExtended(let mediaType,_,_,_,_,_): return String(format: kGETDiscover, mediaType.rawValue)
         case .platforms(_, _, _): return kGETLookup
         }
     }
@@ -126,6 +131,15 @@ enum APIRouter: URLRequestConvertible {
                 URLQueryItem.init(name: kLanguage, value: language),
                 URLQueryItem.init(name: kQuery, value: query)
             ]
+        case .discoverExtended(_, let language, let page, let withGenres, let withPeople, let withKeywords):
+            return [
+                URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
+                URLQueryItem.init(name: kLanguage, value: language),
+                URLQueryItem.init(name: kWithGenres, value: withGenres),
+                URLQueryItem.init(name: kWithPeople, value: withPeople),
+                URLQueryItem.init(name: kWithKeywords, value: withKeywords),
+                URLQueryItem.init(name: kPage, value: String(page))
+            ]
         case .platforms(let id, let source, let country):
             return [
                 URLQueryItem.init(name: kCountry, value: country),
@@ -160,7 +174,7 @@ enum APIRouter: URLRequestConvertible {
             
             //case :
         //      urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters) // URL
-        case .configuration, .genres, .discover, .trending, .search, .detail, .searchKeyword, .searchPeople, .platforms:
+        case .configuration, .genres, .discover, .trending, .search, .detail, .searchKeyword, .searchPeople, .discoverExtended, .platforms:
             components.queryItems = queryParams
         }
         

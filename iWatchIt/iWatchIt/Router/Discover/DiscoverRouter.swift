@@ -9,8 +9,11 @@
 import UIKit
 
 class DiscoverRouter: BaseRouter, DiscoverPresenterToRouterProtocol {
-    func pushToResultsScreen(navigationController: UINavigationController, for searchQuery: DiscoverQuery) {
-        
+    func pushToResultsScreen(navigationController: UINavigationController, for searchQuery: DiscoverQuery, mediaType: MediaType) {
+        let resultsVC = DiscoverResultsRouter.shared.createModule()
+        resultsVC.query = searchQuery
+        resultsVC.mediaType = mediaType
+        navigationController.pushViewController(resultsVC, animated: true)
     }
     
     func createModule() -> DiscoverVC {

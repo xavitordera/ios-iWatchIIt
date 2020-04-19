@@ -17,6 +17,7 @@ let kSearchVC = "SearchVC"
 let kDetailVC = "DetailVC"
 let kDiscoverVC = "DiscoverVC"
 let kSearchInfoVC = "SearchInfoVC"
+let kDiscoverResultsVC = "DiscoverResultsVC"
 
 
 let kHomeTrendingSection = "Trending"

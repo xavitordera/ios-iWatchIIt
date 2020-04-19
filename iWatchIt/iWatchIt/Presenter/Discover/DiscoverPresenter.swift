@@ -30,6 +30,11 @@ class DiscoverPresenter: BasePresenter {
 }
 
 extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
+    func startDiscovering(navigationController: UINavigationController, query: DiscoverQuery, mediaType: MediaType) {
+        if let router = router as? DiscoverPresenterToRouterProtocol {
+            router.pushToResultsScreen(navigationController: navigationController, for: query, mediaType: mediaType)
+        }
+    }
     
     func startFetchingKeywords(term: String) {
         guard let interactor = self.interactor as? DiscoverPresenterToInteractorProtocol else { return  }
@@ -54,21 +59,7 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
         interactor.fetchPeople(term: term)
     }
     
-    func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType) {
-        
-    }
-    
-//    func didSelectKeyword(keyword: Keyword) {
-//        DiscoverQuery.shared.addOrRemoveKeyword(keyword: keyword)
-//    }
-//    
-//    func didSelectGenre(genre: GenreRLM) {
-//        DiscoverQuery.shared.addOrRemoveGenre(genre: genre)
-//    }
-//    
-//    func didSelectPeople(people: People) {
-//        DiscoverQuery.shared.addOrRemovePeople(people: people)
-//    }
+
 }
 
 extension DiscoverPresenter: DiscoverInteractorToPresenterProtocol {

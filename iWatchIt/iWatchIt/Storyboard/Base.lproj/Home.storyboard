@@ -111,5 +111,42 @@
             </objects>
             <point key="canvasLocation" x="840.57971014492762" y="704.46428571428567"/>
         </scene>
+        <!--Discover ResultsVC-->
+        <scene sceneID="x6t-Oj-zGz">
+            <objects>
+                <viewController storyboardIdentifier="DiscoverResultsVC" id="kYP-i8-Az4" customClass="DiscoverResultsVC" customModule="iWatchIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Cj-Kd-dJ4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RWG-vG-Jyt" userLabel="MainCV">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jsa-mx-VoD">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="xac-yv-tgd" firstAttribute="bottom" secondItem="RWG-vG-Jyt" secondAttribute="bottom" id="9se-zo-JJ5"/>
+                            <constraint firstItem="RWG-vG-Jyt" firstAttribute="leading" secondItem="xac-yv-tgd" secondAttribute="leading" id="gIT-y0-lLp"/>
+                            <constraint firstItem="RWG-vG-Jyt" firstAttribute="top" secondItem="xac-yv-tgd" secondAttribute="top" id="iyi-Ob-xaI"/>
+                            <constraint firstItem="xac-yv-tgd" firstAttribute="trailing" secondItem="RWG-vG-Jyt" secondAttribute="trailing" id="n8e-dk-6Yq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xac-yv-tgd"/>
+                    </view>
+                    <connections>
+                        <outlet property="mainCV" destination="RWG-vG-Jyt" id="Ejf-YS-Bsv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lbR-Y0-Qww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1596" y="704"/>
+        </scene>
     </scenes>
 </document>

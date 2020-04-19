@@ -45,6 +45,10 @@ class DiscoverVC: BaseVC {
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     // MARK: - Auxiliar functions
     
     func setupNav() {
@@ -65,15 +69,13 @@ class DiscoverVC: BaseVC {
     
     func setupSearchButton() {
         searchButton = UIButton(frame: .init(x: UIScreen.main.bounds.width/2 - 75, y: UIScreen.main.bounds.height - 160, width: 150, height: 40))
-        searchButton?.backgroundColor = .blackOrWhite
-        searchButton?.setTitleColor(.whiteOrBlack, for: .normal)
+        searchButton?.backgroundColor = .whiteOrBlack
+        searchButton?.setTitleColor(.blackOrWhite, for: .normal)
         searchButton?.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
         searchButton?.setTitle("discover_search".localized, for: .normal)
         searchButton?.setImage(kTabDiscoverImg, for: .normal)
-        searchButton?.imageView?.tintColor = .whiteOrBlack
         searchButton?.layer.cornerRadius = 14
-        searchButton?.layer.borderWidth = 1
-        searchButton?.layer.borderColor = UIColor.whiteOrBlack.cgColor
+        searchButton?.layer.borderColor = UIColor.blackOrWhite.cgColor
         searchButton?.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10)
         searchButton?.addTarget(self, action: #selector(searchTap), for: .touchUpInside)
         
@@ -141,7 +143,9 @@ class DiscoverVC: BaseVC {
     // MARK: - Actions
     
     @objc func searchTap() {
-        
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let nav = navigationController {
+            presenter.startDiscovering(navigationController: nav, query: DiscoverQuery.shared, mediaType: selectedMediaType())
+        }
     }
     
     // MARK:- UITableview auxiliar functions
@@ -197,20 +201,20 @@ class DiscoverVC: BaseVC {
 extension DiscoverVC: DiscoverPresenterToViewProtocol {
     
     func onKeywordsFetched() {
-        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let searchVC = searchVC {
-            searchVC.updateWithKeywords(results: presenter.keywords)
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let searchVC = searchVC, let keywords = presenter.keywords {
+            searchVC.updateWithKeywords(results: Array(keywords.prefix(5)))
         }
     }
     
     func onGenresFiltered(mediaType: MediaType) {
-        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let searchVC = searchVC {
-            searchVC.updateWithGenres(results: presenter.genres)
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let searchVC = searchVC, let genres = presenter.genres {
+            searchVC.updateWithGenres(results: Array(genres.prefix(5)))
         }
     }
     
     func onPeopleFetched() {
-        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let searchVC = searchVC {
-            searchVC.updateWithPeople(results: presenter.people)
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let searchVC = searchVC, let people = presenter.people {
+            searchVC.updateWithPeople(results: Array(people.prefix(5)))
         }
     }
 }
@@ -282,11 +286,16 @@ extension DiscoverVC: UISearchControllerDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         searchController.searchResultsController?.view.isHidden = false
     }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        mainTV.reloadData()
+    }
 }
 
 extension DiscoverVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {return}
+        searchVC?.mainTV.setContentOffset(.zero, animated: true)
         didSearchKeyword(keyword: searchText)
         didSearchGenre(genre: searchText, mediaType: selectedMediaType())
         didSearchPeople(people: searchText)
@@ -294,6 +303,7 @@ extension DiscoverVC: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else {return}
+        searchVC?.mainTV.setContentOffset(.zero, animated: true)
         didSearchKeyword(keyword: searchText)
         didSearchGenre(genre: searchText, mediaType: selectedMediaType())
         didSearchPeople(people: searchText)
@@ -302,7 +312,7 @@ extension DiscoverVC: UISearchBarDelegate {
 // MARK: - Query
 extension DiscoverVC: DiscoverQueryDelegate {
     func didUpdateQuery() {
-        mainTV.reloadData()
+//        mainTV.reloadData()
     }
 }
 

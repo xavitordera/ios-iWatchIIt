@@ -151,6 +151,18 @@ class APIService {
         }
     }
     
+    func discoverExtended(mediaType: MediaType, language: String, withGenres: String, withPeople: String, withKeywords: String, page: Int, completion: @escaping (Root?, Error?) -> Void) {
+        requestObject(from: APIRouter.discoverExtended(mediaType: mediaType, language: language, page: page, withGenres: withGenres, withPeople: withPeople, withKeywords: withKeywords)) { (result: Result<Root, Error>)
+            in
+            switch result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value, nil)
+            }
+        }
+    }
+    
     func getPlatforms(id: String, country: String, source: String, completion: @escaping (RootPlatform?, Error?) -> Void) {
         requestObject(from: APIRouter.platforms(id: id, source: source, country: country)) { (result: Result<RootPlatform, Error>)
             in

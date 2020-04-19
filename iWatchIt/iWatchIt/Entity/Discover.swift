@@ -62,15 +62,22 @@ class DiscoverQuery {
         return self.people.contains(people)
     }
     
-    func getIdsForType(type: DiscoverType) -> [Int64]? {
+    private func getIdsForType(type: DiscoverType) -> [Int]? {
         switch type {
         case .Keywords:
-            return keywords.map{ $0.id ?? -1 }
+            return keywords.map{ Int($0.id ?? -1) }
         case .Genres:
-            return genres.map{ $0.id }
+            return genres.map{ Int($0.id) }
         case .People:
-            return people.map{ $0.id ?? -1 }
+            return people.map{ Int($0.id ?? -1) }
         }
+    }
+    
+    func getFormattedIds(for type: DiscoverType) -> String {
+        guard let ids = getIdsForType(type: type) else {
+            return ""
+        }
+        return ids.map({"\($0)"}).joined(separator: ",")
     }
     
     func addDelegate(delegate: DiscoverQueryDelegate) {
