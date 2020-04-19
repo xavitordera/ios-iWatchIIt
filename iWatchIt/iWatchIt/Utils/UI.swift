@@ -77,6 +77,7 @@ let kDetailOverviewCVC = "DetailOverviewCVC"
 
 let kDiscoverHeaderTHV = "DiscoverHeaderTVC"
 let kDiscoverSearchTVC = "DiscoverSearchTVC"
+let kDiscoverPeopleTVC = "DiscoverPeopleTVC"
 
 
 let kSectionDetailHeader = "SectionDetailHeader"

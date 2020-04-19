@@ -63,6 +63,7 @@ struct Home {
                 content.id = watchli.id
                 content.image = watchli.image
                 content.voteAverage = watchli.voteAverage
+                content.title = watchli.title
                 wsHome.content?.append(content)
             }
             wsHome.type = .Watchlist

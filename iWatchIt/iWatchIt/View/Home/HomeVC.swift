@@ -41,6 +41,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
         search.searchBar.placeholder = (type == .movie) ? "home_search_movies".localized : "home_search_shows".localized
         definesPresentationContext = true
         self.navigationItem.searchController = search
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     func updateSearchResults(for searchController: UISearchController) {

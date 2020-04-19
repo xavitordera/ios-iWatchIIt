@@ -22,8 +22,8 @@ class WatchlistContent: Object {
     
     
     /// Creates a Watchlist item from a given Content Extended
-    /// - parameter detail: content to get info from
-    /// - parameter detail: type of content
+    /// - parameter detail: Content to get info from
+    /// - parameter type: Type of content
     /// - returns: Watchlist item
     class func createFromDetail(detail: ContentExtended, and type: MediaType) -> WatchlistContent {
         

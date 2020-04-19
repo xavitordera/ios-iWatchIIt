@@ -58,23 +58,17 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
         
     }
     
-    func didBeginSearch(discoverType: DiscoverType, mediaType: MediaType, navigationController: UINavigationController, queryDelegate: DiscoverQueryDelegate) {
-        if let router = router as? DiscoverPresenterToRouterProtocol{
-            router.presentSearchInfoVC(discoverType: discoverType, and: mediaType, queryDelegate: queryDelegate, nav: navigationController)
-        }
-    }
-    
-    func didSelectKeyword(keyword: Keyword) {
-        DiscoverQuery.shared.addOrRemoveKeyword(keyword: keyword)
-    }
-    
-    func didSelectGenre(genre: GenreRLM) {
-        DiscoverQuery.shared.addOrRemoveGenre(genre: genre)
-    }
-    
-    func didSelectPeople(people: People) {
-        DiscoverQuery.shared.addOrRemovePeople(people: people)
-    }
+//    func didSelectKeyword(keyword: Keyword) {
+//        DiscoverQuery.shared.addOrRemoveKeyword(keyword: keyword)
+//    }
+//    
+//    func didSelectGenre(genre: GenreRLM) {
+//        DiscoverQuery.shared.addOrRemoveGenre(genre: genre)
+//    }
+//    
+//    func didSelectPeople(people: People) {
+//        DiscoverQuery.shared.addOrRemovePeople(people: people)
+//    }
 }
 
 extension DiscoverPresenter: DiscoverInteractorToPresenterProtocol {

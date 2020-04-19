@@ -66,7 +66,7 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
             scoreBtn.isHidden = true
         }
         
-        guard let imgPath = contentResponse?.image,
+        guard let imgPath = contentResponse?.image, !imgPath.isEmpty, 
             let imgURL = ImageHelper.createImageURL(path: imgPath, size: kHomeSectionsInfiniteCarouselImageSize)
         else {
             coverImgView.image = kEmptyStateMedia

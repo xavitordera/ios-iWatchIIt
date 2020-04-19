@@ -8,35 +8,46 @@
 
 import Foundation
 
-struct DiscoverQuery {
+protocol DiscoverQueryDelegate: class {
+    func didUpdateQuery()
+}
+
+class DiscoverQuery {
     var type: MediaType = .movie
     var keywords: [Keyword] = []
     var genres: [GenreRLM] = []
     var people: [People] = []
     static var shared = DiscoverQuery()
+    var delegates: [DiscoverQueryDelegate] = []
     
-    mutating func addOrRemoveKeyword(keyword: Keyword) {
+    func addOrRemoveKeyword(keyword: Keyword) {
         if self.keywords.contains(keyword), let index = self.keywords.firstIndex(of: keyword) {
             self.keywords.remove(at: index)
         } else {
             self.keywords.append(keyword)
         }
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+        notifyQueryChanged()
+//        }
     }
     
-    mutating func addOrRemoveGenre(genre: GenreRLM) {
+    func addOrRemoveGenre(genre: GenreRLM) {
         if self.genres.contains(genre), let index = self.genres.firstIndex(of: genre) {
             self.genres.remove(at: index)
         } else {
             self.genres.append(genre)
         }
+        notifyQueryChanged()
     }
     
-    mutating func addOrRemovePeople(people: People) {
+    func addOrRemovePeople(people: People) {
         if self.people.contains(people), let index = self.people.firstIndex(of: people) {
             self.people.remove(at: index)
         } else {
             self.people.append(people)
         }
+        notifyQueryChanged()
     }
     
     func keywordIsInQuery(keyword: Keyword) -> Bool {
@@ -61,6 +72,16 @@ struct DiscoverQuery {
             return people.map{ $0.id ?? -1 }
         }
     }
+    
+    func addDelegate(delegate: DiscoverQueryDelegate) {
+        delegates.append(delegate)
+    }
+    
+    func notifyQueryChanged() {
+        for delegate in delegates {
+            delegate.didUpdateQuery()
+        }
+    }
 }
 
 struct Keyword: Decodable, Equatable {
@@ -71,4 +92,13 @@ struct Keyword: Decodable, Equatable {
 struct People: Decodable, Equatable {
     var name: String?
     var id: Int64?
+    var image: String?
+    var department: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case id
+        case image = "profile_path"
+        case department = "known_for_department"
+    }
 }

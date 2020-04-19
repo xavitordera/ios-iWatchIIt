@@ -42,6 +42,7 @@ class DiscoverHeaderTVC: UITableViewHeaderFooterView, Reusable {
     private func setupLayout() {
         titleLbl.font = .systemFont(ofSize: 21.0, weight: .bold)
         titleLbl.textColor = .whiteOrBlack
+        contentView.backgroundColor = .blackOrWhite
     }
     
     func configureCell(title: String) {

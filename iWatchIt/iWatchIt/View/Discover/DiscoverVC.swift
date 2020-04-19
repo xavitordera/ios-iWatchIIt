@@ -17,27 +17,25 @@ class DiscoverVC: BaseVC {
     
     // MARK: - Properties
     var sections: [String] = []
-    
+    var searchVC: SearchInfoVC?
     
     @IBOutlet weak var mainTV: UITableView! {
         didSet {
-            mainTV.separatorStyle = .none
             mainTV.register(UINib(nibName: kDiscoverHeaderTHV, bundle: .main), forHeaderFooterViewReuseIdentifier: kDiscoverHeaderTHV)
             mainTV.register(UINib(nibName: kDiscoverSearchTVC, bundle: .main), forCellReuseIdentifier: kDiscoverSearchTVC)
-            mainTV.register(UITableViewCell.self, forCellReuseIdentifier: "default")
+            mainTV.register(UINib(nibName: kDiscoverPeopleTVC, bundle: .main), forCellReuseIdentifier: kDiscoverPeopleTVC)
             mainTV.delegate = self
             mainTV.dataSource = self
-            mainTV.bounces = false
+            mainTV.bounces = true
             mainTV.allowsSelection = false
+            mainTV.contentInset = .init(top: 0, left: 0, bottom: 80, right: 0)
+            mainTV.tableFooterView = UIView()
+            segMediaType.selectedSegmentIndex = 0
+            mainTV.tableHeaderView = segMediaType
         }
     }
     
-    @IBOutlet weak var segMediaType: UISegmentedControl! {
-        didSet {
-            segMediaType.setTitle("discover_tv_shows_tab".localized, forSegmentAt: SegmentIndexes.shows.rawValue)
-            segMediaType.setTitle("discover_movies_tab".localized, forSegmentAt: SegmentIndexes.movies.rawValue)
-        }
-    }
+    var segMediaType: UISegmentedControl = UISegmentedControl(items: ["discover_tv_shows_tab".localized, "discover_movies_tab".localized])
     
     var searchButton: UIButton?
     // MARK: - UIViewController
@@ -52,18 +50,30 @@ class DiscoverVC: BaseVC {
     func setupNav() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "discover_title".localized
+        
+        searchVC = DiscoverRouter.shared.createSearchInfoModule()
+        let searchController = UISearchController(searchResultsController: searchVC)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search keywords, genres, people..."
+        searchController.searchBar.delegate = self
+        searchController.delegate = self
+        definesPresentationContext = true
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     func setupSearchButton() {
         searchButton = UIButton(frame: .init(x: UIScreen.main.bounds.width/2 - 75, y: UIScreen.main.bounds.height - 160, width: 150, height: 40))
-        searchButton?.backgroundColor = .darkGray
-        searchButton?.setTitleColor(.black, for: .normal)
+        searchButton?.backgroundColor = .blackOrWhite
+        searchButton?.setTitleColor(.whiteOrBlack, for: .normal)
         searchButton?.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
         searchButton?.setTitle("discover_search".localized, for: .normal)
         searchButton?.setImage(kTabDiscoverImg, for: .normal)
+        searchButton?.imageView?.tintColor = .whiteOrBlack
         searchButton?.layer.cornerRadius = 14
         searchButton?.layer.borderWidth = 1
-        searchButton?.layer.borderColor = UIColor.black.cgColor
+        searchButton?.layer.borderColor = UIColor.whiteOrBlack.cgColor
         searchButton?.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10)
         searchButton?.addTarget(self, action: #selector(searchTap), for: .touchUpInside)
         
@@ -75,14 +85,19 @@ class DiscoverVC: BaseVC {
         setupSearchButton()
         setupSections()
         loadData()
+        setupQueryDelegate()
+    }
+    
+    func setupQueryDelegate() {
+        DiscoverQuery.shared.addDelegate(delegate: self)
     }
     
     func setupSections() {
         sections = [
-            kSectionDiscoverKeywords,
             kSectionDiscoverGenre,
-            kSectionDiscoverPeople
-                    ]
+            kSectionDiscoverPeople,
+            kSectionDiscoverKeywords
+        ]
     }
     
     func loadData() {
@@ -101,13 +116,35 @@ class DiscoverVC: BaseVC {
         }
     }
     
+    func didSearchKeyword(keyword: String) {
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
+            presenter.startFetchingKeywords(term: keyword)
+        }
+    }
+    
+    func didSearchGenre(genre: String, mediaType: MediaType) {
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
+            if mediaType == .movie {
+                presenter.startFilteringGenres(term: genre, mediaType: .movie)
+            } else {
+                presenter.startFilteringGenres(term: genre, mediaType: .show)
+            }
+        }
+    }
+    
+    func didSearchPeople(people: String) {
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
+            presenter.startFetchingPeople(term: people)
+        }
+    }
+    
     // MARK: - Actions
     
     @objc func searchTap() {
         
     }
     
-    // MARK: UITableview auxiliar functions
+    // MARK:- UITableview auxiliar functions
     
     func headerForKeywords() -> UITableViewHeaderFooterView  {
         guard let header = mainTV.dequeueReusableHeaderFooterView(withIdentifier: kDiscoverHeaderTHV) as? DiscoverHeaderTVC else { return UITableViewHeaderFooterView() }
@@ -127,57 +164,69 @@ class DiscoverVC: BaseVC {
         return header
     }
     
-    func cellForSection(type: DiscoverType, indexPath: IndexPath) -> UITableViewCell{
-        guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDiscoverSearchTVC, for: indexPath) as? DiscoverSearchTVC else {
-            return UITableViewCell()
-        }
-        cell.configureCell(barDelegate: self, and: type)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0:
-            return 55
-        default:
-            return 28
+    func cellForSection(type: DiscoverType, indexPath: IndexPath) -> UITableViewCell {
+        if type == .Keywords || type == .Genres {
+            guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDiscoverSearchTVC, for: indexPath) as? DiscoverSearchTVC else {
+                return UITableViewCell()
+            }
+            let genres = DiscoverQuery.shared.genres
+            let keywords = DiscoverQuery.shared.keywords
+            if type == .Genres, !genres.isEmpty {
+                cell.configureCell(keyword: nil, genre: genres[indexPath.row])
+            } else if type == .Keywords, !keywords.isEmpty {
+                cell.configureCell(keyword: keywords[indexPath.row], genre: nil)
+            } else {
+                cell.configureEmpty(type: type)
+            }
+            return cell
+        } else {
+            guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDiscoverPeopleTVC, for: indexPath) as? DiscoverPeopleTVC else {
+                return UITableViewCell()
+            }
+            let people = DiscoverQuery.shared.people
+            if !people.isEmpty {
+                cell.configureCell(people: people[indexPath.row])
+            } else {
+                cell.configureEmpty()
+            }
+            return cell
         }
     }
 }
-//
-//extension DiscoverVC: DiscoverPresenterToViewProtocol {
-//
-//    func onKeywordsFetched() {
-//        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let index = sections.firstIndex(of: kSectionDiscoverKeywords) {
-////            if let cell = mainTV.cellForRow(at: .init(row: 0, section: index)) as? DiscoverSearchTVC {
-////                cell.updateKeywordsCell(results: presenter.keywords)
-////                mainTV.reloadData()
-////            }
-//        }
-//    }
-//
-//    func onGenresFiltered(mediaType: MediaType) {
-//        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let index = sections.firstIndex(of: kSectionDiscoverGenre) {
-////            if let cell = mainTV.cellForRow(at: .init(row: 0, section: index)) as? DiscoverSearchTVC {
-////                cell.updateGenresCell(results: presenter.genres)
-////                mainTV.reloadData()
-////            }
-//        }
-//    }
-//
-//    func onPeopleFetched() {
-//        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let index = sections.firstIndex(of: kSectionDiscoverPeople) {
-////            if let cell = mainTV.cellForRow(at: .init(row: 0, section: index)) as? DiscoverSearchTVC {
-////                cell.updatePeopleCell(results: presenter.people)
-////                mainTV.reloadData()
-////            }
-//        }
-//    }
-//}
-
+// MARK: - Presenter
+extension DiscoverVC: DiscoverPresenterToViewProtocol {
+    
+    func onKeywordsFetched() {
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let searchVC = searchVC {
+            searchVC.updateWithKeywords(results: presenter.keywords)
+        }
+    }
+    
+    func onGenresFiltered(mediaType: MediaType) {
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let searchVC = searchVC {
+            searchVC.updateWithGenres(results: presenter.genres)
+        }
+    }
+    
+    func onPeopleFetched() {
+        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let searchVC = searchVC {
+            searchVC.updateWithPeople(results: presenter.people)
+        }
+    }
+}
+// MARK: - UITableView
 extension DiscoverVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+         switch sections[section] {
+         case kSectionDiscoverKeywords:
+            return (DiscoverQuery.shared.keywords.count > 0) ? DiscoverQuery.shared.keywords.count : 1
+         case kSectionDiscoverGenre:
+            return (DiscoverQuery.shared.genres.count > 0) ? DiscoverQuery.shared.genres.count : 1
+         case kSectionDiscoverPeople:
+            return (DiscoverQuery.shared.people.count > 0) ? DiscoverQuery.shared.people.count : 1
+         default:
+            fatalError("Index out of bounds")
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -209,69 +258,52 @@ extension DiscoverVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewHeaderFooterView()
         }
     }
- 
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return kHeightDiscoverSections
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch sections[indexPath.section] {
+        case kSectionDiscoverKeywords:
+            return UITableView.automaticDimension
+        case kSectionDiscoverGenre:
+            return UITableView.automaticDimension
+        case kSectionDiscoverPeople:
+            return 105
+        default:
+            return 0
+            
+        }
+    }
+}
+// MARK: - Search
+extension DiscoverVC: UISearchControllerDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        searchController.searchResultsController?.view.isHidden = false
+    }
 }
 
-//extension DiscoverVC: DiscoverHeaderDelegate {
-//    func didExpand(type: DiscoverType) {
-//        var section: Int = 0
-//        switch type {
-//        case .Keywords:
-//            section = sections.firstIndex(of: kSectionDiscoverKeywords) ?? 0
-//        case .Genres:
-//            section = sections.firstIndex(of: kSectionDiscoverGenre) ?? 0
-//        case .People:
-//            section = sections.firstIndex(of: kSectionDiscoverPeople) ?? 0
-//        }
-//        mainTV.beginUpdates()
-//        mainTV.insertRows(at: [.init(row: 0, section: section)], with: .automatic)
-//        mainTV.endUpdates()
-//    }
-//
-//    func didCollapse(type: DiscoverType) {
-//        var section: Int = 0
-//        switch type {
-//        case .Keywords:
-//            section = sections.firstIndex(of: kSectionDiscoverKeywords) ?? 0
-//        case .Genres:
-//            section = sections.firstIndex(of: kSectionDiscoverGenre) ?? 0
-//        case .People:
-//            section = sections.firstIndex(of: kSectionDiscoverPeople) ?? 0
-//        }
-//        mainTV.beginUpdates()
-//        mainTV.deleteRows(at: [.init(row: 0, section: section)], with: .automatic)
-//        mainTV.endUpdates()
-//    }
-//}
-
+extension DiscoverVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {return}
+        didSearchKeyword(keyword: searchText)
+        didSearchGenre(genre: searchText, mediaType: selectedMediaType())
+        didSearchPeople(people: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text, !searchText.isEmpty else {return}
+        didSearchKeyword(keyword: searchText)
+        didSearchGenre(genre: searchText, mediaType: selectedMediaType())
+        didSearchPeople(people: searchText)
+    }
+}
+// MARK: - Query
 extension DiscoverVC: DiscoverQueryDelegate {
-    func didTapOnKeyword(keyword: Keyword) {
-        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
-            presenter.didSelectKeyword(keyword: keyword)
-        }
-    }
-    
-    func didTapOnGenre(genre: GenreRLM) {
-        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
-            presenter.didSelectGenre(genre: genre)
-        }
-    }
-    
-    func didTapOnPeople(people: People) {
-        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
-            presenter.didSelectPeople(people: people)
-        }
+    func didUpdateQuery() {
+        mainTV.reloadData()
     }
 }
 
-extension DiscoverVC: DiscoverSearchBarDelegate {
-    func didBeginSearch(type: DiscoverType) {
-        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let nav = navigationController {
-            presenter.didBeginSearch(discoverType: type, mediaType: selectedMediaType(), navigationController: nav, queryDelegate: self)
-        }
-    }
-}
 

@@ -85,6 +85,8 @@
 		10A638732440D3D2002B4B83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10A638722440D3D2002B4B83 /* GoogleService-Info.plist */; };
 		10A638752440D5B9002B4B83 /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A638742440D5B9002B4B83 /* Watchlist.swift */; };
 		10A6388F24411129002B4B83 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6388E24411129002B4B83 /* Kingfisher */; };
+		10CD6CF12449EC67008B7E00 /* DiscoverPeopleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CD6CEF2449EC67008B7E00 /* DiscoverPeopleTVC.swift */; };
+		10CD6CF22449EC67008B7E00 /* DiscoverPeopleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10CD6CF02449EC67008B7E00 /* DiscoverPeopleTVC.xib */; };
 		10D28880242F736900A2DA0D /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D28876242F736900A2DA0D /* NibLoadable.swift */; };
 		10D28882242F736900A2DA0D /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D28878242F736900A2DA0D /* NibOwnerLoadable.swift */; };
 		10D28884242F736900A2DA0D /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D2887A242F736900A2DA0D /* Reusable.swift */; };
@@ -218,6 +220,8 @@
 		10A638712440D396002B4B83 /* iWatchIt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iWatchIt.entitlements; sourceTree = "<group>"; };
 		10A638722440D3D2002B4B83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10A638742440D5B9002B4B83 /* Watchlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watchlist.swift; sourceTree = "<group>"; };
+		10CD6CEF2449EC67008B7E00 /* DiscoverPeopleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPeopleTVC.swift; sourceTree = "<group>"; };
+		10CD6CF02449EC67008B7E00 /* DiscoverPeopleTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverPeopleTVC.xib; sourceTree = "<group>"; };
 		10D28876242F736900A2DA0D /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		10D28878242F736900A2DA0D /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
 		10D2887A242F736900A2DA0D /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -387,6 +391,8 @@
 				104D59BF2443E1870085F073 /* DiscoverHeaderTVC.xib */,
 				10354E062444BB97008DF790 /* DiscoverSearchTVC.swift */,
 				10354E072444BB97008DF790 /* DiscoverSearchTVC.xib */,
+				10CD6CEF2449EC67008B7E00 /* DiscoverPeopleTVC.swift */,
+				10CD6CF02449EC67008B7E00 /* DiscoverPeopleTVC.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -925,6 +931,7 @@
 				102BD0BD243918BE003215AF /* DetailOverviewCVC.xib in Resources */,
 				10533D382427BEB600BF8FC4 /* LaunchScreen.storyboard in Resources */,
 				10E4A53B2437547400CD80C2 /* Detail.storyboard in Resources */,
+				10CD6CF22449EC67008B7E00 /* DiscoverPeopleTVC.xib in Resources */,
 				10F6408C242C13420096C229 /* Localizable.strings in Resources */,
 				10354E092444BB97008DF790 /* DiscoverSearchTVC.xib in Resources */,
 				10533D352427BEB500BF8FC4 /* Assets.xcassets in Resources */,
@@ -1097,6 +1104,7 @@
 				1023029B242E55350088859B /* UIColor+color.swift in Sources */,
 				10D28888242F736900A2DA0D /* UITableView+Reusable.swift in Sources */,
 				109E457024312EEA0027012B /* SearchRouter.swift in Sources */,
+				10CD6CF12449EC67008B7E00 /* DiscoverPeopleTVC.swift in Sources */,
 				10F64084242BB6640096C229 /* API.swift in Sources */,
 				108564742436A65600082755 /* DetailRouter.swift in Sources */,
 				1050D9F9243645AE0086990A /* UIViewController+Controller.swift in Sources */,

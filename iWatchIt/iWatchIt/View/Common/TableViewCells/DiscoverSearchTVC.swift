@@ -8,121 +8,58 @@
 
 import UIKit
 
-protocol DiscoverSearchBarDelegate: class {
-    func didBeginSearch(type: DiscoverType)
-}
-
 class DiscoverSearchTVC: UITableViewCell, Reusable {
+    
     // MARK: - Properties
-    @IBOutlet weak var searchBar: UISearchBar! {
-        didSet {
-            searchBar.delegate = self
-        }
-    }
-    var type: DiscoverType?
-    var discoverBarDelegate: DiscoverSearchBarDelegate?
+//    @IBOutlet weak var lblTitle: UILabel!
+//    @IBOutlet weak var removeBtn: UIButton!
+    var keyword: Keyword?
+    var genre: GenreRLM?
     
     // MARK: - UITVC
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        self.textLabel?.textColor = .whiteOrBlack
+        self.tintColor = .whiteOrBlack
     }
     
     override func prepareForReuse() {
-        type = nil
+//        lblTitle.text = ""
+//        removeBtn.isHidden = true
+        keyword = nil
+        genre = nil
+        imageView?.image = nil
+//        removeBtn.setImage(nil, for: .normal)
+        accessoryView = UIView()
     }
     
     // MARK: - Public interface
-    func configureCell(barDelegate: DiscoverSearchBarDelegate, and type: DiscoverType) {
-        self.discoverBarDelegate = barDelegate
-        self.type = type
+    func configureCell(keyword: Keyword?, genre: GenreRLM?) {
+        self.keyword = keyword
+        self.genre = genre
+//        lblTitle.text = keyword?.name ?? genre?.name
+        self.textLabel?.text = keyword?.name ?? genre?.name
+        self.accessoryType = .detailButton
+        
+        
+        if let keyword = keyword {
+            let image = DiscoverQuery.shared.keywordIsInQuery(keyword: keyword) ? UIImage(systemName: "xmark") : UIImage(systemName: "plus")
+//            removeBtn.setImage(image, for: .normal)
+            self.imageView?.image = UIImage(systemName: "tag")
+            accessoryView = UIImageView.init(image: image)
+        } else if let genre = genre {
+//            removeBtn.isHidden = DiscoverQuery.shared.genreIsInQuery(genre: genre)
+            let image = DiscoverQuery.shared.genreIsInQuery(genre: genre) ? UIImage(systemName: "xmark") : UIImage(systemName: "plus")
+            self.imageView?.image = UIImage(systemName: "tv.circle")
+            accessoryView = UIImageView.init(image: image)
+        }
     }
     
-}
-
-//extension DiscoverSearchTVC: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if let genres = genreResults {
-//            return (genres.isEmpty) ? 1 : genres.count
-//        } else if let keywords = keywordResults {
-//            return (keywords.isEmpty) ? 1 : keywords.count
-//        } else if let people = peopleResults {
-//            return (people.isEmpty) ? 1 : people.count
-//        } else {
-//            return 1
-//        }
-//    }
-//
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        return cellForResult(at: indexPath)
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let delegate = queryDelegate else { return }
-//
-//        if let genres = genreResults, !genres.isEmpty {
-//            delegate.didTapOnGenre(genre: genres[indexPath.row])
-//        } else if let keywords = keywordResults, !keywords.isEmpty {
-//            delegate.didTapOnKeyword(keyword: keywords[indexPath.row])
-//        } else if let people = peopleResults, !people.isEmpty {
-//            delegate.didTapOnPeople(people: people[indexPath.row])
-//        }
-//    }
-//
-//    func cellForResult(at: IndexPath) -> UITableViewCell{
-//
-//        guard let cell = resultsTV.dequeueReusableCell(withIdentifier: kDefaultCell) else {
-//            return UITableViewCell()
-//        }
-//        cell.textLabel?.font = .systemFont(ofSize: 14.0, weight: .light)
-//
-//        if let genres = genreResults {
-//            if genres.isEmpty {
-//                cell.textLabel?.text = genres[at.row].name
-//            } else {
-//                cell.textLabel?.text = String(format: "search_empty_results".localized, "") // TODO lastQuery
-//                cell.textLabel?.textColor = kColorEmptyStateLabel
-//                cell.selectionStyle = .none
-//            }
-//        } else if let keywords = keywordResults {
-//            if keywords.isEmpty {
-//                cell.textLabel?.text = keywords[at.row].name
-//            } else {
-//                cell.textLabel?.text = String(format: "search_empty_results".localized, "")
-//                cell.textLabel?.textColor = kColorEmptyStateLabel
-//                cell.selectionStyle = .none
-//            }
-//        } else if let people = peopleResults {
-//            if people.isEmpty {
-//                cell.textLabel?.text = people[at.row].name
-//            } else {
-//                cell.textLabel?.text = String(format: "search_empty_results".localized, "")
-//                cell.textLabel?.textColor = kColorEmptyStateLabel
-//                cell.selectionStyle = .none
-//            }
-//        } else {
-//            cell.textLabel?.text = "Search something..."
-//            cell.textLabel?.textColor = kColorEmptyStateLabel
-//            cell.selectionStyle = .none
-//        }
-//        return cell
-//    }
-//}
-
-extension DiscoverSearchTVC: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        guard let type = type else {return}
-        guard let delegate = discoverBarDelegate else {return}
-        delegate.didBeginSearch(type: type)
+    func configureEmpty(type: DiscoverType) {
+        textLabel?.textColor = kColorEmptyStateLabel
+        textLabel?.text = type == .Keywords ? "Add keywords to discover their content" : "Add genres to discover their content"
+        textLabel?.font = .systemFont(ofSize: 15.0, weight: .light)
     }
+    
 }

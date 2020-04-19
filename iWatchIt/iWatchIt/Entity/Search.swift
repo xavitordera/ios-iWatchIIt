@@ -17,14 +17,3 @@ struct Search {
         return search
     }
 }
-
-
-class RecentlySeen: Object {
-    @objc dynamic var id: Int = 0
-    @objc dynamic var title: String = ""
-    @objc private dynamic var privateType: String = MediaType.movie.rawValue
-    var type: MediaType {
-        get { return MediaType(rawValue: privateType)! }
-        set { privateType = newValue.rawValue }
-    }
-}
