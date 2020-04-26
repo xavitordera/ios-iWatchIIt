@@ -19,33 +19,25 @@ protocol DiscoverHeaderDelegate {
     func didCollapse(type: DiscoverType)
 }
 
-class DiscoverHeaderTVC: UITableViewHeaderFooterView, Reusable {
-
-    @IBOutlet weak var titleLbl: UILabel!
+class DiscoverHeaderTVC: UITableViewCell, Reusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        
         setupLayout()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        titleLbl.text = ""
+        textLabel?.text = ""
     }
     
     private func setupLayout() {
-        titleLbl.font = .systemFont(ofSize: 21.0, weight: .bold)
-        titleLbl.textColor = .whiteOrBlack
-        contentView.backgroundColor = .blackOrWhite
+        textLabel?.font = .boldSystemFont(ofSize: 24.0)
+        textLabel?.textColor = .whiteOrBlack
     }
     
     func configureCell(title: String) {
-        titleLbl.text = title
+        textLabel?.text = title
     }
 }

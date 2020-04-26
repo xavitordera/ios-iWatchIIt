@@ -10,11 +10,15 @@ import UIKit
 
 class DiscoverPresenter: BasePresenter {
     var query: DiscoverQuery?
-    var keywords: [Keyword]?
-    var genres: [GenreRLM]?
-    var people: [People]?
+    var keywords: [TypedSearchResult]?
+    var genres: [TypedSearchResult]?
+    var people: [TypedSearchResult]?
     var showsGenres: GenresRLM?
     var moviesGenres: GenresRLM?
+    var wholeGenres: [TypedSearchResult] = []
+    var trendingResults: [TypedSearchResult]?
+    
+    var lastQuery: String = ""
     
     private func filterGenre(term: String, type: MediaType) -> [GenreRLM] {
         
@@ -26,6 +30,32 @@ class DiscoverPresenter: BasePresenter {
         }
         
         return Array(filtered)
+    }
+    
+    private func initGenres() {
+        guard let movieGenres = moviesGenres, let showsGenres = showsGenres else { return }
+        for genre in movieGenres.genres {
+            let aux = TypedSearchResult.createFromGenre(genre: genre, withMediaType: .movie)
+            wholeGenres.append(aux)
+        }
+        
+        for genre in showsGenres.genres {
+            let aux = TypedSearchResult.createFromGenre(genre: genre, withMediaType: .show)
+            wholeGenres.append(aux)
+        }
+    }
+    
+    private func filterGenre(term: String) -> [TypedSearchResult] {
+        
+        if wholeGenres.isEmpty {
+            initGenres()
+        }
+        
+        let filtered = wholeGenres.filter {
+            ($0.name?.lowercased().contains(term.lowercased()) ?? false)
+        }
+        
+        return filtered
     }
 }
 
@@ -47,10 +77,20 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
     }
     
     func startFilteringGenres(term: String, mediaType: MediaType) {
-        let results = filterGenre(term: term, type: mediaType)
-        self.genres = results
+//        let results = filterGenre(term: term, type: mediaType)
+//        self.genres = results
+//        if let view = getView(type: DiscoverPresenterToViewProtocol.self) {
+//            view.onGenresFiltered(mediaType: mediaType)
+//        }
+    }
+    
+    func startFilteringGenres(term: String) {
+        startFetchingPeople(term: lastQuery)
+        lastQuery = term
+        let results = filterGenre(term: term)
+        self.genres = Array(results.prefix(5))
         if let view = getView(type: DiscoverPresenterToViewProtocol.self) {
-            view.onGenresFiltered(mediaType: mediaType)
+            view.onGenresFiltered()
         }
     }
     
@@ -59,13 +99,32 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
         interactor.fetchPeople(term: term)
     }
     
-
+    func startFetchingTrendingPeople() {
+        guard let interactor = self.interactor as? DiscoverPresenterToInteractorProtocol else { return }
+        interactor.fetchTrendingPeople(timeWindow: .day)
+    }
+    
+    func didTapOnTrendingPeople(index: Int, nav: UINavigationController?) {
+        guard let people = trendingResults else {return}
+        query = DiscoverQuery()
+        query?.addOrRemovePeople(people: people[index])
+        if let router = router as? DiscoverPresenterToRouterProtocol, let query = query, let nav = nav {
+            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie)
+        }
+    }
 }
 
 extension DiscoverPresenter: DiscoverInteractorToPresenterProtocol {
-    func keywordsFetchSuccess(results: RootKeyword?) {
+    
+    func keywordsFetchSuccess(results: GenericSearchResults?) {
         guard let keywords = results?.results else { return }
-        self.keywords = keywords
+        self.keywords = []
+        for keyword in keywords {
+            let aux = TypedSearchResult.createFromParent(keyword)
+            aux.createKeyword()
+            self.keywords?.append(aux)
+        }
+        
         if let view = getView(type: DiscoverPresenterToViewProtocol.self) {
             view.onKeywordsFetched()
         }
@@ -88,16 +147,44 @@ extension DiscoverPresenter: DiscoverInteractorToPresenterProtocol {
         view?.showError(message: message)
     }
     
-    func peopleFetchSuccess(results: RootPeople?) {
+    func peopleFetchSuccess(results: GenericSearchResults?) {
         guard let people = results?.results else { return }
-        self.people = people
+        self.people = []
+        for person in people {
+            let aux = TypedSearchResult.createFromParent(person)
+            aux.createPeople()
+            self.people?.append(aux)
+        }
+        
+        self.people = Array(self.people!.prefix(3))
+        
         if let view = getView(type: DiscoverPresenterToViewProtocol.self) {
             view.onPeopleFetched()
         }
+        startFetchingKeywords(term: lastQuery)
     }
     
     func peopleFetchFailed(message: String?) {
         view?.showError(message: message)
+    }
+    
+    func trendingPeopleFetchFailed(message: String?) {
+        view?.showError(message: message)
+    }
+    
+    func trendingPeopleFetchSuccess(results: GenericSearchResults?) {
+        guard let rawResults = results?.results else { return }
+        trendingResults = []
+        
+        for person in rawResults {
+            let aux = TypedSearchResult.createFromParent(person)
+            aux.createPeople()
+            trendingResults?.append(aux)
+        }
+        
+        if let view = view as? DiscoverPresenterToViewProtocol {
+            view.onTrendingPeopleFetched()
+        }
     }
 }
 
