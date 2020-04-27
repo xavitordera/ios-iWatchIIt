@@ -9,6 +9,7 @@
 enum MediaType: String {
     case movie = "movie"
     case show = "tv"
+    case people = "person"
 }
 
 enum HomeSectionType {
@@ -41,6 +42,8 @@ struct Home {
                 homeMovies.trending = trending
             case .show:
                 homeShows.trending = trending
+            case .people:
+                break
             }
         }
         if let rootDisc = rootDiscover {
@@ -52,6 +55,8 @@ struct Home {
                 homeMovies.discover = discover
             case .show:
                 homeShows.discover = discover
+            case .people:
+                break
             }
         }
         if let watchlist = watchlist {
@@ -72,6 +77,8 @@ struct Home {
                 homeMovies.watchlist = wsHome
             case .show:
                 homeShows.watchlist = wsHome
+            case .people:
+                break
             }
         }
         switch type {
@@ -79,6 +86,8 @@ struct Home {
             return homeMovies
         case .show:
             return homeShows
+        case .people:
+            return nil
         }
     }
 }

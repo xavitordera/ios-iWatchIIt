@@ -16,7 +16,7 @@ class DiscoverResultsRouter: BaseRouter, DiscoverResultsPresenterToRouterProtoco
     
     static let shared = DiscoverResultsRouter()
     
-    func createModule() -> DiscoverResultsVC {
+    func createModule(with title: String) -> DiscoverResultsVC {
         let view = kStoryboardHome.instantiateViewController(identifier: kDiscoverResultsVC) as! DiscoverResultsVC
         
         let presenter: DiscoverResultsViewToPresenterProtocol & DiscoverResultsInteractorToPresenterProtocol = DiscoverResultsPresenter()
@@ -27,6 +27,8 @@ class DiscoverResultsRouter: BaseRouter, DiscoverResultsPresenterToRouterProtoco
         presenter.view = view
         presenter.router = router
         presenter.interactor = interactor
+        
+        view.searchTitle = title
         
         return view
     }

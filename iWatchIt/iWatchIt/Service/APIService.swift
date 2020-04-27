@@ -113,8 +113,8 @@ class APIService {
         }
     }
     
-    func searchKeyword(query: String, completion: @escaping (RootKeyword?, Error?) -> Void) {
-        requestObject(from: APIRouter.searchKeyword(query: query)) { (result: Result<RootKeyword, Error>)
+    func searchKeyword(query: String, completion: @escaping (GenericSearchResults?, Error?) -> Void) {
+        requestObject(from: APIRouter.searchKeyword(query: query)) { (result: Result<GenericSearchResults, Error>)
             in
             switch result {
             case .failure(let error):
@@ -125,8 +125,8 @@ class APIService {
         }
     }
     
-    func searchPeople(query: String, language: String, completion: @escaping (RootPeople?, Error?) -> Void) {
-        requestObject(from: APIRouter.searchPeople(query: query, language: language)) { (result: Result<RootPeople, Error>)
+    func searchPeople(query: String, language: String, completion: @escaping (GenericSearchResults?, Error?) -> Void) {
+        requestObject(from: APIRouter.searchPeople(query: query, language: language)) { (result: Result<GenericSearchResults, Error>)
             in
             switch result {
             case .failure(let error):
@@ -153,6 +153,18 @@ class APIService {
     
     func discoverExtended(mediaType: MediaType, language: String, withGenres: String, withPeople: String, withKeywords: String, page: Int, completion: @escaping (Root?, Error?) -> Void) {
         requestObject(from: APIRouter.discoverExtended(mediaType: mediaType, language: language, page: page, withGenres: withGenres, withPeople: withPeople, withKeywords: withKeywords)) { (result: Result<Root, Error>)
+            in
+            switch result {
+            case .failure(let error):
+                completion(nil, error)
+            case .success(let value):
+                completion(value, nil)
+            }
+        }
+    }
+    
+    func getTrendingPeople(mediaType: MediaType, timeWindow: TimeWindow, language: String, completion: @escaping (GenericSearchResults?, Error?) -> Void) {
+        requestObject(from: APIRouter.trending(mediaType: mediaType, timeWindow: timeWindow.rawValue, language: language)) { (result: Result<GenericSearchResults, Error>)
             in
             switch result {
             case .failure(let error):

@@ -8,15 +8,21 @@
 
 import UIKit
 
+protocol SearchInfoVCDelegate {
+    func didTapOnGenre(genre: TypedSearchResult)
+    func didTapOnPeople(people: TypedSearchResult)
+    func didTapOnKeyword(keyword: TypedSearchResult)
+}
 
 class SearchInfoVC: BaseVC {
     var type: DiscoverType = .Keywords
     var mediaType: MediaType = .movie
     var queryDelegate: DiscoverQueryDelegate?
-    var genreResults: [GenreRLM]?
-    var keywordResults: [Keyword]?
-    var peopleResults: [People]?
+    var genreResults: [TypedSearchResult]?
+    var keywordResults: [TypedSearchResult]?
+    var peopleResults: [TypedSearchResult]?
     var labelEmptySearch = UILabel()
+    var delegate: SearchInfoVCDelegate?
     
     var sections: [String] = []
     
@@ -35,14 +41,13 @@ class SearchInfoVC: BaseVC {
             } else {
                 mainTV?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
             }
-            mainTV.allowsSelection = false
+            mainTV.allowsSelection = true
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        DiscoverQuery.shared.addDelegate(delegate: self)
     }
     
     func loadSections() {
@@ -60,7 +65,7 @@ class SearchInfoVC: BaseVC {
         }
     }
     
-    func updateWithGenres(results: [GenreRLM]?) {
+    func updateWithGenres(results: [TypedSearchResult]?) {
         self.genreResults = results
         loadSections()
         mainTV.reloadData()
@@ -69,7 +74,7 @@ class SearchInfoVC: BaseVC {
         }
     }
     
-    func updateWithKeywords(results: [Keyword]?) {
+    func updateWithKeywords(results: [TypedSearchResult]?) {
         self.keywordResults = results
         loadSections()
         mainTV.reloadData()
@@ -78,7 +83,7 @@ class SearchInfoVC: BaseVC {
         }
     }
     
-    func updateWithPeople(results: [People]?) {
+    func updateWithPeople(results: [TypedSearchResult]?) {
         self.peopleResults = results
         loadSections()
         mainTV.reloadData()
@@ -91,8 +96,8 @@ class SearchInfoVC: BaseVC {
         guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDiscoverSearchTVC) as? DiscoverSearchTVC else {
             return UITableViewCell()
         }
-        if let keywords = keywordResults {
-            !keywords.isEmpty ? cell.configureCell(keyword: keywords[indexPath.row], genre: nil) : cell.configureEmpty(text: "No keywords found")
+        if let keywords = keywordResults, !keywords.isEmpty {
+            cell.configureCell(keyword: keywords[indexPath.row], genre: nil)
         }
         return cell
     }
@@ -104,8 +109,6 @@ class SearchInfoVC: BaseVC {
         if let genres = genreResults {
             if !genres.isEmpty {
                 cell.configureCell(keyword: nil, genre: genres[indexPath.row])
-            } else {
-                cell.configureEmpty(text: "No genres found")
             }
         }
         return cell
@@ -115,28 +118,10 @@ class SearchInfoVC: BaseVC {
         guard let cell = mainTV.dequeueReusableCell(withIdentifier: kDiscoverPeopleTVC) as? DiscoverPeopleTVC else {
             return UITableViewCell()
         }
-        if let people = peopleResults {
-            !people.isEmpty ? cell.configureCell(people: people[indexPath.row]) : cell.configureEmpty(text: "No people found")
+        if let people = peopleResults, !people.isEmpty {
+             cell.configureCell(people: people[indexPath.row])
         }
         return cell
-    }
-    
-    func headerForKeywords() -> UITableViewHeaderFooterView  {
-        guard let header = mainTV.dequeueReusableHeaderFooterView(withIdentifier: kDiscoverHeaderTHV) as? DiscoverHeaderTVC else { return UITableViewHeaderFooterView() }
-        header.configureCell(title: "Keywords")
-        return header
-    }
-    
-    func headerForGenres() -> UITableViewHeaderFooterView  {
-        guard let header = mainTV.dequeueReusableHeaderFooterView(withIdentifier: kDiscoverHeaderTHV) as? DiscoverHeaderTVC else { return UITableViewHeaderFooterView() }
-        header.configureCell(title: "Genres")
-        return header
-    }
-    
-    func headerForPeople() -> UITableViewHeaderFooterView  {
-        guard let header = mainTV.dequeueReusableHeaderFooterView(withIdentifier: kDiscoverHeaderTHV) as? DiscoverHeaderTVC else { return UITableViewHeaderFooterView() }
-        header.configureCell(title: "People")
-        return header
     }
 }
 
@@ -146,43 +131,22 @@ extension SearchInfoVC: UITableViewDelegate, UITableViewDataSource {
         return sections.count
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 55
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch sections[indexPath.section] {
-        case kSectionDiscoverGenre:
-            return UITableView.automaticDimension
-        case kSectionDiscoverPeople:
-            return 105
-        case kSectionDiscoverKeywords:
-            return UITableView.automaticDimension
-        default:
-            fatalError("Index out of bounds")
-        }
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch sections[section] {
         case kSectionDiscoverGenre:
-            if let genres = genreResults {
-                return genres.count > 0 ? genres.count : 1
-            }
+            return genreResults?.count ?? 0
         case kSectionDiscoverPeople:
-            if let people = peopleResults {
-                return people.count > 0 ? people.count : 1
-            }
+            return peopleResults?.count ?? 0
         case kSectionDiscoverKeywords:
-            if let keywords = keywordResults {
-                return keywords.count > 0 ? keywords.count : 1
-            }
+            return keywordResults?.count ?? 0
         default:
             fatalError("Index out of bounds")
         }
-        
-        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -202,32 +166,13 @@ extension SearchInfoVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch sections[indexPath.section] {
         case kSectionDiscoverGenre:
-            DiscoverQuery.shared.addOrRemoveGenre(genre: genreResults![indexPath.row])
+            delegate?.didTapOnGenre(genre: genreResults![indexPath.row])
         case kSectionDiscoverPeople:
-            DiscoverQuery.shared.addOrRemovePeople(people: peopleResults![indexPath.row])
+            delegate?.didTapOnPeople(people: peopleResults![indexPath.row])
         case kSectionDiscoverKeywords:
-            DiscoverQuery.shared.addOrRemoveKeyword(keyword: keywordResults![indexPath.row])
+            delegate?.didTapOnKeyword(keyword: keywordResults![indexPath.row])
         default:
             fatalError("Index out of bounds")
         }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch sections[section] {
-        case kSectionDiscoverKeywords:
-            return headerForKeywords()
-        case kSectionDiscoverGenre:
-            return headerForGenres()
-        case kSectionDiscoverPeople:
-            return headerForPeople()
-        default:
-            return UITableViewHeaderFooterView()
-        }
-    }
-}
-
-extension SearchInfoVC: DiscoverQueryDelegate {
-    func didUpdateQuery() {
-//        mainTV.reloadData()
     }
 }

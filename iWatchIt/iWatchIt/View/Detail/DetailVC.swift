@@ -111,6 +111,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     }
     
     func loadBackground() {
+        
         let imageView = UIImageView(frame: view.frame)
         if let imagePth = getPresenter()?.detail?.image, let imgURL = ImageHelper.createImageURL(path: imagePth, size: .poster(size: .xbig)) {
             imageView.imageFrom(url: imgURL, with: nil)
@@ -119,6 +120,14 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         }
         imageView.contentMode = .scaleToFill
         view.insertSubview(imageView, at: 0)
+        
+        
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.insertSubview(blurEffectView, at: 1)
+        
     }
     
     func prepareVideoPlayer() {

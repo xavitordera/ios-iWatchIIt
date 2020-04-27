@@ -90,6 +90,7 @@
 		10A638732440D3D2002B4B83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10A638722440D3D2002B4B83 /* GoogleService-Info.plist */; };
 		10A638752440D5B9002B4B83 /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A638742440D5B9002B4B83 /* Watchlist.swift */; };
 		10A6388F24411129002B4B83 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6388E24411129002B4B83 /* Kingfisher */; };
+		10B007862450C2FD00097A40 /* DiscoverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B007852450C2FD00097A40 /* DiscoverHelper.swift */; };
 		10CD6CF12449EC67008B7E00 /* DiscoverPeopleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CD6CEF2449EC67008B7E00 /* DiscoverPeopleTVC.swift */; };
 		10CD6CF22449EC67008B7E00 /* DiscoverPeopleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10CD6CF02449EC67008B7E00 /* DiscoverPeopleTVC.xib */; };
 		10D28880242F736900A2DA0D /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D28876242F736900A2DA0D /* NibLoadable.swift */; };
@@ -230,6 +231,7 @@
 		10A638712440D396002B4B83 /* iWatchIt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iWatchIt.entitlements; sourceTree = "<group>"; };
 		10A638722440D3D2002B4B83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10A638742440D5B9002B4B83 /* Watchlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watchlist.swift; sourceTree = "<group>"; };
+		10B007852450C2FD00097A40 /* DiscoverHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverHelper.swift; sourceTree = "<group>"; };
 		10CD6CEF2449EC67008B7E00 /* DiscoverPeopleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPeopleTVC.swift; sourceTree = "<group>"; };
 		10CD6CF02449EC67008B7E00 /* DiscoverPeopleTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverPeopleTVC.xib; sourceTree = "<group>"; };
 		10D28876242F736900A2DA0D /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
@@ -699,6 +701,7 @@
 				10529A9E24378BEC000F12FA /* VideoHelper.swift */,
 				10973B372439EEAD005C467D /* PlatformHelper.swift */,
 				10F2B5122442027A00952A58 /* PreferenceManager.swift */,
+				10B007852450C2FD00097A40 /* DiscoverHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1076,6 +1079,7 @@
 				1005B75F243B913C004B78F3 /* DetailCarouselTrailersCVC.swift in Sources */,
 				10F64086242BCE890096C229 /* APIRouter.swift in Sources */,
 				109E457624312F370027012B /* SearchProtocol.swift in Sources */,
+				10B007862450C2FD00097A40 /* DiscoverHelper.swift in Sources */,
 				1020C693244C963A00F7D0F8 /* DiscoverResultsRouter.swift in Sources */,
 				108564702436905A00082755 /* DetailInteractor.swift in Sources */,
 				1005B75D243B913C004B78F3 /* DetailCarouselCastCVC.swift in Sources */,

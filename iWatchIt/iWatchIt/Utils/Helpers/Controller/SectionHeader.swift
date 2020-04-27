@@ -11,6 +11,12 @@ class SectionHeader: UICollectionReusableView, NibReusable {
     
     @IBOutlet weak var title: UILabel!
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl! {
+        didSet {
+            segmentedControl.addTarget(self, action: #selector(didChangeSegment), for: .touchUpInside)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()
@@ -19,6 +25,10 @@ class SectionHeader: UICollectionReusableView, NibReusable {
     func setupLayout() {
         self.title.font = .boldSystemFont(ofSize: 22.0)
         self.title.textColor = .whiteOrBlack
+    }
+    
+    @objc func didChangeSegment() {
+        
     }
     
     func configureHeader(title: String) {

@@ -48,4 +48,15 @@ extension DiscoverInteractor: DiscoverPresenterToInteractorProtocol {
             presenter.peopleFetchSuccess(results: result)
         }
     }
+    
+    func fetchTrendingPeople(timeWindow: TimeWindow) {
+        APIService.shared.getTrendingPeople(mediaType: .people, timeWindow: timeWindow, language: Preference.getLocaleLanguage()) { (result, error) in
+            guard let presenter = self.getPresenter(type: DiscoverInteractorToPresenterProtocol.self) else {return}
+            guard let result = result else {
+                presenter.trendingPeopleFetchFailed(message: error.debugDescription)
+                return
+            }
+            presenter.trendingPeopleFetchSuccess(results: result)
+        }
+    }
 }

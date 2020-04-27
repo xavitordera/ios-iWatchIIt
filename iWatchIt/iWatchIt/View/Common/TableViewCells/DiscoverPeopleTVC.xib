@@ -9,53 +9,31 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="104" id="KGk-i7-Jjw" customClass="DiscoverPeopleTVC" customModule="iWatchIt" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="323" height="104"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="ruS-Z7-gty" detailTextLabel="xD8-qH-cfZ" rowHeight="37" style="IBUITableViewCellStyleSubtitle" id="KGk-i7-Jjw" customClass="DiscoverPeopleTVC" customModule="iWatchIt" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="323" height="37"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="323" height="104"/>
+                <rect key="frame" x="0.0" y="0.0" width="323" height="37"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wda-4s-ulw">
-                        <rect key="frame" x="14" y="8" width="59" height="88"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="59" id="UDT-Zk-shL"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbM-za-Msc">
-                        <rect key="frame" x="88" y="63" width="43.5" height="18"/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ruS-Z7-gty">
+                        <rect key="frame" x="20" y="1" width="33.5" height="20.5"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brad Pito" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AqK-2p-5xU">
-                        <rect key="frame" x="88" y="23" width="198" height="24"/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xD8-qH-cfZ">
+                        <rect key="frame" x="20" y="21.5" width="44" height="14.5"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="wda-4s-ulw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="EYc-Zb-cRm"/>
-                    <constraint firstItem="AqK-2p-5xU" firstAttribute="top" secondItem="wda-4s-ulw" secondAttribute="top" constant="15" id="PgB-p8-nSu"/>
-                    <constraint firstItem="zbM-za-Msc" firstAttribute="bottom" secondItem="wda-4s-ulw" secondAttribute="bottom" constant="-15" id="TUg-1N-6Cm"/>
-                    <constraint firstItem="AqK-2p-5xU" firstAttribute="leading" secondItem="wda-4s-ulw" secondAttribute="trailing" constant="15" id="fJP-NB-mQP"/>
-                    <constraint firstItem="zbM-za-Msc" firstAttribute="leading" secondItem="wda-4s-ulw" secondAttribute="trailing" constant="15" id="pA3-hl-9ek"/>
-                </constraints>
             </tableViewCellContentView>
-            <constraints>
-                <constraint firstItem="wda-4s-ulw" firstAttribute="top" secondItem="njF-e1-oar" secondAttribute="top" constant="8" id="9IB-2S-w8j"/>
-                <constraint firstItem="njF-e1-oar" firstAttribute="trailing" secondItem="AqK-2p-5xU" secondAttribute="trailing" constant="37" id="kdP-Ks-H0j"/>
-                <constraint firstItem="wda-4s-ulw" firstAttribute="leading" secondItem="njF-e1-oar" secondAttribute="leading" constant="14" id="nqb-Md-edJ"/>
-                <constraint firstItem="njF-e1-oar" firstAttribute="bottom" secondItem="wda-4s-ulw" secondAttribute="bottom" constant="8" id="xKo-0S-Yh8"/>
-            </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <connections>
-                <outlet property="actorImage" destination="wda-4s-ulw" id="FZ0-Pl-BM2"/>
-                <outlet property="subtitleLbl" destination="zbM-za-Msc" id="br4-oW-2iu"/>
-                <outlet property="titleLbl" destination="AqK-2p-5xU" id="ava-Ts-CwR"/>
-            </connections>
-            <point key="canvasLocation" x="132.60869565217394" y="105.80357142857143"/>
+            <point key="canvasLocation" x="132.60869565217394" y="83.370535714285708"/>
         </tableViewCell>
     </objects>
 </document>
