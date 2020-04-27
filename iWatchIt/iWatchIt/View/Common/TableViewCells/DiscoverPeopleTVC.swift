@@ -10,23 +10,19 @@ import UIKit
 
 class DiscoverPeopleTVC: UITableViewCell, Reusable {
     
-//    @IBOutlet weak var actorImage: UIImageView!
-//    @IBOutlet weak var titleLbl: UILabel!
-//    @IBOutlet weak var subtitleLbl: UILabel!
-    
     var people: TypedSearchResult?
-//    var btnAdd: UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        tintColor = .whiteOrBlack
+        setupLayout()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         textLabel?.text = nil
         detailTextLabel?.text = nil
+        people = nil
     }
     
     func configureCell(people: TypedSearchResult?) {
@@ -34,65 +30,23 @@ class DiscoverPeopleTVC: UITableViewCell, Reusable {
         
         guard let people = people else {return}
         
-//        if let imgPath = people.image, let image = ImageHelper.createImageURL(path: imgPath, size: .profile(size: .medium)) {
-//            actorImage.imageFrom(url: image)
-//            actorImage.roundCornersForAspectFit(radius: 6)
-//        } else {
-//            actorImage.image = kEmptyStateUserMale
-//        }
-        
         textLabel?.text = people.name
-        detailTextLabel?.text = people.department ?? "" + "in People"
-//
-        textLabel?.textColor = .whiteOrBlack
-        detailTextLabel?.textColor = UIColor.white.withAlphaComponent(0.6)
+        var detail = people.department ?? ""
         
-        imageView?.image = UIImage(systemName: "person.crop.circle")
-//        btnAdd = accessoryButton()
-//        accessoryView = btnAdd
-//        DiscoverQuery.shared.peopleIsInQuery(people: people) ? showRemove() : showAdd()
-//        btnAdd?.tintColor = .whiteOrBlack
+        if people.mediaType != nil {
+            detail += " in Movies"
+        }
+        
+        detailTextLabel?.text = detail
     }
     
-//    func configureEmpty() {
-//        textLabel?.textColor = kColorEmptyStateLabel
-//        textLabel?.text = "Add people to discover their content"
-//        actorImage?.image = kEmptyStateUserMale
-//    }
-    
-//    func configureEmpty(text: String) {
-//        textLabel?.textColor = kColorEmptyStateLabel
-//        textLabel?.text = text
-//        imageView?.image = kEmptyStateUserMale
-//        detailTextLabel?.text = text
-//        accessoryView = UIView()
-//    }
-    
-//    private func accessoryButton() -> UIButton {
-//        let cellAudioButton = UIButton(type: .custom)
-//        cellAudioButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-//        cellAudioButton.addTarget(self, action: #selector(accessoryButtonTapped(sender:)), for: .touchUpInside)
-//        cellAudioButton.contentMode = .scaleAspectFit
-//        cellAudioButton.tintColor = .whiteOrBlack
-//        return cellAudioButton
-//    }
-//
-//    private func showAdd() {
-//        UIView.transition(with: btnAdd!, duration: 0.5, options: .transitionFlipFromBottom, animations: {
-//            self.btnAdd?.setImage(UIImage(systemName: "plus"), for: .normal)
-//        }, completion: nil)
-//    }
-//
-//    private func showRemove() {
-//        UIView.transition(with: btnAdd!, duration: 0.5, options: .transitionFlipFromTop, animations: {
-//            self.btnAdd?.setImage(UIImage(systemName: "xmark"), for: .normal)
-//        }, completion: nil)
-//    }
-//
-//    @objc func accessoryButtonTapped(sender : AnyObject){
-//        if let people = people {
-//            DiscoverQuery.shared.addOrRemovePeople(people: people)
-//            DiscoverQuery.shared.peopleIsInQuery(people: people) ? showRemove() : showAdd()
-//        }
-//    }
+    func setupLayout() {
+        tintColor = .whiteOrBlack
+        textLabel?.font = .systemFont(ofSize: 16.0, weight: .semibold)
+        detailTextLabel?.font = .systemFont(ofSize: 16.0, weight: .regular)
+        textLabel?.textColor = .whiteOrBlack
+        detailTextLabel?.textColor = UIColor.whiteOrBlack.withAlphaComponent(0.6)
+        imageView?.image = UIImage(systemName: "person.crop.circle")
+        selectionStyle = .none
+    }
 }

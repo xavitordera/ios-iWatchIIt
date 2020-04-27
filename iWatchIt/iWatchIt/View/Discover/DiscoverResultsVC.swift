@@ -24,6 +24,7 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
     var query: DiscoverQuery?
     var mediaType: MediaType = .show
     var labelEmptySearch = UILabel()
+    var searchTitle = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,14 +39,19 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
     // MARK: - Auxiliar functions
     func setupNav() {
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = "Advanced search results"
+        title = searchTitle
+    }
+    
+    func shouldShowSegmentedHeader() -> Bool {
+        return getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.shouldShowSegmentedHeader(query: query) ?? false
     }
     
     func loadData() {
         guard let presenter = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self), let query = query else {
             return
         }
-        presenter.startFetchingData(query: query, type: mediaType)
+        mediaType = query.type
+        presenter.startFetchingData(query: query, type: query.type)
     }
     
     func reloadData(isEmpty: Bool) {
@@ -82,11 +88,18 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
         reloadData(isEmpty: isEmpty)
     }
     
+    func onShowsFetched(isEmpty: Bool) {
+        reloadData(isEmpty: isEmpty)
+    }
+    
+    func onMoviesFetched(isEmpty: Bool) {
+        reloadData(isEmpty: isEmpty)
+    }
 }
 
 extension DiscoverResultsVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.discoverResults?.results?.count ?? 0
+        return getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.discoverResults.results?.count ?? 0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -112,7 +125,7 @@ extension DiscoverResultsVC: UICollectionViewDelegate, UICollectionViewDataSourc
 extension DiscoverResultsVC: InfiniteCarouselCVCDelegate {
     func didTapCell(id: Int) {
         if let presenter = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self), let nav = navigationController {
-            presenter.contentSelected(navigationController: nav, for: id, and: self.mediaType)
+            presenter.contentSelected(navigationController: nav, for: id, and: mediaType)
         }
     }
 }

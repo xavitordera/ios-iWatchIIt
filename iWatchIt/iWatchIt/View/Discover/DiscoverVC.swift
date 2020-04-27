@@ -31,19 +31,22 @@ class DiscoverVC: BaseVC {
             mainTV.allowsSelection = true
             mainTV.contentInset = .init(top: 0, left: 0, bottom: 20, right: 0)
             mainTV.tableFooterView = UIView()
-//            segMediaType.selectedSegmentIndex = 0
-//            mainTV.tableHeaderView = segMediaType
         }
     }
-    
-//    var segMediaType: UISegmentedControl = UISegmentedControl(items: ["discover_tv_shows_tab".localized, "discover_movies_tab".localized])
-    
-//    var searchButton: UIButton?
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     // MARK: - Auxiliar functions
@@ -53,6 +56,7 @@ class DiscoverVC: BaseVC {
         self.navigationItem.title = "discover_title".localized
         
         searchVC = DiscoverRouter.shared.createSearchInfoModule()
+        searchVC?.delegate = self
         let searchController = UISearchController(searchResultsController: searchVC)
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Search keywords, genres, people..."
@@ -64,38 +68,14 @@ class DiscoverVC: BaseVC {
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     
-//    func setupSearchButton() {
-//        searchButton = UIButton(frame: .init(x: UIScreen.main.bounds.width/2 - 75, y: UIScreen.main.bounds.height - 160, width: 150, height: 40))
-//        searchButton?.backgroundColor = .whiteOrBlack
-//        searchButton?.setTitleColor(.blackOrWhite, for: .normal)
-//        searchButton?.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
-//        searchButton?.setTitle("discover_search".localized, for: .normal)
-//        searchButton?.setImage(kTabDiscoverImg, for: .normal)
-//        searchButton?.layer.cornerRadius = 14
-//        searchButton?.layer.borderColor = UIColor.blackOrWhite.cgColor
-//        searchButton?.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10)
-//        searchButton?.addTarget(self, action: #selector(searchTap), for: .touchUpInside)
-//
-//        view.addSubview(searchButton!)
-//    }
-    
     func setup() {
         setupNav()
-//        setupSearchButton()
         setupSections()
         loadData()
-//        setupQueryDelegate()
     }
-    
-//    func setupQueryDelegate() {
-//        DiscoverQuery.shared.addDelegate(delegate: self)
-//    }
     
     func setupSections() {
         sections = [
-//            kSectionDiscoverGenre,
-//            kSectionDiscoverPeople,
-//            kSectionDiscoverKeywords
             kHomeTrendingSection
         ]
     }
@@ -108,30 +88,11 @@ class DiscoverVC: BaseVC {
         }
     }
     
-//    func selectedMediaType() -> MediaType {
-//        switch SegmentIndexes(rawValue: segMediaType.selectedSegmentIndex) {
-//        case .movies:
-//            return .movie
-//        default:
-//            return .show
-//        }
-//    }
-    
     func didSearchKeyword(keyword: String) {
         if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
             presenter.startFetchingKeywords(term: keyword)
         }
     }
-    
-//    func didSearchGenre(genre: String, mediaType: MediaType) {
-//        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
-//            if mediaType == .movie {
-//                presenter.startFilteringGenres(term: genre, mediaType: .movie)
-//            } else {
-//                presenter.startFilteringGenres(term: genre, mediaType: .show)
-//            }
-//        }
-//    }
     
     func didSearchGenre(genre: String) {
         if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self) {
@@ -145,33 +106,7 @@ class DiscoverVC: BaseVC {
         }
     }
     
-    // MARK: - Actions
-    
-//    @objc func searchTap() {
-//        if let presenter = getPresenter(type: DiscoverViewToPresenterProtocol.self), let nav = navigationController {
-//            presenter.startDiscovering(navigationController: nav, query: DiscoverQuery.shared, mediaType: selectedMediaType())
-//        }
-//    }
-    
     // MARK:- UITableview auxiliar functions
-    
-//    func headerForKeywords() -> UITableViewHeaderFooterView  {
-//        guard let header = mainTV.dequeueReusableHeaderFooterView(withIdentifier: kDiscoverHeaderTHV) as? DiscoverHeaderTVC else { return UITableViewHeaderFooterView() }
-//        header.configureCell(title: "Keywords")
-//        return header
-//    }
-//
-//    func headerForGenres() -> UITableViewHeaderFooterView  {
-//        guard let header = mainTV.dequeueReusableHeaderFooterView(withIdentifier: kDiscoverHeaderTHV) as? DiscoverHeaderTVC else { return UITableViewHeaderFooterView() }
-//        header.configureCell(title: "Genres")
-//        return header
-//    }
-//
-//    func headerForPeople() -> UITableViewHeaderFooterView  {
-//        guard let header = mainTV.dequeueReusableHeaderFooterView(withIdentifier: kDiscoverHeaderTHV) as? DiscoverHeaderTVC else { return UITableViewHeaderFooterView() }
-//        header.configureCell(title: "People")
-//        return header
-//    }
     
     func cellForHeader(title: String) -> UITableViewCell {
         guard let cell = mainTV?.dequeueReusableCell(withIdentifier: kDefaultCell) else {
@@ -180,6 +115,8 @@ class DiscoverVC: BaseVC {
         cell.textLabel?.text = title
         cell.textLabel?.font = .boldSystemFont(ofSize: 24.0)
         cell.textLabel?.textColor = .whiteOrBlack
+        
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -287,11 +224,19 @@ extension DiscoverVC: UISearchBarDelegate {
 //        didSearchPeople(people: searchText)
     }
 }
-//// MARK: - Query
-//extension DiscoverVC: DiscoverQueryDelegate {
-//    func didUpdateQuery() {
-////        mainTV.reloadData()
-//    }
-//}
+// MARK: - SearchVC
+extension DiscoverVC: SearchInfoVCDelegate {
+    func didTapOnGenre(genre: TypedSearchResult) {
+        getPresenter(type: DiscoverViewToPresenterProtocol.self)?.didTapOnGenre(genre: genre, nav: navigationController)
+    }
+    
+    func didTapOnPeople(people: TypedSearchResult) {
+        getPresenter(type: DiscoverViewToPresenterProtocol.self)?.didTapOnPeople(people: people, nav: navigationController)
+    }
+    
+    func didTapOnKeyword(keyword: TypedSearchResult) {
+        getPresenter(type: DiscoverViewToPresenterProtocol.self)?.didTapOnKeyword(keyword: keyword, nav: navigationController)
+    }
+}
 
 

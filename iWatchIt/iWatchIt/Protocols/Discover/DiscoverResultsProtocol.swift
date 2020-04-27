@@ -8,13 +8,16 @@
 import UIKit
 
 protocol DiscoverResultsViewToPresenterProtocol: BaseViewToPresenterProtocol{
-    var discoverResults: Search? { get set }
+    var movieResults: Search? { get set }
+    var showsResults: Search? { get set }
     func startFetchingData(query: DiscoverQuery, type: MediaType)
+    func shouldShowSegmentedHeader(query: DiscoverQuery?) -> Bool
     func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType)
 }
 
 protocol DiscoverResultsPresenterToViewProtocol: BasePresenterToViewProtocol{
-    func onDataFetched(isEmpty: Bool)
+    func onMoviesFetched(isEmpty: Bool)
+    func onShowsFetched(isEmpty: Bool)
 }
 
 protocol DiscoverResultsPresenterToRouterProtocol: BasePresenterToRouterProtocol {
@@ -26,6 +29,6 @@ protocol DiscoverResultsPresenterToInteractorProtocol: BasePresenterToInteractor
 }
 
 protocol DiscoverResultsInteractorToPresenterProtocol: BaseInteractorToPresenterProtocol {
-    func discoverResultsFetchSuccess(results: Root?)
+    func discoverResultsFetchSuccess(results: Root?, mediaType: MediaType)
     func discoverResultsFetchFailed(message: String?)
 }

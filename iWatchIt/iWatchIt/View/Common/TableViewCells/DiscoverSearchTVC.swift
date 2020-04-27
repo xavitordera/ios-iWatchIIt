@@ -18,9 +18,7 @@ class DiscoverSearchTVC: UITableViewCell, Reusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        textLabel?.textColor = .whiteOrBlack
-        tintColor = .whiteOrBlack
-        detailTextLabel?.textColor = UIColor.whiteOrBlack.withAlphaComponent(0.6)
+        setupLayout()
     }
     
     override func prepareForReuse() {
@@ -31,18 +29,39 @@ class DiscoverSearchTVC: UITableViewCell, Reusable {
         detailTextLabel?.text = nil
     }
     
+    func setupLayout() {
+        tintColor = .whiteOrBlack
+        textLabel?.textColor = .whiteOrBlack
+        detailTextLabel?.textColor = UIColor.whiteOrBlack.withAlphaComponent(0.6)
+        textLabel?.font = .systemFont(ofSize: 16.0, weight: .semibold)
+        detailTextLabel?.font = .systemFont(ofSize: 16.0, weight: .regular)
+        selectionStyle = .none
+    }
+    
     // MARK: - Public interface
     func configureCell(keyword: TypedSearchResult?, genre: TypedSearchResult?) {
         self.keyword = keyword
         self.genre = genre
-        //        textLabel?.font = .systemFont(ofSize: 15.0, weight: .regular)
-        
         textLabel?.text = keyword?.name ?? genre?.name
-        detailTextLabel?.text = keyword == nil ? "in Genres" : nil
         if let _ = keyword {
             self.imageView?.image = kTabDiscoverImg
-        } else if let _ = genre {
+            detailTextLabel?.text = nil
+        } else if let genre = genre {
             self.imageView?.image = UIImage(systemName: "tv.circle")
+            var detail = "in Genres "
+            if let type = genre.mediaType {
+                switch type {
+                case .movie:
+                    detail += "in Movies"
+                case .show:
+                    detail += "in TV Shows"
+                case .people:
+                    break
+                }
+            }
+            detailTextLabel?.text = detail
         }
+        
+        
     }
 }

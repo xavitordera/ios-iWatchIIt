@@ -22,7 +22,10 @@ protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
     func startDiscovering(navigationController: UINavigationController, query: DiscoverQuery, mediaType: MediaType)
     
     func startFetchingTrendingPeople()
-    func didTapOnTrendingPeople(index: Int, nav: UINavigationController?) 
+    func didTapOnTrendingPeople(index: Int, nav: UINavigationController?)
+    func didTapOnGenre(genre: TypedSearchResult, nav: UINavigationController?)
+    func didTapOnPeople(people: TypedSearchResult, nav: UINavigationController?)
+    func didTapOnKeyword(keyword: TypedSearchResult, nav: UINavigationController?)
 }
 
 protocol DiscoverPresenterToViewProtocol: BasePresenterToViewProtocol{

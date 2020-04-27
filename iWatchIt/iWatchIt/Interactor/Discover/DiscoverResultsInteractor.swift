@@ -27,7 +27,7 @@ class DiscoverResultsInteractor: BaseInteractor, DiscoverResultsPresenterToInter
                 return
             }
             
-            presenter.discoverResultsFetchSuccess(results: results)
+            presenter.discoverResultsFetchSuccess(results: results, mediaType: mediaType)
         }
     }
 }

@@ -60,6 +60,32 @@ class DiscoverPresenter: BasePresenter {
 }
 
 extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
+    func didTapOnGenre(genre: TypedSearchResult, nav: UINavigationController?) {
+        query = DiscoverQuery()
+        query?.addOrRemoveGenre(genre: genre)
+        query?.type = genre.mediaType ?? .movie
+        if let router = router as? DiscoverPresenterToRouterProtocol, let query = query, let nav = nav {
+            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie)
+        }
+    }
+    
+    func didTapOnPeople(people: TypedSearchResult, nav: UINavigationController?) {
+        query = DiscoverQuery()
+        query?.addOrRemovePeople(people: people)
+        query?.type = people.mediaType ?? .movie
+        if let router = router as? DiscoverPresenterToRouterProtocol, let query = query, let nav = nav {
+            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie)
+        }
+    }
+    
+    func didTapOnKeyword(keyword: TypedSearchResult, nav: UINavigationController?) {
+        query = DiscoverQuery()
+        query?.addOrRemoveKeyword(keyword: keyword)
+        if let router = router as? DiscoverPresenterToRouterProtocol, let query = query, let nav = nav {
+            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie)
+        }
+    }
+    
     func startDiscovering(navigationController: UINavigationController, query: DiscoverQuery, mediaType: MediaType) {
         if let router = router as? DiscoverPresenterToRouterProtocol {
             router.pushToResultsScreen(navigationController: navigationController, for: query, mediaType: mediaType)
@@ -85,8 +111,8 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
     }
     
     func startFilteringGenres(term: String) {
-        startFetchingPeople(term: lastQuery)
         lastQuery = term
+        startFetchingPeople(term: lastQuery)
         let results = filterGenre(term: term)
         self.genres = Array(results.prefix(5))
         if let view = getView(type: DiscoverPresenterToViewProtocol.self) {
