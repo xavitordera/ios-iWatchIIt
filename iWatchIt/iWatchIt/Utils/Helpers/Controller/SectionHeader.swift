@@ -7,33 +7,39 @@
 //
 import UIKit
 
+protocol SectionHeaderDelegate {
+    func didChangeSegment(index: Int)
+}
+
 class SectionHeader: UICollectionReusableView, NibReusable {
-    
-    @IBOutlet weak var title: UILabel!
     
     @IBOutlet weak var segmentedControl: UISegmentedControl! {
         didSet {
-            segmentedControl.addTarget(self, action: #selector(didChangeSegment), for: .touchUpInside)
+            segmentedControl.addTarget(self, action: #selector(didChangeSegment), for: .allEvents)
         }
     }
     
+    var delegate: SectionHeaderDelegate?
+    
+    private var selectedSegment = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupLayout()
-    }
-    
-    func setupLayout() {
-        self.title.font = .boldSystemFont(ofSize: 22.0)
-        self.title.textColor = .whiteOrBlack
     }
     
     @objc func didChangeSegment() {
-        
+        if segmentedControl.selectedSegmentIndex != selectedSegment {
+            selectedSegment = segmentedControl.selectedSegmentIndex
+            delegate?.didChangeSegment(index: selectedSegment)
+        }
     }
     
-    func configureHeader(title: String) {
-        self.title.text = title
+    func configureHeader(titles: [String]) {
+        segmentedControl.removeAllSegments()
+        for title in titles {
+            segmentedControl.insertSegment(withTitle: title, at: titles.firstIndex(of: title) ?? 0, animated: true)
+        }
+        segmentedControl.selectedSegmentIndex = 0
     }
-
 }
 

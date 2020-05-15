@@ -114,7 +114,6 @@
 		10E5BA29242CF92A005227C8 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E5BA28242CF92A005227C8 /* Navigation.swift */; };
 		10E5BA2B242D05DC005227C8 /* BaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E5BA2A242D05DC005227C8 /* BaseProtocol.swift */; };
 		10EAF1C8243530BF006A491D /* ScoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EAF1C7243530BF006A491D /* ScoreButton.swift */; };
-		10EBB4AA2431513800C40732 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10EBB4A92431513800C40732 /* SectionHeader.xib */; };
 		10EBB4AC2431515E00C40732 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EBB4AB2431515E00C40732 /* SectionHeader.swift */; };
 		10F2B5132442027A00952A58 /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F2B5122442027A00952A58 /* PreferenceManager.swift */; };
 		10F64082242BB5D00096C229 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F64081242BB5D00096C229 /* Configuration.swift */; };
@@ -255,7 +254,6 @@
 		10E5BA28242CF92A005227C8 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		10E5BA2A242D05DC005227C8 /* BaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocol.swift; sourceTree = "<group>"; };
 		10EAF1C7243530BF006A491D /* ScoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreButton.swift; sourceTree = "<group>"; };
-		10EBB4A92431513800C40732 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
 		10EBB4AB2431515E00C40732 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		10F2B5122442027A00952A58 /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
 		10F2B514244206C100952A58 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -786,7 +784,6 @@
 				1005B755243B9126004B78F3 /* DetailCarouselTrailerCVC.xib */,
 				10E4A53E2437604500CD80C2 /* HorizontalCarouselCVC.xib */,
 				10F6BFC2242FDE2400AE693A /* InfiniteCarouselTVC.xib */,
-				10EBB4A92431513800C40732 /* SectionHeader.xib */,
 				10F6BFC0242FDE0E00AE693A /* InfiniteCarouselCVC.xib */,
 				10E4A54624376CE900CD80C2 /* DetailCarouselCVC.xib */,
 			);
@@ -944,7 +941,6 @@
 			files = (
 				1036D57F24478E2C007333D2 /* SearchInfoVC.xib in Resources */,
 				10E4A54724376CE900CD80C2 /* DetailCarouselCVC.xib in Resources */,
-				10EBB4AA2431513800C40732 /* SectionHeader.xib in Resources */,
 				1005B759243B9126004B78F3 /* DetailCarouselCastCVC.xib in Resources */,
 				102BD0BD243918BE003215AF /* DetailOverviewCVC.xib in Resources */,
 				10533D382427BEB600BF8FC4 /* LaunchScreen.storyboard in Resources */,

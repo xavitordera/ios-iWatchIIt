@@ -81,6 +81,7 @@ class DiscoverQuery {
     var people: [TypedSearchResult] = []
     static var shared = DiscoverQuery()
     var delegates: [DiscoverQueryDelegate] = []
+    var title: String?
     
     func addOrRemoveKeyword(keyword: TypedSearchResult) {
         if self.keywords.contains(keyword), let index = self.keywords.firstIndex(of: keyword) {

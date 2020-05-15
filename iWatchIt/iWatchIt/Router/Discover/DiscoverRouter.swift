@@ -9,10 +9,11 @@
 import UIKit
 
 class DiscoverRouter: BaseRouter, DiscoverPresenterToRouterProtocol {
-    func pushToResultsScreen(navigationController: UINavigationController, for searchQuery: DiscoverQuery, mediaType: MediaType) {
-        let resultsVC = DiscoverResultsRouter.shared.createModule()
+    func pushToResultsScreen(navigationController: UINavigationController, for searchQuery: DiscoverQuery, mediaType: MediaType, shouldShowHeader: Bool) {
+        let resultsVC = DiscoverResultsRouter.shared.createModule(with: searchQuery.title ?? "")
         resultsVC.query = searchQuery
         resultsVC.mediaType = mediaType
+        resultsVC.shouldShowSegmentedHeader = shouldShowHeader
         navigationController.pushViewController(resultsVC, animated: true)
     }
     

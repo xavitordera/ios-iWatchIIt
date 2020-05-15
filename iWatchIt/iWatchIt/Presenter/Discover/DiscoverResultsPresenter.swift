@@ -13,9 +13,12 @@ class DiscoverResultsPresenter: BasePresenter, DiscoverResultsViewToPresenterPro
     var movieResults: Search?
     var showsResults: Search?
     
+    var query: DiscoverQuery?
+    
     func startFetchingData(query: DiscoverQuery, type: MediaType) {
+        self.query = query
         if let interactor = interactor as? DiscoverResultsPresenterToInteractorProtocol {
-            interactor.fetchDiscoverResults(query: query, mediaType: type)
+            interactor.fetchDiscoverResults(query: query, mediaType: type, page: 1)
         }
     }
     
@@ -49,5 +52,19 @@ class DiscoverResultsPresenter: BasePresenter, DiscoverResultsViewToPresenterPro
     
     func shouldShowSegmentedHeader(query: DiscoverQuery?) -> Bool {
         return query?.type == nil
+    }
+    
+    func didChangeType(type: MediaType) {
+        guard let query = query else {return}
+        switch type {
+        case .movie:
+            if movieResults == nil {
+                startFetchingData(query: query, type: .movie)
+            }
+        default:
+            if showsResults == nil {
+                startFetchingData(query: query, type: .show)
+            }
+        }
     }
 }

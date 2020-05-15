@@ -15,8 +15,8 @@ class DiscoverResultsInteractor: BaseInteractor, DiscoverResultsPresenterToInter
         self.presenter = presenter
     }
     
-    func fetchDiscoverResults(query: DiscoverQuery, mediaType: MediaType) {
-        APIService.shared.discoverExtended(mediaType: mediaType, language: Preference.getLocaleLanguage(), withGenres: query.getFormattedIds(for: .Genres), withPeople: query.getFormattedIds(for: .People), withKeywords: query.getFormattedIds(for: .Keywords), page: 1) { (results, error) in
+    func fetchDiscoverResults(query: DiscoverQuery, mediaType: MediaType, page: Int) {
+        APIService.shared.discoverExtended(mediaType: mediaType, language: Preference.getLocaleLanguage(), withGenres: query.getFormattedIds(for: .Genres), withPeople: query.getFormattedIds(for: .People), withKeywords: query.getFormattedIds(for: .Keywords), page: page) { (results, error) in
             
             guard let presenter = self.presenter as? DiscoverResultsInteractorToPresenterProtocol else {
                 return

@@ -37,7 +37,7 @@ protocol DiscoverPresenterToViewProtocol: BasePresenterToViewProtocol{
 
 protocol DiscoverPresenterToRouterProtocol: BasePresenterToRouterProtocol {
     func pushToResultsScreen(navigationController: UINavigationController,
-                             for searchQuery: DiscoverQuery, mediaType: MediaType)
+                             for searchQuery: DiscoverQuery, mediaType: MediaType, shouldShowHeader: Bool)
 }
 
 protocol DiscoverPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {

@@ -120,52 +120,60 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RWG-vG-Jyt" userLabel="MainCV">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="109" width="414" height="753"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jsa-mx-VoD">
                                     <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="SectionHeader" id="5SZ-yc-Tcf">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JtW-2V-sKZ">
-                                            <rect key="frame" x="33" y="10" width="348" height="31"/>
-                                            <segments>
-                                                <segment title="First"/>
-                                                <segment title="Second"/>
-                                            </segments>
-                                        </segmentedControl>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="JtW-2V-sKZ" secondAttribute="bottom" constant="2" id="HeH-lr-6NF"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="JtW-2V-sKZ" secondAttribute="trailing" constant="25" id="Mhx-dI-QwF"/>
-                                        <constraint firstItem="JtW-2V-sKZ" firstAttribute="top" secondItem="5SZ-yc-Tcf" secondAttribute="topMargin" constant="2" id="dTp-Cq-Kse"/>
-                                        <constraint firstItem="JtW-2V-sKZ" firstAttribute="leading" secondItem="5SZ-yc-Tcf" secondAttribute="leadingMargin" constant="25" id="pZz-rK-yZ3"/>
-                                    </constraints>
-                                </collectionReusableView>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NrQ-o9-OAS">
+                                <rect key="frame" x="0.0" y="44" width="414" height="65"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="IVB-nl-okW">
+                                        <rect key="frame" x="25" y="15" width="364" height="36"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="HUk-K7-xl0"/>
+                                    <constraint firstItem="IVB-nl-okW" firstAttribute="centerX" secondItem="NrQ-o9-OAS" secondAttribute="centerX" id="K7G-Pw-sra"/>
+                                    <constraint firstAttribute="trailing" secondItem="IVB-nl-okW" secondAttribute="trailing" constant="25" id="abt-XL-i4f"/>
+                                    <constraint firstAttribute="bottom" secondItem="IVB-nl-okW" secondAttribute="bottom" constant="15" id="jLg-gj-Beh"/>
+                                    <constraint firstItem="IVB-nl-okW" firstAttribute="top" secondItem="NrQ-o9-OAS" secondAttribute="top" constant="15" id="rQL-1W-BDq"/>
+                                    <constraint firstItem="IVB-nl-okW" firstAttribute="centerY" secondItem="NrQ-o9-OAS" secondAttribute="centerY" id="zTg-OC-39V"/>
+                                    <constraint firstItem="IVB-nl-okW" firstAttribute="leading" secondItem="NrQ-o9-OAS" secondAttribute="leading" constant="25" id="znS-gJ-vcF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="RWG-vG-Jyt" firstAttribute="top" secondItem="NrQ-o9-OAS" secondAttribute="bottom" id="2Lw-qq-L9T"/>
                             <constraint firstItem="xac-yv-tgd" firstAttribute="bottom" secondItem="RWG-vG-Jyt" secondAttribute="bottom" id="9se-zo-JJ5"/>
+                            <constraint firstItem="xac-yv-tgd" firstAttribute="trailing" secondItem="NrQ-o9-OAS" secondAttribute="trailing" id="DZB-Sa-6Y0"/>
+                            <constraint firstItem="NrQ-o9-OAS" firstAttribute="leading" secondItem="xac-yv-tgd" secondAttribute="leading" id="QOz-3Z-3xu"/>
                             <constraint firstItem="RWG-vG-Jyt" firstAttribute="leading" secondItem="xac-yv-tgd" secondAttribute="leading" id="gIT-y0-lLp"/>
-                            <constraint firstItem="RWG-vG-Jyt" firstAttribute="top" secondItem="xac-yv-tgd" secondAttribute="top" id="iyi-Ob-xaI"/>
                             <constraint firstItem="xac-yv-tgd" firstAttribute="trailing" secondItem="RWG-vG-Jyt" secondAttribute="trailing" id="n8e-dk-6Yq"/>
+                            <constraint firstItem="NrQ-o9-OAS" firstAttribute="top" secondItem="xac-yv-tgd" secondAttribute="top" id="suO-Z6-BIL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xac-yv-tgd"/>
                     </view>
                     <connections>
+                        <outlet property="heightHeaderConstraint" destination="HUk-K7-xl0" id="gnG-Mo-UV6"/>
                         <outlet property="mainCV" destination="RWG-vG-Jyt" id="Ejf-YS-Bsv"/>
+                        <outlet property="segmentedControl" destination="IVB-nl-okW" id="GYk-f4-oHg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbR-Y0-Qww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1596" y="704"/>
+            <point key="canvasLocation" x="1595.6521739130435" y="703.79464285714278"/>
         </scene>
     </scenes>
 </document>

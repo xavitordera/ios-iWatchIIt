@@ -17,14 +17,35 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
             mainCV.allowsSelection = true
             mainCV.register(UINib(nibName: kInfiniteCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kInfiniteCarouselCVC)
             mainCV.backgroundColor = .blackOrWhite
-            mainCV.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
+            mainCV.contentInset = UIEdgeInsets(top: shouldShowSegmentedHeader ? 0 : 10, left: 10, bottom: 20, right: 10)
         }
     }
     
     var query: DiscoverQuery?
-    var mediaType: MediaType = .show
+    var mediaType: MediaType = .movie
     var labelEmptySearch = UILabel()
     var searchTitle = ""
+    
+    @IBOutlet weak var heightHeaderConstraint: NSLayoutConstraint!
+    
+    var shouldShowSegmentedHeader: Bool = false
+    private var selectedSegment = 0
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl! {
+        didSet {
+            
+            if !shouldShowSegmentedHeader {
+                heightHeaderConstraint.constant = 0
+                segmentedControl.isHidden = true
+            }
+            
+            segmentedControl.removeAllSegments()
+            segmentedControl.insertSegment(withTitle: "discover_movies_tab".localized, at: 0, animated: true)
+            segmentedControl.insertSegment(withTitle: "discover_tv_shows_tab".localized, at: 1, animated: true)
+            segmentedControl.addTarget(self, action: #selector(didChangeSegment), for: .allEvents)
+            segmentedControl.selectedSegmentIndex = 0
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +63,6 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
         title = searchTitle
     }
     
-    func shouldShowSegmentedHeader() -> Bool {
-        return getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.shouldShowSegmentedHeader(query: query) ?? false
-    }
-    
     func loadData() {
         guard let presenter = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self), let query = query else {
             return
@@ -58,8 +75,9 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
         if isEmpty {
             loadSearchEmptyState()
         } else {
-            mainCV.reloadData()
+            hideEmptyState()
         }
+        mainCV.reloadData()
     }
     
     func loadSearchEmptyState() {
@@ -83,6 +101,17 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
         view.addSubview(labelEmptySearch)
     }
     
+    func hideEmptyState() {
+        labelEmptySearch.isHidden = true
+    }
+    
+    @objc func didChangeSegment() {
+        if segmentedControl.selectedSegmentIndex != selectedSegment {
+            selectedSegment = segmentedControl.selectedSegmentIndex
+            didChangeType(index: selectedSegment)
+        }
+    }
+    
     // MARK: - Presenter
     func onDataFetched(isEmpty: Bool) {
         reloadData(isEmpty: isEmpty)
@@ -99,7 +128,15 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
 
 extension DiscoverResultsVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.discoverResults.results?.count ?? 0
+        guard let presenter = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self) else {return 0}
+        
+        switch mediaType {
+        case .movie:
+            return presenter.movieResults?.results?.count ?? 0
+        default:
+            return presenter.showsResults?.results?.count ?? 0
+        }
+        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -110,8 +147,16 @@ extension DiscoverResultsVC: UICollectionViewDelegate, UICollectionViewDataSourc
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kInfiniteCarouselCVC, for: indexPath) as? InfiniteCarouselCVC else {
             return UICollectionViewCell()
         }
-        cell.configureCell(contentResponse: getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.discoverResults?.results?[indexPath.row])
-        cell.delegate = self
+        
+        switch mediaType {
+        case .movie:
+            cell.configureCell(contentResponse: getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.movieResults?.results?[indexPath.row])
+            cell.delegate = self
+        default:
+            cell.configureCell(contentResponse: getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.showsResults?.results?[indexPath.row])
+            cell.delegate = self
+        }
+        
         return cell
     }
     
@@ -126,6 +171,32 @@ extension DiscoverResultsVC: InfiniteCarouselCVCDelegate {
     func didTapCell(id: Int) {
         if let presenter = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self), let nav = navigationController {
             presenter.contentSelected(navigationController: nav, for: id, and: mediaType)
+        }
+    }
+}
+
+extension DiscoverResultsVC {
+    func didChangeType(index: Int) {
+        var isEmpty = true
+        
+        switch index {
+        case 0:
+            mediaType = .movie
+            isEmpty = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.movieResults?.results?.isEmpty ?? true
+        default:
+            mediaType = .show
+            isEmpty = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.showsResults?.results?.isEmpty ?? true
+        }
+        
+        getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.didChangeType(type: mediaType)
+        reloadData(isEmpty: isEmpty)
+    }
+}
+
+extension DiscoverResultsVC: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y == scrollView.contentSize.height {
+            
         }
     }
 }

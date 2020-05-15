@@ -64,8 +64,9 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
         query = DiscoverQuery()
         query?.addOrRemoveGenre(genre: genre)
         query?.type = genre.mediaType ?? .movie
+        query?.title = genre.name
         if let router = router as? DiscoverPresenterToRouterProtocol, let query = query, let nav = nav {
-            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie)
+            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie, shouldShowHeader: false)
         }
     }
     
@@ -73,23 +74,25 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
         query = DiscoverQuery()
         query?.addOrRemovePeople(people: people)
         query?.type = people.mediaType ?? .movie
+        query?.title = people.name
         if let router = router as? DiscoverPresenterToRouterProtocol, let query = query, let nav = nav {
-            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie)
+            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie, shouldShowHeader: false)
         }
     }
     
     func didTapOnKeyword(keyword: TypedSearchResult, nav: UINavigationController?) {
         query = DiscoverQuery()
         query?.addOrRemoveKeyword(keyword: keyword)
+        query?.title = keyword.name
         if let router = router as? DiscoverPresenterToRouterProtocol, let query = query, let nav = nav {
-            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie)
+            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie, shouldShowHeader: true)
         }
     }
     
     func startDiscovering(navigationController: UINavigationController, query: DiscoverQuery, mediaType: MediaType) {
-        if let router = router as? DiscoverPresenterToRouterProtocol {
-            router.pushToResultsScreen(navigationController: navigationController, for: query, mediaType: mediaType)
-        }
+//        if let router = router as? DiscoverPresenterToRouterProtocol {
+//            router.pushToResultsScreen(navigationController: navigationController, for: query, mediaType: mediaType, shouldShowHeader: )
+//        }
     }
     
     func startFetchingKeywords(term: String) {
@@ -135,7 +138,7 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
         query = DiscoverQuery()
         query?.addOrRemovePeople(people: people[index])
         if let router = router as? DiscoverPresenterToRouterProtocol, let query = query, let nav = nav {
-            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie)
+            router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie, shouldShowHeader: false)
         }
     }
 }

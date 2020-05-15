@@ -12,6 +12,7 @@ protocol DiscoverResultsViewToPresenterProtocol: BaseViewToPresenterProtocol{
     var showsResults: Search? { get set }
     func startFetchingData(query: DiscoverQuery, type: MediaType)
     func shouldShowSegmentedHeader(query: DiscoverQuery?) -> Bool
+    func didChangeType(type: MediaType)
     func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType)
 }
 
@@ -25,7 +26,7 @@ protocol DiscoverResultsPresenterToRouterProtocol: BasePresenterToRouterProtocol
 }
 
 protocol DiscoverResultsPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {
-    func fetchDiscoverResults(query: DiscoverQuery, mediaType: MediaType)
+    func fetchDiscoverResults(query: DiscoverQuery, mediaType: MediaType, page: Int)
 }
 
 protocol DiscoverResultsInteractorToPresenterProtocol: BaseInteractorToPresenterProtocol {

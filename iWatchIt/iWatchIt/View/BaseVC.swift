@@ -24,6 +24,10 @@ class BaseVC: UIViewController, BasePresenterToViewProtocol {
         )
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func showError(message: String?) {
         let alert = AlertHelper.simpleAlertWith(title: "app_error_title".localized, message: message, action: "dismiss_pop_up".localized)
         present(alert, animated: true, completion: nil)

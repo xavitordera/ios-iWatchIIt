@@ -75,6 +75,7 @@ let kDetailCarouselCastCVC = "DetailCarouselCastCVC"
 let kHorizontalCarouselCVC = "HorizontalCarouselCVC"
 let kDetailHeaderCVC = "DetailHeaderCVC"
 let kDetailOverviewCVC = "DetailOverviewCVC"
+let kSectionHeader = "SectionHeader"
 
 let kDiscoverHeaderTHV = "DiscoverHeaderTVC"
 let kDiscoverSearchTVC = "DiscoverSearchTVC"
