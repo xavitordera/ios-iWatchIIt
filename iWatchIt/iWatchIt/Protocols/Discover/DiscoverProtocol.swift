@@ -20,7 +20,6 @@ protocol DiscoverViewToPresenterProtocol: BaseViewToPresenterProtocol{
     func startFilteringGenres(term: String)
     func startFetchingPeople(term: String)
     func startDiscovering(navigationController: UINavigationController, query: DiscoverQuery, mediaType: MediaType)
-    
     func startFetchingTrendingPeople()
     func didTapOnTrendingPeople(index: Int, nav: UINavigationController?)
     func didTapOnGenre(genre: TypedSearchResult, nav: UINavigationController?)

@@ -14,6 +14,7 @@ protocol DiscoverResultsViewToPresenterProtocol: BaseViewToPresenterProtocol{
     func shouldShowSegmentedHeader(query: DiscoverQuery?) -> Bool
     func didChangeType(type: MediaType)
     func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType)
+    func didReachEnd(type: MediaType)
 }
 
 protocol DiscoverResultsPresenterToViewProtocol: BasePresenterToViewProtocol{

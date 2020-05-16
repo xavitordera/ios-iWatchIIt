@@ -31,11 +31,13 @@ struct Cast: Decodable {
     var name: String?
     var image: String?
     var gender: Int?
+    var id: Int64?
     
     enum CodingKeys: String, CodingKey {
         case name
         case image = "profile_path"
         case gender
+        case id
     }
 }
 

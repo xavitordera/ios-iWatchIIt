@@ -293,7 +293,7 @@ extension DetailVC: HorizontalCarouselCVCDelegate {
     
     func navigateTo(cast: Cast) {
         if let presenter = getPresenter() {
-            presenter.didTapOnCast(cast: cast)
+            presenter.didTapOnCast(cast: cast, nav: navigationController)
         }
     }
     

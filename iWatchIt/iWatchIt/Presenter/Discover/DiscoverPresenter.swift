@@ -137,6 +137,7 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
         guard let people = trendingResults else {return}
         query = DiscoverQuery()
         query?.addOrRemovePeople(people: people[index])
+        query?.title = people[index].name ?? ""
         if let router = router as? DiscoverPresenterToRouterProtocol, let query = query, let nav = nav {
             router.pushToResultsScreen(navigationController: nav, for: query, mediaType: .movie, shouldShowHeader: false)
         }

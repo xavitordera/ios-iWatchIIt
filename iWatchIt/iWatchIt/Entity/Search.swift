@@ -10,10 +10,14 @@ import RealmSwift
 
 struct Search {
     var results: [Content]?
+    var page: Int?
+    var totalPages: Int?
     
     static func createFromRoot(root: Root?) -> Search {
         var search = Search()
         search.results = root?.results
+        search.page = root?.page
+        search.totalPages = root?.totalPages
         return search
     }
 }

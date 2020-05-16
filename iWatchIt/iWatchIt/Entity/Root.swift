@@ -11,10 +11,12 @@
 struct Root: Decodable {
     var page: Int?
     var results: [Content]?
+    var totalPages: Int?
     
     enum CodingKeys: String, CodingKey {
         case page
         case results
+        case totalPages = "total_pages"
     }
 }
 

@@ -33,11 +33,24 @@ class DiscoverResultsPresenter: BasePresenter, DiscoverResultsViewToPresenterPro
         if let view = view as? DiscoverResultsPresenterToViewProtocol, let results = results?.results {
             switch mediaType {
             case .movie:
-                movieResults = discoverResults
-                view.onMoviesFetched(isEmpty: results.isEmpty)
+                if let page = discoverResults.page, page > 1, movieResults?.page != nil {
+                    movieResults?.results?.append(contentsOf: results)
+                    movieResults?.page! += 1
+                } else {
+                    movieResults = discoverResults
+                }
+                
+                view.onMoviesFetched(isEmpty: movieResults?.results?.isEmpty ?? true)
             case .show:
-                showsResults = discoverResults
-                view.onShowsFetched(isEmpty: results.isEmpty)
+                if let page = discoverResults.page, page > 1, showsResults?.page != nil {
+                    showsResults?.results?.append(contentsOf: results)
+                    showsResults?.page! += 1
+                } else {
+                    showsResults = discoverResults
+                }
+                
+                
+                view.onShowsFetched(isEmpty: showsResults?.results?.isEmpty ?? true)
             case .people:
                 break
             }
@@ -64,6 +77,26 @@ class DiscoverResultsPresenter: BasePresenter, DiscoverResultsViewToPresenterPro
         default:
             if showsResults == nil {
                 startFetchingData(query: query, type: .show)
+            }
+        }
+    }
+    
+    func didReachEnd(type: MediaType) {
+        var typeResults: Search?
+        switch type {
+           case .movie:
+               typeResults = movieResults
+           default:
+               typeResults = showsResults
+        }
+        
+        guard let results = typeResults, let query = query else { return }
+        
+        if let page = results.page, let totalPages = results.totalPages {
+            if page < totalPages {
+                if let interactor = interactor as? DiscoverResultsPresenterToInteractorProtocol {
+                    interactor.fetchDiscoverResults(query: query, mediaType: type, page: page + 1)
+                }
             }
         }
     }

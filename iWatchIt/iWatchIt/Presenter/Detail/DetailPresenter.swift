@@ -73,12 +73,26 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
         PlatformHelper.goToPlatform(platform: platform)
     }
     
-    func didTapOnCast(cast: Cast?) {
+    func didTapOnCast(cast: Cast?, nav: UINavigationController?) {
+        guard type == .movie else { return }
         
+        let people = TypedSearchResult()
+        people.id = cast?.id
+        people.name = cast?.name
+        people.createPeople()
+        
+        let query = DiscoverQuery()
+        query.addOrRemovePeople(people: people)
+        query.type = .movie
+        query.title = people.name
+        
+        if let router = router as? DetailPresenterToRouterProtocol {
+            router.pushDiscoverResults(query: query, nav: nav)
+        }
     }
     
     func didTapOnVideo(video: Video?, nav: UINavigationController) {
-//        VideoHelper.goToVideo(video: video, withNav: nav)
+        
     }
     
     func didTapShare() {

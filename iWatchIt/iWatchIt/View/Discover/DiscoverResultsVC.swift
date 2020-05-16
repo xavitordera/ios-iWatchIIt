@@ -195,8 +195,15 @@ extension DiscoverResultsVC {
 
 extension DiscoverResultsVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y == scrollView.contentSize.height {
-            
+        var page = 1
+        switch mediaType {
+        case .movie:
+            page = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.movieResults?.page ?? 1
+        default:
+            page = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.showsResults?.page ?? 1
+        }
+        if scrollView.contentOffset.y >= (UIScreen.main.bounds.height * CGFloat(page)) {
+            getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.didReachEnd(type: mediaType)
         }
     }
 }

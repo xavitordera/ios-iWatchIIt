@@ -14,6 +14,18 @@ class DetailRouter: BaseRouter, DetailPresenterToRouterProtocol {
         
     }
     
+    func pushDiscoverResults(query: DiscoverQuery, nav: UINavigationController?) {
+        let vc = DiscoverResultsRouter.shared.createModule(with: query.title ?? "")
+        
+        vc.query = query
+        vc.mediaType = .movie
+        vc.shouldShowSegmentedHeader = false
+        
+        if let nav = nav {
+            nav.pushViewController(vc, animated: true)
+        }
+    }
+    
     func createModule(with id: Int, and type: MediaType) -> DetailVC {
         let view = kStoryboardDetail.instantiateViewController(identifier: kDetailVC) as! DetailVC
         
