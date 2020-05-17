@@ -119,17 +119,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RWG-vG-Jyt" userLabel="MainCV">
-                                <rect key="frame" x="0.0" y="109" width="414" height="753"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jsa-mx-VoD">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NrQ-o9-OAS">
                                 <rect key="frame" x="0.0" y="44" width="414" height="65"/>
                                 <subviews>
@@ -152,22 +141,26 @@
                                     <constraint firstItem="IVB-nl-okW" firstAttribute="leading" secondItem="NrQ-o9-OAS" secondAttribute="leading" constant="25" id="znS-gJ-vcF"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L6v-aT-esI">
+                                <rect key="frame" x="0.0" y="109" width="414" height="753"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="RWG-vG-Jyt" firstAttribute="top" secondItem="NrQ-o9-OAS" secondAttribute="bottom" id="2Lw-qq-L9T"/>
-                            <constraint firstItem="xac-yv-tgd" firstAttribute="bottom" secondItem="RWG-vG-Jyt" secondAttribute="bottom" id="9se-zo-JJ5"/>
+                            <constraint firstItem="L6v-aT-esI" firstAttribute="top" secondItem="NrQ-o9-OAS" secondAttribute="bottom" id="5wR-UJ-gfI"/>
                             <constraint firstItem="xac-yv-tgd" firstAttribute="trailing" secondItem="NrQ-o9-OAS" secondAttribute="trailing" id="DZB-Sa-6Y0"/>
+                            <constraint firstItem="L6v-aT-esI" firstAttribute="leading" secondItem="xac-yv-tgd" secondAttribute="leading" id="Hpz-pS-JQg"/>
                             <constraint firstItem="NrQ-o9-OAS" firstAttribute="leading" secondItem="xac-yv-tgd" secondAttribute="leading" id="QOz-3Z-3xu"/>
-                            <constraint firstItem="RWG-vG-Jyt" firstAttribute="leading" secondItem="xac-yv-tgd" secondAttribute="leading" id="gIT-y0-lLp"/>
-                            <constraint firstItem="xac-yv-tgd" firstAttribute="trailing" secondItem="RWG-vG-Jyt" secondAttribute="trailing" id="n8e-dk-6Yq"/>
+                            <constraint firstItem="L6v-aT-esI" firstAttribute="bottom" secondItem="xac-yv-tgd" secondAttribute="bottom" id="Rb2-wH-0Nt"/>
                             <constraint firstItem="NrQ-o9-OAS" firstAttribute="top" secondItem="xac-yv-tgd" secondAttribute="top" id="suO-Z6-BIL"/>
+                            <constraint firstItem="L6v-aT-esI" firstAttribute="trailing" secondItem="xac-yv-tgd" secondAttribute="trailing" id="yyL-Ns-9fq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xac-yv-tgd"/>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="L6v-aT-esI" id="pNx-vp-sHy"/>
                         <outlet property="heightHeaderConstraint" destination="HUk-K7-xl0" id="gnG-Mo-UV6"/>
-                        <outlet property="mainCV" destination="RWG-vG-Jyt" id="Ejf-YS-Bsv"/>
                         <outlet property="segmentedControl" destination="IVB-nl-okW" id="GYk-f4-oHg"/>
                     </connections>
                 </viewController>

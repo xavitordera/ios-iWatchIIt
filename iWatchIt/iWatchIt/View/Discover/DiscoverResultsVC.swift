@@ -9,28 +9,42 @@
 import UIKit
 
 class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
-
-    @IBOutlet weak var mainCV: UICollectionView! {
+    
+    @IBOutlet weak var containerView: UIView! {
         didSet {
-            mainCV.delegate = self
-            mainCV.dataSource = self
-            mainCV.allowsSelection = true
-            mainCV.register(UINib(nibName: kInfiniteCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kInfiniteCarouselCVC)
-            mainCV.backgroundColor = .blackOrWhite
-            mainCV.contentInset = UIEdgeInsets(top: shouldShowSegmentedHeader ? 0 : 10, left: 10, bottom: 20, right: 10)
+            let layout = UICollectionViewFlowLayout()
+            let width = (UIScreen.main.bounds.width / 3) - 35
+            layout.itemSize = .init(width: width, height: width * 1.5)
+            layout.minimumInteritemSpacing = 7.5
+            layout.scrollDirection = .vertical
+            let frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: containerView.frame.size.height)
+            mainCV = UICollectionView(frame: frame, collectionViewLayout: layout)
+            mainCV?.allowsSelection = true
+            mainCV?.delegate = self
+            mainCV?.dataSource = self
+            mainCV?.register(UINib(nibName: kInfiniteCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kInfiniteCarouselCVC)
+            mainCV?.backgroundColor = .blackOrWhite
+            mainCV?.contentInset = UIEdgeInsets(top: shouldShowSegmentedHeader ? 0 : 10, left: 10, bottom: 20, right: 10)
+    
+            if shouldShowSegmentedHeader {
+                let layout1 = UICollectionViewFlowLayout()
+                let width1 = (UIScreen.main.bounds.width / 3) - 35
+                layout1.itemSize = .init(width: width1, height: width1 * 1.5)
+                layout1.minimumInteritemSpacing = 7.5
+                layout1.scrollDirection = .vertical
+                let frame1 = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: containerView.frame.size.height)
+                showsCV = UICollectionView(frame: frame1, collectionViewLayout: layout1)
+                showsCV?.delegate = self
+                showsCV?.dataSource = self
+                showsCV?.allowsSelection = true
+                showsCV?.register(UINib(nibName: kInfiniteCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kInfiniteCarouselCVC)
+                showsCV?.backgroundColor = .blackOrWhite
+                showsCV?.contentInset = UIEdgeInsets(top: shouldShowSegmentedHeader ? 0 : 10, left: 10, bottom: 20, right: 10)
+            }
         }
     }
     
-    var query: DiscoverQuery?
-    var mediaType: MediaType = .movie
-    var labelEmptySearch = UILabel()
-    var searchTitle = ""
-    
     @IBOutlet weak var heightHeaderConstraint: NSLayoutConstraint!
-    
-    var shouldShowSegmentedHeader: Bool = false
-    private var selectedSegment = 0
-    
     @IBOutlet weak var segmentedControl: UISegmentedControl! {
         didSet {
             
@@ -43,18 +57,36 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
             segmentedControl.insertSegment(withTitle: "discover_movies_tab".localized, at: 0, animated: true)
             segmentedControl.insertSegment(withTitle: "discover_tv_shows_tab".localized, at: 1, animated: true)
             segmentedControl.addTarget(self, action: #selector(didChangeSegment), for: .allEvents)
-            segmentedControl.selectedSegmentIndex = 0
+            segmentedControl.selectedSegmentIndex = selectedSegment
         }
     }
+    
+    var mainCV: UICollectionView?
+    var showsCV: UICollectionView?
+    var query: DiscoverQuery?
+    var mediaType: MediaType = .movie
+    var labelEmptySearch = UILabel()
+    var searchTitle = ""
+    var shouldShowSegmentedHeader: Bool = false
+    private var selectedSegment = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchEmptyStates()
         loadData()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNav()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        var frame = containerView.frame
+        frame.origin.y = 0
+        mainCV?.frame = frame
+        showsCV?.frame = frame
+        showActiveContainer()
     }
     
     // MARK: - Auxiliar functions
@@ -77,7 +109,9 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
         } else {
             hideEmptyState()
         }
-        mainCV.reloadData()
+        
+        mainCV?.reloadData()
+        showsCV?.reloadData()
     }
     
     func loadSearchEmptyState() {
@@ -131,12 +165,13 @@ extension DiscoverResultsVC: UICollectionViewDelegate, UICollectionViewDataSourc
         guard let presenter = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self) else {return 0}
         
         switch mediaType {
+        case .show:
+            return presenter.showsResults?.results?.count ?? 0
         case .movie:
             return presenter.movieResults?.results?.count ?? 0
-        default:
-            return presenter.showsResults?.results?.count ?? 0
+        case .people:
+            fatalError()
         }
-        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -147,12 +182,16 @@ extension DiscoverResultsVC: UICollectionViewDelegate, UICollectionViewDataSourc
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kInfiniteCarouselCVC, for: indexPath) as? InfiniteCarouselCVC else {
             return UICollectionViewCell()
         }
-        
-        switch mediaType {
-        case .movie:
-            cell.configureCell(contentResponse: getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.movieResults?.results?[indexPath.row])
-            cell.delegate = self
-        default:
+        if collectionView == self.mainCV {
+            switch mediaType {
+            case .movie:
+                cell.configureCell(contentResponse: getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.movieResults?.results?[indexPath.row])
+                cell.delegate = self
+            default:
+                cell.configureCell(contentResponse: getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.showsResults?.results?[indexPath.row])
+                cell.delegate = self
+            }
+        } else {
             cell.configureCell(contentResponse: getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.showsResults?.results?[indexPath.row])
             cell.delegate = self
         }
@@ -177,19 +216,36 @@ extension DiscoverResultsVC: InfiniteCarouselCVCDelegate {
 
 extension DiscoverResultsVC {
     func didChangeType(index: Int) {
-        var isEmpty = true
-        
         switch index {
         case 0:
             mediaType = .movie
-            isEmpty = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.movieResults?.results?.isEmpty ?? true
         default:
             mediaType = .show
-            isEmpty = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.showsResults?.results?.isEmpty ?? true
         }
         
         getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.didChangeType(type: mediaType)
-        reloadData(isEmpty: isEmpty)
+
+        if shouldShowSegmentedHeader {
+            showActiveContainer()
+        }
+    }
+    
+    func showActiveContainer() {
+        for view in containerView.subviews {
+            view.removeFromSuperview()
+        }
+        
+        guard shouldShowSegmentedHeader else {
+            containerView.addSubview(mainCV!)
+            return
+        }
+        
+        switch mediaType {
+        case .movie:
+            containerView.addSubview(mainCV!)
+        default:
+            containerView.addSubview(showsCV!)
+        }
     }
 }
 

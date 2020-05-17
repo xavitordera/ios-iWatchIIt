@@ -33,19 +33,19 @@ class DiscoverResultsPresenter: BasePresenter, DiscoverResultsViewToPresenterPro
         if let view = view as? DiscoverResultsPresenterToViewProtocol, let results = results?.results {
             switch mediaType {
             case .movie:
-                if let page = discoverResults.page, page > 1, movieResults?.page != nil {
+                if let page = discoverResults.page, movieResults?.page != nil, page > movieResults!.page! {
                     movieResults?.results?.append(contentsOf: results)
                     movieResults?.page! += 1
-                } else {
+                } else if let page = discoverResults.page, page == 1 {
                     movieResults = discoverResults
                 }
                 
                 view.onMoviesFetched(isEmpty: movieResults?.results?.isEmpty ?? true)
             case .show:
-                if let page = discoverResults.page, page > 1, showsResults?.page != nil {
+                if let page = discoverResults.page,  showsResults?.page != nil, page > showsResults!.page! {
                     showsResults?.results?.append(contentsOf: results)
                     showsResults?.page! += 1
-                } else {
+                } else if let page = discoverResults.page, page == 1 {
                     showsResults = discoverResults
                 }
                 
