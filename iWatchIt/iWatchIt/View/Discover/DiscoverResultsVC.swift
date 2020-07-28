@@ -147,9 +147,6 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
     }
     
     // MARK: - Presenter
-    func onDataFetched(isEmpty: Bool) {
-        reloadData(isEmpty: isEmpty)
-    }
     
     func onShowsFetched(isEmpty: Bool) {
         reloadData(isEmpty: isEmpty)

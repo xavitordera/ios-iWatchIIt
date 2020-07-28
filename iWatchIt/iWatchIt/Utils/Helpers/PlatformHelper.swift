@@ -29,6 +29,9 @@ enum PlatformSite: String, CaseIterable {
     case Fox = "Fox"
     case NBC = "NBC"
     case Nickelodeon = "Nickelodeon"
+    case Syfy = "Syfy"
+    case HBOMax = "HBO Max"
+    
 }
 
 enum PlatformScheme: String, CaseIterable {
@@ -82,6 +85,10 @@ class PlatformHelper {
             return kNBC
         case .Nickelodeon:
             return kNickelodeon
+        case .Syfy:
+            return kSyfy
+        case .HBOMax:
+            return kHBOMax
         }
     }
     
@@ -186,7 +193,7 @@ class PlatformHelper {
         case .HBO:
             return (url, buildSchemeURL(for: url, withScheme: .HBO))
         default:
-            return (url,"")
+            return (url, "")
         }
        
     }
@@ -238,6 +245,10 @@ class PlatformHelper {
             return .DCUniverse
         }
         
+        if platformURL.contains("hbomax") {
+            return .HBOMax
+        }
+        
         if platformURL.contains("hbo") {
             return .HBO
         }
@@ -260,6 +271,10 @@ class PlatformHelper {
         
         if platformURL.contains("nickelodeon") {
             return .Nickelodeon
+        }
+        
+        if platformURL.contains("syfy") {
+            return .Syfy
         }
         
         return nil
