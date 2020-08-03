@@ -28,6 +28,7 @@
 		102BD0BD243918BE003215AF /* DetailOverviewCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */; };
 		102CE7C324D84398002811C6 /* BannerAdCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102CE7C224D84398002811C6 /* BannerAdCVC.swift */; };
 		102CE7C524D85172002811C6 /* BannerAdHeaderCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102CE7C424D85172002811C6 /* BannerAdHeaderCRV.swift */; };
+		102CE7C824D855CA002811C6 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102CE7C724D855CA002811C6 /* AdManager.swift */; };
 		103540B9242D6ED6006309FE /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103540B8242D6ED6006309FE /* AlertHelper.swift */; };
 		10354E082444BB97008DF790 /* DiscoverSearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10354E062444BB97008DF790 /* DiscoverSearchTVC.swift */; };
 		10354E092444BB97008DF790 /* DiscoverSearchTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10354E072444BB97008DF790 /* DiscoverSearchTVC.xib */; };
@@ -172,6 +173,7 @@
 		102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailOverviewCVC.xib; sourceTree = "<group>"; };
 		102CE7C224D84398002811C6 /* BannerAdCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdCVC.swift; sourceTree = "<group>"; };
 		102CE7C424D85172002811C6 /* BannerAdHeaderCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdHeaderCRV.swift; sourceTree = "<group>"; };
+		102CE7C724D855CA002811C6 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		103540B8242D6ED6006309FE /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		10354E062444BB97008DF790 /* DiscoverSearchTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverSearchTVC.swift; sourceTree = "<group>"; };
 		10354E072444BB97008DF790 /* DiscoverSearchTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverSearchTVC.xib; sourceTree = "<group>"; };
@@ -319,6 +321,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		102CE7C624D855BA002811C6 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				102CE7C724D855CA002811C6 /* AdManager.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 		1039A5C62427BF36005531A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -709,6 +719,7 @@
 		10D2886C242F71CD00A2DA0D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				102CE7C624D855BA002811C6 /* Ads */,
 				1053A81924D5B2F100AC390A /* DynamicLinks */,
 				10D2886F242F725A00A2DA0D /* Reusable */,
 				103540B8242D6ED6006309FE /* AlertHelper.swift */,
@@ -1116,6 +1127,7 @@
 				10482789242ED69000ED7683 /* HomeProtocol.swift in Sources */,
 				109E456E24312DB00027012B /* SearchVC.swift in Sources */,
 				10F6409A242C14EF0096C229 /* AppError.swift in Sources */,
+				102CE7C824D855CA002811C6 /* AdManager.swift in Sources */,
 				10482794242EEF7700ED7683 /* Home.swift in Sources */,
 				10860C222427CE5D00DA3A5F /* BasePresenter.swift in Sources */,
 				10860C242427CE6C00DA3A5F /* BaseRouter.swift in Sources */,

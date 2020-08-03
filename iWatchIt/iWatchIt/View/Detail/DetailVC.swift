@@ -43,6 +43,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         loadDetail()
         prepareVideoPlayer()
         addOservers()
+        attachToAdManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,12 +53,17 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        AdManager.shared.deattach()
     }
     
     // MARK: - Auxiliar functions
     
     func addOservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(hideLoadingVideoCell), name: UIWindow.didBecomeHiddenNotification, object: nil)
+    }
+    
+    func attachToAdManager() {
+        AdManager.shared.attach(self)
     }
     
     func setupNav() {

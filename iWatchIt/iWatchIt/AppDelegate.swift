@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loadFirstScreen()
         initRealm()
         initFirebase()
+        initGoogleAds()
         
         return true
     }
@@ -37,7 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func initGoogleAds() {
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2f9e0612b4e8f7792a10c6602e28dce6"]
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        GADMobileAds.sharedInstance().start{_ in
+            AdManager.shared.start()
+        }
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity,

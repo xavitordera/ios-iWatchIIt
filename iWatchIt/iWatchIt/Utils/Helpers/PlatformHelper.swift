@@ -31,7 +31,7 @@ enum PlatformSite: String, CaseIterable {
     case Nickelodeon = "Nickelodeon"
     case Syfy = "Syfy"
     case HBOMax = "HBO Max"
-    
+    case Peacock = "Peacock"
 }
 
 enum PlatformScheme: String, CaseIterable {
@@ -89,6 +89,8 @@ class PlatformHelper {
             return kSyfy
         case .HBOMax:
             return kHBOMax
+        case .Peacock:
+            return kPeacock
         }
     }
     
@@ -277,6 +279,10 @@ class PlatformHelper {
             return .Syfy
         }
         
+        if platformURL.contains("peacock") {
+           return .Peacock
+        }
+           
         return nil
     }
     
