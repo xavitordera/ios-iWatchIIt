@@ -27,6 +27,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             mainCV.register(UINib(nibName: kDetailHeaderCVC, bundle: .main), forCellWithReuseIdentifier: kDetailHeaderCVC)
             mainCV.register(UINib(nibName: kDetailOverviewCVC, bundle: .main), forCellWithReuseIdentifier: kDetailOverviewCVC)
             mainCV.register(UINib(nibName: kHorizontalCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kHorizontalCarouselCVC)
+            mainCV.register(cellType: BannerAdCVC.self)
             
             mainCV.contentInset = .zero
             mainCV.bounces = true
@@ -206,7 +207,18 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     }
     
     // MARK: - Collection View Cells
-    func cellForHeader(indexPath: IndexPath) -> UICollectionViewCell {
+    func cellsForHeader(_ indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.item {
+        case 0:
+            return cellForHeader(indexPath)
+        case 1:
+            return cellForAd(indexPath)
+        default:
+            fatalError()
+        }
+    }
+    
+    func cellForHeader(_ indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kDetailHeaderCVC, for: indexPath) as? DetailHeaderCVC else {
             return UICollectionViewCell()
         }
@@ -217,36 +229,48 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         return cell
     }
     
-    func cellForOverview(indexPath: IndexPath) -> UICollectionViewCell {
+    func cellForAd(_ indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = mainCV.dequeueReusableCell(for: indexPath, cellType: BannerAdCVC.self)
+        
+        cell.configureWithBanner(banner: viewForBanner(size: CGSize(width: UIScreen.main.bounds.width, height: kHeightBannerAd)))
+        
+        return cell
+    }
+    
+    func cellForOverview(_ indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kDetailOverviewCVC, for: indexPath) as? DetailOverviewCVC else {
             return UICollectionViewCell()
         }
+        
         cell.configureCell(with: getPresenter()?.detail?.voteAverage, and: "detail_overview_section".localized, and: getPresenter()?.detail?.overview)
         return cell
     }
     
-    func cellForPlatform(indexPath: IndexPath) -> UICollectionViewCell {
+    func cellForPlatform(_ indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
             return UICollectionViewCell()
         }
+        
         cell.configureCell(platformResponse: getPresenter()?.platforms, title: "detail_platforms_section".localized)
         cell.delegate = self
         return cell
     }
     
-    func cellForCast(indexPath: IndexPath) -> UICollectionViewCell {
+    func cellForCast(_ indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
             return UICollectionViewCell()
         }
+        
         cell.configureCell(castResponse: getPresenter()?.detail?.credits?.cast, title: "detail_cast_section".localized)
         cell.delegate = self
         return cell
     }
     
-    func cellForVideos(indexPath: IndexPath) -> UICollectionViewCell {
+    func cellForVideos(_ indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
             return UICollectionViewCell()
         }
+        
         cell.configureCell(videoResponse: getPresenter()?.detail?.videos?.results, title: "detail_videos_section".localized)
         cell.delegate = self
         return cell
@@ -260,13 +284,27 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         }
         return 0.0
     }
+    
+    func sizeForHeaderCells(_ indexPath: IndexPath) -> CGSize {
+        switch indexPath.item {
+        case 0:
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsHeader)
+        case 1:
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightBannerAd)
+        default:
+            fatalError()
+        }
+    }
 }
 
 // MARK: - UICollectionView
 
 extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  1
+        if sections[section] == kSectionDetailHeader {
+            return 2
+        }
+        return 1
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -276,15 +314,15 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch sections[indexPath.section] {
         case kSectionDetailHeader:
-            return cellForHeader(indexPath: indexPath)
+            return cellsForHeader(indexPath)
         case kSectionDetailOverview:
-            return cellForOverview(indexPath: indexPath)
+            return cellForOverview(indexPath)
         case kSectionDetailPlatforms:
-            return cellForPlatform(indexPath: indexPath)
+            return cellForPlatform(indexPath)
         case kSectionDetailCast:
-            return cellForCast(indexPath: indexPath)
+            return cellForCast(indexPath)
         case kSectionDetailVideos:
-            return cellForVideos(indexPath: indexPath)
+            return cellForVideos(indexPath)
         default:
             return UICollectionViewCell()
         }
@@ -293,7 +331,7 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch sections[indexPath.section] {
         case kSectionDetailHeader:
-            return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsHeader)
+            return sizeForHeaderCells(indexPath)
         case kSectionDetailOverview:
             return CGSize(width: UIScreen.main.bounds.width, height: heightForOverview())
         case kSectionDetailPlatforms:

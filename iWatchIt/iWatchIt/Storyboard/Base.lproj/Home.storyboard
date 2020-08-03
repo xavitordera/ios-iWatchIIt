@@ -119,8 +119,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97w-88-Qsi" userLabel="bannerView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="75"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="TWG-qx-Uvp"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NrQ-o9-OAS">
-                                <rect key="frame" x="0.0" y="44" width="414" height="65"/>
+                                <rect key="frame" x="0.0" y="119" width="414" height="65"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="IVB-nl-okW">
                                         <rect key="frame" x="25" y="15" width="364" height="36"/>
@@ -142,7 +149,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L6v-aT-esI">
-                                <rect key="frame" x="0.0" y="109" width="414" height="753"/>
+                                <rect key="frame" x="0.0" y="184" width="414" height="678"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
@@ -151,14 +158,19 @@
                             <constraint firstItem="L6v-aT-esI" firstAttribute="top" secondItem="NrQ-o9-OAS" secondAttribute="bottom" id="5wR-UJ-gfI"/>
                             <constraint firstItem="xac-yv-tgd" firstAttribute="trailing" secondItem="NrQ-o9-OAS" secondAttribute="trailing" id="DZB-Sa-6Y0"/>
                             <constraint firstItem="L6v-aT-esI" firstAttribute="leading" secondItem="xac-yv-tgd" secondAttribute="leading" id="Hpz-pS-JQg"/>
+                            <constraint firstItem="97w-88-Qsi" firstAttribute="bottom" secondItem="NrQ-o9-OAS" secondAttribute="top" id="Kde-5C-IG0"/>
                             <constraint firstItem="NrQ-o9-OAS" firstAttribute="leading" secondItem="xac-yv-tgd" secondAttribute="leading" id="QOz-3Z-3xu"/>
                             <constraint firstItem="L6v-aT-esI" firstAttribute="bottom" secondItem="xac-yv-tgd" secondAttribute="bottom" id="Rb2-wH-0Nt"/>
-                            <constraint firstItem="NrQ-o9-OAS" firstAttribute="top" secondItem="xac-yv-tgd" secondAttribute="top" id="suO-Z6-BIL"/>
+                            <constraint firstItem="xac-yv-tgd" firstAttribute="trailing" secondItem="97w-88-Qsi" secondAttribute="trailing" id="cbp-sg-hUk"/>
+                            <constraint firstItem="97w-88-Qsi" firstAttribute="top" secondItem="xac-yv-tgd" secondAttribute="top" id="n0z-M9-ZQR"/>
+                            <constraint firstItem="NrQ-o9-OAS" firstAttribute="top" secondItem="97w-88-Qsi" secondAttribute="bottom" id="suO-Z6-BIL"/>
+                            <constraint firstItem="97w-88-Qsi" firstAttribute="leading" secondItem="xac-yv-tgd" secondAttribute="leading" id="xyD-ux-R6x"/>
                             <constraint firstItem="L6v-aT-esI" firstAttribute="trailing" secondItem="xac-yv-tgd" secondAttribute="trailing" id="yyL-Ns-9fq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xac-yv-tgd"/>
                     </view>
                     <connections>
+                        <outlet property="bannerView" destination="97w-88-Qsi" id="P2p-bD-cnJ"/>
                         <outlet property="containerView" destination="L6v-aT-esI" id="pNx-vp-sHy"/>
                         <outlet property="heightHeaderConstraint" destination="HUk-K7-xl0" id="gnG-Mo-UV6"/>
                         <outlet property="segmentedControl" destination="IVB-nl-okW" id="GYk-f4-oHg"/>

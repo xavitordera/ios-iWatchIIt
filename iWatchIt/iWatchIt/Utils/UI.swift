@@ -64,6 +64,7 @@ let kHeightDetailSectionsCast: CGFloat = 215
 let kHeightDetailSectionsVideo: CGFloat = 290
 
 let kHeightDiscoverSections: CGFloat = 45
+let kHeightBannerAd: CGFloat = 75
 
 let kDefaultCell = "defaultCell"
 let kInfiniteCarouselTVC = "InfiniteCarouselTVC"
@@ -76,6 +77,7 @@ let kHorizontalCarouselCVC = "HorizontalCarouselCVC"
 let kDetailHeaderCVC = "DetailHeaderCVC"
 let kDetailOverviewCVC = "DetailOverviewCVC"
 let kSectionHeader = "SectionHeader"
+let kAdBannerCVC = "BannerAdCVC"
 
 let kDiscoverHeaderTHV = "DiscoverHeaderTVC"
 let kDiscoverSearchTVC = "DiscoverSearchTVC"

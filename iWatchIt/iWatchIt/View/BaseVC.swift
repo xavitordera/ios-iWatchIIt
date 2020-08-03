@@ -6,6 +6,7 @@
 //  Copyright © 2020 Xavi Tordera. All rights reserved.
 //
 import UIKit
+import GoogleMobileAds
 
 class BaseVC: UIViewController, BasePresenterToViewProtocol {
     var presenter: BaseViewToPresenterProtocol?
@@ -47,5 +48,46 @@ class BaseVC: UIViewController, BasePresenterToViewProtocol {
     func getPresenter<T>(type: T.Type) -> T? {
         guard let presenter = self.presenter as? T else { return nil }
         return presenter
+    }
+    
+    func viewForBanner(size: CGSize? = nil) -> GADBannerView {
+        var banner: GADBannerView!
+        
+        if let size = size {
+            banner = GADBannerView(adSize: GADAdSizeFromCGSize(size))
+        } else {
+            banner = GADBannerView(adSize: kGADAdSizeBanner)
+        }
+        
+        banner.adSizeDelegate = self
+        banner.rootViewController = self
+        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        banner.delegate = self
+        
+        banner.load(GADRequest())
+        
+        return banner
+    }
+}
+
+// MARK: - ADMob Delegate
+extension BaseVC: GADAdSizeDelegate, GADAdLoaderDelegate, GADBannerViewDelegate {
+    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError) {
+        debugPrint(error)
+    }
+    
+    func adLoaderDidFinishLoading(_ adLoader: GADAdLoader) {
+        debugPrint(adLoader)
+    }
+    
+    func adView(_ bannerView: GADBannerView, willChangeAdSizeTo size: GADAdSize) {
+        
+    }
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 0.75, animations: {
+            bannerView.alpha = 1
+        })
     }
 }

@@ -42,7 +42,9 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
     func onDataFetched(isEmpty: Bool) {
         reloadWithSearchData(isEmpty: isEmpty)
         if !isEmpty {
-            mainCV?.scrollToItem(at: .init(row: 0, section: 0), at: .top, animated: true)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.mainCV?.contentOffset = .init(x: -10, y: -(50 + self.topbarHeight))
+            })
         }
     }
     
@@ -139,6 +141,7 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         mainCV?.dataSource = self
         mainCV?.allowsSelection = true
         mainCV?.register(UINib(nibName: kInfiniteCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kInfiniteCarouselCVC)
+        mainCV?.register(supplementaryViewType: BannerAdHeaderCRV.self, ofKind: UICollectionView.elementKindSectionHeader)
         mainCV?.backgroundColor = .blackOrWhite
         if let bottomInset = UserDefaults.standard.object(forKey: "keyboardHeight") as? CGFloat {
             mainCV?.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: bottomInset, right: 10)
@@ -162,6 +165,18 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         cell.configureCell(contentResponse: getPresenter()?.search?.results?[indexPath.row])
         cell.delegate = self
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return .init(width: UIScreen.main.bounds.width, height: kHeightBannerAd)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, for: indexPath, viewType: BannerAdHeaderCRV.self)
+        
+        headerView.configureWithBanner(banner: viewForBanner(size: .init(width: UIScreen.main.bounds.width, height: kHeightBannerAd)))
+        
+        return headerView
     }
     
     // MARK: - UITableView

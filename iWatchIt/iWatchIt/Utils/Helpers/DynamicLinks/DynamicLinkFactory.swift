@@ -57,11 +57,16 @@ final class DynamicLinkFactory {
         
         linkBuilder?.socialMetaTagParameters = createMetadata(content: content)
         
+        DynamicLinks.performDiagnostics(completion: nil)
+        
         linkBuilder?.shorten() { url, warnings, error in
             guard let url = url, error == nil else {
                 completion(nil)
                 return
             }
+            
+            DynamicLinks.performDiagnostics(completion: nil)
+
             print("The short URL is: \(url)")
             completion(url)
         }

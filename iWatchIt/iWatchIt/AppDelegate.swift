@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func initGoogleAds() {
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2f9e0612b4e8f7792a10c6602e28dce6"]
         GADMobileAds.sharedInstance().start(completionHandler: nil)
     }
     
@@ -48,6 +49,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return handled
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+      return application(app, open: url,
+                         sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                         annotation: "")
+    }
+
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+      if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+        // Handle the deep link. For example, show the deep-linked content or
+        // apply a promotional offer to the user's account.
+        // ...
+        DynamicLinkHandler.shared.manage(link: dynamicLink)
+        return true
+      }
+      return false
     }
 }
 

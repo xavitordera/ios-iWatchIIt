@@ -26,6 +26,8 @@
 		102BD0B92438F549003215AF /* UIView+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102BD0B82438F549003215AF /* UIView+View.swift */; };
 		102BD0BC243918BE003215AF /* DetailOverviewCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102BD0BA243918BE003215AF /* DetailOverviewCVC.swift */; };
 		102BD0BD243918BE003215AF /* DetailOverviewCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */; };
+		102CE7C324D84398002811C6 /* BannerAdCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102CE7C224D84398002811C6 /* BannerAdCVC.swift */; };
+		102CE7C524D85172002811C6 /* BannerAdHeaderCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102CE7C424D85172002811C6 /* BannerAdHeaderCRV.swift */; };
 		103540B9242D6ED6006309FE /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103540B8242D6ED6006309FE /* AlertHelper.swift */; };
 		10354E082444BB97008DF790 /* DiscoverSearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10354E062444BB97008DF790 /* DiscoverSearchTVC.swift */; };
 		10354E092444BB97008DF790 /* DiscoverSearchTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10354E072444BB97008DF790 /* DiscoverSearchTVC.xib */; };
@@ -168,6 +170,8 @@
 		102BD0B82438F549003215AF /* UIView+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+View.swift"; sourceTree = "<group>"; };
 		102BD0BA243918BE003215AF /* DetailOverviewCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOverviewCVC.swift; sourceTree = "<group>"; };
 		102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailOverviewCVC.xib; sourceTree = "<group>"; };
+		102CE7C224D84398002811C6 /* BannerAdCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdCVC.swift; sourceTree = "<group>"; };
+		102CE7C424D85172002811C6 /* BannerAdHeaderCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdHeaderCRV.swift; sourceTree = "<group>"; };
 		103540B8242D6ED6006309FE /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		10354E062444BB97008DF790 /* DiscoverSearchTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverSearchTVC.swift; sourceTree = "<group>"; };
 		10354E072444BB97008DF790 /* DiscoverSearchTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverSearchTVC.xib; sourceTree = "<group>"; };
@@ -418,6 +422,8 @@
 				102BD0B52438EF74003215AF /* DetailHeaderCVC.xib */,
 				102BD0BA243918BE003215AF /* DetailOverviewCVC.swift */,
 				102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */,
+				102CE7C224D84398002811C6 /* BannerAdCVC.swift */,
+				102CE7C424D85172002811C6 /* BannerAdHeaderCRV.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -1100,6 +1106,7 @@
 				10D2888C242FAB3300A2DA0D /* ImageHelper.swift in Sources */,
 				10533D2A2427BEB200BF8FC4 /* AppDelegate.swift in Sources */,
 				10973B382439EEAD005C467D /* PlatformHelper.swift in Sources */,
+				102CE7C524D85172002811C6 /* BannerAdHeaderCRV.swift in Sources */,
 				10A638752440D5B9002B4B83 /* Watchlist.swift in Sources */,
 				10529A9F24378BEC000F12FA /* VideoHelper.swift in Sources */,
 				10D28886242F736900A2DA0D /* UICollectionView+Reusable.swift in Sources */,
@@ -1168,6 +1175,7 @@
 				1020C68D244C8ABA00F7D0F8 /* DiscoverResultsProtocol.swift in Sources */,
 				10D28882242F736900A2DA0D /* NibOwnerLoadable.swift in Sources */,
 				1053A81B24D5B33000AC390A /* DynamicLinkHandler.swift in Sources */,
+				102CE7C324D84398002811C6 /* BannerAdCVC.swift in Sources */,
 				10EBB4AC2431515E00C40732 /* SectionHeader.swift in Sources */,
 				104D59B724433AF10085F073 /* Discover.swift in Sources */,
 				10482792242EE8B400ED7683 /* InfiniteCarouselCVC.swift in Sources */,

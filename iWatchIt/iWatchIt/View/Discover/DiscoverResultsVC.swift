@@ -61,6 +61,13 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
         }
     }
     
+    
+    @IBOutlet weak var bannerView: UIView! {
+        didSet {
+            bannerView.addSubview(viewForBanner(size: CGSize(width: UIScreen.main.bounds.width, height: kHeightBannerAd)))
+        }
+    }
+    
     var mainCV: UICollectionView?
     var showsCV: UICollectionView?
     var query: DiscoverQuery?
