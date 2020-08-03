@@ -17,7 +17,8 @@ let kUtellyHost = "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com"
 let kUtellyAPIKey = "612d81ad38msh5a3671974754d62p1d34dejsnfc08e58195b9"
 
 // MARK: ADMOB
-let kAdMobID = "ca-app-pub-8943404832703203/8132885780"
+let kAdMobIDInterstitial = "ca-app-pub-8943404832703203/5301766366"
+let kAdMobIDBanner = "ca-app-pub-8943404832703203/5890623994"
 
 /// Enpoints
 let kGETConfiguration = "/configuration"

@@ -33,11 +33,7 @@ final class AdManager: NSObject {
     private var interstitial: GADInterstitial!
     
     private func createAndLoadInterstitial() -> GADInterstitial {
-        #if DEBUG
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        #else
-        let interstitial = GADInterstitial(adUnitID: kAdMobID)
-        #endif
+        let interstitial = GADInterstitial(adUnitID: kAdMobIDInterstitial)
         
         interstitial.delegate = self
         interstitial.load(GADRequest())

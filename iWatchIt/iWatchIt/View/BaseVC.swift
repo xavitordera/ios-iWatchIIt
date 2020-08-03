@@ -61,11 +61,7 @@ class BaseVC: UIViewController, BasePresenterToViewProtocol {
         
         banner.adSizeDelegate = self
         banner.rootViewController = self
-        #if DEBUG
-        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        #else
-        banner.adUnitID = kAdMobID
-        #endif
+        banner.adUnitID = kAdMobIDBanner
         banner.delegate = self
         
         banner.backgroundColor = UIColor.blackOrWhite
