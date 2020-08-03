@@ -131,14 +131,14 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     }
     
     func prepareVideoPlayer() {
-           let configuration = WKWebViewConfiguration()
-           configuration.allowsInlineMediaPlayback = false
-           configuration.mediaTypesRequiringUserActionForPlayback = []
-           videoPlayer = WKWebView(frame: .zero, configuration: configuration)
-           videoPlayer?.navigationDelegate = self
-           videoPlayer?.uiDelegate = self
-           view.addSubview(videoPlayer!)
-       }
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = false
+        configuration.mediaTypesRequiringUserActionForPlayback = []
+        videoPlayer = WKWebView(frame: .zero, configuration: configuration)
+        videoPlayer?.navigationDelegate = self
+        videoPlayer?.uiDelegate = self
+        view.addSubview(videoPlayer!)
+    }
     
     // MARK: - Presenter
     
@@ -165,12 +165,36 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     
     @objc func share() {
         // set up activity view controller
-        let text = "See this film!!" // FIXME: DYNAMIC LINKSSS
-        let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        var content:ShareContent!
+        switch type {
+        case .movie:
+            content = ShareContent.movie(
+                id: "\(getPresenter()?.detail?.id ?? 0)",
+                title: getPresenter()?.detail?.title ?? "",
+                description: getPresenter()?.detail?.overview,
+                image: ImageHelper.createImageURL(path: getPresenter()?.detail?.image ?? "", size: .poster(size: .small))?.absoluteString)
+            
+            
+        case .show:
+            content = ShareContent.show(
+                id: "\(getPresenter()?.detail?.id ?? 0)",
+                title: getPresenter()?.detail?.title ?? "",
+                description: getPresenter()?.detail?.overview,
+                image: ImageHelper.createImageURL(path: getPresenter()?.detail?.image ?? "", size: .poster(size: .small))?.absoluteString)
+        default:
+            break
+        }
         
-        // present the view controller
-        self.present(activityViewController, animated: true, completion: nil)
+        DynamicLinkFactory.shared.share(content: content) { url in
+            
+            if let url = url {
+                let activityViewController = UIActivityViewController(activityItems: ["Have you watched \(self.getPresenter()?.detail?.title ?? self.getPresenter()?.detail?.name ?? "")\n\n", url], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                
+                // present the view controller
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+        }
     }
     
     @objc func watchlist() {
@@ -315,14 +339,14 @@ extension DetailVC: HorizontalCarouselCVCDelegate {
             <body>
             <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
             <div id="player"></div>
-
+            
             <script>
             var tag = document.createElement('script');
-
+            
             tag.src = "https://www.youtube.com/iframe_api";
             var firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+            
             var player;
             function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -334,7 +358,7 @@ extension DetailVC: HorizontalCarouselCVCDelegate {
             }
             });
             }
-
+            
             function onPlayerReady(event) {
             event.target.playVideo();
             }
@@ -368,7 +392,7 @@ extension DetailVC: HorizontalCarouselCVCDelegate {
 
 extension DetailVC: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-//        hideLoadingVideoCell()
+        //        hideLoadingVideoCell()
         print("failed")
     }
     

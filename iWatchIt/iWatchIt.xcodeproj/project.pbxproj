@@ -13,6 +13,7 @@
 		1005B75D243B913C004B78F3 /* DetailCarouselCastCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005B75A243B913C004B78F3 /* DetailCarouselCastCVC.swift */; };
 		1005B75E243B913C004B78F3 /* DetailCarouselPlatformCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005B75B243B913C004B78F3 /* DetailCarouselPlatformCVC.swift */; };
 		1005B75F243B913C004B78F3 /* DetailCarouselTrailersCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005B75C243B913C004B78F3 /* DetailCarouselTrailersCVC.swift */; };
+		100FA86724D1EDE30071FBA5 /* DynamicLinkFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100FA86624D1EDE30071FBA5 /* DynamicLinkFactory.swift */; };
 		1020C68D244C8ABA00F7D0F8 /* DiscoverResultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1020C68C244C8ABA00F7D0F8 /* DiscoverResultsProtocol.swift */; };
 		1020C68F244C960B00F7D0F8 /* DiscoverResultsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1020C68E244C960B00F7D0F8 /* DiscoverResultsInteractor.swift */; };
 		1020C691244C961B00F7D0F8 /* DiscoverResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1020C690244C961B00F7D0F8 /* DiscoverResultsPresenter.swift */; };
@@ -57,6 +58,8 @@
 		10533D382427BEB600BF8FC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10533D362427BEB600BF8FC4 /* LaunchScreen.storyboard */; };
 		10533D432427BEB600BF8FC4 /* iWatchItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10533D422427BEB600BF8FC4 /* iWatchItTests.swift */; };
 		10533D4E2427BEB600BF8FC4 /* iWatchItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10533D4D2427BEB600BF8FC4 /* iWatchItUITests.swift */; };
+		1053A81B24D5B33000AC390A /* DynamicLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053A81A24D5B33000AC390A /* DynamicLinkHandler.swift */; };
+		1055203424D5CE42006BFC93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1055203324D5CE42006BFC93 /* GoogleService-Info.plist */; };
 		1085646E2436890600082755 /* DetailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1085646D2436890600082755 /* DetailProtocol.swift */; };
 		108564702436905A00082755 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1085646F2436905A00082755 /* DetailInteractor.swift */; };
 		108564722436980200082755 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108564712436980200082755 /* DetailPresenter.swift */; };
@@ -87,7 +90,6 @@
 		109E457424312F1D0027012B /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E457324312F1D0027012B /* SearchInteractor.swift */; };
 		109E457624312F370027012B /* SearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E457524312F370027012B /* SearchProtocol.swift */; };
 		10A638702440D283002B4B83 /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6386F2440D283002B4B83 /* SPAlert */; };
-		10A638732440D3D2002B4B83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10A638722440D3D2002B4B83 /* GoogleService-Info.plist */; };
 		10A638752440D5B9002B4B83 /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A638742440D5B9002B4B83 /* Watchlist.swift */; };
 		10A6388F24411129002B4B83 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6388E24411129002B4B83 /* Kingfisher */; };
 		10B007862450C2FD00097A40 /* DiscoverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B007852450C2FD00097A40 /* DiscoverHelper.swift */; };
@@ -153,6 +155,7 @@
 		1005B75A243B913C004B78F3 /* DetailCarouselCastCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCarouselCastCVC.swift; sourceTree = "<group>"; };
 		1005B75B243B913C004B78F3 /* DetailCarouselPlatformCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCarouselPlatformCVC.swift; sourceTree = "<group>"; };
 		1005B75C243B913C004B78F3 /* DetailCarouselTrailersCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCarouselTrailersCVC.swift; sourceTree = "<group>"; };
+		100FA86624D1EDE30071FBA5 /* DynamicLinkFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLinkFactory.swift; sourceTree = "<group>"; };
 		1020C68C244C8ABA00F7D0F8 /* DiscoverResultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverResultsProtocol.swift; sourceTree = "<group>"; };
 		1020C68E244C960B00F7D0F8 /* DiscoverResultsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverResultsInteractor.swift; sourceTree = "<group>"; };
 		1020C690244C961B00F7D0F8 /* DiscoverResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverResultsPresenter.swift; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 		10533D492427BEB600BF8FC4 /* iWatchItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iWatchItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10533D4D2427BEB600BF8FC4 /* iWatchItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iWatchItUITests.swift; sourceTree = "<group>"; };
 		10533D4F2427BEB600BF8FC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1053A81A24D5B33000AC390A /* DynamicLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLinkHandler.swift; sourceTree = "<group>"; };
+		1055203324D5CE42006BFC93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1085646D2436890600082755 /* DetailProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProtocol.swift; sourceTree = "<group>"; };
 		1085646F2436905A00082755 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		108564712436980200082755 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
@@ -228,7 +233,6 @@
 		109E457324312F1D0027012B /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		109E457524312F370027012B /* SearchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProtocol.swift; sourceTree = "<group>"; };
 		10A638712440D396002B4B83 /* iWatchIt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iWatchIt.entitlements; sourceTree = "<group>"; };
-		10A638722440D3D2002B4B83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10A638742440D5B9002B4B83 /* Watchlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watchlist.swift; sourceTree = "<group>"; };
 		10B007852450C2FD00097A40 /* DiscoverHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverHelper.swift; sourceTree = "<group>"; };
 		10CD6CEF2449EC67008B7E00 /* DiscoverPeopleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPeopleTVC.swift; sourceTree = "<group>"; };
@@ -541,6 +545,15 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		1053A81924D5B2F100AC390A /* DynamicLinks */ = {
+			isa = PBXGroup;
+			children = (
+				100FA86624D1EDE30071FBA5 /* DynamicLinkFactory.swift */,
+				1053A81A24D5B33000AC390A /* DynamicLinkHandler.swift */,
+			);
+			path = DynamicLinks;
+			sourceTree = "<group>";
+		};
 		10856469243680E600082755 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,7 +628,7 @@
 		10860C0A2427C12F00DA3A5F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				10A638722440D3D2002B4B83 /* GoogleService-Info.plist */,
+				1055203324D5CE42006BFC93 /* GoogleService-Info.plist */,
 				10E5BA24242CF3A1005227C8 /* ic_loading_splash.json */,
 				10F64089242C13270096C229 /* Strings */,
 				10533D342427BEB500BF8FC4 /* Assets.xcassets */,
@@ -690,6 +703,7 @@
 		10D2886C242F71CD00A2DA0D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1053A81924D5B2F100AC390A /* DynamicLinks */,
 				10D2886F242F725A00A2DA0D /* Reusable */,
 				103540B8242D6ED6006309FE /* AlertHelper.swift */,
 				10D2888B242FAB3300A2DA0D /* ImageHelper.swift */,
@@ -953,10 +967,10 @@
 				1005B757243B9126004B78F3 /* DetailCarouselPlatformCVC.xib in Resources */,
 				10E5BA25242CF3A2005227C8 /* ic_loading_splash.json in Resources */,
 				102BD0B72438EF74003215AF /* DetailHeaderCVC.xib in Resources */,
-				10A638732440D3D2002B4B83 /* GoogleService-Info.plist in Resources */,
 				10F6BFC3242FDE2400AE693A /* InfiniteCarouselTVC.xib in Resources */,
 				10E4A53F2437604500CD80C2 /* HorizontalCarouselCVC.xib in Resources */,
 				104D59C12443E1870085F073 /* DiscoverHeaderTVC.xib in Resources */,
+				1055203424D5CE42006BFC93 /* GoogleService-Info.plist in Resources */,
 				10F6BFC1242FDE0E00AE693A /* InfiniteCarouselCVC.xib in Resources */,
 				1005B758243B9126004B78F3 /* DetailCarouselTrailerCVC.xib in Resources */,
 			);
@@ -1142,6 +1156,7 @@
 				1048278F242EE7FB00ED7683 /* InfiniteCarouselTVC.swift in Sources */,
 				10F64082242BB5D00096C229 /* Configuration.swift in Sources */,
 				10860C1E2427C87000DA3A5F /* APIService.swift in Sources */,
+				100FA86724D1EDE30071FBA5 /* DynamicLinkFactory.swift in Sources */,
 				10482780242ED36500ED7683 /* ShowsVC.swift in Sources */,
 				10F2B5132442027A00952A58 /* PreferenceManager.swift in Sources */,
 				10860C382428191E00DA3A5F /* FakeSplashInteractor.swift in Sources */,
@@ -1152,6 +1167,7 @@
 				10E5BA2B242D05DC005227C8 /* BaseProtocol.swift in Sources */,
 				1020C68D244C8ABA00F7D0F8 /* DiscoverResultsProtocol.swift in Sources */,
 				10D28882242F736900A2DA0D /* NibOwnerLoadable.swift in Sources */,
+				1053A81B24D5B33000AC390A /* DynamicLinkHandler.swift in Sources */,
 				10EBB4AC2431515E00C40732 /* SectionHeader.swift in Sources */,
 				104D59B724433AF10085F073 /* Discover.swift in Sources */,
 				10482792242EE8B400ED7683 /* InfiniteCarouselCVC.swift in Sources */,
@@ -1342,7 +1358,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iWatchIt/iWatchIt.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4LKGLN6SG4;
 				INFOPLIST_FILE = iWatchIt/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1352,6 +1369,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xtordera.iWatchIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = iWatchIt_DEBUG;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1364,7 +1382,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iWatchIt/iWatchIt.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4LKGLN6SG4;
 				INFOPLIST_FILE = iWatchIt/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1374,6 +1393,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xtordera.iWatchIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = iWatchIt_APP_STORE;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -14,12 +14,18 @@ final class Navigation {
     private var navigationController: UINavigationController?
     private let window = UIWindow(frame: UIScreen.main.bounds)
     
+    var tabbar: TabBarVC?
+    
     func setNavigationController(firstVC controller: UIViewController) {
         self.navigationController = UINavigationController(rootViewController: controller)
         
         if let navController = self.navigationController {
             setRootController(navController)
         }
+    }
+    
+    func setTabBar(_ tabBar: TabBarVC) {
+        tabbar = tabBar
     }
     
     func setRootController(_ controller: UIViewController, animated: Bool = false, completion: (() -> Void)? = nil ) {
@@ -48,6 +54,14 @@ final class Navigation {
         }
         
         return window.rootViewController // Splash
+    }
+    
+    func navigateTo(_ viewController: UIViewController) {
+        guard let tabbar = self.tabbar else {
+            return
+        }
+        
+        tabbar.navigateTo(viewController)
     }
 }
 

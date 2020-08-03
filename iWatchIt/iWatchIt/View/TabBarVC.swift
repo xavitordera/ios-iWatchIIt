@@ -8,7 +8,16 @@
 
 import UIKit
 
+enum IndexTabBar: Int {
+    case movies = 0
+    case shows
+    case discover
+}
+
 class TabBarVC: UITabBarController {
+    
+    private var navigationControllers: [UINavigationController]?
+    private var lastIndex: IndexTabBar = .movies
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,5 +40,16 @@ class TabBarVC: UITabBarController {
         navDiscover.tabBarItem.title = "tab_bar_discover".localized
         
         viewControllers = [navShows, navMovies, navDiscover]
+    }
+    
+    func navigateTo(_ viewController: UIViewController) {
+        let navController = navigationControllers?[lastIndex.rawValue]
+        navController?.pushViewController(viewController, animated: true)
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if let index = tabBar.items?.firstIndex(of: item) {
+            lastIndex = IndexTabBar(rawValue: index) ?? .movies
+        }
     }
 }

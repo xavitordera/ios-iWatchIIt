@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -32,6 +33,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func initFirebase() {
         FirebaseApp.configure()
+    }
+    
+    func initGoogleAds() {
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        let handled = DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!) { (dynamiclink, error) in
+            if let dynamicLink = dynamiclink {
+                DynamicLinkHandler.shared.manage(link: dynamicLink)
+            }
+        }
+        
+        return handled
     }
 }
 
