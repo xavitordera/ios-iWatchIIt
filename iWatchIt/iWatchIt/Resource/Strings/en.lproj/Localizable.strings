@@ -39,5 +39,6 @@
 "discover_tv_shows_tab" = "TV Shows";
 "discover_movies_tab" = "Movies";
 "discover_search" = "Discover";
+"discover_search_placeholder" = "Search keywords, genres, people...";
 
 "share_message" = "Have you already watched %@? Check it out here!\n";

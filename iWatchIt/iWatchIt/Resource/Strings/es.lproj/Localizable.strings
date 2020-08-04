@@ -39,6 +39,7 @@
 "discover_tv_shows_tab" = "Series";
 "discover_movies_tab" = "Películas";
 "discover_search" = "Explorar";
+"discover_search_placeholder" = "Busca palabras clave, géneros, gente...";
 
 
 "share_message" = "Has visto ya %@? Haz click aquí!\n";

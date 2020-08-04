@@ -59,7 +59,7 @@ class DiscoverVC: BaseVC {
         searchVC?.delegate = self
         let searchController = UISearchController(searchResultsController: searchVC)
         searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Search keywords, genres, people..."
+        searchController.searchBar.placeholder = "discover_search_placeholder".localized
         searchController.searchBar.delegate = self
         searchController.delegate = self
         definesPresentationContext = true
