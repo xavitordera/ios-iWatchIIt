@@ -195,7 +195,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         DynamicLinkFactory.shared.share(content: content) { url in
             
             if let url = url {
-                let activityViewController = UIActivityViewController(activityItems: ["Have you watched \(self.getPresenter()?.detail?.title ?? self.getPresenter()?.detail?.name ?? "")\n\n", url], applicationActivities: nil)
+                let activityViewController = UIActivityViewController(activityItems: [String(format:"share_message".localized, self.getPresenter()?.detail?.title ?? self.getPresenter()?.detail?.name ?? ""), url], applicationActivities: nil)
                 activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
                 
                 // present the view controller
