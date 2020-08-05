@@ -15,7 +15,7 @@ blocks:
           - checkout
           - cache restore
           - cd iWatchIt
-          - gem install bundler
+          - gem install bundler -v 1.17.3
           - gem install xcode-install
           - bundle install
           - cache store
