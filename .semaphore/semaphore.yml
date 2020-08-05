@@ -14,13 +14,13 @@ blocks:
         commands:
           - checkout
           - cache restore
-          - bundle install --path vendor/bundle
+          - sudo bundle install
           - cache store
       jobs:
         - name: Build
           commands:
             - bundle exec xcversion select 11.3.1
-            - bundle exec fastlane build
+            - bundle exec fastlane release
   - name: Take screenshots
     task:
       env_vars:
@@ -30,7 +30,7 @@ blocks:
         commands:
           - checkout
           - cache restore
-          - bundle install --path vendor/bundle
+          - sudo bundle install
           - cache store
       jobs:
         - name: Screenshots
