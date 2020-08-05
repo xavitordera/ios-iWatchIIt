@@ -3,7 +3,7 @@ name: iWatchIt
 agent:
   machine:
     type: macos-xcode11
-    os_image: macos-catalina-xcode11
+    os_image: macos-mojave-xcode11
 blocks:
   - name: Build app
     task:
