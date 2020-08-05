@@ -307,9 +307,9 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
 
 extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if sections[section] == kSectionDetailHeader {
-            return 2
-        }
+//        if sections[section] == kSectionDetailHeader {
+//            return 2
+//        }
         return 1
     }
     

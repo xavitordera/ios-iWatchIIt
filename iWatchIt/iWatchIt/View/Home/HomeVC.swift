@@ -64,7 +64,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
         mainTV?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         mainTV?.separatorStyle = .none
         setupSections()
-        mainTV?.tableHeaderView = viewForBanner(size: CGSize(width: view.frame.width, height: kHeightBannerAd))
+//        mainTV?.tableHeaderView = viewForBanner(size: CGSize(width: view.frame.width, height: kHeightBannerAd))
         view = (mainTV!)
     }
     
