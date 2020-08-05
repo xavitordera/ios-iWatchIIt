@@ -1,9 +1,9 @@
 version: v1.0
-name: Tallest Towers
+name: iWatchIt
 agent:
   machine:
-    type: a1-standard-4
-    os_image: macos-mojave-xcode11
+    type: macos-xcode11
+    os_image: macos-catalina-xcode11
 blocks:
   - name: Build app
     task:
