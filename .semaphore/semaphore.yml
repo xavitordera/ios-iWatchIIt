@@ -14,6 +14,7 @@ blocks:
         commands:
           - checkout
           - cache restore
+          - cd iWatchIt
           - gem install xcode-install
           - bundle install --path vendor/bundle
           - cache store
