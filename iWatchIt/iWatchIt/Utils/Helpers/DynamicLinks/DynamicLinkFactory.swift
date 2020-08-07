@@ -11,7 +11,7 @@ import FirebaseDynamicLinks
 import LinkPresentation
 
 let kDynamicLinkURL = "https://iwatchthis.page.link"
-let kDynamicLinkBaseURL = "https://iwatchit.com"
+let kDynamicLinkBaseURL = "https://apps.apple.com/"
 
 enum ShareContent {
     case movie(id: String, title: String, description: String?, image: String?)
