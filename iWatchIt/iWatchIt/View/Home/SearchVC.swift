@@ -171,13 +171,13 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         return .init(width: UIScreen.main.bounds.width, height: kHeightBannerAd)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, for: indexPath, viewType: BannerAdHeaderCRV.self)
-//        
-//        headerView.configureWithBanner(banner: viewForBanner(size: .init(width: UIScreen.main.bounds.width, height: kHeightBannerAd)))
-//        
-//        return headerView
-//    }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, for: indexPath, viewType: BannerAdHeaderCRV.self)
+        
+        headerView.configureWithBanner(banner: viewForBanner(size: .init(width: UIScreen.main.bounds.width, height: kHeightBannerAd)))
+        
+        return headerView
+    }
     
     // MARK: - UITableView
     

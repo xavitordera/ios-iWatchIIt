@@ -52,6 +52,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
         sections.append(kHomeTrendingSection)
         sections.append(kHomeDiscoverSection)
         sections.append(kHomeWatchlistSection)
+        sections.append(kSectionCopyright)
     }
     
     func setupTV() {
@@ -61,10 +62,11 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
         mainTV?.tableFooterView = UIView()
         mainTV?.allowsSelection = false
         mainTV?.register(UINib(nibName: kInfiniteCarouselTVC, bundle: .main), forCellReuseIdentifier: kInfiniteCarouselTVC)
+        mainTV?.register(cellType: BannerAdTVC.self)
         mainTV?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         mainTV?.separatorStyle = .none
         setupSections()
-//        mainTV?.tableHeaderView = viewForBanner(size: CGSize(width: view.frame.width, height: kHeightBannerAd))
+        mainTV?.tableHeaderView = viewForBanner(size: CGSize(width: view.frame.width, height: kHeightBannerAd))
         view = (mainTV!)
     }
     
@@ -84,9 +86,11 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch sections[indexPath.row] {
+        switch sections[indexPath.section] {
         case kHomeTrendingSection:
             return kHeightHomeSectionsInfiniteCarousel - 20
+        case kSectionCopyright:
+            return kHeightBannerAd
         default:
             return kHeightHomeSectionsInfiniteCarousel
         }
@@ -100,6 +104,8 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
             return cellForDiscover()
         case kHomeWatchlistSection:
             return cellForWatchlist()
+        case kSectionCopyright:
+            return cellForCopyright(indexPath)
         default:
             return UITableViewCell()
         }
@@ -130,6 +136,14 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func cellForCopyright(_ indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = mainTV?.dequeueReusableCell(for: indexPath, cellType: BannerAdTVC.self) else { return UITableViewCell() }
+        
+        cell.configureWithBanner(banner: UIImageView(image: kTMBDLogo))
+        
+        return cell
     }
     
     // MARK: - Cell delegates

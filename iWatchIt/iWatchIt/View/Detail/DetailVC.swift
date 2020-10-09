@@ -115,6 +115,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         if let videos = detail.videos?.results, !videos.isEmpty {
             sections.append(kSectionDetailVideos)
         }
+        
+        sections.append(kSectionCopyright)
     }
     
     func loadBackground() {
@@ -282,6 +284,14 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         return cell
     }
     
+    func cellForCopyright(_ indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = mainCV.dequeueReusableCell(for: indexPath, cellType: BannerAdCVC.self)
+        
+        cell.configureWithBanner(banner: UIImageView(image: kTMBDLogo))
+        
+        return cell
+    }
+    
     func heightForOverview() -> CGFloat {
         if let overview = getPresenter()?.detail?.overview {
             let overviewExpectedHeight = overview.height(withConstrainedWidth: view.frame.width - 20, font: .systemFont(ofSize: 14.0, weight: .light))
@@ -307,9 +317,9 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
 
 extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if sections[section] == kSectionDetailHeader {
-//            return 2
-//        }
+        if sections[section] == kSectionDetailHeader {
+            return 2
+        }
         return 1
     }
     
@@ -329,6 +339,8 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return cellForCast(indexPath)
         case kSectionDetailVideos:
             return cellForVideos(indexPath)
+        case kSectionCopyright:
+            return cellForCopyright(indexPath)
         default:
             return UICollectionViewCell()
         }
@@ -346,6 +358,8 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsCast)
         case kSectionDetailVideos:
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsVideo)
+        case kSectionCopyright:
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightBannerAd)
         default:
             return .zero
         }

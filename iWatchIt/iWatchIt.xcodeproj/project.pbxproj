@@ -131,6 +131,7 @@
 		10F6BFC3242FDE2400AE693A /* InfiniteCarouselTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F6BFC2242FDE2400AE693A /* InfiniteCarouselTVC.xib */; };
 		28B223E8213F81C17B80397A /* libPods-iWatchItTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 543BFB3621E304972B5C5C55 /* libPods-iWatchItTests.a */; };
 		3D3AD1F751D5AEC21B938E27 /* libPods-iWatchIt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD5D63564A2B54A46FFCAED /* libPods-iWatchIt.a */; };
+		494CB9CB25309438004455D8 /* BannerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494CB9CA25309438004455D8 /* BannerTVC.swift */; };
 		D6D4E191F8D4F66C0964CE90 /* libPods-iWatchIt-iWatchItUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 118CF2D321F62495C45E3AEB /* libPods-iWatchIt-iWatchItUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -282,6 +283,7 @@
 		10F6BFC2242FDE2400AE693A /* InfiniteCarouselTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfiniteCarouselTVC.xib; sourceTree = "<group>"; };
 		118CF2D321F62495C45E3AEB /* libPods-iWatchIt-iWatchItUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchIt-iWatchItUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CEFCEFB4843AC380F62C6E8 /* Pods-iWatchIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.release.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.release.xcconfig"; sourceTree = "<group>"; };
+		494CB9CA25309438004455D8 /* BannerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerTVC.swift; sourceTree = "<group>"; };
 		543BFB3621E304972B5C5C55 /* libPods-iWatchItTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchItTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6100731C35A95D1323E6FDD7 /* Pods-iWatchIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.debug.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.debug.xcconfig"; sourceTree = "<group>"; };
 		650099F92F7BA0280109A9AD /* Pods-iWatchItTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchItTests.release.xcconfig"; path = "Target Support Files/Pods-iWatchItTests/Pods-iWatchItTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				10354E072444BB97008DF790 /* DiscoverSearchTVC.xib */,
 				10CD6CEF2449EC67008B7E00 /* DiscoverPeopleTVC.swift */,
 				10CD6CF02449EC67008B7E00 /* DiscoverPeopleTVC.xib */,
+				494CB9CA25309438004455D8 /* BannerTVC.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1125,6 +1128,7 @@
 				10D2888C242FAB3300A2DA0D /* ImageHelper.swift in Sources */,
 				10533D2A2427BEB200BF8FC4 /* AppDelegate.swift in Sources */,
 				10973B382439EEAD005C467D /* PlatformHelper.swift in Sources */,
+				494CB9CB25309438004455D8 /* BannerTVC.swift in Sources */,
 				102CE7C524D85172002811C6 /* BannerAdHeaderCRV.swift in Sources */,
 				10A638752440D5B9002B4B83 /* Watchlist.swift in Sources */,
 				10529A9F24378BEC000F12FA /* VideoHelper.swift in Sources */,

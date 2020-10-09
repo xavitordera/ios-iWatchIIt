@@ -211,17 +211,13 @@ extension DiscoverVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {return}
         searchVC?.mainTV.setContentOffset(.zero, animated: true)
-//        didSearchKeyword(keyword: searchText)
         didSearchGenre(genre: searchText)
-//        didSearchPeople(people: searchText)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else {return}
         searchVC?.mainTV.setContentOffset(.zero, animated: true)
-//        didSearchKeyword(keyword: searchText)
         didSearchGenre(genre: searchText)
-//        didSearchPeople(people: searchText)
     }
 }
 // MARK: - SearchVC

@@ -53,7 +53,7 @@ let kStarFilled = UIImage(systemName: "star.fill")
 let kPlusCircle = UIImage(systemName: "plus.circle")
 let kMinusCircle = UIImage(systemName: "minus.circle")
 let kCheckmark = UIImage(systemName: "checkmark")
-
+let kTMBDLogo = UIImage(named: "tmdb")
 
 let kHeightHomeSectionsInfiniteCarousel: CGFloat = 280
 let kHomeSectionsInfiniteCarouselImageSize: ImageSize = .poster(size: PosterSize.medium)
@@ -89,6 +89,7 @@ let kSectionDetailOverview = "SectionDetailOverview"
 let kSectionDetailPlatforms = "SectionDetailPlatforms"
 let kSectionDetailCast = "SectionDetailCast"
 let kSectionDetailVideos = "SectionDetailVideos"
+let kSectionCopyright = "SectionCopyright"
 
 let kSectionDiscoverKeywords = "SectionDiscoverKeywords"
 let kSectionDiscoverGenre = "SectionDiscoverGenre"
