@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DetailCarouselTrailerCVC" id="gTV-IL-0wX" customClass="DetailCarouselTrailerCVC" customModule="iWatchIt" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="226"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="250" height="226"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lWq-2V-sTo">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="160"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="160" id="I0i-Lh-6Wk"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="O0x-My-ccD">
+                        <rect key="frame" x="105" y="61.5" width="40" height="36.5"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="QAk-uD-cjk"/>
+                            <constraint firstAttribute="width" constant="40" id="eRb-6T-Eib"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ashaosfosbafosbfaosbfa ashaosfosbafosbfaosbfa ashaosfosbafosbfaosbfa" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USB-eb-jIg">
+                        <rect key="frame" x="15" y="165" width="220" height="61"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="GGu-iq-Iab">
+                        <rect key="frame" x="115" y="70" width="20" height="20"/>
+                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </activityIndicatorView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="USB-eb-jIg" firstAttribute="top" secondItem="lWq-2V-sTo" secondAttribute="bottom" constant="5" id="6PV-y0-5Qs"/>
+                <constraint firstItem="USB-eb-jIg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="8WQ-Qf-KCG"/>
+                <constraint firstItem="GGu-iq-Iab" firstAttribute="height" secondItem="O0x-My-ccD" secondAttribute="height" multiplier="0.5" id="A20-do-x4K"/>
+                <constraint firstAttribute="trailing" secondItem="lWq-2V-sTo" secondAttribute="trailing" id="Ark-3k-DBh"/>
+                <constraint firstItem="lWq-2V-sTo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Dqd-aD-1DO"/>
+                <constraint firstAttribute="trailing" secondItem="USB-eb-jIg" secondAttribute="trailing" constant="15" id="EQO-pY-N0X"/>
+                <constraint firstItem="lWq-2V-sTo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="YOJ-VP-txh"/>
+                <constraint firstItem="O0x-My-ccD" firstAttribute="centerY" secondItem="lWq-2V-sTo" secondAttribute="centerY" id="eld-pb-9fX"/>
+                <constraint firstItem="O0x-My-ccD" firstAttribute="centerX" secondItem="lWq-2V-sTo" secondAttribute="centerX" id="gba-DN-QhX"/>
+                <constraint firstItem="GGu-iq-Iab" firstAttribute="centerY" secondItem="O0x-My-ccD" secondAttribute="centerY" id="ic8-kH-YM8"/>
+                <constraint firstItem="GGu-iq-Iab" firstAttribute="width" secondItem="O0x-My-ccD" secondAttribute="width" multiplier="0.5" id="mdA-nB-saI"/>
+                <constraint firstItem="GGu-iq-Iab" firstAttribute="centerX" secondItem="O0x-My-ccD" secondAttribute="centerX" id="qen-1y-zhj"/>
+                <constraint firstItem="lWq-2V-sTo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="rf2-jA-3AV"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="535" height="426"/>
+            <connections>
+                <outlet property="activityIndicator" destination="GGu-iq-Iab" id="9pc-is-wdo"/>
+                <outlet property="coverImgView" destination="lWq-2V-sTo" id="HuE-20-OH8"/>
+                <outlet property="lblTitle" destination="USB-eb-jIg" id="Af0-se-ojN"/>
+                <outlet property="playImg" destination="O0x-My-ccD" id="ILd-6x-g1e"/>
+            </connections>
+            <point key="canvasLocation" x="24.637681159420293" y="164.73214285714286"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="play.fill" catalog="system" width="58" height="64"/>
+    </resources>
+</document>

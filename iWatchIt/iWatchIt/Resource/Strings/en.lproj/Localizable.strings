@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  iWatchIt
+
+  Created by Xavi Tordera on 25/03/2020.
+  Copyright © 2020 Xavi Tordera. All rights reserved.
+*/
+"app_error_title" = "Error";
+"app_error_generic" = "There has been an error, please try again later";
+"app_title" = "iWatchIt";
+"dismiss_pop_up" = "OK";
+"tab_bar_movies" = "Movies";
+"tab_bar_shows" = "Shows";
+"tab_bar_discover" = "Discover";
+
+"home_search_movies" = "Search movies...";
+"home_search_shows" = "Search shows...";
+"home_title_movies" = "Movies";
+"home_title_shows" = "Shows";
+"home_section_trending" = "Trending";
+"home_section_discover" = "You might like...";
+"home_section_watchlist" = "Your watchlist";
+"home_empty_watchlist" = "Here you will see your watchlist content. Start exploring!";
+
+"search_header_recently_seen" = "Recently seen";
+"search_empty_results" = "No results found for\n'%@'";
+"search_empty_history" = "Seems you haven't explored anything yet...";
+
+"detail_overview_section" = "Overview";
+"detail_platforms_section" = "Watch it on...";
+"detail_cast_section" = "Cast";
+"detail_videos_section" = "Trailers & more";
+"detail_header_seasons" = "%d seasons";
+"detail_empty_platforms" = "We couldn't find any platform streaming this content in your country.";
+"detail_added_to_watchlist" = "Added to watchlist";
+"detail_removed_from_watchlist" = "Removed from watchlist";
+
+"discover_title" = "Discover";
+"discover_tv_shows_tab" = "TV Shows";
+"discover_movies_tab" = "Movies";
+"discover_search" = "Discover";
+"discover_search_placeholder" = "Search keywords, genres, people...";
+
+"share_message" = "Have you already watched %@? Check it out here!\n";

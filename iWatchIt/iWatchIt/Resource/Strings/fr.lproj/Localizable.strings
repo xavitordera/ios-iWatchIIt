@@ -1,0 +1,45 @@
+/*
+  Localizable.strings
+  Je le regarde
+
+  Créé par Xavi Tordera le 25/03/2020.
+  Copyright © 2020 Xavi Tordera. Tous les droits sont réservés.
+*/
+
+"app_error_title" = "Erreur";
+"app_error_generic" = "Une erreur s'est produite, veuillez réessayer plus tard";
+"app_title" = "iWatchIt";
+"licenciement_pop_up" = "OK";
+"tab_bar_movies" = "Films";
+"tab_bar_shows" = "Spectacles";
+"tab_bar_discover" = "Découvrir";
+
+"home_search_movies" = "Rechercher des films...";
+"home_search_shows" = "Rechercher des émissions...";
+"home_title_movies" = "Films";
+"home_title_shows" = "Spectacles";
+"home_section_trending" = "Tendances";
+"home_section_discover" = "Vous aimerez peut-être...";
+"home_section_watchlist" = "Votre liste de surveillance";
+"home_empty_watchlist" = "Ici, vous verrez le contenu de votre liste de suivi. Commencez à explorer!";
+
+"search_header_recently_seen" = "Récemment vu";
+"search_empty_results" = "Aucun résultat trouvé pour\n'%@'";
+"search_empty_history" = "Il semble que vous n'avez encore rien exploré...";
+
+"detail_overview_section" = "Vue d'ensemble";
+"detail_platforms_section" = "Regardez-le sur...";
+"detail_cast_section" = "Diffuser";
+"detail_videos_section" = "Bandes-annonces et plus";
+"detail_header_seasons" = "%d saisons";
+"detail_empty_platforms" = "Nous n'avons trouvé aucune plateforme diffusant ce contenu dans votre pays.";
+"detail_added_to_watchlist" = "Ajouté à la liste de suivi";
+"detail_removed_from_watchlist" = "Retiré de la liste de suivi";
+
+"discover_title" = "Découvrir";
+"Discover_tv_shows_tab" = "Séries TV";
+"discover_movies_tab" = "Films";
+"discover_search" = "Découvrir";
+"discover_search_placeholder" = "Rechercher des mots-clés, des genres, des personnes...";
+
+"share_message" = "Avez-vous déjà regardé %@? Regardez-le ici!\n";

@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  iWatchIt
+
+  Created by Xavi Tordera on 25/03/2020.
+  Copyright © 2020 Xavi Tordera. All rights reserved.
+*/
+"app_error_title" = "Error";
+"app_error_generic" = "Ha ocurrido un error, vuelve a intentarlo más tarde.";
+"app_title" = "iWatchIt";
+"dismiss_pop_up" = "OK";
+"tab_bar_movies" = "Películas";
+"tab_bar_shows" = "Series";
+"tab_bar_discover" = "Explorar";
+
+"home_search_movies" = "Busca películas...";
+"home_search_shows" = "Busca series...";
+"home_title_movies" = "Películas";
+"home_title_shows" = "Series";
+"home_section_trending" = "Popular";
+"home_section_discover" = "Quizás te guste...";
+"home_section_watchlist" = "Tu lista";
+"home_empty_watchlist" = "Aquí verás el contenido de tu lista. ¡Empieza a explorar!";
+
+"search_header_recently_seen" = "Lo último que has visto";
+"search_empty_results" = "No se han encontrado resultados para\n'%@'";
+"search_empty_history" = "Parece que no has explorado nada aún...";
+
+"detail_overview_section" = "Resumen";
+"detail_platforms_section" = "Puedes verlo en...";
+"detail_cast_section" = "Reparto";
+"detail_videos_section" = "Trailers y más";
+"detail_header_seasons" = "%d temporadas";
+"detail_empty_platforms" = "No hemos podido encontrar ninguna plataforma de streaming en tu país para este contenido.";
+"detail_added_to_watchlist" = "Añadido a tu lista";
+"detail_removed_from_watchlist" = "Eliminado de tu lista";
+
+"discover_title" = "Explorar";
+"discover_tv_shows_tab" = "Series";
+"discover_movies_tab" = "Películas";
+"discover_search" = "Explorar";
+"discover_search_placeholder" = "Busca palabras clave, géneros, gente...";
+
+
+"share_message" = "Has visto ya %@? Haz click aquí!\n";
