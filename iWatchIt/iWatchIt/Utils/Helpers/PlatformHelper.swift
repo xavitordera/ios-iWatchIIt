@@ -94,36 +94,6 @@ class PlatformHelper {
         }
     }
     
-    /// Helper function used beacause the shitty Utelly API does not take into account that TMDB uses /movies or /shows to fucking differenciate between them
-    
-//    class func checkIfContentExistsInTMDB(for platform: RootCollection?, and contentId: Int?) -> Bool {
-//        guard let tdmbId = platform?.externalIds?.tmdb?.id, let id = contentId else {
-//            return false
-//        }
-//
-//        if tdmbId == String(id) {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
-    
-    /// Helper function used beacause the shitty Utelly API does not take into account that TMDB uses /movies or /shows to fucking differenciate between them
-    /// it basically iterates over the model and compares ids, if match lets go!
-//    private class func getLocations(of platform: RootPlatform?, and contentId: Int?) -> [Platform]? {
-//        guard let platform = platform, let results = platform.results, let id = contentId else {
-//            return nil
-//        }
-//
-//        for result in results {
-//            if let ids = result.externalIds, let extId = ids.tmdb?.id, extId == String(id) {
-//                return result.locations
-//            }
-//        }
-//
-//        return nil
-//    }
-    
     /// Nope, we filter some locations because we don't want to...you know...display anything wierd or offensive to our beloved users
     class func filteredLocations(of platform: RootPlatform?) -> [Platform]? {
         guard var locations = platform?.collection?.locations else {
@@ -163,8 +133,8 @@ class PlatformHelper {
             let (originalURLString, schemeURLString) = buildCustomURL(for: site, with: platformUrl)
             if let originalURL = URL(string: originalURLString), let schemeurl = schemeURLString,
                 let customURL = URL(string: schemeurl) {
-                    let urlToOpen = UIApplication.shared.canOpenURL(customURL) ? customURL : originalURL
-                    UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
+                let urlToOpen = UIApplication.shared.canOpenURL(customURL) ? customURL : originalURL
+                UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
             } else {
                 if let url = URL(string: platformUrl) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -197,7 +167,7 @@ class PlatformHelper {
         default:
             return (url, "")
         }
-       
+        
     }
     
     // FIXME: ASAP
@@ -280,9 +250,9 @@ class PlatformHelper {
         }
         
         if platformURL.contains("peacock") {
-           return .Peacock
+            return .Peacock
         }
-           
+        
         return nil
     }
     

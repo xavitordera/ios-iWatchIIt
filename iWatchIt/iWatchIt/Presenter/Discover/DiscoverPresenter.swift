@@ -60,6 +60,14 @@ class DiscoverPresenter: BasePresenter {
 }
 
 extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
+    func startFilteringGenres(term: String, mediaType: MediaType) {
+        
+    }
+    
+    func startDiscovering(navigationController: UINavigationController, query: DiscoverQuery, mediaType: MediaType) {
+        
+    }
+    
     func didTapOnGenre(genre: TypedSearchResult, nav: UINavigationController?) {
         query = DiscoverQuery()
         query?.addOrRemoveGenre(genre: genre)
@@ -89,12 +97,6 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
         }
     }
     
-    func startDiscovering(navigationController: UINavigationController, query: DiscoverQuery, mediaType: MediaType) {
-//        if let router = router as? DiscoverPresenterToRouterProtocol {
-//            router.pushToResultsScreen(navigationController: navigationController, for: query, mediaType: mediaType, shouldShowHeader: )
-//        }
-    }
-    
     func startFetchingKeywords(term: String) {
         guard let interactor = self.interactor as? DiscoverPresenterToInteractorProtocol else { return  }
         interactor.fetchKeywords(term: term)
@@ -103,14 +105,6 @@ extension DiscoverPresenter: DiscoverViewToPresenterProtocol {
     func startFetchingGenres(mediaType: MediaType) {
         guard let interactor = self.interactor as? DiscoverPresenterToInteractorProtocol else { return  }
         interactor.fetchGenres(mediaType: mediaType)
-    }
-    
-    func startFilteringGenres(term: String, mediaType: MediaType) {
-//        let results = filterGenre(term: term, type: mediaType)
-//        self.genres = results
-//        if let view = getView(type: DiscoverPresenterToViewProtocol.self) {
-//            view.onGenresFiltered(mediaType: mediaType)
-//        }
     }
     
     func startFilteringGenres(term: String) {

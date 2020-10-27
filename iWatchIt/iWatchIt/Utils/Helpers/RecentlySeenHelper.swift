@@ -30,9 +30,7 @@ final class RecentlySeenHelper {
     
     static func getRecentlySeen(type: MediaType) -> [RecentlySeen]? {
         do {
-//            let wholeResults = try RealmManager.getObjects(type: RecentlySeen.self)
             let wholeResults = try RealmManager.getObjects(type: RecentlySeen.self, filter: String(format: "privateType == '%@'", type.rawValue))
-//            let resultsFiltered = wholeResults.filter { $0.type == type }
             let results = Array(wholeResults.suffix(6))
             return results.reversed()
         } catch let error {

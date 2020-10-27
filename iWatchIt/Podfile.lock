@@ -9,6 +9,9 @@ PODS:
   - Firebase/Crashlytics (6.29.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 4.3.1)
+  - Firebase/Database (6.29.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (~> 6.4.0)
   - Firebase/DynamicLinks (6.29.0):
     - Firebase/CoreOnly
     - FirebaseDynamicLinks (~> 4.2.0)
@@ -36,6 +39,9 @@ PODS:
     - GoogleDataTransport (~> 7.0)
     - nanopb (~> 1.30905.0)
     - PromisesObjC (~> 1.2)
+  - FirebaseDatabase (6.4.0):
+    - FirebaseCore (~> 6.8)
+    - leveldb-library (~> 1.22)
   - FirebaseDynamicLinks (4.2.0):
     - FirebaseCore (~> 6.8)
   - FirebaseInstallations (1.5.0):
@@ -72,6 +78,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.7.1):
     - GoogleUtilities/Logger
+  - leveldb-library (1.22)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
     - nanopb/encode (= 1.30905.0)
@@ -83,6 +90,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/Crashlytics
+  - Firebase/Database
   - Firebase/DynamicLinks
   - Google-Mobile-Ads-SDK
 
@@ -93,12 +101,14 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCrashlytics
+    - FirebaseDatabase
     - FirebaseDynamicLinks
     - FirebaseInstallations
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - leveldb-library
     - nanopb
     - PromisesObjC
 
@@ -108,15 +118,17 @@ SPEC CHECKSUMS:
   FirebaseCore: 7930a1946517d94256d857f97371ed993b55f7bd
   FirebaseCoreDiagnostics: 7535fe695737f8c5b350584292a70b7f8ff0357b
   FirebaseCrashlytics: 863c851b034baeb3116cd2c91743e37de2dcedfc
+  FirebaseDatabase: 55e69fe802ccb438d9c6ee51eb32fd425d5409d3
   FirebaseDynamicLinks: cf3cfedfd47ce6ea56fa66a5c940ea0ca9c60950
   FirebaseInstallations: 3c520c951305cbf9ca54eb891ff9e6d1fd384881
   Google-Mobile-Ads-SDK: a71d6bc14f9cf1f66d686dbdf9ad2091de04059c
   GoogleAppMeasurement: 345d365fd105e6682bf5084783a5352a3db26820
   GoogleDataTransport: af0c79193dc59acd37630b4833d0dc6912ae6bd5
   GoogleUtilities: e121a3867449ce16b0e35ddf1797ea7a389ffdf2
+  leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
 
-PODFILE CHECKSUM: e566eb4faed87e60bd58b4956cef9934ab629658
+PODFILE CHECKSUM: 91b697a997cf97aa5d8523af3cc8b377f8655af8
 
 COCOAPODS: 1.9.3

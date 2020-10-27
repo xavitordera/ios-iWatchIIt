@@ -8,14 +8,24 @@
 
 import GoogleMobileAds
 
-let kMaxTimes = 3
+
 
 final class AdManager: NSObject {
     // MARK: - Public interface
     static let shared = AdManager()
     
+    /// default value
+    var interstitialFrequency = 5
+    
+    let firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol
+    
+    init(firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol = FirebaseDatabaseProvider()) {
+        self.firebaseDatabaseProvider = firebaseDatabaseProvider
+    }
+    
     func start() {
         interstitial = createAndLoadInterstitial()
+        fetchConfiguration()
     }
     
     func attach(_ viewController: UIViewController) {
@@ -42,7 +52,7 @@ final class AdManager: NSObject {
     
     private func controllerAttached() {
         timesAttached += 1
-        if timesAttached == kMaxTimes {
+        if timesAttached == interstitialFrequency {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.botherUser()
                 self.timesAttached = 0
@@ -56,6 +66,14 @@ final class AdManager: NSObject {
             interstitial.present(fromRootViewController: controller)
         } else {
             print("Ad wasn't ready")
+        }
+    }
+    
+    private func fetchConfiguration() {
+        firebaseDatabaseProvider.fetchParameter(parent: DatabaseFields.adManager, name: DatabaseFields.interstitialFrequency, ofType: Int.self) { param in
+            if let frequency = param {
+                self.interstitialFrequency = frequency
+            }
         }
     }
 }

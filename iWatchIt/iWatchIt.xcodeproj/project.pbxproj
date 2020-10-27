@@ -132,6 +132,7 @@
 		28B223E8213F81C17B80397A /* libPods-iWatchItTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 543BFB3621E304972B5C5C55 /* libPods-iWatchItTests.a */; };
 		3D3AD1F751D5AEC21B938E27 /* libPods-iWatchIt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD5D63564A2B54A46FFCAED /* libPods-iWatchIt.a */; };
 		494CB9CB25309438004455D8 /* BannerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494CB9CA25309438004455D8 /* BannerTVC.swift */; };
+		49CF26F625480A56004A7F76 /* FirebaseDatabaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF26F525480A56004A7F76 /* FirebaseDatabaseProvider.swift */; };
 		D6D4E191F8D4F66C0964CE90 /* libPods-iWatchIt-iWatchItUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 118CF2D321F62495C45E3AEB /* libPods-iWatchIt-iWatchItUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -284,6 +285,7 @@
 		118CF2D321F62495C45E3AEB /* libPods-iWatchIt-iWatchItUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchIt-iWatchItUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CEFCEFB4843AC380F62C6E8 /* Pods-iWatchIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.release.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.release.xcconfig"; sourceTree = "<group>"; };
 		494CB9CA25309438004455D8 /* BannerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerTVC.swift; sourceTree = "<group>"; };
+		49CF26F525480A56004A7F76 /* FirebaseDatabaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseProvider.swift; sourceTree = "<group>"; };
 		543BFB3621E304972B5C5C55 /* libPods-iWatchItTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchItTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6100731C35A95D1323E6FDD7 /* Pods-iWatchIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.debug.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.debug.xcconfig"; sourceTree = "<group>"; };
 		650099F92F7BA0280109A9AD /* Pods-iWatchItTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchItTests.release.xcconfig"; path = "Target Support Files/Pods-iWatchItTests/Pods-iWatchItTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 				10860C1D2427C87000DA3A5F /* APIService.swift */,
 				10F64083242BB6640096C229 /* API.swift */,
 				10F64085242BCE890096C229 /* APIRouter.swift */,
+				49CF26F525480A56004A7F76 /* FirebaseDatabaseProvider.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1111,6 +1114,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49CF26F625480A56004A7F76 /* FirebaseDatabaseProvider.swift in Sources */,
 				10E4A54524376C6000CD80C2 /* DetailCarouselCVC.swift in Sources */,
 				104D59C02443E1870085F073 /* DiscoverHeaderTVC.swift in Sources */,
 				10860C362428184300DA3A5F /* FakeSplashPresenter.swift in Sources */,
@@ -1397,7 +1401,7 @@
 				CODE_SIGN_ENTITLEMENTS = iWatchIt/iWatchIt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4LKGLN6SG4;
 				INFOPLIST_FILE = iWatchIt/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1405,6 +1409,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xtordera.iWatchIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = iWatchIt_DEBUG;
@@ -1422,7 +1427,7 @@
 				CODE_SIGN_ENTITLEMENTS = iWatchIt/iWatchIt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4LKGLN6SG4;
 				INFOPLIST_FILE = iWatchIt/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1430,6 +1435,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xtordera.iWatchIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = iWatchIt_APP_STORE;
