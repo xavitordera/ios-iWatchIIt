@@ -6,7 +6,7 @@
 //  Copyright © 2020 Xavi Tordera. All rights reserved.
 //
 
-import Foundation
+import FirebaseCrashlytics
 
 class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
     
@@ -32,11 +32,15 @@ class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
     func fetchPlatforms(id: String) {
         APIService.shared.getPlatforms(id: id, country: Preference.getCurrentCountry(), source: kIMDB) {
             (result, error) in
+            
+            EventLogger.logEvent(UserEvents.utellyReq)
+            
             guard let presenter = self.getPresenter() else {
                 return
             }
             
             guard let result = result else {
+                Crashlytics.crashlytics().record(error: error ?? AppError.utellyRequestFailed)
                 presenter.platformsFetchFailed(message: error?.localizedDescription)
                 return
             }

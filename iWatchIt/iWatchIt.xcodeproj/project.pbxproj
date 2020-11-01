@@ -131,6 +131,7 @@
 		10F6BFC3242FDE2400AE693A /* InfiniteCarouselTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10F6BFC2242FDE2400AE693A /* InfiniteCarouselTVC.xib */; };
 		28B223E8213F81C17B80397A /* libPods-iWatchItTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 543BFB3621E304972B5C5C55 /* libPods-iWatchItTests.a */; };
 		3D3AD1F751D5AEC21B938E27 /* libPods-iWatchIt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD5D63564A2B54A46FFCAED /* libPods-iWatchIt.a */; };
+		4928A79A254EDC4B00F2A3DD /* EventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928A799254EDC4B00F2A3DD /* EventLogger.swift */; };
 		494CB9CB25309438004455D8 /* BannerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494CB9CA25309438004455D8 /* BannerTVC.swift */; };
 		49CF26F625480A56004A7F76 /* FirebaseDatabaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF26F525480A56004A7F76 /* FirebaseDatabaseProvider.swift */; };
 		D6D4E191F8D4F66C0964CE90 /* libPods-iWatchIt-iWatchItUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 118CF2D321F62495C45E3AEB /* libPods-iWatchIt-iWatchItUITests.a */; };
@@ -284,6 +285,7 @@
 		10F6BFC2242FDE2400AE693A /* InfiniteCarouselTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfiniteCarouselTVC.xib; sourceTree = "<group>"; };
 		118CF2D321F62495C45E3AEB /* libPods-iWatchIt-iWatchItUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchIt-iWatchItUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CEFCEFB4843AC380F62C6E8 /* Pods-iWatchIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.release.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.release.xcconfig"; sourceTree = "<group>"; };
+		4928A799254EDC4B00F2A3DD /* EventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLogger.swift; sourceTree = "<group>"; };
 		494CB9CA25309438004455D8 /* BannerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerTVC.swift; sourceTree = "<group>"; };
 		49CF26F525480A56004A7F76 /* FirebaseDatabaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseProvider.swift; sourceTree = "<group>"; };
 		543BFB3621E304972B5C5C55 /* libPods-iWatchItTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchItTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -730,6 +732,7 @@
 		10D2886C242F71CD00A2DA0D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				4928A798254EDC3600F2A3DD /* Analytics */,
 				102CE7C624D855BA002811C6 /* Ads */,
 				1053A81924D5B2F100AC390A /* DynamicLinks */,
 				10D2886F242F725A00A2DA0D /* Reusable */,
@@ -840,6 +843,14 @@
 				543BFB3621E304972B5C5C55 /* libPods-iWatchItTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4928A798254EDC3600F2A3DD /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				4928A799254EDC4B00F2A3DD /* EventLogger.swift */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		EAC5A6745B6E0E5B36C47AE8 /* Pods */ = {
@@ -1128,6 +1139,7 @@
 				109E457224312F010027012B /* SearchPresenter.swift in Sources */,
 				104D59B924433EF70085F073 /* RealmObjects.swift in Sources */,
 				102BD0BC243918BE003215AF /* DetailOverviewCVC.swift in Sources */,
+				4928A79A254EDC4B00F2A3DD /* EventLogger.swift in Sources */,
 				10E4A5392437470D00CD80C2 /* UIBarButtonItem+Item.swift in Sources */,
 				10D2888C242FAB3300A2DA0D /* ImageHelper.swift in Sources */,
 				10533D2A2427BEB200BF8FC4 /* AppDelegate.swift in Sources */,

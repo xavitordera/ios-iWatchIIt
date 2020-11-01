@@ -5,6 +5,7 @@
 //  Created by Xavi Tordera on 28/03/2020.
 //  Copyright © 2020 Xavi Tordera. All rights reserved.
 //
+
 import UIKit
 
 class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, DetailViewToPresenterProtocol {
@@ -45,7 +46,7 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
     }
     
     func platformsFetchFailed(message: String?) {
-        view?.showError(message: message )
+        view?.showError(message: message)
     }
     
     // MARK: View protocol
@@ -63,9 +64,11 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
     }
     
     func startFetchingPlatform(term: String) {
+        
         guard let interactor = interactor as? DetailPresenterToInteractorProtocol else {
             return
         }
+        
         interactor.fetchPlatforms(id: term)
     }
     
