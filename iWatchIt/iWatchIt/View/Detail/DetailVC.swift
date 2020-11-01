@@ -198,7 +198,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             
             if let url = url {
                 let activityViewController = UIActivityViewController(activityItems: [String(format:"share_message".localized, self.getPresenter()?.detail?.title ?? self.getPresenter()?.detail?.name ?? ""), url], applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                activityViewController.popoverPresentationController?.sourceView = self.navigationItem.rightBarButtonItems?.first?.customView // so that iPads won't crash
                 
                 // present the view controller
                 self.present(activityViewController, animated: true, completion: nil)

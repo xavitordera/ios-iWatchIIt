@@ -39,7 +39,8 @@ class TabBarVC: UITabBarController {
         navDiscover.tabBarItem.image = kTabDiscoverImg
         navDiscover.tabBarItem.title = "tab_bar_discover".localized
         
-        viewControllers = [navShows, navMovies, navDiscover]
+        navigationControllers = [navShows, navMovies, navDiscover]
+        viewControllers = navigationControllers
     }
     
     func navigateTo(_ viewController: UIViewController) {
