@@ -8,6 +8,8 @@
 
 import Foundation
 
+let defaults = UserDefaults.standard
+
 class Preference {
     static func getCurrentCountry() -> String {
         let langRegion = Locale.current.regionCode ?? "us"
@@ -17,5 +19,16 @@ class Preference {
     static func getLocaleLanguage() -> String {
         let langStr = Locale.current.languageCode ?? "en"
         return langStr
+    }
+    
+    static func getUtellyKeys() -> [String] {
+        guard let keys = defaults.array(forKey: DatabaseFields.utellyKeys) as? [String] else {
+            return [kUtellyAPIKey]
+        }
+        return keys
+    }
+    
+    static func setUtellyKeys(keys: [String]) {
+        defaults.set(keys, forKey: DatabaseFields.utellyKeys)
     }
 }

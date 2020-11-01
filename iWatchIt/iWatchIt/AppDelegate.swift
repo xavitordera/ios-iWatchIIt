@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initRealm()
         initFirebase()
         initGoogleAds()
+        initUtellyAPI()
         
         return true
     }
@@ -41,6 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.sharedInstance().start{_ in
             AdManager.shared.start()
         }
+    }
+    
+    private func initUtellyAPI() {
+        PlatformHelper.initializeUtellyKeys()
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity,

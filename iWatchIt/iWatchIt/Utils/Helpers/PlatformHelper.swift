@@ -274,4 +274,12 @@ class PlatformHelper {
             return nil
         }
     }
+    
+    class func initializeUtellyKeys() {
+        FirebaseDatabaseProvider.shared.fetchObject(name: DatabaseFields.utellyKeys) { (param: [String]?) in
+            if let param = param {
+                Preference.setUtellyKeys(keys: param)
+            }
+        }
+    }
 }

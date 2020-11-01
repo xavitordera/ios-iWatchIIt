@@ -155,7 +155,7 @@ enum APIRouter: URLRequestConvertible {
             return
                 HTTPHeaders.init([
                     HTTPHeader.init(name: kHeaderRapidAPIHost, value: kUtellyHost),
-                    HTTPHeader.init(name: kHeaderRapidAPIKey, value: kUtellyAPIKey)
+                    HTTPHeader.init(name: kHeaderRapidAPIKey, value: randUtellyKey())
                 ])
         default:
             return nil
@@ -187,6 +187,12 @@ enum APIRouter: URLRequestConvertible {
         }
         
         return urlRequest
+    }
+    
+    private func randUtellyKey() -> String {
+        let keys = Preference.getUtellyKeys()
+        
+        return keys.randomElement() ?? kUtellyAPIKey
     }
 }
 
