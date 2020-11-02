@@ -20,7 +20,7 @@ protocol FirebaseDatabaseProviderProtocol {
 }
 
 struct FirebaseDatabaseProvider {
-    let ref = Database.database().reference()
+    lazy var ref = Database.database().reference()
     
     static let shared = FirebaseDatabaseProvider()
 }

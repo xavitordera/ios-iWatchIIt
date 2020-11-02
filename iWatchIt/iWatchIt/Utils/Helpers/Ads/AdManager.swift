@@ -19,7 +19,7 @@ final class AdManager: NSObject {
     
     let firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol
     
-    init(firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol = FirebaseDatabaseProvider()) {
+    init(firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol = FirebaseDatabaseProvider.shared) {
         self.firebaseDatabaseProvider = firebaseDatabaseProvider
     }
     
