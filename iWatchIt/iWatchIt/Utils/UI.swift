@@ -23,6 +23,7 @@ let kDiscoverResultsVC = "DiscoverResultsVC"
 let kHomeTrendingSection = "Trending"
 let kHomeDiscoverSection = "You might like..."
 let kHomeWatchlistSection = "Your watchlist"
+let kHomeTopRatedSection = "Top rated"
 
 
 var kStoryboardHome: UIStoryboard{

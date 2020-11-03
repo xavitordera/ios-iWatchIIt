@@ -14,7 +14,7 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
     
     // MARK: Interactor protocol
     func trendingFetchSuccess(trending: Root?) {
-        home = Home.updateFromRoot(rootTrending: trending, rootDiscover: nil, watchlist: nil, type: type)
+        home = Home.updateFromRoot(rootTrending: trending, rootDiscover: nil, rootTopRated: nil, watchlist: nil, type: type)
         if let view = getView() {
             view.onDataFetched()
         }
@@ -25,7 +25,7 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
     }
     
     func discoverFetchSuccess(discover: Root?) {
-        home = Home.updateFromRoot(rootTrending: nil, rootDiscover: discover, watchlist: nil, type: type)
+        home = Home.updateFromRoot(rootTrending: nil, rootDiscover: discover, rootTopRated: nil, watchlist: nil, type: type)
         if let view = getView() {
             view.onDataFetched()
         }
@@ -35,8 +35,19 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
         view?.showError(message: message)
     }
     
+    func topRatedFetchSuccess(topRated: Root?) {
+        home = Home.updateFromRoot(rootTrending: nil, rootDiscover: nil, rootTopRated: topRated, watchlist: nil, type: type)
+        if let view = getView() {
+            view.onDataFetched()
+        }
+    }
+    
+    func topRatedFetchFailed(message: String?) {
+        view?.showError(message: message)
+    }
+    
     func watchlistFetched(watchlist: [WatchlistContent]?) {
-        home = Home.updateFromRoot(rootTrending: nil, rootDiscover: nil, watchlist: watchlist, type: type)
+        home = Home.updateFromRoot(rootTrending: nil, rootDiscover: nil, rootTopRated: nil, watchlist: watchlist, type: type)
         if let view = getView() {
             view.onDataFetched()
         }
@@ -48,12 +59,14 @@ class HomePresenter: BasePresenter, HomeInteractorToPresenterProtocol, HomeViewT
     func startFetchingData(type: MediaType) {
         guard let interactor = interactor as? HomePresenterToInteractorProtocol else {
             discoverFetchFailed(message: "app_error_generic".localized)
-            trendingFetchFailed(message: "app_error_generic".localized)
             return
         }
         self.type = type
+    
+        
         interactor.fetchTrending(type: type, timeWindow: TimeWindow.day)
         interactor.fetchDiscover(type: type)
+        interactor.fetchTopRated(type: type)
         interactor.fetchWatchlist(type: type)
     }
     

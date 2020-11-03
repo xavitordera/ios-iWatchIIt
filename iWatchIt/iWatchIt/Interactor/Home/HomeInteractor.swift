@@ -44,6 +44,25 @@ class HomeInteractor: BaseInteractor, HomePresenterToInteractorProtocol {
         }
     }
     
+    func fetchTopRated(type: MediaType) {
+        
+        APIService.shared.requestObject(
+            from: APIRouter.topRated(
+                mediaType: type,
+                language: Preference.getLocaleLanguage()
+            )
+        )
+        { (result: Result<Root, Error>) in
+            guard let presenter = self.getPresenter() else { return }
+            switch result {
+            case .failure(let error):
+                presenter.topRatedFetchFailed(message: error.localizedDescription)
+            case .success(let root):
+                presenter.topRatedFetchSuccess(topRated: root)
+            }
+        }
+    }
+    
     func fetchWatchlist(type: MediaType) {
         let ws = WatchlistManager.shared.getWatchlist(type: type)
         guard let presenter = getPresenter() else { return }

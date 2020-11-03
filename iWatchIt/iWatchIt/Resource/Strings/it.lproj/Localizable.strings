@@ -19,6 +19,7 @@
 "home_title_shows" = "Shows";
 "home_section_trending" = "Trending";
 "home_section_discover" = "Potrebbe piacerti...";
+"home_section_top_rated" = "Più votati";
 "home_section_watchlist" = "La tua watchlist";
 "home_empty_watchlist" = "Qui vedrai il contenuto della tua watchlist. Inizia a esplorare!";
 

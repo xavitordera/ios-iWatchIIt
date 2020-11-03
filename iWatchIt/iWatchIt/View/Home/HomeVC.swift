@@ -51,6 +51,7 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
     func setupSections() {
         sections.append(kHomeTrendingSection)
         sections.append(kHomeDiscoverSection)
+        sections.append(kHomeTopRatedSection)
         sections.append(kHomeWatchlistSection)
         sections.append(kSectionCopyright)
     }
@@ -99,11 +100,13 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch sections[indexPath.section] {
         case kHomeTrendingSection:
-            return cellForTrending()
+            return cellForSection(getPresenter()?.home?.trending)
         case kHomeDiscoverSection:
-            return cellForDiscover()
+            return cellForSection(getPresenter()?.home?.discover)
+        case kHomeTopRatedSection:
+            return cellForSection(getPresenter()?.home?.topRated)
         case kHomeWatchlistSection:
-            return cellForWatchlist()
+            return cellForSection(getPresenter()?.home?.watchlist)
         case kSectionCopyright:
             return cellForCopyright(indexPath)
         default:
@@ -111,27 +114,9 @@ class HomeVC: BaseVC, HomePresenterToViewProtocol, UISearchResultsUpdating, UISe
         }
     }
     
-    func cellForTrending() -> UITableViewCell {
-        if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC, let presenter = getPresenter() {
-            cell.configureCell(homeContentResponse: presenter.home?.trending, isHiddingSeeMore: true)
-            cell.delegate = self
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    func cellForDiscover() -> UITableViewCell {
-        if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC, let presenter = getPresenter() {
-            cell.configureCell(homeContentResponse: presenter.home?.discover, isHiddingSeeMore: true)
-            cell.delegate = self
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    func cellForWatchlist() -> UITableViewCell {
-        if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC, let presenter = getPresenter() {
-            cell.configureCell(homeContentResponse: presenter.home?.watchlist, isHiddingSeeMore: false)
+    func cellForSection(_ section: HomeSection?) -> UITableViewCell {
+        if let cell = mainTV?.dequeueReusableCell(withIdentifier: kInfiniteCarouselTVC) as? InfiniteCarouselTVC {
+            cell.configureCell(homeContentResponse: section, isHiddingSeeMore: true)
             cell.delegate = self
             return cell
         }

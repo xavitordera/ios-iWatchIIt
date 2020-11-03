@@ -20,6 +20,7 @@
 "home_title_shows" = "Spectacles";
 "home_section_trending" = "Tendances";
 "home_section_discover" = "Vous aimerez peut-être...";
+"home_section_top_rated" = "Les mieux notés";
 "home_section_watchlist" = "Votre liste de surveillance";
 "home_empty_watchlist" = "Ici, vous verrez le contenu de votre liste de suivi. Commencez à explorer!";
 

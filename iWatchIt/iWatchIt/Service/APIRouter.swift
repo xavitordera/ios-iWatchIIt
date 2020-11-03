@@ -24,6 +24,10 @@ enum APIRouter: URLRequestConvertible {
     
     case discover(mediaType: MediaType, language: String, withGenres: String)
     
+    /// TopRated trending content
+    
+    case topRated(mediaType: MediaType, language: String)
+    
     /// Search content
     
     case search(mediaType: MediaType, query: String, language: String, page: Int = 1)
@@ -53,7 +57,7 @@ enum APIRouter: URLRequestConvertible {
     var method: HTTPMethod {
         switch self {
             
-        case .configuration, .genres, .trending, .discover, .search, .detail, .searchKeyword, .searchPeople, .discoverExtended, .platforms: return .get
+        case .configuration, .genres, .trending, .discover, .topRated, .search, .detail, .searchKeyword, .searchPeople, .discoverExtended, .platforms: return .get
             
             // case : return .head
             // case : return .delete
@@ -64,7 +68,7 @@ enum APIRouter: URLRequestConvertible {
     
     var baseURLString: String {
         switch self {
-        case .configuration, .genres, .discover, .trending, .search, .detail, .searchKeyword, .searchPeople, .discoverExtended:
+        case .configuration, .genres, .discover, .topRated, .trending, .search, .detail, .searchKeyword, .searchPeople, .discoverExtended:
             return kTMDBBaseURL + kTMDBAPIVersion
         case .platforms:
             return kUtellyBaseURL
@@ -77,6 +81,7 @@ enum APIRouter: URLRequestConvertible {
         case .genres(let mediaType, _): return String(format: kGETGenres, mediaType.rawValue)
         case .trending(let mediaType, let timeWindow, _): return String(format: kGETTrending, mediaType.rawValue, timeWindow)
         case .discover(let mediaType, _, _): return String(format: kGETDiscover, mediaType.rawValue)
+        case .topRated(let mediaType, _): return String(format: kGETTopRated, mediaType.rawValue)
         case .search(let mediaType, _, _, _): return String(format: kGETSearch, mediaType.rawValue)
         case .detail(let mediaType, let id, _, _): return String(format: kGETDetail, mediaType.rawValue, id)
         case .searchKeyword(_): return kGETSearchKeywords
@@ -106,6 +111,11 @@ enum APIRouter: URLRequestConvertible {
                 URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
                 URLQueryItem.init(name: kLanguage, value: language),
                 URLQueryItem.init(name: kWithGenres, value: withGenres)
+            ]
+        case .topRated(_, let language):
+            return [
+                URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
+                URLQueryItem.init(name: kLanguage, value: language)
             ]
         case .search(_ , let query, let language, let page):
             return [
@@ -174,7 +184,7 @@ enum APIRouter: URLRequestConvertible {
             
             //case :
         //      urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters) // URL
-        case .configuration, .genres, .discover, .trending, .search, .detail, .searchKeyword, .searchPeople, .discoverExtended, .platforms:
+        case .configuration, .genres, .discover, .trending, .search, .detail, .searchKeyword, .searchPeople, .discoverExtended, .platforms, .topRated:
             components.queryItems = queryParams
         }
         
