@@ -17,7 +17,7 @@ final class AdManager: NSObject {
     /// default value
     var interstitialFrequency = 5
     
-    let firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol
+    var firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol
     
     init(firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol = FirebaseDatabaseProvider.shared) {
         self.firebaseDatabaseProvider = firebaseDatabaseProvider

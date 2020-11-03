@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         let handled = DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!) { (dynamiclink, error) in
             if let dynamicLink = dynamiclink {
-                DynamicLinkHandler.shared.manage(link: dynamicLink)
+                self.manageDynamicLink(dynamicLink)
             }
         }
         
@@ -70,10 +70,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Handle the deep link. For example, show the deep-linked content or
             // apply a promotional offer to the user's account.
             // ...
-            DynamicLinkHandler.shared.manage(link: dynamicLink)
+            manageDynamicLink(dynamicLink)
             return true
         }
         return false
+    }
+    
+    private func manageDynamicLink(_ link: DynamicLink) {
+        guard TabBarVC.isTabBarInitialized else {
+            TabBarVC.enqueue {
+                DynamicLinkHandler.shared.manage(link: link)
+            }
+            return
+        }
+        
+        DynamicLinkHandler.shared.manage(link: link)
     }
 }
 

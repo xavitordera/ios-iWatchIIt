@@ -14,10 +14,13 @@ enum IndexTabBar: Int {
     case discover
 }
 
-class TabBarVC: UITabBarController {
+final class TabBarVC: UITabBarController {
     
     private var navigationControllers: [UINavigationController]?
     private var lastIndex: IndexTabBar = .movies
+    
+    static var isTabBarInitialized = false
+    static var queue: [() -> ()] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,17 @@ class TabBarVC: UITabBarController {
         
         navigationControllers = [navShows, navMovies, navDiscover]
         viewControllers = navigationControllers
+        
+        TabBarVC.isTabBarInitialized = true
+        
+        if !TabBarVC.queue.isEmpty {
+            TabBarVC.queue.forEach { task in
+                DispatchQueue.main.async {
+                    task()
+                }
+            }
+            
+        }
     }
     
     func navigateTo(_ viewController: UIViewController) {
@@ -52,5 +66,9 @@ class TabBarVC: UITabBarController {
         if let index = tabBar.items?.firstIndex(of: item) {
             lastIndex = IndexTabBar(rawValue: index) ?? .movies
         }
+    }
+    
+    static func enqueue(task: @escaping () -> ()) {
+        queue.append(task)
     }
 }

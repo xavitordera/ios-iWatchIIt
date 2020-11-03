@@ -15,19 +15,21 @@ enum DatabaseFields {
 }
 
 protocol FirebaseDatabaseProviderProtocol {
-    func fetchParameter<T>(parent: String, name: String, ofType: T.Type, _ completion: @escaping (T?) -> Void)
-    func fetchObject(name: String, _ completion: @escaping (NSDictionary?) -> Void)
+    mutating func fetchParameter<T>(parent: String, name: String, ofType: T.Type, _ completion: @escaping (T?) -> Void)
+    mutating func fetchObject<T>(name: String, _ completion: @escaping (T?) -> Void)
 }
 
 struct FirebaseDatabaseProvider {
     lazy var ref = Database.database().reference()
     
-    static let shared = FirebaseDatabaseProvider()
+    static var shared = FirebaseDatabaseProvider()
 }
 
 
 extension FirebaseDatabaseProvider: FirebaseDatabaseProviderProtocol {
-    func fetchObject<T>(name: String, _ completion: @escaping (T?) -> Void) {
+    
+    
+    mutating func fetchObject<T>(name: String, _ completion: @escaping (T?) -> Void) {
         ref.observeSingleEvent(of: .value) { snapshot in
             if let value = snapshot.value as? NSDictionary {
                 let object = value[name] as? T
@@ -38,7 +40,7 @@ extension FirebaseDatabaseProvider: FirebaseDatabaseProviderProtocol {
         }
     }
     
-    func fetchParameter<T>(parent: String = DatabaseFields.adManager, name: String, ofType: T.Type, _ completion: @escaping (T?) -> Void) {
+    mutating func fetchParameter<T>(parent: String = DatabaseFields.adManager, name: String, ofType: T.Type, _ completion: @escaping (T?) -> Void) {
         
         ref.child(parent).observeSingleEvent(of: .value) { (snapshot) in
             let value = snapshot.value as? NSDictionary
