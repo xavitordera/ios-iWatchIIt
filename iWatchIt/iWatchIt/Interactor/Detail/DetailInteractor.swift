@@ -16,7 +16,7 @@ class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
     }
     
     func fetchDetail(type: MediaType, id: Int, language: String) {
-        APIService.shared.detail(mediaType: type, id: id, language: Preference.getLocaleLanguage(), appendToResponse: String(format: "%@,%@,%@", kGETDetailVideos, kGETDetailCredits, kGETDetailExternalIDs)) { (result, error) in
+        APIService.shared.detail(mediaType: type, id: id, language: Preference.getLocaleLanguage(), appendToResponse: String(format: "%@,%@,%@,%@", kGETDetailVideos, kGETDetailCredits, kGETDetailExternalIDs, kGETDetailSimilar)) { (result, error) in
             guard let presenter = self.getPresenter() else {
                 return
             }

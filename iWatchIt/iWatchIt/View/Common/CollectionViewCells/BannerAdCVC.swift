@@ -17,6 +17,7 @@ class BannerAdCVC: UICollectionViewCell, Reusable {
         
         self.banner = banner
         contentView.backgroundColor = UIColor.black.withAlphaComponent(0.85)
+        banner.backgroundColor = UIColor.black.withAlphaComponent(0.85)
         
         banner.center = contentView.center
         contentView.addSubview(banner)

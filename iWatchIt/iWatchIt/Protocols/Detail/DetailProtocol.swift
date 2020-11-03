@@ -17,6 +17,7 @@ protocol DetailViewToPresenterProtocol: BaseViewToPresenterProtocol{
     func didTapOnPlatform(platform: Platform?)
     func didTapOnVideo(video: Video?, nav: UINavigationController)
     func didTapOnCast(cast: Cast?, nav: UINavigationController?)
+    func didTapOnSimilarContent(content: Content?, nav: UINavigationController?)
     func didTapWatchlist() -> Bool
     func didTapShare()
 }
@@ -28,6 +29,7 @@ protocol DetailPresenterToViewProtocol: BasePresenterToViewProtocol{
 
 protocol DetailPresenterToRouterProtocol: BasePresenterToRouterProtocol {
     func presentReviews(for id: Int, navigationController: UINavigationController)
+    func pushDetail(for id: Int, type: MediaType, navigationController: UINavigationController)
     func pushDiscoverResults(query: DiscoverQuery, nav: UINavigationController?)
 }
 

@@ -35,6 +35,7 @@
 "detail_empty_platforms" = "Nous n'avons trouvé aucune plateforme diffusant ce contenu dans votre pays.";
 "detail_added_to_watchlist" = "Ajouté à la liste de suivi";
 "detail_removed_from_watchlist" = "Retiré de la liste de suivi";
+"detail_similar_section" = "Contenu similaire";
 
 "discover_title" = "Découvrir";
 "Discover_tv_shows_tab" = "Séries TV";

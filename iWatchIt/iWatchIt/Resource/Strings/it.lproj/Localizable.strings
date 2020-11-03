@@ -34,6 +34,7 @@
 "detail_empty_platforms" = "Non siamo riusciti a trovare alcuna piattaforma in streaming di questi contenuti nel tuo Paese.";
 "detail_added_to_watchlist" = "Aggiunto alla watchlist";
 "detail_removed_from_watchlist" = "Rimosso dalla watchlist";
+"detail_similar_section" = "Contenuto simile";
 
 "discover_title" = "Scopri";
 "discover_tv_shows_tab" = "Programmi TV";

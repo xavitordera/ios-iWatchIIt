@@ -102,6 +102,13 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
         
     }
     
+    func didTapOnSimilarContent(content: Content?, nav: UINavigationController?) {
+        guard let id = content?.id, let nav = nav else { return }
+        if let router = router as? DetailPresenterToRouterProtocol {
+            router.pushDetail(for: id, type: type ?? .movie, navigationController: nav)
+        }
+    }
+    
     func didTapWatchlist() -> Bool {
         guard let detail = detail, let id = detail.id, let type = type else {return false}
         if WatchlistManager.shared.isInWatchlist(id: id, type: type) {

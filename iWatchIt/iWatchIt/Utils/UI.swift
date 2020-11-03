@@ -63,6 +63,8 @@ let kHeightDetailSectionsPlatforms: CGFloat = 160
 let kHeightDetailSectionsCast: CGFloat = 215
 let kHeightDetailSectionsVideo: CGFloat = 290
 
+let kHeightDetailSectionsSimilar: CGFloat = 200
+
 let kHeightDiscoverSections: CGFloat = 45
 let kHeightBannerAd: CGFloat = 75
 
@@ -90,6 +92,7 @@ let kSectionDetailPlatforms = "SectionDetailPlatforms"
 let kSectionDetailCast = "SectionDetailCast"
 let kSectionDetailVideos = "SectionDetailVideos"
 let kSectionCopyright = "SectionCopyright"
+let kSectionDetailSimilar = "SectionDetailSimilar"
 
 let kSectionDiscoverKeywords = "SectionDiscoverKeywords"
 let kSectionDiscoverGenre = "SectionDiscoverGenre"

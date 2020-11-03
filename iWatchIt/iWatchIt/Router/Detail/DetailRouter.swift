@@ -14,6 +14,12 @@ class DetailRouter: BaseRouter, DetailPresenterToRouterProtocol {
         
     }
     
+    func pushDetail(for id: Int, type: MediaType, navigationController: UINavigationController) {
+        let vc = createModule(with: id, and: type)
+        
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
     func pushDiscoverResults(query: DiscoverQuery, nav: UINavigationController?) {
         let vc = DiscoverResultsRouter.shared.createModule(with: query.title ?? "")
         

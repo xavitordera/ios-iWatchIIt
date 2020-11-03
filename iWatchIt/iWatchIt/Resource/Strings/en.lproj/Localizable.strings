@@ -34,6 +34,7 @@
 "detail_empty_platforms" = "We couldn't find any platform streaming this content in your country.";
 "detail_added_to_watchlist" = "Added to watchlist";
 "detail_removed_from_watchlist" = "Removed from watchlist";
+"detail_similar_section" = "Similar content";
 
 "discover_title" = "Discover";
 "discover_tv_shows_tab" = "TV Shows";

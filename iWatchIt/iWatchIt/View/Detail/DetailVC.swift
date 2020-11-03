@@ -116,6 +116,10 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             sections.append(kSectionDetailVideos)
         }
         
+        if let similar = detail.similar?.results, !similar.isEmpty {
+            sections.append(kSectionDetailSimilar)
+        }
+        
         sections.append(kSectionCopyright)
     }
     
@@ -284,6 +288,15 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         return cell
     }
     
+    func cellForSimilar(_ indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
+            return UICollectionViewCell()
+        }
+        cell.configureCell(contentResponse: getPresenter()?.detail?.similar?.results, title: "detail_similar_section".localized)
+        cell.delegate = self
+        return cell
+    }
+    
     func cellForCopyright(_ indexPath: IndexPath) -> UICollectionViewCell {
         let cell = mainCV.dequeueReusableCell(for: indexPath, cellType: BannerAdCVC.self)
         
@@ -339,6 +352,8 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return cellForCast(indexPath)
         case kSectionDetailVideos:
             return cellForVideos(indexPath)
+        case kSectionDetailSimilar:
+            return cellForSimilar(indexPath)
         case kSectionCopyright:
             return cellForCopyright(indexPath)
         default:
@@ -358,6 +373,8 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsCast)
         case kSectionDetailVideos:
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsVideo)
+        case kSectionDetailSimilar:
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightHomeSectionsInfiniteCarousel)
         case kSectionCopyright:
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightBannerAd)
         default:
@@ -367,6 +384,12 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 }
 
 extension DetailVC: HorizontalCarouselCVCDelegate {
+    func navigateTo(content: Content) {
+        if let presenter = getPresenter() {
+            presenter.didTapOnSimilarContent(content: content, nav: navigationController)
+        }
+    }
+    
     func navigateTo(platform: Platform) {
         if let presenter = getPresenter() {
             presenter.didTapOnPlatform(platform: platform)
