@@ -43,7 +43,7 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         reloadWithSearchData(isEmpty: isEmpty)
         if !isEmpty {
             UIView.animate(withDuration: 0.5, animations: {
-                self.mainCV?.contentOffset = .init(x: -10, y: -(50 + self.topbarHeight))
+                self.mainCV?.contentOffset = .init(x: -10, y: -(60 + self.topbarHeight))
             })
         }
     }
@@ -141,13 +141,14 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
         mainCV?.dataSource = self
         mainCV?.allowsSelection = true
         mainCV?.register(UINib(nibName: kInfiniteCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kInfiniteCarouselCVC)
-        mainCV?.register(supplementaryViewType: BannerAdHeaderCRV.self, ofKind: UICollectionView.elementKindSectionHeader)
+        
         mainCV?.backgroundColor = .blackOrWhite
         if let bottomInset = UserDefaults.standard.object(forKey: "keyboardHeight") as? CGFloat {
             mainCV?.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: bottomInset, right: 10)
         } else {
             mainCV?.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
         }
+        mainCV?.register(supplementaryViewType: BannerAdHeaderCRV.self, ofKind: UICollectionView.elementKindSectionHeader)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -168,13 +169,22 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: UIScreen.main.bounds.width, height: kHeightBannerAd)
+        
+        let size = AdManager.shared.shouldShowAds ? CGSize(width: UIScreen.main.bounds.width, height: kHeightBannerAd) : .zero
+        
+        return size
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, for: indexPath, viewType: BannerAdHeaderCRV.self)
         
-        headerView.configureWithBanner(banner: viewForBanner(size: .init(width: UIScreen.main.bounds.width, height: kHeightBannerAd)))
+        if AdManager.shared.shouldShowAds {
+            headerView.configureWithBanner(banner: viewForBanner(size: .init(width: UIScreen.main.bounds.width, height: kHeightBannerAd)))
+        } else {
+            headerView.configureWithBanner(banner: UIView())
+        }
+        
         
         return headerView
     }

@@ -44,6 +44,14 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
         }
     }
     
+    @IBOutlet weak var heightBannerConstraint: NSLayoutConstraint! {
+        didSet {
+            if !AdManager.shared.shouldShowAds {
+                heightBannerConstraint.constant = 0
+            }
+        }
+    }
+    
     @IBOutlet weak var heightHeaderConstraint: NSLayoutConstraint!
     @IBOutlet weak var segmentedControl: UISegmentedControl! {
         didSet {
@@ -64,7 +72,9 @@ class DiscoverResultsVC: BaseVC, DiscoverResultsPresenterToViewProtocol {
     
     @IBOutlet weak var bannerView: UIView! {
         didSet {
-            bannerView.addSubview(viewForBanner(size: CGSize(width: UIScreen.main.bounds.width, height: kHeightBannerAd)))
+            if AdManager.shared.shouldShowAds {
+                bannerView.addSubview(viewForBanner(size: CGSize(width: UIScreen.main.bounds.width, height: kHeightBannerAd)))
+            }
         }
     }
     

@@ -133,6 +133,8 @@
 		3D3AD1F751D5AEC21B938E27 /* libPods-iWatchIt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD5D63564A2B54A46FFCAED /* libPods-iWatchIt.a */; };
 		4928A79A254EDC4B00F2A3DD /* EventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928A799254EDC4B00F2A3DD /* EventLogger.swift */; };
 		494CB9CB25309438004455D8 /* BannerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494CB9CA25309438004455D8 /* BannerTVC.swift */; };
+		4975E44C255338B8005D20DD /* SimpleButtonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4975E44B255338B8005D20DD /* SimpleButtonCVC.swift */; };
+		49A3E25B25533E9B00840325 /* SimpleButtonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A3E25A25533E9B00840325 /* SimpleButtonCVC.xib */; };
 		49CF26F625480A56004A7F76 /* FirebaseDatabaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF26F525480A56004A7F76 /* FirebaseDatabaseProvider.swift */; };
 		D6D4E191F8D4F66C0964CE90 /* libPods-iWatchIt-iWatchItUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 118CF2D321F62495C45E3AEB /* libPods-iWatchIt-iWatchItUITests.a */; };
 /* End PBXBuildFile section */
@@ -287,6 +289,8 @@
 		2CEFCEFB4843AC380F62C6E8 /* Pods-iWatchIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.release.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.release.xcconfig"; sourceTree = "<group>"; };
 		4928A799254EDC4B00F2A3DD /* EventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLogger.swift; sourceTree = "<group>"; };
 		494CB9CA25309438004455D8 /* BannerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerTVC.swift; sourceTree = "<group>"; };
+		4975E44B255338B8005D20DD /* SimpleButtonCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButtonCVC.swift; sourceTree = "<group>"; };
+		49A3E25A25533E9B00840325 /* SimpleButtonCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleButtonCVC.xib; sourceTree = "<group>"; };
 		49CF26F525480A56004A7F76 /* FirebaseDatabaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseProvider.swift; sourceTree = "<group>"; };
 		543BFB3621E304972B5C5C55 /* libPods-iWatchItTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchItTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6100731C35A95D1323E6FDD7 /* Pods-iWatchIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.debug.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.debug.xcconfig"; sourceTree = "<group>"; };
@@ -446,6 +450,8 @@
 				102BD0BB243918BE003215AF /* DetailOverviewCVC.xib */,
 				102CE7C224D84398002811C6 /* BannerAdCVC.swift */,
 				102CE7C424D85172002811C6 /* BannerAdHeaderCRV.swift */,
+				4975E44B255338B8005D20DD /* SimpleButtonCVC.swift */,
+				49A3E25A25533E9B00840325 /* SimpleButtonCVC.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -1008,6 +1014,7 @@
 				10533D332427BEB200BF8FC4 /* Home.storyboard in Resources */,
 				1005B757243B9126004B78F3 /* DetailCarouselPlatformCVC.xib in Resources */,
 				10E5BA25242CF3A2005227C8 /* ic_loading_splash.json in Resources */,
+				49A3E25B25533E9B00840325 /* SimpleButtonCVC.xib in Resources */,
 				102BD0B72438EF74003215AF /* DetailHeaderCVC.xib in Resources */,
 				10F6BFC3242FDE2400AE693A /* InfiniteCarouselTVC.xib in Resources */,
 				10E4A53F2437604500CD80C2 /* HorizontalCarouselCVC.xib in Resources */,
@@ -1129,6 +1136,7 @@
 				10E4A54524376C6000CD80C2 /* DetailCarouselCVC.swift in Sources */,
 				104D59C02443E1870085F073 /* DiscoverHeaderTVC.swift in Sources */,
 				10860C362428184300DA3A5F /* FakeSplashPresenter.swift in Sources */,
+				4975E44C255338B8005D20DD /* SimpleButtonCVC.swift in Sources */,
 				1005B75F243B913C004B78F3 /* DetailCarouselTrailersCVC.swift in Sources */,
 				10F64086242BCE890096C229 /* APIRouter.swift in Sources */,
 				109E457624312F370027012B /* SearchProtocol.swift in Sources */,

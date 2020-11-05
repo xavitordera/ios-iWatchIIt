@@ -19,6 +19,8 @@ final class AdManager: NSObject {
     
     var firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol
     
+    var shouldShowAds: Bool = true
+    
     init(firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol = FirebaseDatabaseProvider.shared) {
         self.firebaseDatabaseProvider = firebaseDatabaseProvider
     }
@@ -73,6 +75,12 @@ final class AdManager: NSObject {
         firebaseDatabaseProvider.fetchParameter(parent: DatabaseFields.adManager, name: DatabaseFields.interstitialFrequency, ofType: Int.self) { param in
             if let frequency = param {
                 self.interstitialFrequency = frequency
+            }
+        }
+        
+        firebaseDatabaseProvider.fetchParameter(parent: DatabaseFields.adManager, name: DatabaseFields.shouldShowAds, ofType: Bool.self) { param in
+            if let shouldShowAds = param {
+                self.shouldShowAds = shouldShowAds
             }
         }
     }

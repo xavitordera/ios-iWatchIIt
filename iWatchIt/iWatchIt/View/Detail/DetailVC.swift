@@ -28,6 +28,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             mainCV.register(UINib(nibName: kDetailOverviewCVC, bundle: .main), forCellWithReuseIdentifier: kDetailOverviewCVC)
             mainCV.register(UINib(nibName: kHorizontalCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kHorizontalCarouselCVC)
             mainCV.register(cellType: BannerAdCVC.self)
+            mainCV.register(cellType: SimpleButtonCVC.self)
             
             mainCV.contentInset = .zero
             mainCV.bounces = true
@@ -100,6 +101,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             return
         }
         
+        sections = []
+        
         sections.append(kSectionDetailHeader)
         
         if let overview = detail.overview, !overview.isEmpty {
@@ -163,7 +166,9 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     }
     
     func onPlatformsFetched() {
-        reloadSection(section: kSectionDetailPlatforms)
+        setupSections()
+        reloadData()
+//        reloadSection(section: kSectionDetailPlatforms)
     }
     
     func getPresenter() -> DetailViewToPresenterProtocol? {
@@ -330,7 +335,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
 
 extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if sections[section] == kSectionDetailHeader {
+        if sections[section] == kSectionDetailHeader, AdManager.shared.shouldShowAds {
             return 2
         }
         return 1
@@ -369,6 +374,8 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return CGSize(width: UIScreen.main.bounds.width, height: heightForOverview())
         case kSectionDetailPlatforms:
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsPlatforms)
+        case kSectionDetailAffiliate:
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightDiscoverSections)
         case kSectionDetailCast:
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsCast)
         case kSectionDetailVideos:

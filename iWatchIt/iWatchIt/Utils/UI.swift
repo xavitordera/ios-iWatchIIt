@@ -94,6 +94,7 @@ let kSectionDetailCast = "SectionDetailCast"
 let kSectionDetailVideos = "SectionDetailVideos"
 let kSectionCopyright = "SectionCopyright"
 let kSectionDetailSimilar = "SectionDetailSimilar"
+let kSectionDetailAffiliate = "SectionDetailAffiliate"
 
 let kSectionDiscoverKeywords = "SectionDiscoverKeywords"
 let kSectionDiscoverGenre = "SectionDiscoverGenre"

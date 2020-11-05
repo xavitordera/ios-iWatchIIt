@@ -32,6 +32,60 @@ enum PlatformSite: String, CaseIterable {
     case Syfy = "Syfy"
     case HBOMax = "HBO Max"
     case Peacock = "Peacock"
+    
+    var urlKey: String? {
+        switch self {
+        case .Netflix:
+            return "netflix"
+        case .AmazonPrimeVideo:
+            return "primevideo"
+        case .AmazonInstantVideo:
+            return "watch.amazon"
+        case .AppleTV:
+            return "tv.apple"
+        case .iTunes:
+            return "itunes"
+        case .YouTubePremium:
+            return "youtube"
+        case .DisneyPlus:
+            return "disney"
+        case .Hulu:
+            return "hulu"
+        case .AtomTickets:
+            return "atom"
+        case .CBS:
+            return "cbs"
+        case .DCUniverse:
+            return "dcuniverse"
+        case .HBOMax:
+            return "hbomax"
+        case .HBO:
+            return "hbo"
+        case .DiscoveryChannel:
+            return "discovery"
+        case .FandangoMovies:
+            return "fandango"
+        case .Fox:
+            return "fox"
+        case .NBC:
+            return "nbc"
+        case .Nickelodeon:
+            return "nickelodeon"
+        case .Syfy:
+            return "syfy"
+        case .Peacock:
+            return "peacock"
+        }
+    }
+    
+    var shouldShowAffiliateCell: Bool {
+        switch self {
+        case .AmazonPrimeVideo, .AmazonInstantVideo:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 enum PlatformScheme: String, CaseIterable {
@@ -112,18 +166,17 @@ class PlatformHelper {
         return locations
     }
     
-    /// check if any string contains excluded words
-    /// return: true if constains excluded words false if not
-    private class func checkIfHasExcludedWords(term: String) -> Bool {
-        for word in excludedPlatformWords {
-            if term.contains(word) {
-                return true
+    class func initializeUtellyKeys() {
+        FirebaseDatabaseProvider.shared.fetchObject(name: DatabaseFields.utellyKeys) { (param: [String]?) in
+            if let param = param {
+                Preference.setUtellyKeys(keys: param)
             }
         }
-        
-        return false
     }
     
+    
+    /// Navigates to the especified streaming platform
+    /// - Parameter platform: Platform to navigate to
     class func goToPlatform(platform: Platform?) {
         guard let platform = platform, let platformUrl = platform .url else {
             return
@@ -145,6 +198,24 @@ class PlatformHelper {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
+    }
+    
+    class func shouldDisplayAffiliateCell(for platform: Platform?) -> Bool {
+        guard let platform = platform, let site = getSiteForPlatform(platform: platform) else { return false }
+        
+        return site.shouldShowAffiliateCell
+    }
+    
+    /// check if any string contains excluded words
+    /// return: true if constains excluded words false if not
+    private class func checkIfHasExcludedWords(term: String) -> Bool {
+        for word in excludedPlatformWords {
+            if term.contains(word) {
+                return true
+            }
+        }
+        
+        return false
     }
     
     /// Returns the original url and the custom url for each site
@@ -173,87 +244,20 @@ class PlatformHelper {
     // FIXME: ASAP
     /// "Analyses" the incoming url and determines from with platform is
     private class func getSiteForPlatform(platform: Platform) -> PlatformSite? {
-        guard let platformURL = platform.url else {
+         guard let platformURL = platform.url else {
             return nil
         }
         
-        if platformURL.contains("netflix") {
-            return .Netflix
+        var platformSite: PlatformSite?
+        
+        PlatformSite.allCases.forEach {
+            guard let key = $0.urlKey else {return}
+            if platformURL.contains(key) {
+                platformSite = $0
+            }
         }
         
-        if platformURL.contains("amazon") || platformURL.contains("primevideo") {
-            return .AmazonPrimeVideo
-        }
-        
-        if platformURL.contains("tv.apple") {
-            return .AppleTV
-        }
-        
-        if platformURL.contains("itunes") {
-            return .iTunes
-        }
-        
-        if platformURL.contains("youtube") {
-            return .YouTubePremium
-        }
-        
-        if platformURL.contains("disney") {
-            return .DisneyPlus
-        }
-        
-        if platformURL.contains("hulu") {
-            return .Hulu
-        }
-        
-        if platformURL.contains("atom") {
-            return .AtomTickets
-        }
-        
-        if platformURL.contains("cbs") {
-            return .CBS
-        }
-        
-        if platformURL.contains("dcuniverse") {
-            return .DCUniverse
-        }
-        
-        if platformURL.contains("hbomax") {
-            return .HBOMax
-        }
-        
-        if platformURL.contains("hbo") {
-            return .HBO
-        }
-        
-        if platformURL.contains("discovery") {
-            return .DiscoveryChannel
-        }
-        
-        if platformURL.contains("fandango") {
-            return .FandangoMovies
-        }
-        
-        if platformURL.contains("fox") {
-            return .Fox
-        }
-        
-        if platformURL.contains("nbc") {
-            return .NBC
-        }
-        
-        if platformURL.contains("nickelodeon") {
-            return .Nickelodeon
-        }
-        
-        if platformURL.contains("syfy") {
-            return .Syfy
-        }
-        
-        if platformURL.contains("peacock") {
-            return .Peacock
-        }
-        
-        return nil
+        return platformSite
     }
     
     private class func buildSchemeURL(for url: String, withScheme: PlatformScheme) -> String? {
@@ -272,14 +276,6 @@ class PlatformHelper {
             return String(format: kDeepURLAmazon, asin)
         } else {
             return nil
-        }
-    }
-    
-    class func initializeUtellyKeys() {
-        FirebaseDatabaseProvider.shared.fetchObject(name: DatabaseFields.utellyKeys) { (param: [String]?) in
-            if let param = param {
-                Preference.setUtellyKeys(keys: param)
-            }
         }
     }
 }

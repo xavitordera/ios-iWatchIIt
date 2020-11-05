@@ -14,6 +14,18 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
     var type: MediaType?
     var platforms: [Platform]?
     
+    var shouldShowAffiliateCell: Bool {
+        guard let platforms = platforms else { return false }
+        
+       for platform in platforms {
+            if PlatformHelper.shouldDisplayAffiliateCell(for: platform) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     // MARK: Interactor protocol
     func detailFetchSuccess(detail: ContentExtended?) {
         self.detail = detail
