@@ -53,6 +53,7 @@ let kSource = "source"
 let kTerm = "term"
 let kHeaderRapidAPIHost = "x-rapidapi-host"
 let kHeaderRapidAPIKey = "x-rapidapi-key"
+let kTag = "tag"
 
 /// Config
 let kIMDB = "imdb"

@@ -88,7 +88,7 @@ final class AdManager: NSObject {
 
 extension AdManager: GADInterstitialDelegate {
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-      interstitial = createAndLoadInterstitial()
+        interstitial = createAndLoadInterstitial()
     }
     
     func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {

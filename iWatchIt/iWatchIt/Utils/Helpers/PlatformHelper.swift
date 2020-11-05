@@ -178,14 +178,16 @@ class PlatformHelper {
     /// Navigates to the especified streaming platform
     /// - Parameter platform: Platform to navigate to
     class func goToPlatform(platform: Platform?) {
-        guard let platform = platform, let platformUrl = platform .url else {
+        guard let platform = platform, let platformUrl = platform.url else {
             return
         }
         
         if let site = getSiteForPlatform(platform: platform) {
             let (originalURLString, schemeURLString) = buildCustomURL(for: site, with: platformUrl)
-            if let originalURL = URL(string: originalURLString), let schemeurl = schemeURLString,
+            if let originalURL = URL(string: originalURLString),
+                let schemeurl = schemeURLString,
                 let customURL = URL(string: schemeurl) {
+                
                 let urlToOpen = UIApplication.shared.canOpenURL(customURL) ? customURL : originalURL
                 UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
             } else {
@@ -226,9 +228,9 @@ class PlatformHelper {
         case .Netflix:
             return (url, buildSchemeURL(for: url, withScheme: .Netflix))
         case .AmazonPrimeVideo, .AmazonInstantVideo:
-            return (url, buildSchemeURL(for: url, withScheme: .AmazonPrimeVideo))
-        case .AppleTV:
-            return (url, buildSchemeURL(for: url, withScheme: .AppleTV))
+            
+            let tweakedURL = URL(string: url)?.urlWithTweakedURLParams(paramName: kTag, paramValue: amazonTagForCountry()).absoluteString
+            return (tweakedURL ?? url, buildSchemeURL(for: url, withScheme: .AmazonPrimeVideo))
         case .Hulu:
             return (url, buildSchemeURL(for: url, withScheme: .Hulu))
         case .iTunes:
@@ -241,10 +243,27 @@ class PlatformHelper {
         
     }
     
+    private class func amazonTagForCountry() -> String {
+        switch Preference.getCurrentCountry() {
+        case "es":
+            return "xavi03b-21"
+        case "it":
+            return "xavi0b5d-21"
+        case "fr":
+            return "xavi05-21"
+        case "de":
+            return "xavi0f-21"
+        case "uk":
+            return "xavi0c-21"
+        default:
+            return "iwatchit-20" // us id in default
+        }
+    }
+    
     // FIXME: ASAP
     /// "Analyses" the incoming url and determines from with platform is
     private class func getSiteForPlatform(platform: Platform) -> PlatformSite? {
-         guard let platformURL = platform.url else {
+        guard let platformURL = platform.url else {
             return nil
         }
         

@@ -132,6 +132,7 @@
 		28B223E8213F81C17B80397A /* libPods-iWatchItTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 543BFB3621E304972B5C5C55 /* libPods-iWatchItTests.a */; };
 		3D3AD1F751D5AEC21B938E27 /* libPods-iWatchIt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD5D63564A2B54A46FFCAED /* libPods-iWatchIt.a */; };
 		4928A79A254EDC4B00F2A3DD /* EventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4928A799254EDC4B00F2A3DD /* EventLogger.swift */; };
+		4932B0CC25540EA900B6C14A /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4932B0CB25540EA900B6C14A /* URL+Utils.swift */; };
 		494CB9CB25309438004455D8 /* BannerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494CB9CA25309438004455D8 /* BannerTVC.swift */; };
 		4975E44C255338B8005D20DD /* SimpleButtonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4975E44B255338B8005D20DD /* SimpleButtonCVC.swift */; };
 		49A3E25B25533E9B00840325 /* SimpleButtonCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49A3E25A25533E9B00840325 /* SimpleButtonCVC.xib */; };
@@ -288,6 +289,7 @@
 		118CF2D321F62495C45E3AEB /* libPods-iWatchIt-iWatchItUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iWatchIt-iWatchItUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CEFCEFB4843AC380F62C6E8 /* Pods-iWatchIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWatchIt.release.xcconfig"; path = "Target Support Files/Pods-iWatchIt/Pods-iWatchIt.release.xcconfig"; sourceTree = "<group>"; };
 		4928A799254EDC4B00F2A3DD /* EventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLogger.swift; sourceTree = "<group>"; };
+		4932B0CB25540EA900B6C14A /* URL+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Utils.swift"; sourceTree = "<group>"; };
 		494CB9CA25309438004455D8 /* BannerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerTVC.swift; sourceTree = "<group>"; };
 		4975E44B255338B8005D20DD /* SimpleButtonCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButtonCVC.swift; sourceTree = "<group>"; };
 		49A3E25A25533E9B00840325 /* SimpleButtonCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleButtonCVC.xib; sourceTree = "<group>"; };
@@ -811,6 +813,7 @@
 				1050D9F8243645AE0086990A /* UIViewController+Controller.swift */,
 				10E4A5382437470D00CD80C2 /* UIBarButtonItem+Item.swift */,
 				102BD0B82438F549003215AF /* UIView+View.swift */,
+				4932B0CB25540EA900B6C14A /* URL+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1227,6 +1230,7 @@
 				10EBB4AC2431515E00C40732 /* SectionHeader.swift in Sources */,
 				104D59B724433AF10085F073 /* Discover.swift in Sources */,
 				10482792242EE8B400ED7683 /* InfiniteCarouselCVC.swift in Sources */,
+				4932B0CC25540EA900B6C14A /* URL+Utils.swift in Sources */,
 				10482782242ED4C800ED7683 /* HomeRouter.swift in Sources */,
 				10860C342428171500DA3A5F /* FakeSplashProtocol.swift in Sources */,
 			);

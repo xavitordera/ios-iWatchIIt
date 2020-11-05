@@ -167,8 +167,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     
     func onPlatformsFetched() {
         setupSections()
-        reloadData()
-//        reloadSection(section: kSectionDetailPlatforms)
+//        reloadData()
+        reloadSection(section: kSectionDetailPlatforms)
     }
     
     func getPresenter() -> DetailViewToPresenterProtocol? {
