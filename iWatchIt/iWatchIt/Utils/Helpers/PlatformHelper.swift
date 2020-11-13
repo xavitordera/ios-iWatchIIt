@@ -191,7 +191,7 @@ class PlatformHelper {
                 let urlToOpen = UIApplication.shared.canOpenURL(customURL) ? customURL : originalURL
                 UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
             } else {
-                if let url = URL(string: platformUrl) {
+                if let url = URL(string: originalURLString) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
             }
