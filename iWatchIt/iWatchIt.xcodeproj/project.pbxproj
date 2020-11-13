@@ -68,11 +68,11 @@
 		108564722436980200082755 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108564712436980200082755 /* DetailPresenter.swift */; };
 		108564742436A65600082755 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108564732436A65600082755 /* DetailRouter.swift */; };
 		108564762436A74300082755 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108564752436A74300082755 /* DetailVC.swift */; };
-		10860C0D2427C32000DA3A5F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C0C2427C32000DA3A5F /* SwiftPackageProductDependency */; };
-		10860C102427C36800DA3A5F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C0F2427C36800DA3A5F /* SwiftPackageProductDependency */; };
-		10860C162427C44400DA3A5F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C152427C44400DA3A5F /* SwiftPackageProductDependency */; };
-		10860C182427C44400DA3A5F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C172427C44400DA3A5F /* SwiftPackageProductDependency */; };
-		10860C1B2427C4C300DA3A5F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C1A2427C4C300DA3A5F /* SwiftPackageProductDependency */; };
+		10860C0D2427C32000DA3A5F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C0C2427C32000DA3A5F /* Lottie */; };
+		10860C102427C36800DA3A5F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C0F2427C36800DA3A5F /* Alamofire */; };
+		10860C162427C44400DA3A5F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C152427C44400DA3A5F /* Realm */; };
+		10860C182427C44400DA3A5F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C172427C44400DA3A5F /* RealmSwift */; };
+		10860C1B2427C4C300DA3A5F /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 10860C1A2427C4C300DA3A5F /* SkeletonView */; };
 		10860C1E2427C87000DA3A5F /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C1D2427C87000DA3A5F /* APIService.swift */; };
 		10860C202427CE5100DA3A5F /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C1F2427CE5100DA3A5F /* BaseInteractor.swift */; };
 		10860C222427CE5D00DA3A5F /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10860C212427CE5D00DA3A5F /* BasePresenter.swift */; };
@@ -92,9 +92,9 @@
 		109E457224312F010027012B /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E457124312F010027012B /* SearchPresenter.swift */; };
 		109E457424312F1D0027012B /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E457324312F1D0027012B /* SearchInteractor.swift */; };
 		109E457624312F370027012B /* SearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E457524312F370027012B /* SearchProtocol.swift */; };
-		10A638702440D283002B4B83 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6386F2440D283002B4B83 /* SwiftPackageProductDependency */; };
+		10A638702440D283002B4B83 /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6386F2440D283002B4B83 /* SPAlert */; };
 		10A638752440D5B9002B4B83 /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A638742440D5B9002B4B83 /* Watchlist.swift */; };
-		10A6388F24411129002B4B83 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6388E24411129002B4B83 /* SwiftPackageProductDependency */; };
+		10A6388F24411129002B4B83 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6388E24411129002B4B83 /* Kingfisher */; };
 		10B007862450C2FD00097A40 /* DiscoverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B007852450C2FD00097A40 /* DiscoverHelper.swift */; };
 		10CD6CF12449EC67008B7E00 /* DiscoverPeopleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CD6CEF2449EC67008B7E00 /* DiscoverPeopleTVC.swift */; };
 		10CD6CF22449EC67008B7E00 /* DiscoverPeopleTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10CD6CF02449EC67008B7E00 /* DiscoverPeopleTVC.xib */; };
@@ -308,13 +308,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10A638702440D283002B4B83 /* BuildFile in Frameworks */,
-				10860C0D2427C32000DA3A5F /* BuildFile in Frameworks */,
-				10A6388F24411129002B4B83 /* BuildFile in Frameworks */,
-				10860C162427C44400DA3A5F /* BuildFile in Frameworks */,
-				10860C182427C44400DA3A5F /* BuildFile in Frameworks */,
-				10860C1B2427C4C300DA3A5F /* BuildFile in Frameworks */,
-				10860C102427C36800DA3A5F /* BuildFile in Frameworks */,
+				10A638702440D283002B4B83 /* SPAlert in Frameworks */,
+				10860C0D2427C32000DA3A5F /* Lottie in Frameworks */,
+				10A6388F24411129002B4B83 /* Kingfisher in Frameworks */,
+				10860C162427C44400DA3A5F /* Realm in Frameworks */,
+				10860C182427C44400DA3A5F /* RealmSwift in Frameworks */,
+				10860C1B2427C4C300DA3A5F /* SkeletonView in Frameworks */,
+				10860C102427C36800DA3A5F /* Alamofire in Frameworks */,
 				3D3AD1F751D5AEC21B938E27 /* libPods-iWatchIt.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -896,13 +896,13 @@
 			);
 			name = iWatchIt;
 			packageProductDependencies = (
-				10860C0C2427C32000DA3A5F /* SwiftPackageProductDependency */,
-				10860C0F2427C36800DA3A5F /* SwiftPackageProductDependency */,
-				10860C152427C44400DA3A5F /* SwiftPackageProductDependency */,
-				10860C172427C44400DA3A5F /* SwiftPackageProductDependency */,
-				10860C1A2427C4C300DA3A5F /* SwiftPackageProductDependency */,
-				10A6386F2440D283002B4B83 /* SwiftPackageProductDependency */,
-				10A6388E24411129002B4B83 /* SwiftPackageProductDependency */,
+				10860C0C2427C32000DA3A5F /* Lottie */,
+				10860C0F2427C36800DA3A5F /* Alamofire */,
+				10860C152427C44400DA3A5F /* Realm */,
+				10860C172427C44400DA3A5F /* RealmSwift */,
+				10860C1A2427C4C300DA3A5F /* SkeletonView */,
+				10A6386F2440D283002B4B83 /* SPAlert */,
+				10A6388E24411129002B4B83 /* Kingfisher */,
 			);
 			productName = iWatchIt;
 			productReference = 10533D262427BEB200BF8FC4 /* iWatchIt.app */;
@@ -985,12 +985,12 @@
 			);
 			mainGroup = 10533D1D2427BEB200BF8FC4;
 			packageReferences = (
-				10860C0B2427C32000DA3A5F /* RemoteSwiftPackageReference */,
-				10860C0E2427C36800DA3A5F /* RemoteSwiftPackageReference */,
-				10860C142427C44400DA3A5F /* RemoteSwiftPackageReference */,
-				10860C192427C4C300DA3A5F /* RemoteSwiftPackageReference */,
-				10A6386E2440D283002B4B83 /* RemoteSwiftPackageReference */,
-				10A6388D24411128002B4B83 /* RemoteSwiftPackageReference */,
+				10860C0B2427C32000DA3A5F /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				10860C0E2427C36800DA3A5F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				10860C142427C44400DA3A5F /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				10860C192427C4C300DA3A5F /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				10A6386E2440D283002B4B83 /* XCRemoteSwiftPackageReference "SPAlert" */,
+				10A6388D24411128002B4B83 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 10533D272427BEB200BF8FC4 /* Products */;
 			projectDirPath = "";
@@ -1505,7 +1505,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xtordera.iWatchIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = iWatchIt_DEBUG;
@@ -1531,7 +1531,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xtordera.iWatchIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = iWatchIt_APP_STORE;
@@ -1671,7 +1671,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		10860C0B2427C32000DA3A5F /* RemoteSwiftPackageReference */ = {
+		10860C0B2427C32000DA3A5F /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -1679,7 +1679,7 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		10860C0E2427C36800DA3A5F /* RemoteSwiftPackageReference */ = {
+		10860C0E2427C36800DA3A5F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -1687,7 +1687,7 @@
 				minimumVersion = 5.0.4;
 			};
 		};
-		10860C142427C44400DA3A5F /* RemoteSwiftPackageReference */ = {
+		10860C142427C44400DA3A5F /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
@@ -1695,7 +1695,7 @@
 				minimumVersion = 4.3.2;
 			};
 		};
-		10860C192427C4C300DA3A5F /* RemoteSwiftPackageReference */ = {
+		10860C192427C4C300DA3A5F /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
 			requirement = {
@@ -1703,7 +1703,7 @@
 				minimumVersion = 1.8.6;
 			};
 		};
-		10A6386E2440D283002B4B83 /* RemoteSwiftPackageReference */ = {
+		10A6386E2440D283002B4B83 /* XCRemoteSwiftPackageReference "SPAlert" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ivanvorobei/SPAlert";
 			requirement = {
@@ -1711,7 +1711,7 @@
 				minimumVersion = 2.1.4;
 			};
 		};
-		10A6388D24411128002B4B83 /* RemoteSwiftPackageReference */ = {
+		10A6388D24411128002B4B83 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -1722,39 +1722,39 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		10860C0C2427C32000DA3A5F /* SwiftPackageProductDependency */ = {
+		10860C0C2427C32000DA3A5F /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 10860C0B2427C32000DA3A5F /* RemoteSwiftPackageReference */;
+			package = 10860C0B2427C32000DA3A5F /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
-		10860C0F2427C36800DA3A5F /* SwiftPackageProductDependency */ = {
+		10860C0F2427C36800DA3A5F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 10860C0E2427C36800DA3A5F /* RemoteSwiftPackageReference */;
+			package = 10860C0E2427C36800DA3A5F /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		10860C152427C44400DA3A5F /* SwiftPackageProductDependency */ = {
+		10860C152427C44400DA3A5F /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 10860C142427C44400DA3A5F /* RemoteSwiftPackageReference */;
+			package = 10860C142427C44400DA3A5F /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = Realm;
 		};
-		10860C172427C44400DA3A5F /* SwiftPackageProductDependency */ = {
+		10860C172427C44400DA3A5F /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 10860C142427C44400DA3A5F /* RemoteSwiftPackageReference */;
+			package = 10860C142427C44400DA3A5F /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
-		10860C1A2427C4C300DA3A5F /* SwiftPackageProductDependency */ = {
+		10860C1A2427C4C300DA3A5F /* SkeletonView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 10860C192427C4C300DA3A5F /* RemoteSwiftPackageReference */;
+			package = 10860C192427C4C300DA3A5F /* XCRemoteSwiftPackageReference "SkeletonView" */;
 			productName = SkeletonView;
 		};
-		10A6386F2440D283002B4B83 /* SwiftPackageProductDependency */ = {
+		10A6386F2440D283002B4B83 /* SPAlert */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 10A6386E2440D283002B4B83 /* RemoteSwiftPackageReference */;
+			package = 10A6386E2440D283002B4B83 /* XCRemoteSwiftPackageReference "SPAlert" */;
 			productName = SPAlert;
 		};
-		10A6388E24411129002B4B83 /* SwiftPackageProductDependency */ = {
+		10A6388E24411129002B4B83 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 10A6388D24411128002B4B83 /* RemoteSwiftPackageReference */;
+			package = 10A6388D24411128002B4B83 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
