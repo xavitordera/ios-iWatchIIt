@@ -15,6 +15,7 @@ enum MediaType: String {
 enum HomeSectionType {
     case Trending
     case Discover
+    case TopRated
     case Watchlist
 }
 
@@ -28,10 +29,12 @@ struct Home {
     var trending: HomeSection?
     var discover: HomeSection?
     var watchlist: HomeSection?
+    var topRated: HomeSection?
+    
     static var homeShows = Home()
     static var homeMovies = Home()
     
-    static func updateFromRoot(rootTrending: Root?, rootDiscover: Root?, watchlist: [WatchlistContent]?, type: MediaType) -> Home? {
+    static func updateFromRoot(rootTrending: Root?, rootDiscover: Root?, rootTopRated: Root?, watchlist: [WatchlistContent]?, type: MediaType) -> Home? {
         if let rootTren = rootTrending {
             var trending = HomeSection()
             trending.content = rootTren.results
@@ -59,6 +62,22 @@ struct Home {
                 break
             }
         }
+        
+        if let rootTopRated = rootTopRated {
+            var section = HomeSection()
+            section.content = rootTopRated.results
+            section.title = "home_section_top_rated".localized
+            section.type = .TopRated
+            switch type {
+            case .movie:
+                homeMovies.topRated = section
+            case .show:
+                homeShows.topRated = section
+            case .people:
+                break
+            }
+        }
+        
         if let watchlist = watchlist {
             var wsHome = HomeSection()
             wsHome.title = "home_section_watchlist".localized

@@ -68,6 +68,7 @@ struct ContentExtended: Decodable {
     var originalName: String?
     var originalTitle: String?
     var externalIDs: ContentExternalId?
+    var similar: Root?
     
     enum CodingKeys: String, CodingKey {
         case image = "poster_path"
@@ -87,6 +88,7 @@ struct ContentExtended: Decodable {
         case originalName = "original_name"
         case originalTitle = "original_title"
         case externalIDs = "external_ids"
+        case similar = "similar"
     }
 }
 

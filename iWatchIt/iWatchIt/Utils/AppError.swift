@@ -12,6 +12,7 @@ enum AppError: Error {
     case message(String)
     case generic
     case malformedData
+    case utellyRequestFailed
     
     public var errorDescription: String? {
         switch self {

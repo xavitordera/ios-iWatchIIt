@@ -19,6 +19,7 @@
 "home_title_shows" = "Shows";
 "home_section_trending" = "Trending";
 "home_section_discover" = "You might like...";
+"home_section_top_rated" = "Top rated";
 "home_section_watchlist" = "Your watchlist";
 "home_empty_watchlist" = "Here you will see your watchlist content. Start exploring!";
 
@@ -34,6 +35,7 @@
 "detail_empty_platforms" = "We couldn't find any platform streaming this content in your country.";
 "detail_added_to_watchlist" = "Added to watchlist";
 "detail_removed_from_watchlist" = "Removed from watchlist";
+"detail_similar_section" = "Similar content";
 
 "discover_title" = "Discover";
 "discover_tv_shows_tab" = "TV Shows";

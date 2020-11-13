@@ -19,6 +19,7 @@
 "home_title_shows" = "Shows";
 "home_section_trending" = "Trending";
 "home_section_discover" = "Potrebbe piacerti...";
+"home_section_top_rated" = "Più votati";
 "home_section_watchlist" = "La tua watchlist";
 "home_empty_watchlist" = "Qui vedrai il contenuto della tua watchlist. Inizia a esplorare!";
 
@@ -34,6 +35,7 @@
 "detail_empty_platforms" = "Non siamo riusciti a trovare alcuna piattaforma in streaming di questi contenuti nel tuo Paese.";
 "detail_added_to_watchlist" = "Aggiunto alla watchlist";
 "detail_removed_from_watchlist" = "Rimosso dalla watchlist";
+"detail_similar_section" = "Contenuto simile";
 
 "discover_title" = "Scopri";
 "discover_tv_shows_tab" = "Programmi TV";

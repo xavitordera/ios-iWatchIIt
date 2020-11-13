@@ -28,6 +28,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             mainCV.register(UINib(nibName: kDetailOverviewCVC, bundle: .main), forCellWithReuseIdentifier: kDetailOverviewCVC)
             mainCV.register(UINib(nibName: kHorizontalCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kHorizontalCarouselCVC)
             mainCV.register(cellType: BannerAdCVC.self)
+            mainCV.register(cellType: SimpleButtonCVC.self)
             
             mainCV.contentInset = .zero
             mainCV.bounces = true
@@ -100,6 +101,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             return
         }
         
+        sections = []
+        
         sections.append(kSectionDetailHeader)
         
         if let overview = detail.overview, !overview.isEmpty {
@@ -114,6 +117,10 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         
         if let videos = detail.videos?.results, !videos.isEmpty {
             sections.append(kSectionDetailVideos)
+        }
+        
+        if let similar = detail.similar?.results, !similar.isEmpty {
+            sections.append(kSectionDetailSimilar)
         }
         
         sections.append(kSectionCopyright)
@@ -159,6 +166,8 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     }
     
     func onPlatformsFetched() {
+        setupSections()
+//        reloadData()
         reloadSection(section: kSectionDetailPlatforms)
     }
     
@@ -198,7 +207,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             
             if let url = url {
                 let activityViewController = UIActivityViewController(activityItems: [String(format:"share_message".localized, self.getPresenter()?.detail?.title ?? self.getPresenter()?.detail?.name ?? ""), url], applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                activityViewController.popoverPresentationController?.sourceView = self.navigationItem.rightBarButtonItems?.first?.customView // so that iPads won't crash
                 
                 // present the view controller
                 self.present(activityViewController, animated: true, completion: nil)
@@ -284,6 +293,15 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         return cell
     }
     
+    func cellForSimilar(_ indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
+            return UICollectionViewCell()
+        }
+        cell.configureCell(contentResponse: getPresenter()?.detail?.similar?.results, title: "detail_similar_section".localized)
+        cell.delegate = self
+        return cell
+    }
+    
     func cellForCopyright(_ indexPath: IndexPath) -> UICollectionViewCell {
         let cell = mainCV.dequeueReusableCell(for: indexPath, cellType: BannerAdCVC.self)
         
@@ -317,7 +335,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
 
 extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if sections[section] == kSectionDetailHeader {
+        if sections[section] == kSectionDetailHeader, AdManager.shared.shouldShowAds {
             return 2
         }
         return 1
@@ -339,6 +357,8 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return cellForCast(indexPath)
         case kSectionDetailVideos:
             return cellForVideos(indexPath)
+        case kSectionDetailSimilar:
+            return cellForSimilar(indexPath)
         case kSectionCopyright:
             return cellForCopyright(indexPath)
         default:
@@ -354,10 +374,14 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return CGSize(width: UIScreen.main.bounds.width, height: heightForOverview())
         case kSectionDetailPlatforms:
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsPlatforms)
+        case kSectionDetailAffiliate:
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightDiscoverSections)
         case kSectionDetailCast:
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsCast)
         case kSectionDetailVideos:
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightDetailSectionsVideo)
+        case kSectionDetailSimilar:
+            return CGSize(width: UIScreen.main.bounds.width, height: kHeightHomeSectionsInfiniteCarousel)
         case kSectionCopyright:
             return CGSize(width: UIScreen.main.bounds.width, height: kHeightBannerAd)
         default:
@@ -367,6 +391,12 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 }
 
 extension DetailVC: HorizontalCarouselCVCDelegate {
+    func navigateTo(content: Content) {
+        if let presenter = getPresenter() {
+            presenter.didTapOnSimilarContent(content: content, nav: navigationController)
+        }
+    }
+    
     func navigateTo(platform: Platform) {
         if let presenter = getPresenter() {
             presenter.didTapOnPlatform(platform: platform)

@@ -32,6 +32,60 @@ enum PlatformSite: String, CaseIterable {
     case Syfy = "Syfy"
     case HBOMax = "HBO Max"
     case Peacock = "Peacock"
+    
+    var urlKey: String? {
+        switch self {
+        case .Netflix:
+            return "netflix"
+        case .AmazonPrimeVideo:
+            return "primevideo"
+        case .AmazonInstantVideo:
+            return "watch.amazon"
+        case .AppleTV:
+            return "tv.apple"
+        case .iTunes:
+            return "itunes"
+        case .YouTubePremium:
+            return "youtube"
+        case .DisneyPlus:
+            return "disney"
+        case .Hulu:
+            return "hulu"
+        case .AtomTickets:
+            return "atom"
+        case .CBS:
+            return "cbs"
+        case .DCUniverse:
+            return "dcuniverse"
+        case .HBOMax:
+            return "hbomax"
+        case .HBO:
+            return "hbo"
+        case .DiscoveryChannel:
+            return "discovery"
+        case .FandangoMovies:
+            return "fandango"
+        case .Fox:
+            return "fox"
+        case .NBC:
+            return "nbc"
+        case .Nickelodeon:
+            return "nickelodeon"
+        case .Syfy:
+            return "syfy"
+        case .Peacock:
+            return "peacock"
+        }
+    }
+    
+    var shouldShowAffiliateCell: Bool {
+        switch self {
+        case .AmazonPrimeVideo, .AmazonInstantVideo:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 enum PlatformScheme: String, CaseIterable {
@@ -94,36 +148,6 @@ class PlatformHelper {
         }
     }
     
-    /// Helper function used beacause the shitty Utelly API does not take into account that TMDB uses /movies or /shows to fucking differenciate between them
-    
-//    class func checkIfContentExistsInTMDB(for platform: RootCollection?, and contentId: Int?) -> Bool {
-//        guard let tdmbId = platform?.externalIds?.tmdb?.id, let id = contentId else {
-//            return false
-//        }
-//
-//        if tdmbId == String(id) {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
-    
-    /// Helper function used beacause the shitty Utelly API does not take into account that TMDB uses /movies or /shows to fucking differenciate between them
-    /// it basically iterates over the model and compares ids, if match lets go!
-//    private class func getLocations(of platform: RootPlatform?, and contentId: Int?) -> [Platform]? {
-//        guard let platform = platform, let results = platform.results, let id = contentId else {
-//            return nil
-//        }
-//
-//        for result in results {
-//            if let ids = result.externalIds, let extId = ids.tmdb?.id, extId == String(id) {
-//                return result.locations
-//            }
-//        }
-//
-//        return nil
-//    }
-    
     /// Nope, we filter some locations because we don't want to...you know...display anything wierd or offensive to our beloved users
     class func filteredLocations(of platform: RootPlatform?) -> [Platform]? {
         guard var locations = platform?.collection?.locations else {
@@ -142,6 +166,48 @@ class PlatformHelper {
         return locations
     }
     
+    class func initializeUtellyKeys() {
+        FirebaseDatabaseProvider.shared.fetchObject(name: DatabaseFields.utellyKeys) { (param: [String]?) in
+            if let param = param {
+                Preference.setUtellyKeys(keys: param)
+            }
+        }
+    }
+    
+    
+    /// Navigates to the especified streaming platform
+    /// - Parameter platform: Platform to navigate to
+    class func goToPlatform(platform: Platform?) {
+        guard let platform = platform, let platformUrl = platform.url else {
+            return
+        }
+        
+        if let site = getSiteForPlatform(platform: platform) {
+            let (originalURLString, schemeURLString) = buildCustomURL(for: site, with: platformUrl)
+            if let originalURL = URL(string: originalURLString),
+                let schemeurl = schemeURLString,
+                let customURL = URL(string: schemeurl) {
+                
+                let urlToOpen = UIApplication.shared.canOpenURL(customURL) ? customURL : originalURL
+                UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
+            } else {
+                if let url = URL(string: originalURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        } else {
+            if let url = URL(string: platformUrl) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
+    class func shouldDisplayAffiliateCell(for platform: Platform?) -> Bool {
+        guard let platform = platform, let site = getSiteForPlatform(platform: platform) else { return false }
+        
+        return site.shouldShowAffiliateCell
+    }
+    
     /// check if any string contains excluded words
     /// return: true if constains excluded words false if not
     private class func checkIfHasExcludedWords(term: String) -> Bool {
@@ -154,29 +220,6 @@ class PlatformHelper {
         return false
     }
     
-    class func goToPlatform(platform: Platform?) {
-        guard let platform = platform, let platformUrl = platform .url else {
-            return
-        }
-        
-        if let site = getSiteForPlatform(platform: platform) {
-            let (originalURLString, schemeURLString) = buildCustomURL(for: site, with: platformUrl)
-            if let originalURL = URL(string: originalURLString), let schemeurl = schemeURLString,
-                let customURL = URL(string: schemeurl) {
-                    let urlToOpen = UIApplication.shared.canOpenURL(customURL) ? customURL : originalURL
-                    UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
-            } else {
-                if let url = URL(string: platformUrl) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            }
-        } else {
-            if let url = URL(string: platformUrl) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }
-    }
-    
     /// Returns the original url and the custom url for each site
     private class func buildCustomURL(for site: PlatformSite, with url: String?) ->  (String, String?) {
         guard let url = url else {return ("","")}
@@ -185,9 +228,9 @@ class PlatformHelper {
         case .Netflix:
             return (url, buildSchemeURL(for: url, withScheme: .Netflix))
         case .AmazonPrimeVideo, .AmazonInstantVideo:
-            return (url, buildSchemeURL(for: url, withScheme: .AmazonPrimeVideo))
-        case .AppleTV:
-            return (url, buildSchemeURL(for: url, withScheme: .AppleTV))
+            
+            let tweakedURL = URL(string: url)?.urlWithTweakedURLParams(paramName: kTag, paramValue: amazonTagForCountry()).absoluteString
+            return (tweakedURL ?? url, buildSchemeURL(for: url, withScheme: .AmazonPrimeVideo))
         case .Hulu:
             return (url, buildSchemeURL(for: url, withScheme: .Hulu))
         case .iTunes:
@@ -197,7 +240,24 @@ class PlatformHelper {
         default:
             return (url, "")
         }
-       
+        
+    }
+    
+    private class func amazonTagForCountry() -> String {
+        switch Preference.getCurrentCountry() {
+        case "es":
+            return "xavi03b-21"
+        case "it":
+            return "xavi0b5d-21"
+        case "fr":
+            return "xavi05-21"
+        case "de":
+            return "xavi0f-21"
+        case "uk":
+            return "xavi0c-21"
+        default:
+            return "iwatchit-20" // us id in default
+        }
     }
     
     // FIXME: ASAP
@@ -207,83 +267,16 @@ class PlatformHelper {
             return nil
         }
         
-        if platformURL.contains("netflix") {
-            return .Netflix
+        var platformSite: PlatformSite?
+        
+        PlatformSite.allCases.forEach {
+            guard let key = $0.urlKey else {return}
+            if platformURL.contains(key) {
+                platformSite = $0
+            }
         }
         
-        if platformURL.contains("amazon") || platformURL.contains("primevideo") {
-            return .AmazonPrimeVideo
-        }
-        
-        if platformURL.contains("tv.apple") {
-            return .AppleTV
-        }
-        
-        if platformURL.contains("itunes") {
-            return .iTunes
-        }
-        
-        if platformURL.contains("youtube") {
-            return .YouTubePremium
-        }
-        
-        if platformURL.contains("disney") {
-            return .DisneyPlus
-        }
-        
-        if platformURL.contains("hulu") {
-            return .Hulu
-        }
-        
-        if platformURL.contains("atom") {
-            return .AtomTickets
-        }
-        
-        if platformURL.contains("cbs") {
-            return .CBS
-        }
-        
-        if platformURL.contains("dcuniverse") {
-            return .DCUniverse
-        }
-        
-        if platformURL.contains("hbomax") {
-            return .HBOMax
-        }
-        
-        if platformURL.contains("hbo") {
-            return .HBO
-        }
-        
-        if platformURL.contains("discovery") {
-            return .DiscoveryChannel
-        }
-        
-        if platformURL.contains("fandango") {
-            return .FandangoMovies
-        }
-        
-        if platformURL.contains("fox") {
-            return .Fox
-        }
-        
-        if platformURL.contains("nbc") {
-            return .NBC
-        }
-        
-        if platformURL.contains("nickelodeon") {
-            return .Nickelodeon
-        }
-        
-        if platformURL.contains("syfy") {
-            return .Syfy
-        }
-        
-        if platformURL.contains("peacock") {
-           return .Peacock
-        }
-           
-        return nil
+        return platformSite
     }
     
     private class func buildSchemeURL(for url: String, withScheme: PlatformScheme) -> String? {

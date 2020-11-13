@@ -23,6 +23,7 @@ let kDiscoverResultsVC = "DiscoverResultsVC"
 let kHomeTrendingSection = "Trending"
 let kHomeDiscoverSection = "You might like..."
 let kHomeWatchlistSection = "Your watchlist"
+let kHomeTopRatedSection = "Top rated"
 
 
 var kStoryboardHome: UIStoryboard{
@@ -63,6 +64,8 @@ let kHeightDetailSectionsPlatforms: CGFloat = 160
 let kHeightDetailSectionsCast: CGFloat = 215
 let kHeightDetailSectionsVideo: CGFloat = 290
 
+let kHeightDetailSectionsSimilar: CGFloat = 200
+
 let kHeightDiscoverSections: CGFloat = 45
 let kHeightBannerAd: CGFloat = 75
 
@@ -90,6 +93,8 @@ let kSectionDetailPlatforms = "SectionDetailPlatforms"
 let kSectionDetailCast = "SectionDetailCast"
 let kSectionDetailVideos = "SectionDetailVideos"
 let kSectionCopyright = "SectionCopyright"
+let kSectionDetailSimilar = "SectionDetailSimilar"
+let kSectionDetailAffiliate = "SectionDetailAffiliate"
 
 let kSectionDiscoverKeywords = "SectionDiscoverKeywords"
 let kSectionDiscoverGenre = "SectionDiscoverGenre"

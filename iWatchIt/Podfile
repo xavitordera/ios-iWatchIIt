@@ -10,6 +10,7 @@ target 'iWatchIt' do
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
+  pod 'Firebase/Database'
   pod 'Google-Mobile-Ads-SDK'
   target 'iWatchItTests' do
     inherit! :search_paths

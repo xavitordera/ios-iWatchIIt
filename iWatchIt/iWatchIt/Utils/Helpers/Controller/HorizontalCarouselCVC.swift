@@ -12,6 +12,7 @@ protocol HorizontalCarouselCVCDelegate: class {
     func navigateTo(platform: Platform)
     func navigateTo(cast: Cast)
     func navigateTo(video: Video, indexPath: IndexPath)
+    func navigateTo(content: Content)
 }
 
 class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -25,6 +26,7 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     var platformResponse: [Platform]?
     var castResponse: [Cast]?
     var videoResponse: [Video]?
+    var contentResponse: [Content]?
     
     // Variables
     weak var delegate: HorizontalCarouselCVCDelegate?
@@ -61,6 +63,7 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         carouselCV.register(UINib(nibName: kDetailCarouselCastCVC, bundle: .main), forCellWithReuseIdentifier: kDetailCarouselCastCVC)
         carouselCV.register(UINib(nibName: kDetailCarouselPlatformCVC, bundle: .main), forCellWithReuseIdentifier: kDetailCarouselPlatformCVC)
         carouselCV.register(UINib(nibName: kDetailCarouselTrailerCVC, bundle: .main), forCellWithReuseIdentifier: kDetailCarouselTrailerCVC)
+        carouselCV.register(UINib(nibName: kInfiniteCarouselCVC, bundle: .main), forCellWithReuseIdentifier: kInfiniteCarouselCVC)
         carouselCV.backgroundColor = UIColor.clear
         carouselCV.isPagingEnabled = false
         carouselCV.delegate = self
@@ -113,6 +116,12 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         setupLayout()
     }
     
+    func configureCell(contentResponse: [Content]?, title: String?) {
+        self.contentResponse = contentResponse
+        self.titleLbl.text = title
+        setupLayout()
+    }
+    
     // MARK: - UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -125,6 +134,9 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         }
         else if videoResponse != nil && !(videoResponse?.isEmpty ?? true) {
             return videoResponse?.count ?? 0
+        }
+        else if contentResponse != nil && !(contentResponse?.isEmpty ?? true) {
+            return contentResponse?.count ?? 0
         } else {
             return 0
         }
@@ -158,6 +170,17 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
                 }
             }
         }
+        
+        else if contentResponse != nil {
+            if contentResponse!.count >= indexPath.row {
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kInfiniteCarouselCVC, for: indexPath) as? InfiniteCarouselCVC {
+                    cell.configureCell(contentResponse: self.contentResponse?[indexPath.row])
+                    cell.delegate = self
+                    return cell
+                }
+            }
+        }
+        
         return UICollectionViewCell()
     }
     
@@ -168,6 +191,8 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
             return .init(width: 100, height: 100)
         } else if let _ = videoResponse {
             return .init(width: 200, height: 250)
+        } else if let _ = contentResponse {
+            return .init(width: kHeightDetailSectionsSimilar * 9/16, height: kHeightDetailSectionsSimilar)
         } else {
             return UICollectionViewFlowLayout.automaticSize
         }
@@ -184,6 +209,18 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
             delegate?.navigateTo(cast: cast[indexPath.row])
         } else if let videos = videoResponse {
             delegate?.navigateTo(video: videos[indexPath.row], indexPath: indexPath)
+        } else if let content = contentResponse {
+            delegate?.navigateTo(content: content[indexPath.row])
         }
+    }
+}
+
+extension HorizontalCarouselCVC: InfiniteCarouselCVCDelegate {
+    func didTapCell(id: Int) {
+        guard let content = contentResponse?.first(where: {content in
+            content.id == id
+        })
+        else { return }
+        delegate?.navigateTo(content: content)
     }
 }

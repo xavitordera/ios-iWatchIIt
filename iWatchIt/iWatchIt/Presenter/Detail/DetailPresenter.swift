@@ -5,6 +5,7 @@
 //  Created by Xavi Tordera on 28/03/2020.
 //  Copyright © 2020 Xavi Tordera. All rights reserved.
 //
+
 import UIKit
 
 class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, DetailViewToPresenterProtocol {
@@ -12,6 +13,18 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
     var detail: ContentExtended?
     var type: MediaType?
     var platforms: [Platform]?
+    
+    var shouldShowAffiliateCell: Bool {
+        guard let platforms = platforms else { return false }
+        
+       for platform in platforms {
+            if PlatformHelper.shouldDisplayAffiliateCell(for: platform) {
+                return true
+            }
+        }
+        
+        return false
+    }
     
     // MARK: Interactor protocol
     func detailFetchSuccess(detail: ContentExtended?) {
@@ -45,7 +58,7 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
     }
     
     func platformsFetchFailed(message: String?) {
-        view?.showError(message: message )
+        view?.showError(message: message)
     }
     
     // MARK: View protocol
@@ -63,9 +76,11 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
     }
     
     func startFetchingPlatform(term: String) {
+        
         guard let interactor = interactor as? DetailPresenterToInteractorProtocol else {
             return
         }
+        
         interactor.fetchPlatforms(id: term)
     }
     
@@ -97,6 +112,13 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
     
     func didTapShare() {
         
+    }
+    
+    func didTapOnSimilarContent(content: Content?, nav: UINavigationController?) {
+        guard let id = content?.id, let nav = nav else { return }
+        if let router = router as? DetailPresenterToRouterProtocol {
+            router.pushDetail(for: id, type: type ?? .movie, navigationController: nav)
+        }
     }
     
     func didTapWatchlist() -> Bool {

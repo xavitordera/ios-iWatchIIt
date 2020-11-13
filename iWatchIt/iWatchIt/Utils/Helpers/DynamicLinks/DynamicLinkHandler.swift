@@ -22,13 +22,13 @@ final class DynamicLinkHandler {
         
         let components = url.pathComponents
         
-        guard components.count == 2 else {
+        guard components.count == 3 else {
             debugPrint("Error - Dynamic Link components not expected")
                        return
         }
         
-        let type = components[0]
-        let id = components[1]
+        let type = components[1]
+        let id = components[2]
         
         switch type {
         case "0":

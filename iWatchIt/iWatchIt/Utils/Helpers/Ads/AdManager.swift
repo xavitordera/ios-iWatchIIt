@@ -8,14 +8,26 @@
 
 import GoogleMobileAds
 
-let kMaxTimes = 3
+
 
 final class AdManager: NSObject {
     // MARK: - Public interface
     static let shared = AdManager()
     
+    /// default value
+    var interstitialFrequency = 5
+    
+    var firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol
+    
+    var shouldShowAds: Bool = true
+    
+    init(firebaseDatabaseProvider: FirebaseDatabaseProviderProtocol = FirebaseDatabaseProvider.shared) {
+        self.firebaseDatabaseProvider = firebaseDatabaseProvider
+    }
+    
     func start() {
         interstitial = createAndLoadInterstitial()
+        fetchConfiguration()
     }
     
     func attach(_ viewController: UIViewController) {
@@ -42,7 +54,7 @@ final class AdManager: NSObject {
     
     private func controllerAttached() {
         timesAttached += 1
-        if timesAttached == kMaxTimes {
+        if timesAttached == interstitialFrequency {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.botherUser()
                 self.timesAttached = 0
@@ -58,11 +70,25 @@ final class AdManager: NSObject {
             print("Ad wasn't ready")
         }
     }
+    
+    private func fetchConfiguration() {
+        firebaseDatabaseProvider.fetchParameter(parent: DatabaseFields.adManager, name: DatabaseFields.interstitialFrequency, ofType: Int.self) { param in
+            if let frequency = param {
+                self.interstitialFrequency = frequency
+            }
+        }
+        
+        firebaseDatabaseProvider.fetchParameter(parent: DatabaseFields.adManager, name: DatabaseFields.shouldShowAds, ofType: Bool.self) { param in
+            if let shouldShowAds = param {
+                self.shouldShowAds = shouldShowAds
+            }
+        }
+    }
 }
 
 extension AdManager: GADInterstitialDelegate {
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-      interstitial = createAndLoadInterstitial()
+        interstitial = createAndLoadInterstitial()
     }
     
     func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
