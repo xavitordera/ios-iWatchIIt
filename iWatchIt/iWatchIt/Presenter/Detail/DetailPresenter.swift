@@ -58,7 +58,7 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
     }
     
     func platformsFetchFailed(message: String?) {
-        view?.showError(message: message)
+        getView()?.onPlatformsFetched(isError: true)
     }
     
     // MARK: View protocol
@@ -75,13 +75,13 @@ class DetailPresenter: BasePresenter, DetailInteractorToPresenterProtocol, Detai
         interactor.fetchDetail(type: type, id: id, language: Preference.getLocaleLanguage())
     }
     
-    func startFetchingPlatform(term: String) {
+    func startFetchingPlatform() {
         
-        guard let interactor = interactor as? DetailPresenterToInteractorProtocol else {
+        guard let interactor = interactor as? DetailPresenterToInteractorProtocol, let imdbID = detail?.externalIDs?.imdbID else {
             return
         }
         
-        interactor.fetchPlatforms(id: term)
+        interactor.fetchPlatforms(id: imdbID)
     }
     
     func didTapOnPlatform(platform: Platform?) {

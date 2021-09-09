@@ -73,7 +73,7 @@ class BaseVC: UIViewController, BasePresenterToViewProtocol {
 
 // MARK: - ADMob Delegate
 extension BaseVC: GADAdSizeDelegate, GADAdLoaderDelegate, GADBannerViewDelegate {
-    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError) {
+    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: Error) {
         debugPrint(error)
     }
     

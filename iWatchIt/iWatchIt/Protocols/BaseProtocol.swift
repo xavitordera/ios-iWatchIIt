@@ -8,23 +8,23 @@
 
 import Foundation
 
-protocol BaseViewToPresenterProtocol: class{
+protocol BaseViewToPresenterProtocol: AnyObject{
     var view: BasePresenterToViewProtocol? {get set}
     var interactor: BasePresenterToInteractorProtocol? {get set}
     var router: BasePresenterToRouterProtocol? {get set}
 }
 
-protocol BasePresenterToViewProtocol: class{
+protocol BasePresenterToViewProtocol: AnyObject{
     var presenter:BaseViewToPresenterProtocol? {get set}
     func showError(message: String?)
 }
 
-protocol BasePresenterToRouterProtocol: class {}
+protocol BasePresenterToRouterProtocol: AnyObject {}
 
-protocol BasePresenterToInteractorProtocol: class {
+protocol BasePresenterToInteractorProtocol: AnyObject {
     var presenter:BaseInteractorToPresenterProtocol? {get set}
 }
 
-protocol BaseInteractorToPresenterProtocol: class {}
+protocol BaseInteractorToPresenterProtocol: AnyObject {}
 
 

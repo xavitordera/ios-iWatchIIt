@@ -51,18 +51,13 @@ enum APIRouter: URLRequestConvertible {
     
     /// UTELLY: - Get platform links
     
-    case platforms(id: String, source: String, country: String)
+    case platforms(id: String, source: String, country: String, key: String? = nil)
     
     
     var method: HTTPMethod {
         switch self {
             
         case .configuration, .genres, .trending, .discover, .topRated, .search, .detail, .searchKeyword, .searchPeople, .discoverExtended, .platforms: return .get
-            
-            // case : return .head
-            // case : return .delete
-            // case : return .patch
-            // case : return .put
         }
     }
     
@@ -87,7 +82,7 @@ enum APIRouter: URLRequestConvertible {
         case .searchKeyword(_): return kGETSearchKeywords
         case .searchPeople(_,_): return kGETSearchPeople
         case .discoverExtended(let mediaType,_,_,_,_,_): return String(format: kGETDiscover, mediaType.rawValue)
-        case .platforms(_, _, _): return kGETLookup
+        case .platforms(_, _, _, _): return kGETLookup
         }
     }
     
@@ -150,7 +145,7 @@ enum APIRouter: URLRequestConvertible {
                 URLQueryItem.init(name: kWithKeywords, value: withKeywords),
                 URLQueryItem.init(name: kPage, value: String(page))
             ]
-        case .platforms(let id, let source, let country):
+        case .platforms(let id, let source, let country, _):
             return [
                 URLQueryItem.init(name: kCountry, value: country),
                 URLQueryItem.init(name: kSourceId, value: id),
@@ -161,11 +156,11 @@ enum APIRouter: URLRequestConvertible {
     
     var headers: HTTPHeaders? {
         switch self {
-        case .platforms:
+        case .platforms(_, _, _, let key):
             return
                 HTTPHeaders.init([
                     HTTPHeader.init(name: kHeaderRapidAPIHost, value: kUtellyHost),
-                    HTTPHeader.init(name: kHeaderRapidAPIKey, value: randUtellyKey())
+                    HTTPHeader.init(name: kHeaderRapidAPIKey, value: key ?? randUtellyKey())
                 ])
         default:
             return nil

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol DiscoverQueryDelegate: class {
+protocol DiscoverQueryDelegate: AnyObject {
     func didUpdateQuery()
 }
 

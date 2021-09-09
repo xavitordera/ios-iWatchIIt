@@ -1,18 +1,11 @@
-//
-//  HorizontalCarouselCVC.swift
-//  WindowSightAPP
-//
-//  Created by Albert Mayans on 07/06/2019.
-//  Copyright © 2019 Slashmobility. All rights reserved.
-//
-
 import UIKit
 
-protocol HorizontalCarouselCVCDelegate: class {
+protocol HorizontalCarouselCVCDelegate: AnyObject {
     func navigateTo(platform: Platform)
     func navigateTo(cast: Cast)
     func navigateTo(video: Video, indexPath: IndexPath)
     func navigateTo(content: Content)
+    func didTapRetry()
 }
 
 class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -22,7 +15,7 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var carouselCV: UICollectionView!
     @IBOutlet weak var emptyLbl: UILabel!
-    
+
     var platformResponse: [Platform]?
     var castResponse: [Cast]?
     var videoResponse: [Video]?
@@ -30,6 +23,7 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     
     // Variables
     weak var delegate: HorizontalCarouselCVCDelegate?
+    private var spinner: UIActivityIndicatorView?
     
     // MARK: - UIView
     
@@ -43,7 +37,12 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         titleLbl.text = nil
         delegate = nil
         emptyLbl.text = nil
+        emptyLbl.isUserInteractionEnabled = false
+        emptyLbl.attributedText = nil
         carouselCV.contentOffset.x = 0
+        carouselCV.isHidden = false
+        spinner?.removeFromSuperview()
+        spinner = nil
     }
     
     override func draw(_ rect: CGRect) {
@@ -91,14 +90,46 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     func loadEmptyState(with text: String) {
         emptyLbl.text = text
     }
+
+    lazy var tap: UITapGestureRecognizer = {
+        let t = UITapGestureRecognizer(target: self, action: #selector(didTapRetry))
+        return t
+    }()
+
+    private func setErrorLayout(text: String = "detail_error_platforms".localized, hasRetryButton: Bool = true) {
+        emptyLbl.text = nil
+
+        let attachment = NSTextAttachment()
+        let image = UIImage(systemName: "arrow.2.circlepath")
+        attachment.image = image?.withTintColor(kColorEmptyStatePlatforms, renderingMode: .alwaysTemplate)
+        let attachmentString = NSAttributedString(attachment: attachment)
+        let myString = NSMutableAttributedString(string: text)
+        myString.append(attachmentString)
+        emptyLbl.attributedText = myString
+        emptyLbl.isHidden = false
+        carouselCV.isHidden = true
+        emptyLbl.addGestureRecognizer(tap)
+        emptyLbl.isUserInteractionEnabled = true
+    }
     
+    @objc private func didTapRetry() {
+        delegate?.didTapRetry()
+        emptyLbl.isHidden = true
+        spinner = UIActivityIndicatorView(frame: .init(x: contentView.center.x - 12.5, y: contentView.center.y - 12.5, width: 25, height: 25))
+        contentView.addSubview(spinner!)
+        spinner?.startAnimating()
+    }
     // MARK: - Public Interface
     
-    func configureCell(platformResponse: [Platform]?, title: String?) {
+    func configureCell(platformResponse: [Platform]?, title: String?, isError: Bool = false) {
         self.platformResponse = platformResponse
         self.titleLbl.text = title
         if let platformResponse = platformResponse, !platformResponse.isEmpty {
             setupLayout()
+            return
+        } else if isError {
+            setErrorLayout()
+            return
         } else {
             loadEmptyState(with: "detail_empty_platforms".localized)
         }

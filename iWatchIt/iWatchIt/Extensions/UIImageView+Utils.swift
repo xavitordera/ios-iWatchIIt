@@ -15,18 +15,18 @@ extension UIImageView {
         
         kf.setImage(with: ImageResource(downloadURL: url),
                     placeholder: emptyState,
-                    options: options) { (result: Result<RetrieveImageResult, KingfisherError>) in
-                
-                switch result {
-                case .failure(let error):
-                    print(error)
-                    completion?(nil)
-                case .success(let value):
-                    let imageSize = value.image.size
-                    completion?(imageSize)
-                }
-        
-        }
+                    options: options, completionHandler:  { (result: Result<RetrieveImageResult, KingfisherError>) in
+
+                        switch result {
+                        case .failure(let error):
+                            print(error)
+                            completion?(nil)
+                        case .success(let value):
+                            let imageSize = value.image.size
+                            completion?(imageSize)
+                        }
+
+                    })
     }
     
     func roundCornersForAspectFit(radius: CGFloat) {

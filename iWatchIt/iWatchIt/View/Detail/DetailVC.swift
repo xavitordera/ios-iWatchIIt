@@ -16,6 +16,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     var type: MediaType?
     var videoPlayer: WKWebView?
     var videoIndexPath: IndexPath?
+    var platformsDidFail: Bool = false
     
     @IBOutlet weak var mainCV: UICollectionView! {
         didSet {
@@ -44,7 +45,6 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         loadDetail()
         prepareVideoPlayer()
         addOservers()
-        attachToAdManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,17 +54,12 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        AdManager.shared.deattach()
     }
     
     // MARK: - Auxiliar functions
     
     func addOservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(hideLoadingVideoCell), name: UIWindow.didBecomeHiddenNotification, object: nil)
-    }
-    
-    func attachToAdManager() {
-        AdManager.shared.attach(self)
     }
     
     func setupNav() {
@@ -165,9 +160,9 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         loadBackground()
     }
     
-    func onPlatformsFetched() {
+    func onPlatformsFetched(isError: Bool = false) {
+        platformsDidFail = isError
         setupSections()
-//        reloadData()
         reloadSection(section: kSectionDetailPlatforms)
     }
     
@@ -268,7 +263,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             return UICollectionViewCell()
         }
         
-        cell.configureCell(platformResponse: getPresenter()?.platforms, title: "detail_platforms_section".localized)
+        cell.configureCell(platformResponse: getPresenter()?.platforms, title: "detail_platforms_section".localized, isError: platformsDidFail)
         cell.delegate = self
         return cell
     }
@@ -391,6 +386,10 @@ extension DetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 }
 
 extension DetailVC: HorizontalCarouselCVCDelegate {
+    func didTapRetry() {
+        getPresenter()?.startFetchingPlatform()
+    }
+
     func navigateTo(content: Content) {
         if let presenter = getPresenter() {
             presenter.didTapOnSimilarContent(content: content, nav: navigationController)

@@ -15,7 +15,7 @@ protocol DetailViewToPresenterProtocol: BaseViewToPresenterProtocol{
     var shouldShowAffiliateCell: Bool { get }
     
     func startFetchingDetail(type: MediaType?, id: Int?)
-    func startFetchingPlatform(term: String)
+    func startFetchingPlatform()
     func didTapOnPlatform(platform: Platform?)
     func didTapOnVideo(video: Video?, nav: UINavigationController)
     func didTapOnCast(cast: Cast?, nav: UINavigationController?)
@@ -26,7 +26,13 @@ protocol DetailViewToPresenterProtocol: BaseViewToPresenterProtocol{
 
 protocol DetailPresenterToViewProtocol: BasePresenterToViewProtocol{
     func onDetailFetched()
-    func onPlatformsFetched()
+    func onPlatformsFetched(isError: Bool)
+}
+
+extension DetailPresenterToViewProtocol {
+    func onPlatformsFetched(isError: Bool = false) {
+        onPlatformsFetched(isError: isError)
+    }
 }
 
 protocol DetailPresenterToRouterProtocol: BasePresenterToRouterProtocol {

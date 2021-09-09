@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func initGoogleAds() {
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "2f9e0612b4e8f7792a10c6602e28dce6"]
-        GADMobileAds.sharedInstance().start{_ in
+        GADMobileAds.sharedInstance().start { _ in
             AdManager.shared.start()
         }
     }
@@ -50,7 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        let handled = DynamicLinks.dynamicLinks().handleUniversalLink(userActivity.webpageURL!) { (dynamiclink, error) in
+        guard let link = userActivity.webpageURL else { return false }
+        let handled = DynamicLinks.dynamicLinks().handleUniversalLink(link) { (dynamiclink, error) in
             if let dynamicLink = dynamiclink {
                 self.manageDynamicLink(dynamicLink)
             }
@@ -60,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        return application(app, open: url,
+        application(app, open: url,
                            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
                            annotation: "")
     }

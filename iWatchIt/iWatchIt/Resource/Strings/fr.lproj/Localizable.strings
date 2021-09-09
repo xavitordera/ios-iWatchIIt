@@ -37,6 +37,7 @@
 "detail_added_to_watchlist" = "Ajouté à la liste de suivi";
 "detail_removed_from_watchlist" = "Retiré de la liste de suivi";
 "detail_similar_section" = "Contenu similaire";
+"detail_error_platforms" = "Une erreur s'est produite lors du chargement des plates-formes. Veuillez appuyer pour réessayer. ";
 
 "discover_title" = "Découvrir";
 "Discover_tv_shows_tab" = "Séries TV";

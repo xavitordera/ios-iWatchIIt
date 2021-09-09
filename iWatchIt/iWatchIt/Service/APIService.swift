@@ -175,7 +175,7 @@ class APIService {
         }
     }
     
-    func getPlatforms(id: String, country: String, source: String, completion: @escaping (RootPlatform?, Error?) -> Void) {
+    func getPlatforms(id: String, country: String, source: String, key: String? = nil, completion: @escaping (RootPlatform?, Error?) -> Void) {
         requestObject(from: APIRouter.platforms(id: id, source: source, country: country)) { (result: Result<RootPlatform, Error>)
             in
             switch result {

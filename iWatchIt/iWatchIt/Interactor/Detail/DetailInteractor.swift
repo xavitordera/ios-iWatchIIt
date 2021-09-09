@@ -30,17 +30,22 @@ class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
     }
     
     func fetchPlatforms(id: String) {
-        APIService.shared.getPlatforms(id: id, country: Preference.getCurrentCountry(), source: kIMDB) {
-            (result, error) in
+        let keys = Preference.getUtellyKeys()
+
+        let key = keys.randomElement()
+
+        APIService.shared.getPlatforms(id: id, country: Preference.getCurrentCountry(), source: kIMDB, key: key) {
+            [weak self] (result, error) in
             
             EventLogger.logEvent(UserEvents.utellyReq)
             
-            guard let presenter = self.getPresenter() else {
+            guard let presenter = self?.getPresenter() else {
                 return
             }
             
             guard let result = result else {
-                Crashlytics.crashlytics().record(error: error ?? AppError.utellyRequestFailed)
+                Crashlytics.crashlytics().record(error: AppError.utellyRequestFailed)
+                Crashlytics.crashlytics().log("Failing Utelly API key: \(String(describing: key))")
                 presenter.platformsFetchFailed(message: error?.localizedDescription)
                 return
             }

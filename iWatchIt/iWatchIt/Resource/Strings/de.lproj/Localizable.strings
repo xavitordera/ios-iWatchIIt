@@ -37,6 +37,7 @@
 "detail_added_to_watchlist" = "Zur Beobachtungsliste hinzugefügt";
 "detail_removed_from_watchlist" = "Von der Beobachtungsliste entfernt";
 "detail_similar_section" = "Ähnliche Inhalte";
+"detail_error_platforms" = "Beim Laden der Plattformen ist ein Fehler aufgetreten. Bitte tippen Sie, um es erneut zu versuchen.";
 
 "remove_title" = "Entdecken";
 "remove_tv_shows_tab" = "TV-Shows";

@@ -883,12 +883,10 @@
 			buildConfigurationList = 10533D522427BEB600BF8FC4 /* Build configuration list for PBXNativeTarget "iWatchIt" */;
 			buildPhases = (
 				8A78D2E9BF7E02CEF7394295 /* [CP] Check Pods Manifest.lock */,
-				49FCEECC3BDC388E1FC26E4C /* [CP] Prepare Artifacts */,
 				10533D222427BEB200BF8FC4 /* Sources */,
 				10533D232427BEB200BF8FC4 /* Frameworks */,
 				10533D242427BEB200BF8FC4 /* Resources */,
 				10F2B51524427C4800952A58 /* ShellScript */,
-				58C478CCD45E34505C92AC87 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -932,11 +930,9 @@
 			buildConfigurationList = 10533D582427BEB600BF8FC4 /* Build configuration list for PBXNativeTarget "iWatchItUITests" */;
 			buildPhases = (
 				23EBEF8C077813EEA310757B /* [CP] Check Pods Manifest.lock */,
-				2DDD2F0A636F987428646094 /* [CP] Prepare Artifacts */,
 				10533D452427BEB600BF8FC4 /* Sources */,
 				10533D462427BEB600BF8FC4 /* Frameworks */,
 				10533D472427BEB600BF8FC4 /* Resources */,
-				0CF307B2F7C6D845E3C4D473 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -955,7 +951,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Xavi Tordera";
 				TargetAttributes = {
 					10533D252427BEB200BF8FC4 = {
@@ -1071,23 +1067,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0CF307B2F7C6D845E3C4D473 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		10F2B51524427C4800952A58 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1125,57 +1104,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2DDD2F0A636F987428646094 /* [CP] Prepare Artifacts */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-artifacts-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Prepare Artifacts";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-artifacts-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iWatchIt-iWatchItUITests/Pods-iWatchIt-iWatchItUITests-artifacts.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		49FCEECC3BDC388E1FC26E4C /* [CP] Prepare Artifacts */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-artifacts-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Prepare Artifacts";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-artifacts-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-artifacts.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		58C478CCD45E34505C92AC87 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iWatchIt/Pods-iWatchIt-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8A78D2E9BF7E02CEF7394295 /* [CP] Check Pods Manifest.lock */ = {
@@ -1400,6 +1328,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1461,6 +1390,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1505,7 +1435,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xtordera.iWatchIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = iWatchIt_DEBUG;
@@ -1531,7 +1461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xtordera.iWatchIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = iWatchIt_APP_STORE;
