@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>2</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-8943404832703203~8132885780</string>
 	<key>LSApplicationCategoryType</key>

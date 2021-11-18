@@ -17,6 +17,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     var videoPlayer: WKWebView?
     var videoIndexPath: IndexPath?
     var platformsDidFail: Bool = false
+    var isLoadingPlatform: Bool = false
     
     @IBOutlet weak var mainCV: UICollectionView! {
         didSet {
@@ -154,7 +155,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     // MARK: - Presenter
     
     func onDetailFetched() {
-        setupSections() 
+        setupSections()
         reloadData()
         setupNav()
         loadBackground()
@@ -162,6 +163,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     
     func onPlatformsFetched(isError: Bool = false) {
         platformsDidFail = isError
+        isLoadingPlatform = false
         setupSections()
         reloadSection(section: kSectionDetailPlatforms)
     }
@@ -172,6 +174,12 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             return nil
         }
         return presenter
+    }
+
+    func setLoadingPlatforms() {
+        isLoadingPlatform = true
+        setupSections()
+        reloadSection(section: kSectionDetailPlatforms)
     }
     
     // MARK: - Actions
@@ -259,12 +267,14 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
     }
     
     func cellForPlatform(_ indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath) as? HorizontalCarouselCVC else {
-            return UICollectionViewCell()
+        let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath)
+
+        if let cellHorizontal = cell as? HorizontalCarouselCVC {
+            cellHorizontal.configureCell(platformResponse: getPresenter()?.platforms, title: "detail_platforms_section".localized, isError: platformsDidFail)
+            cellHorizontal.delegate = self
+            return cellHorizontal
         }
-        
-        cell.configureCell(platformResponse: getPresenter()?.platforms, title: "detail_platforms_section".localized, isError: platformsDidFail)
-        cell.delegate = self
+
         return cell
     }
     

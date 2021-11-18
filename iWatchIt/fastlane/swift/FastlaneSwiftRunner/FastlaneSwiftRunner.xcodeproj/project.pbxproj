@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0311E387230AC1B20060BB5C /* Plugins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0311E386230AC1B20060BB5C /* Plugins.swift */; };
 		0311E38B230AC9490060BB5C /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0311E38A230AC9490060BB5C /* Actions.swift */; };
+		53DB04554DB8C6ED9F6FB349 /* OptionalConfigValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C990673248F9728E0AB3A6E7 /* OptionalConfigValue.swift */; };
 		B302067B1F5E3E9000DE6EBD /* SnapshotfileProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30206741F5E3E9000DE6EBD /* SnapshotfileProtocol.swift */; };
 		B302067C1F5E3E9000DE6EBD /* GymfileProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30206751F5E3E9000DE6EBD /* GymfileProtocol.swift */; };
 		B302067D1F5E3E9000DE6EBD /* MatchfileProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30206761F5E3E9000DE6EBD /* MatchfileProtocol.swift */; };
@@ -62,6 +63,7 @@
 		B3BA65A31F5A269100B34850 /* SocketClientDelegateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketClientDelegateProtocol.swift; path = ../SocketClientDelegateProtocol.swift; sourceTree = "<group>"; };
 		B3BA65A41F5A269100B34850 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketResponse.swift; path = ../SocketResponse.swift; sourceTree = "<group>"; };
 		B3BA65AE1F5A2D5C00B34850 /* RunnerArgument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunnerArgument.swift; path = ../RunnerArgument.swift; sourceTree = "<group>"; };
+		C990673248F9728E0AB3A6E7 /* OptionalConfigValue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptionalConfigValue.swift; path = ../OptionalConfigValue.swift; sourceTree = "<group>"; };
 		D556D6A91F6A08F5003108E3 /* FastlaneRunner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FastlaneRunner; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55B28BC1F6C588300DC42C5 /* Deliverfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Deliverfile.swift; path = ../../Deliverfile.swift; sourceTree = "<group>"; };
 		D55B28BD1F6C588300DC42C5 /* Gymfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gymfile.swift; path = ../Gymfile.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				B3144C08200553C800470AFE /* README.txt */,
 				B3BA659E1F5A269100B34850 /* LaneFileProtocol.swift */,
+				C990673248F9728E0AB3A6E7 /* OptionalConfigValue.swift */,
 			);
 			name = "Fastfile Components";
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				D55B28C91F6C588300DC42C5 /* Snapshotfile.swift in Sources */,
 				B3BA65A61F5A269100B34850 /* Fastlane.swift in Sources */,
 				D55B28C81F6C588300DC42C5 /* Screengrabfile.swift in Sources */,
+				53DB04554DB8C6ED9F6FB349 /* OptionalConfigValue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

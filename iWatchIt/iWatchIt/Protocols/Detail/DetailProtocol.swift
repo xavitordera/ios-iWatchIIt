@@ -27,6 +27,7 @@ protocol DetailViewToPresenterProtocol: BaseViewToPresenterProtocol{
 protocol DetailPresenterToViewProtocol: BasePresenterToViewProtocol{
     func onDetailFetched()
     func onPlatformsFetched(isError: Bool)
+    func setLoadingPlatforms()
 }
 
 extension DetailPresenterToViewProtocol {

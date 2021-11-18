@@ -9,6 +9,8 @@
 import FirebaseCrashlytics
 
 class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
+
+    private var platformRetries = 0
     
     init(presenter: DetailInteractorToPresenterProtocol) {
         super.init()
@@ -46,6 +48,15 @@ class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
             guard let result = result else {
                 Crashlytics.crashlytics().record(error: AppError.utellyRequestFailed)
                 Crashlytics.crashlytics().log("Failing Utelly API key: \(String(describing: key))")
+
+                if self?.platformRetries ?? 8 < 8 {
+                    self?.fetchPlatforms(id: id)
+                    self?.platformRetries += 1
+                    return
+                } else {
+                    self?.platformRetries = 0
+                }
+
                 presenter.platformsFetchFailed(message: error?.localizedDescription)
                 return
             }

@@ -53,7 +53,20 @@ final class TabBarVC: UITabBarController {
                     task()
                 }
             }
-            
+        }
+
+        if #available(iOS 15.0, *) {
+           let appearance = UITabBarAppearance()
+           appearance.configureWithOpaqueBackground()
+           tabBar.standardAppearance = appearance
+           tabBar.scrollEdgeAppearance = tabBar.standardAppearance
+        }
+
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
         }
     }
     

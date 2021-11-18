@@ -23,7 +23,9 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     
     // Variables
     weak var delegate: HorizontalCarouselCVCDelegate?
-    private var spinner: UIActivityIndicatorView?
+    private lazy var spinner: UIActivityIndicatorView = {
+        UIActivityIndicatorView(frame: .init(x: contentView.center.x - 12.5, y: contentView.center.y - 12.5, width: 25, height: 25))
+    }()
     
     // MARK: - UIView
     
@@ -41,8 +43,7 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         emptyLbl.attributedText = nil
         carouselCV.contentOffset.x = 0
         carouselCV.isHidden = false
-        spinner?.removeFromSuperview()
-        spinner = nil
+        spinner.removeFromSuperview()
     }
     
     override func draw(_ rect: CGRect) {
@@ -89,6 +90,7 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
     
     func loadEmptyState(with text: String) {
         emptyLbl.text = text
+        emptyLbl.isHidden = false
     }
 
     lazy var tap: UITapGestureRecognizer = {
@@ -116,12 +118,12 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
         delegate?.didTapRetry()
         emptyLbl.isHidden = true
         spinner = UIActivityIndicatorView(frame: .init(x: contentView.center.x - 12.5, y: contentView.center.y - 12.5, width: 25, height: 25))
-        contentView.addSubview(spinner!)
-        spinner?.startAnimating()
+        contentView.addSubview(spinner)
+        spinner.startAnimating()
     }
     // MARK: - Public Interface
     
-    func configureCell(platformResponse: [Platform]?, title: String?, isError: Bool = false) {
+    func configureCell(platformResponse: [Platform]?, title: String?, isError: Bool = false, isLoading: Bool = false) {
         self.platformResponse = platformResponse
         self.titleLbl.text = title
         if let platformResponse = platformResponse, !platformResponse.isEmpty {
@@ -129,6 +131,11 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
             return
         } else if isError {
             setErrorLayout()
+            return
+        } else if isLoading {
+            emptyLbl.isHidden = true
+            contentView.addSubview(spinner)
+            spinner.startAnimating()
             return
         } else {
             loadEmptyState(with: "detail_empty_platforms".localized)
