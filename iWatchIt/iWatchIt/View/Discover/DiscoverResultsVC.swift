@@ -217,12 +217,37 @@ extension DiscoverResultsVC: UICollectionViewDelegate, UICollectionViewDataSourc
         let width = (UIScreen.main.bounds.size.width / 3) - 15
         return .init(width: width, height: width * 1.5)
     }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let presenter = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self) else { return }
+
+        var cursor: Int {
+            if case .movie = mediaType {
+                return presenter.movieResults?.results?.count ?? 0
+            } else {
+                return presenter.showsResults?.results?.count ?? 0
+            }
+        }
+
+        guard indexPath.row == cursor - 1 else { return }
+
+        var page: Int {
+            if case .movie = mediaType {
+                return presenter.movieResults?.page ?? 1
+            } else {
+                return presenter.showsResults?.page ?? 1
+            }
+        }
+
+        presenter.didReachEnd(type: mediaType)
+    }
 }
 
 
 extension DiscoverResultsVC: InfiniteCarouselCVCDelegate {
-    func didTapCell(id: Int) {
-        if let presenter = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self), let nav = navigationController {
+    func didTapCell(content: Content) {
+        if let presenter = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self), let nav = navigationController,
+           let id = content.id {
             presenter.contentSelected(navigationController: nav, for: id, and: mediaType)
         }
     }
@@ -259,21 +284,6 @@ extension DiscoverResultsVC {
             containerView.addSubview(mainCV!)
         default:
             containerView.addSubview(showsCV!)
-        }
-    }
-}
-
-extension DiscoverResultsVC: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        var page = 1
-        switch mediaType {
-        case .movie:
-            page = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.movieResults?.page ?? 1
-        default:
-            page = getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.showsResults?.page ?? 1
-        }
-        if scrollView.contentOffset.y >= (UIScreen.main.bounds.height * CGFloat(page)) {
-            getPresenter(type: DiscoverResultsViewToPresenterProtocol.self)?.didReachEnd(type: mediaType)
         }
     }
 }

@@ -101,8 +101,8 @@ class APIService {
         }
     }
 
-    func search(query: String, mediaType: MediaType, language: String, page: Int, completion: @escaping (Root?, Error?) -> Void) {
-        requestObject(from: APIRouter.search(mediaType: mediaType, query: query, language: language, page: page)) { (result: Result<Root, Error>)
+    func search(query: String, language: String, page: Int, completion: @escaping (Root?, Error?) -> Void) {
+        requestObject(from: APIRouter.search(query: query, language: language, page: page)) { (result: Result<Root, Error>)
             in
             switch result {
             case .failure(let error):

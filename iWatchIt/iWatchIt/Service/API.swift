@@ -36,6 +36,7 @@ let kGETLookup = "idlookup"
 let kGETGenres = "/genre/%@/list"
 let kGETSearchKeywords = "/search/keyword"
 let kGETSearchPeople = "/search/person"
+let kGETSearchMulti = "/search/multi"
 
 
 /// Param keys

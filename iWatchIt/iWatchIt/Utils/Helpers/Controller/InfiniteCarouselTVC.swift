@@ -131,7 +131,7 @@ class InfiniteCarouselTVC: UITableViewCell, NibReusable, UICollectionViewDelegat
         return 10
     }
     
-    func didTapCell(id: Int) {
-        delegate?.didTapContentCell(id: id)
+    func didTapCell(content: Content) {
+        delegate?.didTapContentCell(id: content.id ?? 0)
     }
 }

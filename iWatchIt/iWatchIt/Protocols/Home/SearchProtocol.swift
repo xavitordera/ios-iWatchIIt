@@ -12,7 +12,7 @@ protocol SearchViewToPresenterProtocol: BaseViewToPresenterProtocol{
     var recentlySeen: [RecentlySeen]? { get set }
     var lastQuery: String? { get set }
     func startFetchingHistory(type: MediaType)
-    func startFetchingData(query: String, type: MediaType)
+    func startFetchingData(query: String)
     func contentSelected(navigationController: UINavigationController, for contentWithId: Int, and mediaType: MediaType)
 }
 
@@ -26,7 +26,7 @@ protocol SearchPresenterToRouterProtocol: BasePresenterToRouterProtocol {
 }
 
 protocol SearchPresenterToInteractorProtocol: BasePresenterToInteractorProtocol {
-    func fetchSearch(query: String, mediaType: MediaType)
+    func fetchSearch(query: String)
     func fetchRecentlySeen(mediaType: MediaType)
 }
 

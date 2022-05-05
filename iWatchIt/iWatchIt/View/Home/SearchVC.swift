@@ -61,7 +61,7 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
             showFirstStateTV()
         } else {
             showMainCV()
-            presenter.startFetchingData(query: searchText, type: type)
+            presenter.startFetchingData(query: searchText)
         }
     }
     
@@ -252,9 +252,13 @@ class SearchVC: BaseVC, SearchPresenterToViewProtocol, UISearchBarDelegate, UICo
 }
 
 extension SearchVC: InfiniteCarouselCVCDelegate {
-    func didTapCell(id: Int) {
-        if let presenter = getPresenter() {
-            presenter.contentSelected(navigationController: self.nav!, for: id, and: self.type)
+    func didTapCell(content: Content) {
+        if
+            let presenter = getPresenter(),
+            let id = content.id,
+            let mediaType = content.mediaType
+        {
+            presenter.contentSelected(navigationController: self.nav!, for: id, and: mediaType)
         }
     }
 }

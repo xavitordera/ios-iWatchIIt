@@ -38,13 +38,13 @@ class SearchPresenter: BasePresenter, SearchInteractorToPresenterProtocol, Searc
     
     // MARK: View protocol
     
-    func startFetchingData(query: String, type: MediaType) {
+    func startFetchingData(query: String) {
         guard let interactor = interactor as? SearchPresenterToInteractorProtocol else {
             searchFetchFailed(message: "app_error_generic".localized)
             return
         }
         lastQuery = query
-        interactor.fetchSearch(query: query, mediaType: type)
+        interactor.fetchSearch(query: query)
     }
     
     func startFetchingHistory(type: MediaType) {

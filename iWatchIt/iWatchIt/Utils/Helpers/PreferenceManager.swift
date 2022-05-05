@@ -31,4 +31,12 @@ class Preference {
     static func setUtellyKeys(keys: [String]) {
         defaults.set(keys, forKey: DatabaseFields.utellyKeys)
     }
+
+    static func getRetryNumber() -> Int {
+        defaults.integer(forKey: DatabaseFields.retryNumber)
+    }
+
+    static func setRetryNumber(_ retryNumber: Int) {
+        defaults.set(retryNumber, forKey: DatabaseFields.retryNumber)
+    }
 }

@@ -172,6 +172,10 @@ class PlatformHelper {
                 Preference.setUtellyKeys(keys: param)
             }
         }
+
+        FirebaseDatabaseProvider.shared.fetchParameter(parent: DatabaseFields.config, name: DatabaseFields.retryNumber, ofType: Int.self) { number in
+            Preference.setRetryNumber(number ?? 10)
+        }
     }
     
     

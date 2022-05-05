@@ -33,6 +33,7 @@ class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
     
     func fetchPlatforms(id: String) {
         let keys = Preference.getUtellyKeys()
+        let maxRetries = Preference.getRetryNumber()
 
         let key = keys.randomElement()
 
@@ -49,7 +50,7 @@ class DetailInteractor: BaseInteractor, DetailPresenterToInteractorProtocol {
                 Crashlytics.crashlytics().record(error: AppError.utellyRequestFailed)
                 Crashlytics.crashlytics().log("Failing Utelly API key: \(String(describing: key))")
 
-                if self?.platformRetries ?? 8 < 8 {
+                if self?.platformRetries ?? maxRetries < maxRetries {
                     self?.fetchPlatforms(id: id)
                     self?.platformRetries += 1
                     return

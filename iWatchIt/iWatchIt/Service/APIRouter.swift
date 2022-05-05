@@ -30,7 +30,7 @@ enum APIRouter: URLRequestConvertible {
     
     /// Search content
     
-    case search(mediaType: MediaType, query: String, language: String, page: Int = 1)
+    case search(query: String, language: String, page: Int = 1)
     
     /// Get detailed information
     
@@ -77,7 +77,7 @@ enum APIRouter: URLRequestConvertible {
         case .trending(let mediaType, let timeWindow, _): return String(format: kGETTrending, mediaType.rawValue, timeWindow)
         case .discover(let mediaType, _, _): return String(format: kGETDiscover, mediaType.rawValue)
         case .topRated(let mediaType, _): return String(format: kGETTopRated, mediaType.rawValue)
-        case .search(let mediaType, _, _, _): return String(format: kGETSearch, mediaType.rawValue)
+        case .search: return kGETSearchMulti
         case .detail(let mediaType, let id, _, _): return String(format: kGETDetail, mediaType.rawValue, id)
         case .searchKeyword(_): return kGETSearchKeywords
         case .searchPeople(_,_): return kGETSearchPeople
@@ -112,7 +112,7 @@ enum APIRouter: URLRequestConvertible {
                 URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
                 URLQueryItem.init(name: kLanguage, value: language)
             ]
-        case .search(_ , let query, let language, let page):
+        case .search(let query, let language, let page):
             return [
                 URLQueryItem.init(name: kApiKey, value: kTMDBAPIKey),
                 URLQueryItem.init(name: kLanguage, value: language),

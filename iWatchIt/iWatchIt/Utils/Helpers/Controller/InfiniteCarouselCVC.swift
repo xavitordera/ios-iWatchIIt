@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol InfiniteCarouselCVCDelegate {
-    func didTapCell(id: Int)
+    func didTapCell(content: Content)
 }
 
 class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
@@ -93,9 +93,12 @@ class InfiniteCarouselCVC: UICollectionViewCell, NibReusable {
         scoreBtn.layer.cornerRadius = scoreBtn.frame.size.width / 3.5
     }
     
-   @objc func tapCell(sender: UITapGestureRecognizer) {
-    if let delegate = self.delegate, let id = contentResponse?.id {
-            delegate.didTapCell(id: id)
+    @objc func tapCell(sender: UITapGestureRecognizer) {
+        if
+            let delegate = self.delegate,
+            let content = contentResponse
+        {
+            delegate.didTapCell(content: content)
         }
     }
 }

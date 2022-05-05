@@ -13,6 +13,8 @@ enum DatabaseFields {
     static let interstitialFrequency = "IntersitialFrequency"
     static let utellyKeys = "UtellyKeys"
     static let shouldShowAds = "shouldShowAds"
+    static let config = "Config"
+    static let retryNumber = "retryNumber"
 }
 
 protocol FirebaseDatabaseProviderProtocol {

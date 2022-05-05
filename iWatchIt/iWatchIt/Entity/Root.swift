@@ -34,12 +34,19 @@ struct RootExtended: Decodable {
     }
 }
 
+enum MediaType: String, Decodable {
+    case movie = "movie"
+    case show = "tv"
+    case people = "person"
+}
+
 struct Content: Decodable {
     var image: String?
     var id: Int?
     var voteAverage: Double?
     var title: String?
     var name: String?
+    var mediaType: MediaType?
     
     enum CodingKeys: String, CodingKey {
         case image = "poster_path"
@@ -47,6 +54,7 @@ struct Content: Decodable {
         case voteAverage = "vote_average"
         case title
         case name
+        case mediaType = "media_type"
     }
 }
 

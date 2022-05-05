@@ -80,6 +80,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
             return
         }
         presenter.startFetchingDetail(type: type, id: contentId)
+        isLoadingPlatform = true
     }
     
     func reloadData() {
@@ -270,7 +271,7 @@ class DetailVC: BaseVC, DetailPresenterToViewProtocol {
         let cell = mainCV.dequeueReusableCell(withReuseIdentifier: kHorizontalCarouselCVC, for: indexPath)
 
         if let cellHorizontal = cell as? HorizontalCarouselCVC {
-            cellHorizontal.configureCell(platformResponse: getPresenter()?.platforms, title: "detail_platforms_section".localized, isError: platformsDidFail)
+            cellHorizontal.configureCell(platformResponse: getPresenter()?.platforms, title: "detail_platforms_section".localized, isError: platformsDidFail, isLoading: isLoadingPlatform)
             cellHorizontal.delegate = self
             return cellHorizontal
         }

@@ -6,12 +6,6 @@
 //  Copyright © 2020 Xavi Tordera. All rights reserved.
 //
 
-enum MediaType: String {
-    case movie = "movie"
-    case show = "tv"
-    case people = "person"
-}
-
 enum HomeSectionType {
     case Trending
     case Discover

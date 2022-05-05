@@ -254,11 +254,7 @@ class HorizontalCarouselCVC: UICollectionViewCell, NibReusable, UICollectionView
 }
 
 extension HorizontalCarouselCVC: InfiniteCarouselCVCDelegate {
-    func didTapCell(id: Int) {
-        guard let content = contentResponse?.first(where: {content in
-            content.id == id
-        })
-        else { return }
+    func didTapCell(content: Content) {
         delegate?.navigateTo(content: content)
     }
 }
